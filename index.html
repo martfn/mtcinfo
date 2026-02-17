@@ -92,6 +92,14 @@
       gap: 18px;
     }
 
+    /* Top grid for small cards */
+    .top-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+
     @media (max-width: 720px) {
       header {
         flex-direction: column;
@@ -100,13 +108,16 @@
       .grid {
         grid-template-columns: minmax(0, 1fr);
       }
+      .top-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
     }
 
     /* Cards */
     .card {
       background: rgba(8, 8, 18, 0.92);
       border-radius: 16px;
-      padding: 16px 18px 18px;
+      padding: 14px 16px 16px;
       border: 1px solid rgba(168, 85, 247, 0.15);
       box-shadow: 0 18px 40px rgba(0, 0, 0, 0.7);
       backdrop-filter: blur(26px);
@@ -116,12 +127,12 @@
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
       gap: 10px;
     }
 
     .card-title {
-      font-size: 16px;
+      font-size: 14px;
       font-weight: 600;
       letter-spacing: 0.08em;
       text-transform: uppercase;
@@ -132,8 +143,8 @@
     }
 
     .card-title-dot {
-      width: 9px;
-      height: 9px;
+      width: 8px;
+      height: 8px;
       border-radius: 999px;
       background: var(--green);
       box-shadow: 0 0 12px rgba(34, 197, 94, 0.8);
@@ -157,7 +168,7 @@
     li {
       padding-left: 16px;
       position: relative;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
       line-height: 1.6;
     }
 
@@ -195,8 +206,8 @@
     .note {
       font-size: 13px;
       color: var(--text-muted);
-      margin-top: 12px;
-      padding-top: 12px;
+      margin-top: 10px;
+      padding-top: 10px;
       border-top: 1px solid rgba(255, 255, 255, 0.05);
       font-style: italic;
       line-height: 1.5;
@@ -227,7 +238,7 @@
       color: var(--purple);
     }
 
-    /* Semester overview - COMPACTED */
+    /* Semester overview - compact square */
     .timeline {
       display: grid;
       gap: 2px;
@@ -280,40 +291,64 @@
       </div>
     </header>
 
-    <!-- Top: semester overview - COMPACTED -->
-    <div class="card" style="margin-bottom:18px;">
-      <div class="card-header">
-        <div class="card-title">
-          <div class="card-title-dot"></div>
-          Informações Gerais
+    <!-- Top small cards -->
+    <div class="top-grid">
+      <!-- Informações Gerais -->
+      <section class="card">
+        <div class="card-header">
+          <div class="card-title">
+            <div class="card-title-dot"></div>
+            Informações Gerais
+          </div>
         </div>
-      </div>
-      <div class="timeline">
-        <div class="timeline-row">
-          <div class="timeline-label">Início 2.º Semestre</div>
-          <div class="timeline-value">9 de Fevereiro</div>
+        <div class="timeline">
+          <div class="timeline-row">
+            <div class="timeline-label">Início 2.º Semestre</div>
+            <div class="timeline-value">9 de Fevereiro</div>
+          </div>
+          <div class="timeline-row">
+            <div class="timeline-label">Férias da Páscoa</div>
+            <div class="timeline-value">1 a 10 de Abril</div>
+          </div>
+          <div class="timeline-row">
+            <div class="timeline-label">Semana Académica</div>
+            <div class="timeline-value">27 a 30 de Abril</div>
+          </div>
+          <div class="timeline-row">
+            <div class="timeline-label">Fim das Aulas</div>
+            <div class="timeline-value">3 de Junho</div>
+          </div>
+          <div class="timeline-row">
+            <div class="timeline-label">Época de Exames</div>
+            <div class="timeline-value">8 a 22 de Junho</div>
+          </div>
+          <div class="timeline-row">
+            <div class="timeline-label">Época de Recurso</div>
+            <div class="timeline-value">29 de Junho a 10 de Julho</div>
+          </div>
         </div>
-        <div class="timeline-row">
-          <div class="timeline-label">Férias da Páscoa</div>
-          <div class="timeline-value">1 a 10 de Abril</div>
+      </section>
+
+      <!-- Próximas 2 semanas -->
+      <section class="card">
+        <div class="card-header">
+          <div class="card-title">
+            <div class="card-title-dot"></div>
+            Próximas 2 semanas
+          </div>
+          <div class="card-meta">Eventos em breve</div>
         </div>
-        <div class="timeline-row">
-          <div class="timeline-label">Semana Académica</div>
-          <div class="timeline-value">27 a 30 de Abril</div>
-        </div>
-        <div class="timeline-row">
-          <div class="timeline-label">Fim das Aulas (normais)</div>
-          <div class="timeline-value">3 de Junho</div>
-        </div>
-        <div class="timeline-row">
-          <div class="timeline-label">Época de Exames</div>
-          <div class="timeline-value">8 a 22 de Junho</div>
-        </div>
-        <div class="timeline-row">
-          <div class="timeline-label">Época de Recurso</div>
-          <div class="timeline-value">29 de Junho a 10 de Julho</div>
-        </div>
-      </div>
+        <ul>
+          <!-- Exemplo de conteúdo; atualiza isto à mão -->
+          <li><span class="date">19/03</span> – CI – Teste 1</li>
+          <li><span class="date">26/03</span> – SC – TP1 (representação das personagens)</li>
+          <li><span class="date">31/03</span> – G – Possível reposição de aulas</li>
+          <li><span class="date">??/03</span> – Outro evento que queiras listar aqui</li>
+        </ul>
+        <p class="note">
+          Atualiza esta lista sempre que houver novas coisas na agenda. Pensa nisto como o “painel de emergência”.
+        </p>
+      </section>
     </div>
 
     <div class="grid">
