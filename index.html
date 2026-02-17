@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>MTC – 2.º Semestre</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    :root {
+      --bg: #050507;
+      --card: #101016;
+      --accent: #ff3ebf;
+      --accent-soft: #ff8fd8;
+      --text-main: #f5f5f7;
+      --text-muted: #a0a0b2;
+      --border-subtle: #2a2a3a;
+      --font-main: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Segoe UI", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-main);
+      background: radial-gradient(circle at top left, #1a1a2b 0, #050507 55%, #000 100%);
+      color: var(--text-main);
+      line-height: 1.5;
+      padding: 24px 16px 48px;
+    }
+
+    .page {
+      max-width: 880px;
+      margin: 0 auto;
+    }
+
+    header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 24px;
+      gap: 12px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #ff3ebf, #ffa94d);
+      color: #050507;
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .tag span {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #050507;
+    }
+
+    h1 {
+      font-size: 28px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .subtitle {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* Layout */
+    .grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 18px;
+      align-items: flex-start;
+    }
+
+    @media (max-width: 720px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    /* Cards */
+    .card {
+      background: rgba(8, 8, 18, 0.92);
+      border-radius: 16px;
+      padding: 16px 18px 14px;
+      border: 1px solid rgba(255, 255, 255, 0.03);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(26px);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 8px;
+      gap: 10px;
+    }
+
+    .card-title {
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-title-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 12px rgba(255, 62, 191, 0.8);
+    }
+
+    .card-meta {
+      font-size: 12px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    /* Lists */
+    ul {
+      list-style: none;
+      margin-top: 4px;
+      font-size: 14px;
+      color: var(--text-main);
+    }
+
+    li + li {
+      margin-top: 4px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      font-size: 11px;
+      color: var(--accent-soft);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-left: 6px;
+    }
+
+    .hint {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 8px;
+    }
+
+    .section-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin: 18px 0 8px;
+    }
+
+    .divider {
+      border-top: 1px solid var(--border-subtle);
+      margin: 14px 0 12px;
+    }
+
+    /* Semester overview */
+    .timeline {
+      display: grid;
+      gap: 8px;
+      margin-top: 6px;
+      font-size: 13px;
+    }
+
+    .timeline-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .timeline-label {
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 11px;
+    }
+
+    .timeline-value {
+      text-align: right;
+    }
+
+    .highlight {
+      color: var(--accent-soft);
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div>
+        <div class="tag"><span></span>MTC – 2.º Semestre</div>
+        <h1>Calendário de avaliações</h1>
+      </div>
+      <div class="subtitle">
+        Atualizado • 2026<br>
+        Usa este link em vez de screenshots.
+      </div>
+    </header>
+
+    <!-- Top: semester overview -->
+    <div class="card" style="margin-bottom:18px;">
+      <div class="card-header">
+        <div class="card-title">
+          <div class="card-title-dot"></div>
+          Semestre
+        </div>
+      </div>
+      <div class="timeline">
+        <div class="timeline-row">
+          <div class="timeline-label">Início 2.º semestre</div>
+          <div class="timeline-value">9 de fevereiro</div>
+        </div>
+        <div class="timeline-row">
+          <div class="timeline-label">Férias da Páscoa</div>
+          <div class="timeline-value">1 a 10 de abril</div>
+        </div>
+        <div class="timeline-row">
+          <div class="timeline-label">Semana académica</div>
+          <div class="timeline-value">27 a 30 de abril</div>
+        </div>
+        <div class="timeline-row">
+          <div class="timeline-label">Fim das aulas</div>
+          <div class="timeline-value">3 de junho</div>
+        </div>
+        <div class="timeline-row">
+          <div class="timeline-label">Época de exames</div>
+          <div class="timeline-value">8 a 22 de junho</div>
+        </div>
+        <div class="timeline-row">
+          <div class="timeline-label">Recurso</div>
+          <div class="timeline-value">29 de junho a 10 de julho</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid">
+      <!-- Left column -->
+      <div class="stack">
+        <!-- LM2 -->
+        <section class="card">
+          <div class="card-header">
+            <div class="card-title">
+              <div class="card-title-dot"></div>
+              LM2
+            </div>
+            <div class="card-meta">HTML/CSS • Bootstrap • Projeto</div>
+          </div>
+
+          <ul>
+            <li>30/03 – HTML/CSS, teste teórico e prático (15% cada).</li>
+            <li>18/05 – Projeto final, entrega da prototipagem (10%).</li>
+            <li>01/06 – RWD/Bootstrap, teste teórico e prático (15% cada).</li>
+            <li>Por marcar – Projeto final, entrega (20%) e pitch da implementação (10%).</li>
+          </ul>
+        </section>
+
+        <!-- CI -->
+        <section class="card">
+          <div class="card-header">
+            <div class="card-title">
+              <div class="card-title-dot"></div>
+              CI
+            </div>
+            <div class="card-meta">2 testes • Trabalho vídeo</div>
+          </div>
+
+          <ul>
+            <li>19/03 – Teste 1.</li>
+            <li>28/05 – Teste 2.</li>
+            <li>21/05 – Trabalho prático, vídeo com resumo das atividades do grupo.</li>
+          </ul>
+
+          <p class="hint">
+            Testes feitos no computador; média mínima de 8 valores nos dois testes (possivelmente escolha múltipla).
+          </p>
+        </section>
+
+        <!-- SC -->
+        <section class="card">
+          <div class="card-header">
+            <div class="card-title">
+              <div class="card-title-dot"></div>
+              SC
+            </div>
+            <div class="card-meta">Semiótica • Exame + TP</div>
+          </div>
+
+          <div class="section-label">Avaliação</div>
+          <ul>
+            <li>Teste em época de exames (35% da nota, mínima 8,5 valores).</li>
+            <li>10 exercícios de escolha múltipla e desenvolvimento.</li>
+          </ul>
+
+          <div class="divider"></div>
+
+          <div class="section-label">Trabalhos práticos</div>
+          <ul>
+            <li>26/03 – TP1, representação das personagens (15%).</li>
+            <li>23/04 – TP2, apresentação do curta (15%).</li>
+            <li>29/05 – TP3, semiótica da marca (25%).</li>
+            <li>Nota mínima nos práticos: 10 valores.</li>
+          </ul>
+        </section>
+      </div>
+
+      <!-- Right column -->
+      <div class="stack">
+        <!-- VD (G) -->
+        <section class="card">
+          <div class="card-header">
+            <div class="card-title">
+              <div class="card-title-dot"></div>
+              VD
+            </div>
+            <div class="card-meta">Grupo + individual</div>
+          </div>
+
+          <div class="section-label">Datas chave</div>
+          <ul>
+            <li>31/03 – Possível data para reposição de aulas (Carnaval).</li>
+            <li>07/04 – Planificação do trabalho prático 1 (TP1).</li>
+            <li>10/04 – Desenvolvimento do TP1 (30% da nota).</li>
+            <li>15/05 – Trabalho individual (10%).</li>
+            <li>01/06 – Apresentação do trabalho prático 2 (TP2, 30%).</li>
+            <li>05/06 – Relatório do TP2.</li>
+          </ul>
+        </section>
+
+        <!-- SC quick note card or spare space for future CU -->
+        <section class="card">
+          <div class="card-header">
+            <div class="card-title">
+              <div class="card-title-dot"></div>
+              Notas rápidas
+            </div>
+            <div class="card-meta">Extra</div>
+          </div>
+          <p class="hint">
+            Usa este bloco para apontar alterações de datas, avisos do Moodle ou notas rápidas entre cadeiras.
+          </p>
+        </section>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
