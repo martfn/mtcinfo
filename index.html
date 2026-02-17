@@ -5,32 +5,44 @@
   <title>MTC – 2.º Semestre</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
+    /* ============================================================
+       DESIGN TOKENS
+       Change these variables to retheme the whole page at once.
+       ============================================================ */
     :root {
-      --bg: #050507;
-      --card: #101016;
-      --purple: #a855f7;
-      --purple-bright: #c084fc;
-      --green: #22c55e;
-      --green-bright: #4ade80;
-      --text-main: #f5f5f7;
-      --text-muted: #a0a0b2;
-      --border-subtle: #2a2a3a;
-      --font-main: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
-        "Segoe UI", sans-serif;
+      --purple:        #a855f7;   /* Purple – used for accents */
+      --purple-bright: #c084fc;   /* Purple – used for percentages + titles */
+      --green:         #22c55e;   /* Green – used for bullet dots + labels */
+      --green-bright:  #4ade80;   /* Green – used for dates */
+      --text-main:     #f5f5f7;   /* Main text */
+      --text-muted:    #a0a0b2;   /* Secondary / note text */
+      --font-main: system-ui, -apple-system, BlinkMacSystemFont,
+                   "SF Pro Text", "Segoe UI", sans-serif;
     }
 
+    /* ============================================================
+       RESET
+       ============================================================ */
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
+    /* ============================================================
+       PAGE BASE
+       ============================================================ */
     body {
       font-family: var(--font-main);
+      /* Dark background with a subtle purple gradient in the corner */
       background: radial-gradient(circle at top left, #1e1333 0, #050507 55%, #000 100%);
       color: var(--text-main);
       line-height: 1.5;
       padding: 24px 16px 48px;
     }
 
+    /* Centered content wrapper – max 880px wide */
     .page { max-width: 880px; margin: 0 auto; }
 
+    /* ============================================================
+       HEADER  (logo tag + title + subtitle)
+       ============================================================ */
     header {
       display: flex;
       align-items: baseline;
@@ -39,6 +51,7 @@
       gap: 12px;
     }
 
+    /* Gradient pill badge (e.g. "MTC – UA") */
     .tag {
       display: inline-flex;
       align-items: center;
@@ -52,10 +65,9 @@
       letter-spacing: 0.05em;
       text-transform: uppercase;
     }
-
+    /* Small dot inside the tag */
     .tag span {
-      width: 6px;
-      height: 6px;
+      width: 6px; height: 6px;
       border-radius: 999px;
       background: #050507;
     }
@@ -69,21 +81,14 @@
     .subtitle {
       font-size: 13px;
       color: var(--text-muted);
+      text-align: right;
     }
 
-    .grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-      gap: 18px;
-      align-items: flex-start;
-    }
+    /* ============================================================
+       LAYOUT HELPERS
+       ============================================================ */
 
-    .stack {
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-    }
-
+    /* Two equal columns for the top (Informações Gerais + Upcoming) */
     .top-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -91,21 +96,42 @@
       margin-bottom: 18px;
     }
 
-    @media (max-width: 720px) {
-      header { flex-direction: column; align-items: flex-start; }
-      .grid { grid-template-columns: minmax(0, 1fr); }
-      .top-grid { grid-template-columns: minmax(0, 1fr); }
+    /* Main body: left column is slightly wider */
+    .grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 18px;
+      align-items: flex-start;
     }
 
+    /* Stacks cards vertically inside each column */
+    .stack {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    /* ── Mobile: everything goes single column ────────────────── */
+    @media (max-width: 720px) {
+      header       { flex-direction: column; align-items: flex-start; }
+      .top-grid    { grid-template-columns: minmax(0, 1fr); }
+      .grid        { grid-template-columns: minmax(0, 1fr); }
+      .subtitle    { text-align: left; }
+    }
+
+    /* ============================================================
+       CARDS
+       ============================================================ */
     .card {
       background: rgba(8, 8, 18, 0.92);
       border-radius: 16px;
       padding: 14px 16px 16px;
-      border: 1px solid rgba(168, 85, 247, 0.15);
+      border: 1px solid rgba(168, 85, 247, 0.15); /* subtle purple border */
       box-shadow: 0 18px 40px rgba(0, 0, 0, 0.7);
       backdrop-filter: blur(26px);
     }
 
+    /* Row at the top of each card: title on the left, meta label on the right */
     .card-header {
       display: flex;
       justify-content: space-between;
@@ -114,6 +140,7 @@
       gap: 10px;
     }
 
+    /* Card title (e.g. "LM2") */
     .card-title {
       font-size: 14px;
       font-weight: 600;
@@ -125,14 +152,15 @@
       color: var(--purple-bright);
     }
 
+    /* Glowing green dot before each card title */
     .card-title-dot {
-      width: 8px;
-      height: 8px;
+      width: 8px; height: 8px;
       border-radius: 999px;
       background: var(--green);
       box-shadow: 0 0 12px rgba(34, 197, 94, 0.8);
     }
 
+    /* Small grey label on the right of the header (e.g. "Lab. Multimédia 2") */
     .card-meta {
       font-size: 11px;
       color: var(--text-muted);
@@ -140,9 +168,11 @@
       letter-spacing: 0.08em;
     }
 
+    /* ============================================================
+       LISTS  (used inside subject cards)
+       ============================================================ */
     ul {
       list-style: none;
-      margin-top: 0;
       font-size: 14px;
       color: var(--text-main);
     }
@@ -154,6 +184,7 @@
       line-height: 1.6;
     }
 
+    /* Green bullet point */
     li::before {
       content: "•";
       position: absolute;
@@ -164,14 +195,23 @@
 
     li:last-child { margin-bottom: 0; }
 
-    .date { color: var(--green-bright); font-weight: 600; }
+    /* ============================================================
+       TEXT UTILITIES
+       ============================================================ */
 
+    /* Date labels (e.g. "30/03") – bright green */
+    .date       { color: var(--green-bright); font-weight: 600; }
+
+    /* Percentage values (e.g. "(15% da nota)") – bright purple */
     .percentage { color: var(--purple-bright); font-weight: 600; }
 
-    .emphasis { color: var(--text-main); font-weight: 600; }
+    /* Bold white text for emphasis */
+    .emphasis   { color: var(--text-main); font-weight: 600; }
 
-    .muted { color: var(--text-muted); }
+    /* De-emphasised grey text (used for parenthetical notes) */
+    .muted      { color: var(--text-muted); }
 
+    /* Italic note block at the bottom of a card, separated by a faint line */
     .note {
       font-size: 13px;
       color: var(--text-muted);
@@ -182,6 +222,7 @@
       line-height: 1.5;
     }
 
+    /* Section divider label inside a card (e.g. "Trabalhos Práticos") */
     .section-label {
       font-size: 12px;
       text-transform: uppercase;
@@ -191,28 +232,15 @@
       font-weight: 600;
     }
 
-    .nested-list {
-      margin-left: 20px;
-      margin-top: 8px;
-    }
+    /* Indented sub-list (used under the SC Teste item) */
+    .nested-list            { margin-left: 20px; margin-top: 8px; }
+    .nested-list li         { font-size: 13px; color: var(--text-muted); margin-bottom: 4px; }
+    .nested-list li::before { content: "◦"; color: var(--purple); }
 
-    .nested-list li {
-      font-size: 13px;
-      color: var(--text-muted);
-      margin-bottom: 4px;
-    }
-
-    .nested-list li::before {
-      content: "◦";
-      color: var(--purple);
-    }
-
-    .timeline {
-      display: grid;
-      gap: 2px;
-      margin-top: 0;
-      font-size: 13px;
-    }
+    /* ============================================================
+       INFORMAÇÕES GERAIS  (timeline rows)
+       ============================================================ */
+    .timeline { display: grid; gap: 2px; font-size: 13px; }
 
     .timeline-row {
       display: flex;
@@ -221,17 +249,14 @@
       padding: 3px 0;
     }
 
-    .timeline-label {
-      color: var(--text-muted);
-      font-weight: 500;
-    }
+    .timeline-label { color: var(--text-muted); font-weight: 500; }
+    .timeline-value { text-align: right; color: var(--text-main); font-weight: 600; }
 
-    .timeline-value {
-      text-align: right;
-      color: var(--text-main);
-      font-weight: 600;
-    }
+    /* ============================================================
+       MISC UTILITIES
+       ============================================================ */
 
+    /* "POR MARCAR" style label – loud uppercase green */
     .highlight {
       color: var(--green-bright);
       font-weight: 700;
@@ -239,29 +264,40 @@
       font-size: 13px;
     }
 
-    .pending {
-      color: var(--text-muted);
-      font-style: italic;
-      font-size: 13px;
-    }
+    /* Placeholder text when a subject has no info yet */
+    .pending { color: var(--text-muted); font-style: italic; font-size: 13px; }
   </style>
 </head>
 <body>
   <div class="page">
+
+    <!-- ============================================================
+         HEADER
+         Change the tag text, page title, or subtitle below.
+         ============================================================ -->
     <header>
       <div>
+        <!-- Badge top-left – change "MTC - UA" to whatever you want -->
         <div class="tag"><span></span>MTC - UA</div>
+        <!-- Main page title -->
         <h1>Datas importantes</h1>
       </div>
+      <!-- Small description top-right -->
       <div class="subtitle">
         Atualizado regularmente porque n tenho mais nada para fazer da vida.<br>
         Site feito com IA. Não digam ao caixinha
       </div>
     </header>
 
-    <!-- Top small cards -->
+    <!-- ============================================================
+         TOP ROW: Informações Gerais + Próximas 2 Semanas
+         ============================================================ -->
     <div class="top-grid">
-      <!-- Informações Gerais -->
+
+      <!-- ── Informações Gerais ───────────────────────────────────
+           Add or remove .timeline-row blocks to update the semester
+           calendar (holidays, exam periods, etc.).
+           ─────────────────────────────────────────────────────── -->
       <section class="card">
         <div class="card-header">
           <div class="card-title">
@@ -297,46 +333,66 @@
         </div>
       </section>
 
-      <!-- Próximas 2 semanas (AUTO) -->
+      <!-- ── Próximas 2 Semanas ───────────────────────────────────
+           ⚠️  DO NOT edit this card's HTML directly.
+           All events come from the `events` array in the <script>
+           at the bottom of the file. Edit that instead.
+           ─────────────────────────────────────────────────────── -->
       <section class="card">
         <div class="card-header">
           <div class="card-title">
             <div class="card-title-dot"></div>
             Próximas 2 semanas
           </div>
-          <div class="card-meta">Eventos em breve</div>
+          <div class="card-meta">Preenchido automaticamente</div>
         </div>
-        <ul id="upcoming-list">
-          <!-- Preenchido por JavaScript -->
-        </ul>
+        <!-- JavaScript writes the <li> items into this list -->
+        <ul id="upcoming-list"></ul>
         <p class="note" id="upcoming-note">
-          Esta lista mostra automaticamente tudo o que acontece nos próximos 14 dias.
+          Lista atualizada automaticamente com base na data de hoje.
         </p>
       </section>
-    </div>
 
+    </div><!-- /top-grid -->
+
+    <!-- ============================================================
+         MAIN GRID: subject cards
+         Left column is slightly wider (1.1fr vs 1fr).
+         Add new subject cards by duplicating a <section class="card">
+         block and placing it inside .stack.
+         ============================================================ -->
     <div class="grid">
-      <!-- Left column -->
+
+      <!-- ── LEFT COLUMN ──────────────────────────────────────── -->
       <div class="stack">
-        <!-- LM2 -->
+
+        <!-- LM2 ─────────────────────────────────────────────────
+             To add an event: copy a <li> line and adjust the date
+             and text. Use <span class="date"> for dates and
+             <span class="percentage"> for grade weights.
+             ───────────────────────────────────────────────────── -->
         <section class="card">
           <div class="card-header">
             <div class="card-title">
               <div class="card-title-dot"></div>
               LM2
             </div>
+            <!-- Long name shown on the right in small grey text -->
             <div class="card-meta">Lab. Multimédia 2</div>
           </div>
-
           <ul>
             <li><span class="date">30/03</span> – HTML/CSS – Teste teórico e prático <span class="percentage">(15% da nota, cada)</span></li>
             <li><span class="date">18/05</span> – Projeto Final – Entrega da Prototipagem <span class="percentage">(10% da nota)</span></li>
             <li><span class="date">1/06</span> – RWD/Bootstrap – Teste teórico e prático <span class="percentage">(15% da nota, cada)</span></li>
+            <!-- Use class="highlight" for dates not yet confirmed -->
             <li><span class="highlight">Por marcar</span> – Projeto Final – Entrega <span class="percentage">(20%)</span> e Pitch <span class="percentage">(10%)</span> da Implementação</li>
           </ul>
         </section>
 
-        <!-- CI -->
+        <!-- CI ──────────────────────────────────────────────────
+             The .note block at the bottom is for extra info
+             that doesn't fit as a bullet point.
+             ───────────────────────────────────────────────────── -->
         <section class="card">
           <div class="card-header">
             <div class="card-title">
@@ -345,19 +401,21 @@
             </div>
             <div class="card-meta">Cognição e Interação</div>
           </div>
-
           <ul>
             <li><span class="date">19/03</span> – Teste 1</li>
             <li><span class="date">28/05</span> – Teste 2</li>
             <li><span class="date">21/05</span> – Trabalho Prático: Vídeo de resumo das atividades elaboradas pelo grupo</li>
           </ul>
-
+          <!-- Italic note separated by a faint line -->
           <p class="note">
             <span class="emphasis">Info. Testes:</span> Feitos no computador, nota mínima de 8 na média dos 2 testes. Possivelmente escolha múltipla.
           </p>
         </section>
 
-        <!-- SC -->
+        <!-- SC ──────────────────────────────────────────────────
+             Uses .section-label to separate "Teste" from
+             "Trabalhos Práticos", and .nested-list for sub-items.
+             ───────────────────────────────────────────────────── -->
         <section class="card">
           <div class="card-header">
             <div class="card-title">
@@ -367,11 +425,12 @@
             <div class="card-meta">Semiótica da Comunicação</div>
           </div>
 
+          <!-- Section sub-heading inside the card -->
           <div class="section-label">Teste</div>
           <ul>
             <li>Época de Exames <span class="percentage">(35% da nota)</span></li>
           </ul>
-          
+          <!-- Indented sub-items -->
           <ul class="nested-list">
             <li>Nota mínima: 8,5</li>
             <li>10 esc. múltipla, 2 desenvolvimento</li>
@@ -383,16 +442,20 @@
             <li><span class="date">23/04</span> – Ex. TP2 (semiótica da curta) <span class="percentage">(15% da nota)</span></li>
             <li><span class="date">29/05</span> – Ex. TP3 (semiótica da marca) <span class="percentage">(25% da nota)</span></li>
           </ul>
-
           <p class="note">
             Nota mínima exs. práticos: <span class="emphasis">10 valores</span>
           </p>
         </section>
-      </div>
 
-      <!-- Right column -->
+      </div><!-- /left stack -->
+
+      <!-- ── RIGHT COLUMN ─────────────────────────────────────── -->
       <div class="stack">
-        <!-- VD -->
+
+        <!-- VD ──────────────────────────────────────────────────
+             Use class="pending" when there's no info yet.
+             Replace it with a <ul> once dates are known.
+             ───────────────────────────────────────────────────── -->
         <section class="card">
           <div class="card-header">
             <div class="card-title">
@@ -401,11 +464,14 @@
             </div>
             <div class="card-meta">Vídeo Digital</div>
           </div>
-
           <p class="pending">(Por enquanto, sem info)</p>
         </section>
 
-        <!-- G -->
+        <!-- G ───────────────────────────────────────────────────
+             Use class="emphasis" (bold white) instead of
+             class="date" when the trigger is a period, not a
+             specific date (e.g. "Abril todo").
+             ───────────────────────────────────────────────────── -->
         <section class="card">
           <div class="card-header">
             <div class="card-title">
@@ -414,44 +480,78 @@
             </div>
             <div class="card-meta">Guionismo</div>
           </div>
-
           <ul>
             <li><span class="date">31/03</span> – Possível data para repor as aulas <span class="muted">(não lecionadas devido ao Carnaval)</span></li>
             <li><span class="date">7/04</span> – Planificação do Trabalho Prático 1 (TP1)</li>
+            <!-- Use .emphasis when there's no exact date -->
             <li><span class="emphasis">Abril todo</span> – Desenvolvimento do TP1 <span class="percentage">(30% da nota)</span></li>
             <li><span class="date">5/05</span> – Trabalho Individual <span class="percentage">(10% da nota)</span></li>
             <li><span class="date">2/06</span> – Apresentação do Trabalho Prático 2 (TP2) <span class="percentage">(30% da nota)</span></li>
             <li><span class="date">5/06</span> – Entrega do Relatório do TP2</li>
           </ul>
         </section>
-      </div>
-    </div>
-  </div>
 
+      </div><!-- /right stack -->
+
+    </div><!-- /main grid -->
+
+  </div><!-- /page -->
+
+  <!-- ==============================================================
+       EVENTS DATA + UPCOMING LOGIC
+       ==============================================================
+
+       HOW TO ADD OR EDIT EVENTS
+       ─────────────────────────
+       Each event in the array below follows this format:
+
+         { date: "YYYY-MM-DD", label: "Subject – Description" },
+
+       Rules:
+         • date must be in YYYY-MM-DD format (e.g. "2026-03-19")
+         • label is free text – keep it short so it fits the card
+         • Order doesn't matter – the script sorts by date
+         • Events outside the next 14 days are silently ignored
+           (they still show up in the subject cards above though)
+
+       EXAMPLE – adding a new event:
+         { date: "2026-04-15", label: "LM2 – Entrega do Projeto X" },
+
+       ============================================================== -->
   <script>
-    // LISTA ÚNICA DE EVENTOS – só precisas mexer aqui
-    // date: "YYYY-MM-DD"
     const events = [
-      { date: "2026-03-19", label: "CI – Teste 1" },
-      { date: "2026-03-26", label: "SC – TP1 (representação das personagens)" },
+      // ── LM2 ────────────────────────────────────────────────────
       { date: "2026-03-30", label: "LM2 – HTML/CSS – Teste teórico e prático" },
-      { date: "2026-03-31", label: "G – Possível reposição de aulas" },
-      { date: "2026-04-07", label: "G – Planificação TP1" },
-      { date: "2026-04-23", label: "SC – TP2 (semiótica da curta)" },
-      { date: "2026-05-05", label: "G – Trabalho Individual" },
       { date: "2026-05-18", label: "LM2 – Entrega Prototipagem" },
+      { date: "2026-06-01", label: "LM2 – RWD/Bootstrap – Teste" },
+
+      // ── CI ─────────────────────────────────────────────────────
+      { date: "2026-03-19", label: "CI – Teste 1" },
       { date: "2026-05-21", label: "CI – Trabalho Prático (vídeo)" },
       { date: "2026-05-28", label: "CI – Teste 2" },
+
+      // ── SC ─────────────────────────────────────────────────────
+      { date: "2026-03-26", label: "SC – TP1 (representação das personagens)" },
+      { date: "2026-04-23", label: "SC – TP2 (semiótica da curta)" },
       { date: "2026-05-29", label: "SC – TP3 (semiótica da marca)" },
-      { date: "2026-06-01", label: "LM2 – RWD/Bootstrap – Teste" },
+
+      // ── G ──────────────────────────────────────────────────────
+      { date: "2026-03-31", label: "G – Possível reposição de aulas" },
+      { date: "2026-04-07", label: "G – Planificação TP1" },
+      { date: "2026-05-05", label: "G – Trabalho Individual" },
       { date: "2026-06-02", label: "G – Apresentação TP2" },
+      { date: "2026-06-05", label: "G – Entrega Relatório TP2" },
+
+      // ── Geral ──────────────────────────────────────────────────
       { date: "2026-06-03", label: "Fim das aulas" },
-      { date: "2026-06-05", label: "G – Entrega Relatório TP2" }
     ];
 
+    // ── Script logic – no need to edit below this line ────────────
+
+    // Converts a Date object to "DD/MM" for display
     function formatPtDate(dateObj) {
-      const d = dateObj.getDate().toString().padStart(2, "0");
-      const m = (dateObj.getMonth() + 1).toString().padStart(2, "0");
+      const d = String(dateObj.getDate()).padStart(2, "0");
+      const m = String(dateObj.getMonth() + 1).padStart(2, "0");
       return `${d}/${m}`;
     }
 
@@ -460,11 +560,13 @@
       const noteEl = document.getElementById("upcoming-note");
       if (!listEl) return;
 
+      // Get today at midnight and two weeks from now
       const today = new Date();
-      today.setHours(0,0,0,0);
+      today.setHours(0, 0, 0, 0);
       const inTwoWeeks = new Date(today);
       inTwoWeeks.setDate(inTwoWeeks.getDate() + 14);
 
+      // Filter events within the window and sort chronologically
       const upcoming = events
         .map(e => ({ ...e, d: new Date(e.date + "T00:00:00") }))
         .filter(e => e.d >= today && e.d <= inTwoWeeks)
@@ -472,20 +574,25 @@
 
       listEl.innerHTML = "";
 
+      // If nothing is coming up, show a friendly message
       if (upcoming.length === 0) {
         const li = document.createElement("li");
-        li.textContent = "Nada marcado nos próximos 14 dias. Aproveita para respirar.";
-        li.classList.add("muted");
+        li.textContent = "Nada marcado nos próximos 14 dias. Aproveita.";
+        li.style.color = "var(--text-muted)";
+        li.style.fontStyle = "italic";
         listEl.appendChild(li);
         if (noteEl) noteEl.style.display = "none";
         return;
       }
 
+      // Render each upcoming event as a list item
       upcoming.forEach(e => {
         const li = document.createElement("li");
+
         const spanDate = document.createElement("span");
         spanDate.className = "date";
         spanDate.textContent = formatPtDate(e.d);
+
         li.appendChild(spanDate);
         li.insertAdjacentText("beforeend", " – " + e.label);
         listEl.appendChild(li);
