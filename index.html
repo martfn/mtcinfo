@@ -19,11 +19,7 @@
         "Segoe UI", sans-serif;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       font-family: var(--font-main);
@@ -33,10 +29,7 @@
       padding: 24px 16px 48px;
     }
 
-    .page {
-      max-width: 880px;
-      margin: 0 auto;
-    }
+    .page { max-width: 880px; margin: 0 auto; }
 
     header {
       display: flex;
@@ -78,7 +71,6 @@
       color: var(--text-muted);
     }
 
-    /* Layout */
     .grid {
       display: grid;
       grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
@@ -92,7 +84,6 @@
       gap: 18px;
     }
 
-    /* Top grid for small cards */
     .top-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -101,19 +92,11 @@
     }
 
     @media (max-width: 720px) {
-      header {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      .grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
-      .top-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
+      header { flex-direction: column; align-items: flex-start; }
+      .grid { grid-template-columns: minmax(0, 1fr); }
+      .top-grid { grid-template-columns: minmax(0, 1fr); }
     }
 
-    /* Cards */
     .card {
       background: rgba(8, 8, 18, 0.92);
       border-radius: 16px;
@@ -157,7 +140,6 @@
       letter-spacing: 0.08em;
     }
 
-    /* Lists */
     ul {
       list-style: none;
       margin-top: 0;
@@ -180,28 +162,15 @@
       font-weight: bold;
     }
 
-    li:last-child {
-      margin-bottom: 0;
-    }
+    li:last-child { margin-bottom: 0; }
 
-    .date {
-      color: var(--green-bright);
-      font-weight: 600;
-    }
+    .date { color: var(--green-bright); font-weight: 600; }
 
-    .percentage {
-      color: var(--purple-bright);
-      font-weight: 600;
-    }
+    .percentage { color: var(--purple-bright); font-weight: 600; }
 
-    .emphasis {
-      color: var(--text-main);
-      font-weight: 600;
-    }
+    .emphasis { color: var(--text-main); font-weight: 600; }
 
-    .muted {
-      color: var(--text-muted);
-    }
+    .muted { color: var(--text-muted); }
 
     .note {
       font-size: 13px;
@@ -238,7 +207,6 @@
       color: var(--purple);
     }
 
-    /* Semester overview - compact square */
     .timeline {
       display: grid;
       gap: 2px;
@@ -329,7 +297,7 @@
         </div>
       </section>
 
-      <!-- Próximas 2 semanas -->
+      <!-- Próximas 2 semanas (AUTO) -->
       <section class="card">
         <div class="card-header">
           <div class="card-title">
@@ -338,15 +306,11 @@
           </div>
           <div class="card-meta">Eventos em breve</div>
         </div>
-        <ul>
-          <!-- Exemplo de conteúdo; atualiza isto à mão -->
-          <li><span class="date">19/03</span> – CI – Teste 1</li>
-          <li><span class="date">26/03</span> – SC – TP1 (representação das personagens)</li>
-          <li><span class="date">31/03</span> – G – Possível reposição de aulas</li>
-          <li><span class="date">??/03</span> – Outro evento que queiras listar aqui</li>
+        <ul id="upcoming-list">
+          <!-- Preenchido por JavaScript -->
         </ul>
-        <p class="note">
-          Atualiza esta lista sempre que houver novas coisas na agenda. Pensa nisto como o “painel de emergência”.
+        <p class="note" id="upcoming-note">
+          Esta lista mostra automaticamente tudo o que acontece nos próximos 14 dias.
         </p>
       </section>
     </div>
@@ -463,5 +427,72 @@
       </div>
     </div>
   </div>
+
+  <script>
+    // LISTA ÚNICA DE EVENTOS – só precisas mexer aqui
+    // date: "YYYY-MM-DD"
+    const events = [
+      { date: "2026-03-19", label: "CI – Teste 1" },
+      { date: "2026-03-26", label: "SC – TP1 (representação das personagens)" },
+      { date: "2026-03-30", label: "LM2 – HTML/CSS – Teste teórico e prático" },
+      { date: "2026-03-31", label: "G – Possível reposição de aulas" },
+      { date: "2026-04-07", label: "G – Planificação TP1" },
+      { date: "2026-04-23", label: "SC – TP2 (semiótica da curta)" },
+      { date: "2026-05-05", label: "G – Trabalho Individual" },
+      { date: "2026-05-18", label: "LM2 – Entrega Prototipagem" },
+      { date: "2026-05-21", label: "CI – Trabalho Prático (vídeo)" },
+      { date: "2026-05-28", label: "CI – Teste 2" },
+      { date: "2026-05-29", label: "SC – TP3 (semiótica da marca)" },
+      { date: "2026-06-01", label: "LM2 – RWD/Bootstrap – Teste" },
+      { date: "2026-06-02", label: "G – Apresentação TP2" },
+      { date: "2026-06-03", label: "Fim das aulas" },
+      { date: "2026-06-05", label: "G – Entrega Relatório TP2" }
+    ];
+
+    function formatPtDate(dateObj) {
+      const d = dateObj.getDate().toString().padStart(2, "0");
+      const m = (dateObj.getMonth() + 1).toString().padStart(2, "0");
+      return `${d}/${m}`;
+    }
+
+    function buildUpcoming() {
+      const listEl = document.getElementById("upcoming-list");
+      const noteEl = document.getElementById("upcoming-note");
+      if (!listEl) return;
+
+      const today = new Date();
+      today.setHours(0,0,0,0);
+      const inTwoWeeks = new Date(today);
+      inTwoWeeks.setDate(inTwoWeeks.getDate() + 14);
+
+      const upcoming = events
+        .map(e => ({ ...e, d: new Date(e.date + "T00:00:00") }))
+        .filter(e => e.d >= today && e.d <= inTwoWeeks)
+        .sort((a, b) => a.d - b.d);
+
+      listEl.innerHTML = "";
+
+      if (upcoming.length === 0) {
+        const li = document.createElement("li");
+        li.textContent = "Nada marcado nos próximos 14 dias. Aproveita para respirar.";
+        li.classList.add("muted");
+        listEl.appendChild(li);
+        if (noteEl) noteEl.style.display = "none";
+        return;
+      }
+
+      upcoming.forEach(e => {
+        const li = document.createElement("li");
+        const spanDate = document.createElement("span");
+        spanDate.className = "date";
+        spanDate.textContent = formatPtDate(e.d);
+        li.appendChild(spanDate);
+        li.insertAdjacentText("beforeend", " – " + e.label);
+        listEl.appendChild(li);
+      });
+    }
+
+    buildUpcoming();
+  </script>
 </body>
 </html>
