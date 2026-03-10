@@ -170,10 +170,6 @@
       font-weight: 600;
     }
 
-    .nested-list            { margin-left: 20px; margin-top: 8px; }
-    .nested-list li         { font-size: 13px; color: var(--text-muted); margin-bottom: 4px; }
-    .nested-list li::before { content: "◦"; color: var(--purple); }
-
     .timeline     { display: grid; gap: 2px; font-size: 13px; }
     .timeline-row { display: flex; justify-content: space-between; gap: 12px; padding: 3px 0; }
     .timeline-label { color: var(--text-muted); font-weight: 500; }
@@ -197,8 +193,7 @@
     </header>
 
     <div class="top-grid">
-
-      <!-- Informações Gerais -->
+      <!-- Informações Gerais – static, semester calendar doesn't change often -->
       <section class="card">
         <div class="card-header">
           <div class="card-title"><div class="card-title-dot"></div>Informações Gerais</div>
@@ -231,7 +226,7 @@
         </div>
       </section>
 
-      <!-- Próximas 2 semanas – preenchido automaticamente via events.json -->
+      <!-- Próximas 2 semanas – filled by JS -->
       <section class="card">
         <div class="card-header">
           <div class="card-title"><div class="card-title-dot"></div>Próximas 2 semanas</div>
@@ -242,147 +237,101 @@
           Lista atualizada automaticamente com base na data de hoje.
         </p>
       </section>
+    </div>
 
-    </div><!-- /top-grid -->
-
+    <!-- Subject cards – fully built by JS from events.json -->
     <div class="grid">
+      <div class="stack" id="col-left"></div>
+      <div class="stack" id="col-right"></div>
+    </div>
 
-      <!-- ── Left column ── -->
-      <div class="stack">
-
-        <!-- LM2 -->
-        <section class="card">
-          <div class="card-header">
-            <div class="card-title"><div class="card-title-dot"></div>LM2</div>
-            <div class="card-meta">Lab. Multimédia 2</div>
-          </div>
-          <ul>
-            <li><span class="date">30/03</span> – HTML/CSS – Teste teórico e prático <span class="percentage">(15% da nota, cada)</span></li>
-            <li><span class="date">18/05</span> – Projeto Final – Entrega da Prototipagem <span class="percentage">(10% da nota)</span></li>
-            <li><span class="date">1/06</span> – RWD/Bootstrap – Teste teórico e prático <span class="percentage">(15% da nota, cada)</span></li>
-            <li><span class="highlight">~9/06, 9h</span> – Projeto Final – Apresentações – Entrega <span class="percentage">(20%)</span> e Pitch <span class="percentage">(10%)</span> da Implementação <span class="muted">(data a confirmar)</span></li>
-          </ul>
-          <div class="section-label">Recurso</div>
-          <ul>
-            <li><span class="date">30/06, 9h</span> – Apresentações</li>
-          </ul>
-        </section>
-
-        <!-- CI -->
-        <section class="card">
-          <div class="card-header">
-            <div class="card-title"><div class="card-title-dot"></div>CI</div>
-            <div class="card-meta">Cognição e Interação</div>
-          </div>
-          <ul>
-            <li><span class="date">19/03</span> – Teste 1</li>
-            <li><span class="date">28/05</span> – Teste 2</li>
-            <li><span class="date">21/05</span> – Trabalho Prático: Vídeo de resumo das atividades elaboradas pelo grupo</li>
-          </ul>
-          <p class="note">
-            <span class="emphasis">Info. Testes:</span> Feitos no computador, nota mínima de 8 na média dos 2 testes. Possivelmente escolha múltipla.
-          </p>
-          <div class="section-label">Recurso</div>
-          <ul>
-            <li><span class="date">2/07, 15h</span> – Recurso</li>
-          </ul>
-        </section>
-
-        <!-- SC -->
-        <section class="card">
-          <div class="card-header">
-            <div class="card-title"><div class="card-title-dot"></div>SC</div>
-            <div class="card-meta">Semiótica da Comunicação</div>
-          </div>
-          <div class="section-label">Teste</div>
-          <ul>
-            <li><span class="date">22/06, 15h</span> – Época de Exames <span class="percentage">(35% da nota)</span></li>
-          </ul>
-          <ul class="nested-list">
-            <li>Nota mínima: 8,5</li>
-            <li>10 esc. múltipla, 2 desenvolvimento</li>
-          </ul>
-          <div class="section-label">Trabalhos Práticos</div>
-          <ul>
-            <li><span class="date">26/03</span> – Ex. TP1 (sobre a representação das personagens) <span class="percentage">(15% da nota)</span></li>
-            <li><span class="date">23/04</span> – Ex. TP2 (semiótica da curta) <span class="percentage">(15% da nota)</span></li>
-            <li><span class="date">29/05</span> – Ex. TP3 (semiótica da marca) <span class="percentage">(25% da nota)</span></li>
-          </ul>
-          <p class="note">Nota mínima exs. práticos: <span class="emphasis">10 valores</span></p>
-          <div class="section-label">Recurso</div>
-          <ul>
-            <li><span class="date">10/07, 15h</span> – Recurso</li>
-          </ul>
-        </section>
-
-      </div><!-- /left stack -->
-
-      <!-- ── Right column ── -->
-      <div class="stack">
-
-        <!-- VD -->
-        <section class="card">
-          <div class="card-header">
-            <div class="card-title"><div class="card-title-dot"></div>VD</div>
-            <div class="card-meta">Vídeo Digital</div>
-          </div>
-          <ul>
-            <li>Curta Metragem <span class="percentage">(50%)</span> <span class="muted">· Grupo</span></li>
-            <li>Trailer da Curta <span class="percentage">(10%)</span> <span class="muted">· Individual</span></li>
-            <li>Curta Al Al <span class="percentage">(15%)</span> <span class="muted">· Grupo</span></li>
-            <li><span class="date">18/06, 10h</span> – Teste teórico <span class="percentage">(25%)</span> <span class="muted">· Individual</span></li>
-          </ul>
-          <div class="section-label">Recurso</div>
-          <ul>
-            <li><span class="date">8/07, 10h</span> – Recurso</li>
-          </ul>
-        </section>
-
-        <!-- G -->
-        <section class="card">
-          <div class="card-header">
-            <div class="card-title"><div class="card-title-dot"></div>G</div>
-            <div class="card-meta">Guionismo</div>
-          </div>
-          <ul>
-            <li><span class="date">31/03</span> – Possível data para repor as aulas <span class="muted">(não lecionadas devido ao Carnaval)</span></li>
-            <li><span class="date">7/04</span> – Planificação do Trabalho Prático 1 (TP1)</li>
-            <li><span class="emphasis">Abril todo</span> – Desenvolvimento do TP1 <span class="percentage">(30% da nota)</span></li>
-            <li><span class="date">5/05</span> – Trabalho Individual <span class="percentage">(10% da nota)</span></li>
-            <li><span class="date">2/06</span> – Apresentação do Trabalho Prático 2 (TP2) <span class="percentage">(30% da nota)</span></li>
-            <li><span class="date">5/06</span> – Entrega do Relatório do TP2</li>
-          </ul>
-          <div class="section-label">Recurso</div>
-          <ul>
-            <li><span class="date">6/07, 15h</span> – Recurso</li>
-          </ul>
-        </section>
-
-      </div><!-- /right stack -->
-    </div><!-- /main grid -->
-  </div><!-- /page -->
+  </div>
 
   <script>
-    // Fetches events.json from the same folder.
-    // Use editor.html to manage events and export the file.
-    async function init() {
-      let events = [];
-      try {
-        const res = await fetch("events.json");
-        if (!res.ok) throw new Error();
-        events = await res.json();
-      } catch {
-        console.warn("events.json não encontrado – lista de eventos vazia.");
-      }
-      buildUpcoming(events);
-    }
+    // ── Subject definitions ──────────────────────────────────────
+    // Controls card order, column placement, full name, and any
+    // static note shown at the bottom of the card.
+    const SUBJECTS = [
+      { id: "LM2", name: "Lab. Multimédia 2",        col: "left"  },
+      { id: "CI",  name: "Cognição e Interação",      col: "left",
+        note: "<span class='emphasis'>Info. Testes:</span> Feitos no computador, nota mínima de 8 na média dos 2 testes. Possivelmente escolha múltipla." },
+      { id: "SC",  name: "Semiótica da Comunicação",  col: "left",
+        note: "Nota mínima exs. práticos: <span class='emphasis'>10 valores</span>" },
+      { id: "VD",  name: "Vídeo Digital",             col: "right" },
+      { id: "G",   name: "Guionismo",                 col: "right" },
+    ];
 
+    // ── Helpers ──────────────────────────────────────────────────
     function formatPtDate(dateObj) {
       const d = String(dateObj.getDate()).padStart(2, "0");
       const m = String(dateObj.getMonth() + 1).padStart(2, "0");
       return `${d}/${m}`;
     }
 
+    function renderDateLabel(e) {
+      if (e.porMarcar) {
+        return `<span class="highlight">Por marcar</span>`;
+      }
+      const prefix = e.unconfirmed ? "~" : "";
+      const d      = new Date(e.date + "T00:00:00");
+      const time   = e.time ? `, ${e.time}` : "";
+      const cls    = e.unconfirmed ? "highlight" : "date";
+      return `<span class="${cls}">${prefix}${formatPtDate(d)}${time}</span>`;
+    }
+
+    function renderEventLi(e) {
+      const dateHtml = renderDateLabel(e);
+      const pct      = e.pct  ? ` <span class="percentage">(${e.pct}%)</span>` : "";
+      const type     = e.type ? ` <span class="muted">· ${e.type}</span>`      : "";
+      const sep      = (!e.porMarcar) ? " – " : " – ";
+      return `<li>${dateHtml}${sep}${e.label}${pct}${type}</li>`;
+    }
+
+    // ── Build subject cards ──────────────────────────────────────
+    function buildSubjectCards(events) {
+      const colLeft  = document.getElementById("col-left");
+      const colRight = document.getElementById("col-right");
+
+      SUBJECTS.forEach(subj => {
+        const subjectEvents = events.filter(e => e.subject === subj.id);
+
+        // Group into sections: normal events first, then recurso
+        const normal  = subjectEvents.filter(e => !e.section);
+        const recurso = subjectEvents.filter(e => e.section === "Recurso");
+
+        // Build inner HTML
+        let inner = "";
+
+        if (normal.length === 0 && recurso.length === 0) {
+          inner = `<p class="pending">(Por enquanto, sem info)</p>`;
+        } else {
+          if (normal.length > 0) {
+            inner += `<ul>${normal.map(renderEventLi).join("")}</ul>`;
+          }
+          if (recurso.length > 0) {
+            inner += `<div class="section-label">Recurso</div>`;
+            inner += `<ul>${recurso.map(renderEventLi).join("")}</ul>`;
+          }
+        }
+
+        if (subj.note) {
+          inner += `<p class="note">${subj.note}</p>`;
+        }
+
+        const card = document.createElement("section");
+        card.className = "card";
+        card.innerHTML = `
+          <div class="card-header">
+            <div class="card-title"><div class="card-title-dot"></div>${subj.id}</div>
+            <div class="card-meta">${subj.name}</div>
+          </div>
+          ${inner}`;
+
+        (subj.col === "left" ? colLeft : colRight).appendChild(card);
+      });
+    }
+
+    // ── Build upcoming list ──────────────────────────────────────
     function buildUpcoming(events) {
       const listEl = document.getElementById("upcoming-list");
       const noteEl = document.getElementById("upcoming-note");
@@ -404,7 +353,7 @@
       if (upcoming.length === 0) {
         const li = document.createElement("li");
         li.textContent = "Nada marcado nos próximos 14 dias. Aproveita para descansar e pagar um café aos teus representantes de curso favoritos.";
-        li.style.color = "var(--text-muted)";
+        li.style.color     = "var(--text-muted)";
         li.style.fontStyle = "italic";
         listEl.appendChild(li);
         if (noteEl) noteEl.style.display = "none";
@@ -419,10 +368,24 @@
         const time           = e.time ? `, ${e.time}` : "";
         spanDate.textContent = prefix + formatPtDate(e.d) + time;
         li.appendChild(spanDate);
-        const subject = e.subject !== "Geral" ? ` ${e.subject} –` : "";
-        li.insertAdjacentText("beforeend", `${subject} ${e.label}`);
+        const subj = e.subject !== "Geral" ? ` ${e.subject} –` : "";
+        li.insertAdjacentText("beforeend", `${subj} ${e.label}`);
         listEl.appendChild(li);
       });
+    }
+
+    // ── Init ─────────────────────────────────────────────────────
+    async function init() {
+      let events = [];
+      try {
+        const res = await fetch("events.json");
+        if (!res.ok) throw new Error();
+        events = await res.json();
+      } catch {
+        console.warn("events.json não encontrado – a carregar sem eventos.");
+      }
+      buildSubjectCards(events);
+      buildUpcoming(events);
     }
 
     init();
