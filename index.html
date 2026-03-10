@@ -2,21 +2,18 @@
 <html lang="pt">
 <head>
   <meta charset="UTF-8">
-  <title>MTC – Info 2.º Semestre</title>
+  <title>MTC – 2.º Semestre</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     :root {
-      --bg: #050507;
-      --card: #101016;
-      --purple: #a855f7;
+      --purple:        #a855f7;
       --purple-bright: #c084fc;
-      --green: #22c55e;
-      --green-bright: #4ade80;
-      --text-main: #f5f5f7;
-      --text-muted: #a0a0b2;
-      --border-subtle: #2a2a3a;
-      --font-main: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
-        "Segoe UI", sans-serif;
+      --green:         #22c55e;
+      --green-bright:  #4ade80;
+      --text-main:     #f5f5f7;
+      --text-muted:    #a0a0b2;
+      --font-main: system-ui, -apple-system, BlinkMacSystemFont,
+                   "SF Pro Text", "Segoe UI", sans-serif;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -53,22 +50,17 @@
       text-transform: uppercase;
     }
 
-    .tag span {
-      width: 6px;
-      height: 6px;
-      border-radius: 999px;
-      background: #050507;
-    }
+    .tag span { width: 6px; height: 6px; border-radius: 999px; background: #050507; }
 
-    h1 {
-      font-size: 28px;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-    }
+    h1 { font-size: 28px; letter-spacing: 0.04em; text-transform: uppercase; }
 
-    .subtitle {
-      font-size: 13px;
-      color: var(--text-muted);
+    .subtitle { font-size: 13px; color: var(--text-muted); }
+
+    .top-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin-bottom: 18px;
     }
 
     .grid {
@@ -78,23 +70,12 @@
       align-items: flex-start;
     }
 
-    .stack {
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-    }
-
-    .top-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 18px;
-      margin-bottom: 18px;
-    }
+    .stack { display: flex; flex-direction: column; gap: 18px; }
 
     @media (max-width: 720px) {
-      header { flex-direction: column; align-items: flex-start; }
-      .grid { grid-template-columns: minmax(0, 1fr); }
+      header    { flex-direction: column; align-items: flex-start; }
       .top-grid { grid-template-columns: minmax(0, 1fr); }
+      .grid     { grid-template-columns: minmax(0, 1fr); }
     }
 
     .card {
@@ -126,8 +107,7 @@
     }
 
     .card-title-dot {
-      width: 8px;
-      height: 8px;
+      width: 8px; height: 8px;
       border-radius: 999px;
       background: var(--green);
       box-shadow: 0 0 12px rgba(34, 197, 94, 0.8);
@@ -140,12 +120,7 @@
       letter-spacing: 0.08em;
     }
 
-    ul {
-      list-style: none;
-      margin-top: 0;
-      font-size: 14px;
-      color: var(--text-main);
-    }
+    ul { list-style: none; font-size: 14px; color: var(--text-main); }
 
     li {
       padding-left: 16px;
@@ -164,10 +139,17 @@
 
     li:last-child { margin-bottom: 0; }
 
-    .date { color: var(--green-bright); font-weight: 600; }
+    .date       { color: var(--green-bright); font-weight: 600; }
     .percentage { color: var(--purple-bright); font-weight: 600; }
-    .emphasis { color: var(--text-main); font-weight: 600; }
-    .muted { color: var(--text-muted); }
+    .emphasis   { color: var(--text-main); font-weight: 600; }
+    .muted      { color: var(--text-muted); }
+
+    .highlight {
+      color: var(--green-bright);
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 13px;
+    }
 
     .note {
       font-size: 13px;
@@ -188,34 +170,21 @@
       font-weight: 600;
     }
 
-    .nested-list { margin-left: 20px; margin-top: 8px; }
-    .nested-list li { font-size: 13px; color: var(--text-muted); margin-bottom: 4px; }
+    .nested-list            { margin-left: 20px; margin-top: 8px; }
+    .nested-list li         { font-size: 13px; color: var(--text-muted); margin-bottom: 4px; }
     .nested-list li::before { content: "◦"; color: var(--purple); }
 
-    .timeline { display: grid; gap: 2px; margin-top: 0; font-size: 13px; }
-
-    .timeline-row {
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 3px 0;
-    }
-
+    .timeline     { display: grid; gap: 2px; font-size: 13px; }
+    .timeline-row { display: flex; justify-content: space-between; gap: 12px; padding: 3px 0; }
     .timeline-label { color: var(--text-muted); font-weight: 500; }
     .timeline-value { text-align: right; color: var(--text-main); font-weight: 600; }
-
-    .highlight {
-      color: var(--green-bright);
-      font-weight: 700;
-      text-transform: uppercase;
-      font-size: 13px;
-    }
 
     .pending { color: var(--text-muted); font-style: italic; font-size: 13px; }
   </style>
 </head>
 <body>
   <div class="page">
+
     <header>
       <div>
         <div class="tag"><span></span>MTC - UA</div>
@@ -228,13 +197,11 @@
     </header>
 
     <div class="top-grid">
+
       <!-- Informações Gerais -->
       <section class="card">
         <div class="card-header">
-          <div class="card-title">
-            <div class="card-title-dot"></div>
-            Informações Gerais
-          </div>
+          <div class="card-title"><div class="card-title-dot"></div>Informações Gerais</div>
         </div>
         <div class="timeline">
           <div class="timeline-row">
@@ -264,13 +231,10 @@
         </div>
       </section>
 
-      <!-- Próximas 2 semanas (AUTO) -->
+      <!-- Próximas 2 semanas – preenchido automaticamente via events.json -->
       <section class="card">
         <div class="card-header">
-          <div class="card-title">
-            <div class="card-title-dot"></div>
-            Próximas 2 semanas
-          </div>
+          <div class="card-title"><div class="card-title-dot"></div>Próximas 2 semanas</div>
           <div class="card-meta">Preenchido automaticamente</div>
         </div>
         <ul id="upcoming-list"></ul>
@@ -278,19 +242,18 @@
           Lista atualizada automaticamente com base na data de hoje.
         </p>
       </section>
-    </div>
+
+    </div><!-- /top-grid -->
 
     <div class="grid">
-      <!-- Left column -->
+
+      <!-- ── Left column ── -->
       <div class="stack">
 
         <!-- LM2 -->
         <section class="card">
           <div class="card-header">
-            <div class="card-title">
-              <div class="card-title-dot"></div>
-              LM2
-            </div>
+            <div class="card-title"><div class="card-title-dot"></div>LM2</div>
             <div class="card-meta">Lab. Multimédia 2</div>
           </div>
           <ul>
@@ -308,10 +271,7 @@
         <!-- CI -->
         <section class="card">
           <div class="card-header">
-            <div class="card-title">
-              <div class="card-title-dot"></div>
-              CI
-            </div>
+            <div class="card-title"><div class="card-title-dot"></div>CI</div>
             <div class="card-meta">Cognição e Interação</div>
           </div>
           <ul>
@@ -331,10 +291,7 @@
         <!-- SC -->
         <section class="card">
           <div class="card-header">
-            <div class="card-title">
-              <div class="card-title-dot"></div>
-              SC
-            </div>
+            <div class="card-title"><div class="card-title-dot"></div>SC</div>
             <div class="card-meta">Semiótica da Comunicação</div>
           </div>
           <div class="section-label">Teste</div>
@@ -351,9 +308,7 @@
             <li><span class="date">23/04</span> – Ex. TP2 (semiótica da curta) <span class="percentage">(15% da nota)</span></li>
             <li><span class="date">29/05</span> – Ex. TP3 (semiótica da marca) <span class="percentage">(25% da nota)</span></li>
           </ul>
-          <p class="note">
-            Nota mínima exs. práticos: <span class="emphasis">10 valores</span>
-          </p>
+          <p class="note">Nota mínima exs. práticos: <span class="emphasis">10 valores</span></p>
           <div class="section-label">Recurso</div>
           <ul>
             <li><span class="date">10/07, 15h</span> – Recurso</li>
@@ -362,16 +317,13 @@
 
       </div><!-- /left stack -->
 
-      <!-- Right column -->
+      <!-- ── Right column ── -->
       <div class="stack">
 
         <!-- VD -->
         <section class="card">
           <div class="card-header">
-            <div class="card-title">
-              <div class="card-title-dot"></div>
-              VD
-            </div>
+            <div class="card-title"><div class="card-title-dot"></div>VD</div>
             <div class="card-meta">Vídeo Digital</div>
           </div>
           <ul>
@@ -389,10 +341,7 @@
         <!-- G -->
         <section class="card">
           <div class="card-header">
-            <div class="card-title">
-              <div class="card-title-dot"></div>
-              G
-            </div>
+            <div class="card-title"><div class="card-title-dot"></div>G</div>
             <div class="card-meta">Guionismo</div>
           </div>
           <ul>
@@ -414,47 +363,19 @@
   </div><!-- /page -->
 
   <script>
-    // ── EVENTS LIST ─────────────────────────────────────────────
-    // Format: { date: "YYYY-MM-DD", label: "Subject – Description" }
-    // The "Próximas 2 semanas" card is built automatically from this.
-    const events = [
-      // ── LM2 ──
-      { date: "2026-03-30", label: "LM2 – HTML/CSS – Teste teórico e prático" },
-      { date: "2026-05-18", label: "LM2 – Entrega Prototipagem" },
-      { date: "2026-06-01", label: "LM2 – RWD/Bootstrap – Teste" },
-      { date: "2026-06-09", label: "LM2 – Apresentações, 9h (a confirmar)" },
-      { date: "2026-06-30", label: "LM2 – Recurso Apresentações, 9h" },
-
-      // ── CI ──
-      { date: "2026-03-19", label: "CI – Teste 1" },
-      { date: "2026-05-21", label: "CI – Trabalho Prático (vídeo)" },
-      { date: "2026-05-28", label: "CI – Teste 2" },
-      { date: "2026-07-02", label: "CI – Recurso, 15h" },
-
-      // ── SC ──
-      { date: "2026-03-26", label: "SC – TP1 (representação das personagens)" },
-      { date: "2026-04-23", label: "SC – TP2 (semiótica da curta)" },
-      { date: "2026-05-29", label: "SC – TP3 (semiótica da marca)" },
-      { date: "2026-06-22", label: "SC – Teste, 15h" },
-      { date: "2026-07-10", label: "SC – Recurso, 15h" },
-
-      // ── VD ──
-      { date: "2026-06-18", label: "VD – Teste teórico, 10h" },
-      { date: "2026-07-08", label: "VD – Recurso, 10h" },
-
-      // ── G ──
-      { date: "2026-03-31", label: "G – Possível reposição de aulas" },
-      { date: "2026-04-07", label: "G – Planificação TP1" },
-      { date: "2026-05-05", label: "G – Trabalho Individual" },
-      { date: "2026-06-02", label: "G – Apresentação TP2" },
-      { date: "2026-06-05", label: "G – Entrega Relatório TP2" },
-      { date: "2026-07-06", label: "G – Recurso, 15h" },
-
-      // ── Geral ──
-      { date: "2026-06-03", label: "Fim das aulas" },
-    ];
-
-    // ── No need to edit below this line ─────────────────────────
+    // Fetches events.json from the same folder.
+    // Use editor.html to manage events and export the file.
+    async function init() {
+      let events = [];
+      try {
+        const res = await fetch("events.json");
+        if (!res.ok) throw new Error();
+        events = await res.json();
+      } catch {
+        console.warn("events.json não encontrado – lista de eventos vazia.");
+      }
+      buildUpcoming(events);
+    }
 
     function formatPtDate(dateObj) {
       const d = String(dateObj.getDate()).padStart(2, "0");
@@ -462,7 +383,7 @@
       return `${d}/${m}`;
     }
 
-    function buildUpcoming() {
+    function buildUpcoming(events) {
       const listEl = document.getElementById("upcoming-list");
       const noteEl = document.getElementById("upcoming-note");
       if (!listEl) return;
@@ -473,6 +394,7 @@
       inTwoWeeks.setDate(inTwoWeeks.getDate() + 14);
 
       const upcoming = events
+        .filter(e => !e.porMarcar && !e.recursoOnly && e.date)
         .map(e => ({ ...e, d: new Date(e.date + "T00:00:00") }))
         .filter(e => e.d >= today && e.d <= inTwoWeeks)
         .sort((a, b) => a.d - b.d);
@@ -490,17 +412,20 @@
       }
 
       upcoming.forEach(e => {
-        const li = document.createElement("li");
+        const li       = document.createElement("li");
         const spanDate = document.createElement("span");
-        spanDate.className = "date";
-        spanDate.textContent = formatPtDate(e.d);
+        spanDate.className   = "date";
+        const prefix         = e.unconfirmed ? "~" : "";
+        const time           = e.time ? `, ${e.time}` : "";
+        spanDate.textContent = prefix + formatPtDate(e.d) + time;
         li.appendChild(spanDate);
-        li.insertAdjacentText("beforeend", " – " + e.label);
+        const subject = e.subject !== "Geral" ? ` ${e.subject} –` : "";
+        li.insertAdjacentText("beforeend", `${subject} ${e.label}`);
         listEl.appendChild(li);
       });
     }
 
-    buildUpcoming();
+    init();
   </script>
 </body>
 </html>
