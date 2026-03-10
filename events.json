@@ -5,6 +5,8 @@
   { "subject": "Geral", "display": "info", "label": "Fim das Aulas",        "value": "3 de Junho" },
   { "subject": "Geral", "display": "info", "label": "Época de Exames",      "value": "8 a 22 de Junho" },
   { "subject": "Geral", "display": "info", "label": "Época de Recurso",     "value": "29 de Junho a 10 de Julho" },
+{ "subject": "Geral", "display": "info", "label": "BIBLIODRIVE MTC", "value": "Google Drive", "link": "https://drive.google.com/drive/folders/1CiDwU9PxqU-BsIYjGo4nA-1aUBwyGyJm?usp=drive_link" }
+  
 
   { "subject": "LM2", "label": "HTML/CSS – Teste teórico e prático", "date": "2026-03-30", "time": null, "pct": 15, "type": null, "section": null, "porMarcar": false, "unconfirmed": false, "recursoOnly": false },
   { "subject": "LM2", "label": "Projeto Final – Entrega da Prototipagem", "date": "2026-05-18", "time": null, "pct": 10, "type": null, "section": null, "porMarcar": false, "unconfirmed": false, "recursoOnly": false },
@@ -29,7 +31,6 @@
   { "subject": "VD", "label": "Teste teórico", "date": "2026-06-18", "time": "10:00", "pct": 25, "type": "Individual", "section": null, "porMarcar": false, "unconfirmed": false, "recursoOnly": false },
   { "subject": "VD", "label": "Recurso", "date": "2026-07-08", "time": "10:00", "pct": null, "type": null, "section": "Recurso", "porMarcar": false, "unconfirmed": false, "recursoOnly": true },
 
-  { "subject": "G", "label": "Possível reposição de aulas (Carnaval)", "date": "2026-03-31", "time": null, "pct": null, "type": null, "section": null, "porMarcar": false, "unconfirmed": false, "recursoOnly": false },
   { "subject": "G", "label": "Planificação do Trabalho Prático 1 (TP1)", "date": "2026-04-07", "time": null, "pct": null, "type": null, "section": null, "porMarcar": false, "unconfirmed": false, "recursoOnly": false },
   { "subject": "G", "label": "Desenvolvimento do TP1", "date": null, "time": null, "pct": 30, "type": null, "section": null, "porMarcar": true, "unconfirmed": false, "recursoOnly": false },
   { "subject": "G", "label": "Trabalho Individual", "date": "2026-05-05", "time": null, "pct": 10, "type": null, "section": null, "porMarcar": false, "unconfirmed": false, "recursoOnly": false },
