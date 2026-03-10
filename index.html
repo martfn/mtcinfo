@@ -193,40 +193,15 @@
     </header>
 
     <div class="top-grid">
-      <!-- Informações Gerais – static, semester calendar doesn't change often -->
       <section class="card">
         <div class="card-header">
           <div class="card-title"><div class="card-title-dot"></div>Informações Gerais</div>
         </div>
-        <div class="timeline">
-          <div class="timeline-row">
-            <div class="timeline-label">Início 2.º Semestre</div>
-            <div class="timeline-value">9 de Fevereiro</div>
-          </div>
-          <div class="timeline-row">
-            <div class="timeline-label">Férias da Páscoa</div>
-            <div class="timeline-value">1 a 10 de Abril</div>
-          </div>
-          <div class="timeline-row">
-            <div class="timeline-label">Semana Académica</div>
-            <div class="timeline-value">27 a 30 de Abril</div>
-          </div>
-          <div class="timeline-row">
-            <div class="timeline-label">Fim das Aulas</div>
-            <div class="timeline-value">3 de Junho</div>
-          </div>
-          <div class="timeline-row">
-            <div class="timeline-label">Época de Exames</div>
-            <div class="timeline-value">8 a 22 de Junho</div>
-          </div>
-          <div class="timeline-row">
-            <div class="timeline-label">Época de Recurso</div>
-            <div class="timeline-value">29 de Junho a 10 de Julho</div>
-          </div>
+        <div class="timeline" id="timeline-gerais">
+          <div style="color:var(--text-muted);font-size:13px;font-style:italic;">A carregar...</div>
         </div>
       </section>
 
-      <!-- Próximas 2 semanas – filled by JS -->
       <section class="card">
         <div class="card-header">
           <div class="card-title"><div class="card-title-dot"></div>Próximas 2 semanas</div>
@@ -239,7 +214,6 @@
       </section>
     </div>
 
-    <!-- Subject cards – fully built by JS from events.json -->
     <div class="grid">
       <div class="stack" id="col-left"></div>
       <div class="stack" id="col-right"></div>
@@ -248,20 +222,16 @@
   </div>
 
   <script>
-    // ── Subject definitions ──────────────────────────────────────
-    // Controls card order, column placement, full name, and any
-    // static note shown at the bottom of the card.
     const SUBJECTS = [
-      { id: "LM2", name: "Lab. Multimédia 2",        col: "left"  },
-      { id: "CI",  name: "Cognição e Interação",      col: "left",
+      { id: "LM2", name: "Lab. Multimédia 2",       col: "left"  },
+      { id: "CI",  name: "Cognição e Interação",     col: "left",
         note: "<span class='emphasis'>Info. Testes:</span> Feitos no computador, nota mínima de 8 na média dos 2 testes. Possivelmente escolha múltipla." },
-      { id: "SC",  name: "Semiótica da Comunicação",  col: "left",
+      { id: "SC",  name: "Semiótica da Comunicação", col: "left",
         note: "Nota mínima exs. práticos: <span class='emphasis'>10 valores</span>" },
-      { id: "VD",  name: "Vídeo Digital",             col: "right" },
-      { id: "G",   name: "Guionismo",                 col: "right" },
+      { id: "VD",  name: "Vídeo Digital",            col: "right" },
+      { id: "G",   name: "Guionismo",                col: "right" },
     ];
 
-    // ── Helpers ──────────────────────────────────────────────────
     function formatPtDate(dateObj) {
       const d = String(dateObj.getDate()).padStart(2, "0");
       const m = String(dateObj.getMonth() + 1).padStart(2, "0");
@@ -269,9 +239,7 @@
     }
 
     function renderDateLabel(e) {
-      if (e.porMarcar) {
-        return `<span class="highlight">Por marcar</span>`;
-      }
+      if (e.porMarcar) return `<span class="highlight">Por marcar</span>`;
       const prefix = e.unconfirmed ? "~" : "";
       const d      = new Date(e.date + "T00:00:00");
       const time   = e.time ? `, ${e.time}` : "";
@@ -280,43 +248,44 @@
     }
 
     function renderEventLi(e) {
-      const dateHtml = renderDateLabel(e);
-      const pct      = e.pct  ? ` <span class="percentage">(${e.pct}%)</span>` : "";
-      const type     = e.type ? ` <span class="muted">· ${e.type}</span>`      : "";
-      const sep      = (!e.porMarcar) ? " – " : " – ";
-      return `<li>${dateHtml}${sep}${e.label}${pct}${type}</li>`;
+      const pct  = e.pct  ? ` <span class="percentage">(${e.pct}%)</span>` : "";
+      const type = e.type ? ` <span class="muted">· ${e.type}</span>`      : "";
+      return `<li>${renderDateLabel(e)} – ${e.label}${pct}${type}</li>`;
     }
 
-    // ── Build subject cards ──────────────────────────────────────
+    // ── Informações Gerais ───────────────────────────────────────
+    // Built from events.json entries where subject=Geral, display=info
+    function buildInfoGerais(entries) {
+      const el = document.getElementById("timeline-gerais");
+      if (!entries.length) {
+        el.innerHTML = `<div style="color:var(--text-muted);font-size:13px;font-style:italic;">Sem informações gerais.</div>`;
+        return;
+      }
+      el.innerHTML = entries.map(e => `
+        <div class="timeline-row">
+          <div class="timeline-label">${e.label}</div>
+          <div class="timeline-value">${e.value}</div>
+        </div>`).join("");
+    }
+
+    // ── Subject cards ────────────────────────────────────────────
     function buildSubjectCards(events) {
       const colLeft  = document.getElementById("col-left");
       const colRight = document.getElementById("col-right");
 
       SUBJECTS.forEach(subj => {
-        const subjectEvents = events.filter(e => e.subject === subj.id);
+        const all     = events.filter(e => e.subject === subj.id);
+        const normal  = all.filter(e => !e.section);
+        const recurso = all.filter(e => e.section === "Recurso");
 
-        // Group into sections: normal events first, then recurso
-        const normal  = subjectEvents.filter(e => !e.section);
-        const recurso = subjectEvents.filter(e => e.section === "Recurso");
-
-        // Build inner HTML
         let inner = "";
-
         if (normal.length === 0 && recurso.length === 0) {
           inner = `<p class="pending">(Por enquanto, sem info)</p>`;
         } else {
-          if (normal.length > 0) {
-            inner += `<ul>${normal.map(renderEventLi).join("")}</ul>`;
-          }
-          if (recurso.length > 0) {
-            inner += `<div class="section-label">Recurso</div>`;
-            inner += `<ul>${recurso.map(renderEventLi).join("")}</ul>`;
-          }
+          if (normal.length)  inner += `<ul>${normal.map(renderEventLi).join("")}</ul>`;
+          if (recurso.length) inner += `<div class="section-label">Recurso</div><ul>${recurso.map(renderEventLi).join("")}</ul>`;
         }
-
-        if (subj.note) {
-          inner += `<p class="note">${subj.note}</p>`;
-        }
+        if (subj.note) inner += `<p class="note">${subj.note}</p>`;
 
         const card = document.createElement("section");
         card.className = "card";
@@ -324,14 +293,12 @@
           <div class="card-header">
             <div class="card-title"><div class="card-title-dot"></div>${subj.id}</div>
             <div class="card-meta">${subj.name}</div>
-          </div>
-          ${inner}`;
-
+          </div>${inner}`;
         (subj.col === "left" ? colLeft : colRight).appendChild(card);
       });
     }
 
-    // ── Build upcoming list ──────────────────────────────────────
+    // ── Upcoming list ────────────────────────────────────────────
     function buildUpcoming(events) {
       const listEl = document.getElementById("upcoming-list");
       const noteEl = document.getElementById("upcoming-note");
@@ -343,7 +310,7 @@
       inTwoWeeks.setDate(inTwoWeeks.getDate() + 14);
 
       const upcoming = events
-        .filter(e => !e.porMarcar && !e.recursoOnly && e.date)
+        .filter(e => !e.porMarcar && !e.recursoOnly && e.date && e.display !== "info")
         .map(e => ({ ...e, d: new Date(e.date + "T00:00:00") }))
         .filter(e => e.d >= today && e.d <= inTwoWeeks)
         .sort((a, b) => a.d - b.d);
@@ -361,8 +328,8 @@
       }
 
       upcoming.forEach(e => {
-        const li       = document.createElement("li");
-        const spanDate = document.createElement("span");
+        const li             = document.createElement("li");
+        const spanDate       = document.createElement("span");
         spanDate.className   = "date";
         const prefix         = e.unconfirmed ? "~" : "";
         const time           = e.time ? `, ${e.time}` : "";
@@ -382,10 +349,16 @@
         if (!res.ok) throw new Error();
         events = await res.json();
       } catch {
-        console.warn("events.json não encontrado – a carregar sem eventos.");
+        console.warn("events.json não encontrado.");
       }
-      buildSubjectCards(events);
-      buildUpcoming(events);
+
+      // Split info entries from regular events
+      const infoEntries = events.filter(e => e.subject === "Geral" && e.display === "info");
+      const restEvents  = events.filter(e => e.display !== "info");
+
+      buildInfoGerais(infoEntries);
+      buildSubjectCards(restEvents);
+      buildUpcoming(restEvents);
     }
 
     init();
