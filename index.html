@@ -165,11 +165,8 @@
     li:last-child { margin-bottom: 0; }
 
     .date { color: var(--green-bright); font-weight: 600; }
-
     .percentage { color: var(--purple-bright); font-weight: 600; }
-
     .emphasis { color: var(--text-main); font-weight: 600; }
-
     .muted { color: var(--text-muted); }
 
     .note {
@@ -191,28 +188,11 @@
       font-weight: 600;
     }
 
-    .nested-list {
-      margin-left: 20px;
-      margin-top: 8px;
-    }
+    .nested-list { margin-left: 20px; margin-top: 8px; }
+    .nested-list li { font-size: 13px; color: var(--text-muted); margin-bottom: 4px; }
+    .nested-list li::before { content: "◦"; color: var(--purple); }
 
-    .nested-list li {
-      font-size: 13px;
-      color: var(--text-muted);
-      margin-bottom: 4px;
-    }
-
-    .nested-list li::before {
-      content: "◦";
-      color: var(--purple);
-    }
-
-    .timeline {
-      display: grid;
-      gap: 2px;
-      margin-top: 0;
-      font-size: 13px;
-    }
+    .timeline { display: grid; gap: 2px; margin-top: 0; font-size: 13px; }
 
     .timeline-row {
       display: flex;
@@ -221,16 +201,8 @@
       padding: 3px 0;
     }
 
-    .timeline-label {
-      color: var(--text-muted);
-      font-weight: 500;
-    }
-
-    .timeline-value {
-      text-align: right;
-      color: var(--text-main);
-      font-weight: 600;
-    }
+    .timeline-label { color: var(--text-muted); font-weight: 500; }
+    .timeline-value { text-align: right; color: var(--text-main); font-weight: 600; }
 
     .highlight {
       color: var(--green-bright);
@@ -239,11 +211,7 @@
       font-size: 13px;
     }
 
-    .pending {
-      color: var(--text-muted);
-      font-style: italic;
-      font-size: 13px;
-    }
+    .pending { color: var(--text-muted); font-style: italic; font-size: 13px; }
   </style>
 </head>
 <body>
@@ -259,7 +227,6 @@
       </div>
     </header>
 
-    <!-- Top small cards -->
     <div class="top-grid">
       <!-- Informações Gerais -->
       <section class="card">
@@ -304,13 +271,11 @@
             <div class="card-title-dot"></div>
             Próximas 2 semanas
           </div>
-          <div class="card-meta">Eventos em breve</div>
+          <div class="card-meta">Preenchido automaticamente</div>
         </div>
-        <ul id="upcoming-list">
-          <!-- Preenchido por JavaScript -->
-        </ul>
+        <ul id="upcoming-list"></ul>
         <p class="note" id="upcoming-note">
-          Esta lista mostra automaticamente tudo o que acontece nos próximos 14 dias.
+          Lista atualizada automaticamente com base na data de hoje.
         </p>
       </section>
     </div>
@@ -318,6 +283,7 @@
     <div class="grid">
       <!-- Left column -->
       <div class="stack">
+
         <!-- LM2 -->
         <section class="card">
           <div class="card-header">
@@ -327,12 +293,15 @@
             </div>
             <div class="card-meta">Lab. Multimédia 2</div>
           </div>
-
           <ul>
             <li><span class="date">30/03</span> – HTML/CSS – Teste teórico e prático <span class="percentage">(15% da nota, cada)</span></li>
             <li><span class="date">18/05</span> – Projeto Final – Entrega da Prototipagem <span class="percentage">(10% da nota)</span></li>
             <li><span class="date">1/06</span> – RWD/Bootstrap – Teste teórico e prático <span class="percentage">(15% da nota, cada)</span></li>
-            <li><span class="highlight">Por marcar</span> – Projeto Final – Entrega <span class="percentage">(20%)</span> e Pitch <span class="percentage">(10%)</span> da Implementação</li>
+            <li><span class="highlight">~9/06, 9h</span> – Projeto Final – Apresentações – Entrega <span class="percentage">(20%)</span> e Pitch <span class="percentage">(10%)</span> da Implementação <span class="muted">(data a confirmar)</span></li>
+          </ul>
+          <div class="section-label">Recurso</div>
+          <ul>
+            <li><span class="date">30/06, 9h</span> – Apresentações</li>
           </ul>
         </section>
 
@@ -345,16 +314,18 @@
             </div>
             <div class="card-meta">Cognição e Interação</div>
           </div>
-
           <ul>
             <li><span class="date">19/03</span> – Teste 1</li>
             <li><span class="date">28/05</span> – Teste 2</li>
             <li><span class="date">21/05</span> – Trabalho Prático: Vídeo de resumo das atividades elaboradas pelo grupo</li>
           </ul>
-
           <p class="note">
             <span class="emphasis">Info. Testes:</span> Feitos no computador, nota mínima de 8 na média dos 2 testes. Possivelmente escolha múltipla.
           </p>
+          <div class="section-label">Recurso</div>
+          <ul>
+            <li><span class="date">2/07, 15h</span> – Recurso</li>
+          </ul>
         </section>
 
         <!-- SC -->
@@ -366,33 +337,35 @@
             </div>
             <div class="card-meta">Semiótica da Comunicação</div>
           </div>
-
           <div class="section-label">Teste</div>
           <ul>
-            <li>Época de Exames <span class="percentage">(35% da nota)</span></li>
+            <li><span class="date">22/06, 15h</span> – Época de Exames <span class="percentage">(35% da nota)</span></li>
           </ul>
-          
           <ul class="nested-list">
             <li>Nota mínima: 8,5</li>
             <li>10 esc. múltipla, 2 desenvolvimento</li>
           </ul>
-
           <div class="section-label">Trabalhos Práticos</div>
           <ul>
             <li><span class="date">26/03</span> – Ex. TP1 (sobre a representação das personagens) <span class="percentage">(15% da nota)</span></li>
             <li><span class="date">23/04</span> – Ex. TP2 (semiótica da curta) <span class="percentage">(15% da nota)</span></li>
             <li><span class="date">29/05</span> – Ex. TP3 (semiótica da marca) <span class="percentage">(25% da nota)</span></li>
           </ul>
-
           <p class="note">
             Nota mínima exs. práticos: <span class="emphasis">10 valores</span>
           </p>
+          <div class="section-label">Recurso</div>
+          <ul>
+            <li><span class="date">10/07, 15h</span> – Recurso</li>
+          </ul>
         </section>
-      </div>
+
+      </div><!-- /left stack -->
 
       <!-- Right column -->
       <div class="stack">
-                <!-- VD -->
+
+        <!-- VD -->
         <section class="card">
           <div class="card-header">
             <div class="card-title">
@@ -401,15 +374,16 @@
             </div>
             <div class="card-meta">Vídeo Digital</div>
           </div>
-
           <ul>
-            <li> Curta Metragem <span class="percentage">(50%)</span> <span class="muted">· Grupo</span></li>
-            <li> Trailer da Curta <span class="percentage">(10%)</span> <span class="muted">· Individual</span></li>
-            <li> Curta Al Al <span class="percentage">(15%)</span> <span class="muted">· Grupo</span></li>
-            <li> Teste teórico <span class="percentage">(25%)</span> <span class="muted">· Individual</span></li>
+            <li>Curta Metragem <span class="percentage">(50%)</span> <span class="muted">· Grupo</span></li>
+            <li>Trailer da Curta <span class="percentage">(10%)</span> <span class="muted">· Individual</span></li>
+            <li>Curta Al Al <span class="percentage">(15%)</span> <span class="muted">· Grupo</span></li>
+            <li><span class="date">18/06, 10h</span> – Teste teórico <span class="percentage">(25%)</span> <span class="muted">· Individual</span></li>
           </ul>
-
-          <p class="note">Datas ainda não marcadas.</p>
+          <div class="section-label">Recurso</div>
+          <ul>
+            <li><span class="date">8/07, 10h</span> – Recurso</li>
+          </ul>
         </section>
 
         <!-- G -->
@@ -421,7 +395,6 @@
             </div>
             <div class="card-meta">Guionismo</div>
           </div>
-
           <ul>
             <li><span class="date">31/03</span> – Possível data para repor as aulas <span class="muted">(não lecionadas devido ao Carnaval)</span></li>
             <li><span class="date">7/04</span> – Planificação do Trabalho Prático 1 (TP1)</li>
@@ -430,35 +403,62 @@
             <li><span class="date">2/06</span> – Apresentação do Trabalho Prático 2 (TP2) <span class="percentage">(30% da nota)</span></li>
             <li><span class="date">5/06</span> – Entrega do Relatório do TP2</li>
           </ul>
+          <div class="section-label">Recurso</div>
+          <ul>
+            <li><span class="date">6/07, 15h</span> – Recurso</li>
+          </ul>
         </section>
-      </div>
-    </div>
-  </div>
+
+      </div><!-- /right stack -->
+    </div><!-- /main grid -->
+  </div><!-- /page -->
 
   <script>
-    // LISTA ÚNICA DE EVENTOS – só precisas mexer aqui
-    // date: "YYYY-MM-DD"
+    // ── EVENTS LIST ─────────────────────────────────────────────
+    // Format: { date: "YYYY-MM-DD", label: "Subject – Description" }
+    // The "Próximas 2 semanas" card is built automatically from this.
     const events = [
-      { date: "2026-03-19", label: "CI – Teste 1" },
-      { date: "2026-03-26", label: "SC – TP1 (representação das personagens)" },
+      // ── LM2 ──
       { date: "2026-03-30", label: "LM2 – HTML/CSS – Teste teórico e prático" },
-      { date: "2026-03-31", label: "G – Possível reposição de aulas" },
-      { date: "2026-04-07", label: "G – Planificação TP1" },
-      { date: "2026-04-23", label: "SC – TP2 (semiótica da curta)" },
-      { date: "2026-05-05", label: "G – Trabalho Individual" },
       { date: "2026-05-18", label: "LM2 – Entrega Prototipagem" },
+      { date: "2026-06-01", label: "LM2 – RWD/Bootstrap – Teste" },
+      { date: "2026-06-09", label: "LM2 – Apresentações, 9h (a confirmar)" },
+      { date: "2026-06-30", label: "LM2 – Recurso Apresentações, 9h" },
+
+      // ── CI ──
+      { date: "2026-03-19", label: "CI – Teste 1" },
       { date: "2026-05-21", label: "CI – Trabalho Prático (vídeo)" },
       { date: "2026-05-28", label: "CI – Teste 2" },
+      { date: "2026-07-02", label: "CI – Recurso, 15h" },
+
+      // ── SC ──
+      { date: "2026-03-26", label: "SC – TP1 (representação das personagens)" },
+      { date: "2026-04-23", label: "SC – TP2 (semiótica da curta)" },
       { date: "2026-05-29", label: "SC – TP3 (semiótica da marca)" },
-      { date: "2026-06-01", label: "LM2 – RWD/Bootstrap – Teste" },
+      { date: "2026-06-22", label: "SC – Teste, 15h" },
+      { date: "2026-07-10", label: "SC – Recurso, 15h" },
+
+      // ── VD ──
+      { date: "2026-06-18", label: "VD – Teste teórico, 10h" },
+      { date: "2026-07-08", label: "VD – Recurso, 10h" },
+
+      // ── G ──
+      { date: "2026-03-31", label: "G – Possível reposição de aulas" },
+      { date: "2026-04-07", label: "G – Planificação TP1" },
+      { date: "2026-05-05", label: "G – Trabalho Individual" },
       { date: "2026-06-02", label: "G – Apresentação TP2" },
+      { date: "2026-06-05", label: "G – Entrega Relatório TP2" },
+      { date: "2026-07-06", label: "G – Recurso, 15h" },
+
+      // ── Geral ──
       { date: "2026-06-03", label: "Fim das aulas" },
-      { date: "2026-06-05", label: "G – Entrega Relatório TP2" }
     ];
 
+    // ── No need to edit below this line ─────────────────────────
+
     function formatPtDate(dateObj) {
-      const d = dateObj.getDate().toString().padStart(2, "0");
-      const m = (dateObj.getMonth() + 1).toString().padStart(2, "0");
+      const d = String(dateObj.getDate()).padStart(2, "0");
+      const m = String(dateObj.getMonth() + 1).padStart(2, "0");
       return `${d}/${m}`;
     }
 
@@ -468,7 +468,7 @@
       if (!listEl) return;
 
       const today = new Date();
-      today.setHours(0,0,0,0);
+      today.setHours(0, 0, 0, 0);
       const inTwoWeeks = new Date(today);
       inTwoWeeks.setDate(inTwoWeeks.getDate() + 14);
 
@@ -482,7 +482,8 @@
       if (upcoming.length === 0) {
         const li = document.createElement("li");
         li.textContent = "Nada marcado nos próximos 14 dias. Aproveita para descansar e pagar um café aos teus representantes de curso favoritos.";
-        li.classList.add("muted");
+        li.style.color = "var(--text-muted)";
+        li.style.fontStyle = "italic";
         listEl.appendChild(li);
         if (noteEl) noteEl.style.display = "none";
         return;
