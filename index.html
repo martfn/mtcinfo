@@ -248,13 +248,14 @@
     }
 
     function renderEventLi(e) {
-  const pct      = e.pct  ? ` <span class="percentage">(${e.pct}%)</span>` : "";
-  const type     = e.type ? ` <span class="muted">· ${e.type}</span>`      : "";
+  const pct       = e.pct  ? ` <span class="percentage">(${e.pct}%)</span>` : "";
+  const type      = e.type ? ` <span class="muted">· ${e.type}</span>`      : "";
   const labelHtml = e.link
     ? `<a href="${e.link}" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.2);">${e.label}</a>`
     : e.label;
   return `<li>${renderDateLabel(e)} – ${labelHtml}${pct}${type}</li>`;
 }
+
 
 
     // ── Informações Gerais ───────────────────────────────────────
@@ -276,6 +277,7 @@
       </div>`;
   }).join("");
 }
+
 
 
     // ── Subject cards ────────────────────────────────────────────
@@ -337,19 +339,31 @@
         return;
       }
 
-      upcoming.forEach(e => {
-        const li             = document.createElement("li");
-        const spanDate       = document.createElement("span");
-        spanDate.className   = "date";
-        const prefix         = e.unconfirmed ? "~" : "";
-        const time           = e.time ? `, ${e.time}` : "";
+            upcoming.forEach(e => {
+        const li           = document.createElement("li");
+        const spanDate     = document.createElement("span");
+        spanDate.className = "date";
+        const prefix       = e.unconfirmed ? "~" : "";
+        const time         = e.time ? `, ${e.time}` : "";
         spanDate.textContent = prefix + formatPtDate(e.d) + time;
         li.appendChild(spanDate);
         const subj = e.subject !== "Geral" ? ` ${e.subject} –` : "";
-        li.insertAdjacentText("beforeend", `${subj} ${e.label}`);
+        if (e.link) {
+          li.insertAdjacentText("beforeend", subj + " ");
+          const a = document.createElement("a");
+          a.href          = e.link;
+          a.target        = "_blank";
+          a.rel           = "noopener";
+          a.textContent   = e.label;
+          a.style.cssText = "color:inherit;text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.2);";
+          li.appendChild(a);
+        } else {
+          li.insertAdjacentText("beforeend", `${subj} ${e.label}`);
+        }
         listEl.appendChild(li);
       });
     }
+
 
     // ── Init ─────────────────────────────────────────────────────
     async function init() {
