@@ -248,25 +248,35 @@
     }
 
     function renderEventLi(e) {
-      const pct  = e.pct  ? ` <span class="percentage">(${e.pct}%)</span>` : "";
-      const type = e.type ? ` <span class="muted">· ${e.type}</span>`      : "";
-      return `<li>${renderDateLabel(e)} – ${e.label}${pct}${type}</li>`;
-    }
+  const pct      = e.pct  ? ` <span class="percentage">(${e.pct}%)</span>` : "";
+  const type     = e.type ? ` <span class="muted">· ${e.type}</span>`      : "";
+  const labelHtml = e.link
+    ? `<a href="${e.link}" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.2);">${e.label}</a>`
+    : e.label;
+  return `<li>${renderDateLabel(e)} – ${labelHtml}${pct}${type}</li>`;
+}
+
 
     // ── Informações Gerais ───────────────────────────────────────
     // Built from events.json entries where subject=Geral, display=info
     function buildInfoGerais(entries) {
-      const el = document.getElementById("timeline-gerais");
-      if (!entries.length) {
-        el.innerHTML = `<div style="color:var(--text-muted);font-size:13px;font-style:italic;">Sem informações gerais.</div>`;
-        return;
-      }
-      el.innerHTML = entries.map(e => `
-        <div class="timeline-row">
-          <div class="timeline-label">${e.label}</div>
-          <div class="timeline-value">${e.value}</div>
-        </div>`).join("");
-    }
+  const el = document.getElementById("timeline-gerais");
+  if (!entries.length) {
+    el.innerHTML = `<div style="color:var(--text-muted);font-size:13px;font-style:italic;">Sem informações gerais.</div>`;
+    return;
+  }
+  el.innerHTML = entries.map(e => {
+    const valueHtml = e.link
+      ? `<a href="${e.link}" target="_blank" rel="noopener" style="color:var(--green-bright);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(74,222,128,0.4);">${e.value}</a>`
+      : e.value;
+    return `
+      <div class="timeline-row">
+        <div class="timeline-label">${e.label}</div>
+        <div class="timeline-value">${valueHtml}</div>
+      </div>`;
+  }).join("");
+}
+
 
     // ── Subject cards ────────────────────────────────────────────
     function buildSubjectCards(events) {
