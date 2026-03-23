@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>LabMM2 – Guia para Teste HTML+CSS</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #050816;
+      --bg-card: #0b1020;
+      --bg-soft: #111827;
+      --accent: #38bdf8;
+      --accent-soft: #0ea5e9;
+      --accent-strong: #22c55e;
+      --danger: #f97373;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --border: #1f2937;
+      --font-main: system-ui, -apple-system, BlinkMacSystemFont,
+        "SF Pro Text", "Segoe UI", sans-serif;
+      --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+        "Liberation Mono", "Courier New", monospace;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-main);
+      background: radial-gradient(circle at top left, #1f2937 0, #020617 55%, #000 100%);
+      color: var(--text);
+      line-height: 1.5;
+      padding: 24px 16px 40px;
+    }
+
+    .page {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 280px minmax(0, 1fr);
+      gap: 18px;
+    }
+
+    @media (max-width: 900px) {
+      .page {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    header {
+      grid-column: 1 / -1;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 12px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+      color: #020617;
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .tag span {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #020617;
+    }
+
+    h1 {
+      font-size: 26px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .subtitle {
+      font-size: 13px;
+      color: var(--muted);
+      max-width: 360px;
+    }
+
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      position: sticky;
+      top: 24px;
+      align-self: start;
+      max-height: calc(100vh - 48px);
+      overflow-y: auto;
+    }
+
+    .sidebar-section-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin-top: 8px;
+      margin-bottom: 4px;
+    }
+
+    .nav-item {
+      background: var(--bg-card);
+      border-radius: 999px;
+      padding: 7px 10px;
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.7);
+    }
+
+    .nav-item::before {
+      content: "•";
+      color: var(--accent-strong);
+      font-size: 14px;
+    }
+
+    .nav-item:hover {
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    .nav-item.active {
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.18), rgba(34, 197, 94, 0.16));
+      border-color: var(--accent);
+    }
+
+    main {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .progress-card {
+      background: var(--bg-card);
+      border-radius: 14px;
+      padding: 10px 14px 12px;
+      border: 1px solid var(--border);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.7);
+    }
+
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+    }
+
+    .progress-value {
+      color: var(--accent-strong);
+      font-weight: 600;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 6px;
+      background: #020617;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, var(--accent), var(--accent-strong));
+      transition: width 0.25s ease;
+    }
+
+    .section {
+      display: none;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    .section-title {
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-title::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent-strong);
+      box-shadow: 0 0 12px rgba(34, 197, 94, 0.8);
+    }
+
+    .card {
+      background: var(--bg-card);
+      border-radius: 14px;
+      padding: 12px 14px 14px;
+      border: 1px solid var(--border);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.7);
+      margin-bottom: 10px;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 6px;
+      gap: 6px;
+    }
+
+    .card-title {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .card-title-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent-strong);
+    }
+
+    .card-meta {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+    }
+
+    p,
+    li {
+      font-size: 13px;
+      color: var(--text);
+    }
+
+    ul,
+    ol {
+      padding-left: 18px;
+      margin-top: 4px;
+    }
+
+    li {
+      margin-bottom: 4px;
+    }
+
+    .highlight {
+      color: var(--accent-strong);
+      font-weight: 600;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .alert,
+    .ok,
+    .warn {
+      border-radius: 12px;
+      padding: 8px 10px;
+      font-size: 13px;
+      margin-top: 6px;
+    }
+
+    .alert {
+      background: rgba(127, 29, 29, 0.7);
+      border: 1px solid rgba(248, 113, 113, 0.8);
+      color: #fee2e2;
+    }
+
+    .ok {
+      background: rgba(22, 101, 52, 0.7);
+      border: 1px solid rgba(74, 222, 128, 0.7);
+      color: #dcfce7;
+    }
+
+    .warn {
+      background: rgba(161, 98, 7, 0.7);
+      border: 1px solid rgba(251, 191, 36, 0.9);
+      color: #fffbeb;
+    }
+
+    code {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      background: #020617;
+      padding: 1px 4px;
+      border-radius: 4px;
+      border: 1px solid #1f2937;
+    }
+
+    pre {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      background: #020617;
+      padding: 8px 10px;
+      border-radius: 8px;
+      border: 1px solid #1f2937;
+      overflow-x: auto;
+      margin-top: 6px;
+      white-space: pre;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 6px;
+      font-size: 12px;
+    }
+
+    th,
+    td {
+      border: 1px solid #1f2937;
+      padding: 6px 8px;
+    }
+
+    th {
+      background: #020617;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-size: 11px;
+    }
+
+    .checklist-group {
+      margin-top: 4px;
+    }
+
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      margin-bottom: 4px;
+      font-size: 13px;
+    }
+
+    .check-item input[type="checkbox"] {
+      margin-top: 2px;
+      width: 14px;
+      height: 14px;
+      accent-color: var(--accent-strong);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .check-item label {
+      cursor: pointer;
+    }
+
+    .check-item input:checked+label {
+      text-decoration: line-through;
+      color: var(--muted);
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .btn-action {
+      padding: 5px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      color: var(--muted);
+      font-size: 11px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-action:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    @media (max-width: 600px) {
+      .two-col {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .mini-card {
+      background: #020617;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 10px;
+    }
+
+    .mini-card-title {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .button-row button {
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: #020617;
+      color: var(--text);
+      font-size: 11px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .button-row button.secondary {
+      background: transparent;
+      color: var(--muted);
+    }
+
+    .button-row button:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    footer.site-footer {
+      max-width: 1200px;
+      margin: 18px auto 0;
+      font-size: 11px;
+      text-align: center;
+      color: var(--muted);
+      padding: 10px 0 24px;
+      border-top: 1px solid var(--border);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <header>
+      <div>
+        <div class="tag"><span></span> LabMM2 – HTML & CSS</div>
+        <h1>Guia para Teste Teórico + Prático</h1>
+        <p class="subtitle">Teoria T01–T06 · Exercícios 4 e 5 · Referência rápida e checklist interativa.</p>
+      </div>
+      <div class="header-actions">
+        <button class="btn-action" id="btn-limpar">🗑 Limpar checks</button>
+        <button class="btn-action" id="btn-exportar">📥 Exportar checklist</button>
+      </div>
+    </header>
+
+    <aside class="sidebar">
+      <div class="progress-card">
+        <div class="progress-header">
+          <span>Progresso checklist</span>
+          <span class="progress-value" id="progress-label">0 / 0</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progress-bar"></div>
+        </div>
+      </div>
+
+      <div class="sidebar-section-label">Navegação</div>
+      <div class="nav-item active" data-target="visao-geral">🎯 Visão geral & estratégia</div>
+      <div class="nav-item" data-target="teorico">📘 Teste teórico (T01–T06)</div>
+      <div class="nav-item" data-target="pratico">🧪 Teste prático (Ex. 4 & 5)</div>
+      <div class="nav-item" data-target="html-essencial">&lt;/&gt; HTML essencial</div>
+      <div class="nav-item" data-target="css-essencial">🎨 CSS essencial</div>
+      <div class="nav-item" data-target="checklist-final">✅ Checklist final</div>
+    </aside>
+
+    <main>
+      <!-- VISÃO GERAL -->
+      <section class="section active" id="visao-geral">
+        <h2 class="section-title">Visão geral & prioridades</h2>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title"><span class="card-title-dot"></span> Estrutura dos testes – 30 de março</div>
+          </div>
+          <ul>
+            <li><span class="highlight">Teste Teórico</span> – 09:00, 60 min, papel. Escolha múltipla + desenvolvimento.
+              Slides T01–T06.</li>
+            <li><span class="highlight">Teste Prático</span> – 11:00, 60 min, papel. Analisar fragmentos de HTML/CSS,
+              identificar erros, prever o que aparece no browser e propor correções.</li>
+            <li>Prático foca sobretudo nos <strong>Exercícios 4 e 5</strong> (Mark Ryden + Blog Mr. Fig).</li>
+          </ul>
+          <div class="ok">O objetivo é <strong>ler e raciocinar sobre código</strong>, não decorar sintaxe.</div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title"><span class="card-title-dot"></span> Estratégia de estudo</div>
+          </div>
+          <ol>
+            <li><strong>Teoria primeiro:</strong> pontos CRÍTICOS em T02–T06 (T01 é contextual, cai menos).</li>
+            <li><strong>Prática depois:</strong> rever Ex. 4a/4b e 5a/5b, entendendo <em>porquê</em> cada regra existe.
+            </li>
+            <li><strong>Dia anterior:</strong> revisão leve + checklist. Não decorar código; foco em compreensão.</li>
+          </ol>
+          <div class="warn">Vais ter de explicar, prever resultados e apontar problemas em código real.</div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title"><span class="card-title-dot"></span> Competências essenciais</div>
+          </div>
+          <ul>
+            <li>Distinguir <strong>HTML (estrutura/semântica)</strong> de <strong>CSS (apresentação)</strong>.</li>
+            <li>Explicar e calcular o <strong>Box Model</strong> (content + padding + border + margin = tamanho real).
+            </li>
+            <li>Dominar seletores: tag, classe, id, descendente, child, siblings, attribute, pseudo-classes e
+              pseudo-elementos.</li>
+            <li>Construir/analisar <strong>formulários</strong> completos (action, method, inputs, labels, select,
+              textarea, radio, checkbox).</li>
+            <li>Explicar <strong>static/fixed/relative/absolute</strong> e o papel do z-index.</li>
+            <li>Distinguir <strong>transições</strong> de <strong>animações</strong> e reconhecer a sintaxe base de
+              cada.</li>
+            <li>Relacionar tudo isto com o que fizeste nos Exercícios 4 e 5.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- TEÓRICO -->
+      <section class="section" id="teorico">
+        <h2 class="section-title">Teste teórico – T01 a T06</h2>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title"><span class="card-title-dot"></span> T01 – Contexto Web & camadas</div>
+          </div>
+          <p>Arquitetura cliente/servidor, protocolos Web, browsers e standards W3C. Base para o resto da matéria.</p>
+          <p>O <strong>browser</strong> é o cliente: faz pedidos HTTP ao servidor. O <strong>servidor</strong> responde
+            com HTML, CSS e JS, que o browser interpreta e renderiza.</p>
+          <p><strong>HTML</strong> = estrutura. <strong>CSS</strong> = apresentação. <strong>JS</strong> =
+            comportamento. Três camadas separadas, mas que trabalham em conjunto.</p>
+          <p><strong>RWD</strong> parte do desktop e adapta para mobile. <strong>Mobile-first</strong> parte do mobile e
+            expande para ecrãs maiores.</p>
+          <p>O W3C define standards que os browsers seguem para garantir compatibilidade, acessibilidade e boa
+            experiência de utilização.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title"><span class="card-title-dot"></span> T02/T03 – Estrutura HTML5 & CSS base</div>
+          </div>
+          <p>Estrutura base de uma página HTML5, tags semânticas, imagens, hiperligações, seletores básicos, cores e
+            tipografia CSS.</p>
+          <pre>&lt;!DOCTYPE html&gt;
+&lt;html lang="pt"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+    &lt;title&gt;Título&lt;/title&gt;
+    &lt;link rel="stylesheet" href="estilos.css"&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;header&gt;Cabeçalho&lt;/header&gt;
+    &lt;nav&gt;Navegação&lt;/nav&gt;
+    &lt;main&gt;
+      &lt;section&gt;
+        &lt;article&gt;Conteúdo&lt;/article&gt;
+      &lt;/section&gt;
+    &lt;/main&gt;
+    &lt;aside&gt;Conteúdo lateral&lt;/aside&gt;
+    &lt;footer&gt;Rodapé&lt;/footer&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</pre>
+          <ul>
+            <li><code>&lt;header&gt;</code> – cabeçalho da página/section.</li>
+            <li><code>&lt;nav&gt;</code> – navegação principal.</li>
+            <li><code>&lt;main&gt;</code> – conteúdo principal (único).</li>
+            <li><code>&lt;section&gt;</code> – grupo temático.</li>
+            <li><code>&lt;article&gt;</code> – conteúdo autónomo.</li>
+            <li><code>&lt;aside&gt;</code> – conteúdo lateral.</li>
+            <li><code>&lt;footer&gt;</code> – rodapé.</li>
+          </ul>
+          <pre>&lt;!-- CSS externo, interno, inline --&gt;
+&lt;link rel="stylesheet" href="estilos.css"&gt;
+&lt;style&gt; p { color: blue; } &lt;/style&gt;
+&lt;p style="color:red"&gt;Texto&lt;/p&gt;</pre>
+          <p>Prioridade (sem <code>!important</code>): <strong>inline &gt; interna &gt; externa</strong>.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title"><span class="card-title-dot"></span> T03/T04 – Box Model, unidades e seletores</div>
+          </div>
+          <p>Complementa T02 com formatação de imagens, pseudo-classes de links, display block/inline, tabelas, listas e
+            unidades absolutas/relativas.</p>
+          <pre>a {
+  text-decoration: none;
+  font-size: 14px;
+}
+a:link    { color: red; }   /* não visitado */
+a:visited { color: green; } /* já visitado */
+a:hover   { color: hotpink; } /* rato por cima */
+a:active  { color: blue; }  /* ao clicar */
+</pre>
+          <p>A ordem <strong>LoVe HAte</strong> (<code>:link</code>, <code>:visited</code>, <code>:hover</code>,
+            <code>:active</code>) é obrigatória para o CSS funcionar corretamente.</p>
+          <table>
+            <tr>
+              <th>Tipo</th>
+              <th>Quebra linha?</th>
+              <th>Controla width/height?</th>
+              <th>Exemplos</th>
+            </tr>
+            <tr>
+              <td>block</td>
+              <td>Sim</td>
+              <td>Sim</td>
+              <td><code>div, p, h1, section</code></td>
+            </tr>
+            <tr>
+              <td>inline</td>
+              <td>Não</td>
+              <td>Não</td>
+              <td><code>span, a, strong</code></td>
+            </tr>
+            <tr>
+              <td>inline-block</td>
+              <td>Não</td>
+              <td>Sim</td>
+              <td><code>img</code> (por defeito)</td>
+            </tr>
+          </table>
+          <table>
+            <tr>
+              <th>Unidade</th>
+              <th>Tipo</th>
+              <th>Relativo a</th>
+              <th>Uso típico</th>
+            </tr>
+            <tr>
+              <td><code>px</code></td>
+              <td>Absoluta</td>
+              <td>Pixel</td>
+              <td>Linhas, bordas</td>
+            </tr>
+            <tr>
+              <td><code>em</code></td>
+              <td>Relativa</td>
+              <td>font-size do pai</td>
+              <td>Padding/margens relativas ao texto</td>
+            </tr>
+            <tr>
+              <td><code>rem</code></td>
+              <td>Relativa</td>
+              <td>font-size do <code>html</code></td>
+              <td>Escala global</td>
+            </tr>
+            <tr>
+              <td><code>%</code></td>
+              <td>Relativa</td>
+              <td>Elemento pai</td>
+              <td>Larguras fluidas</td>
+            </tr>
+            <tr>
+              <td><code>vh/vw</code></td>
+              <td>Relativa</td>
+              <td>Viewport</td>
+              <td>Alturas e larguras fullscreen</td>
+            </tr>
+          </table>
+          <pre>section {
+  width: 220px;
+  padding: 10px;
+  border: 5px solid gray;
+  margin: 10px;
+}
+/* Largura total = 220 + 10 + 10 + 5 + 5 + 10 + 10 = 270px */</pre>
+          <pre>article p   { } /* descendente */
+article &gt; p { } /* filho direto */
+article + p { } /* irmão adjacente */
+article ~ p { } /* irmãos gerais */
+a[href^="https://"] { }
+a[href$=".pdf"]    { }
+a[href*="aveiro"]  { }
+p:first-child      { }
+p:nth-child(odd)   { }
+input:focus        { }</pre>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title"><span class="card-title-dot"></span> T05 – Média & formulários</div>
+          </div>
+          <p>Integração de áudio/vídeo e construção de formulários completos com GET/POST.</p>
+          <pre>&lt;audio controls loop&gt;
+  &lt;source src="musica.mp3" type="audio/mpeg"&gt;
+  O teu browser não suporta áudio HTML5.
+&lt;/audio&gt;
+
+&lt;video width="640" height="480" controls&gt;
+  &lt;source src="video.mp4" type="video/mp4"&gt;
+  O teu browser não suporta vídeo HTML5.
+&lt;/video&gt;</pre>
+          <pre>&lt;form action="https://formtester.goodbytes.be/post.php" method="post"&gt;
+  &lt;label for="nome"&gt;Nome&lt;/label&gt;
+  &lt;input type="text" id="nome" name="nome" size="40" maxlength="60"&gt;
+
+  &lt;input type="password" name="pwd" placeholder="Introduz a tua senha"&gt;
+  &lt;input type="email" name="email" size="60"&gt;
+  &lt;input type="number" name="idade"&gt;
+
+  &lt;textarea name="opiniao" rows="5" cols="60"&gt;&lt;/textarea&gt;
+
+  &lt;input type="radio"   name="cor" value="azul"&gt; Azul
+  &lt;input type="radio"   name="cor" value="verde" checked&gt; Verde
+  &lt;input type="checkbox" name="opt1" value="a" checked&gt; Opção A
+  &lt;input type="checkbox" name="opt2" value="b"&gt; Opção B
+
+  &lt;select name="nivel"&gt;
+    &lt;option value="0"&gt;Escolhe um nível&lt;/option&gt;
+    &lt;option value="1"&gt;Básico&lt;/option&gt;
+    &lt;option value="2" selected&gt;Médio&lt;/option&gt;
+  &lt;/select&gt;
+
+  &lt;input type="submit" value="Enviar"&gt;
+  &lt;input type="reset"  value="Limpar"&gt;
+&lt;/form&gt;</pre>
+          <p><strong>GET</strong> – dados no URL (limitado, visível). <strong>POST</strong> – dados no corpo do pedido
+            (mais seguro, suporta ficheiros).</p>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title"><span class="card-title-dot"></span> T06 – Overflow, sprites, transformações</div>
+          </div>
+          <p>Controlar overflow, usar sprites para ícones e aplicar transformações 2D/3D.</p>
+          <pre>section {
+  width: 200px;
+  height: 200px;
+  overflow: scroll; /* ou auto, hidden */
+}</pre>
+          <pre>.icon {
+  width: 30px;
+  height: 30px;
+  background-image: url("sprite.png");
+  background-position: -44px -180px;
+}</pre>
+          <p>Transições e animações são usadas para micro-interações (hover em links, inputs com <code>:focus</code>,
+            etc.).</p>
+        </div>
+      </section>
+
+      <!-- PRÁTICO -->
+      <section class="section" id="pratico">
+        <h2 class="section-title">Teste prático – Ex. 4 & 5</h2>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title"><span class="card-title-dot"></span> Formato do teste prático</div>
+          </div>
+          <ul>
+            <li>Em papel, 60 minutos, após o teórico.</li>
+            <li>Perguntas de desenvolvimento sobre <strong>fragmentos de código HTML/CSS</strong>.</li>
+            <li>Tarefas: detectar erros, explicar seletores, prever aparência, propor correções.</li>
+          </ul>
+          <div class="warn">O enunciado é <strong>reduzido</strong>; o importante é mostrar que compreendes o que o
+            código faz.</div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title"><span class="card-title-dot"></span> Ex. 4 – Mark Ryden (4a/4b)</div>
+          </div>
+          <div class="warn"><strong>Ex. 4 – páginas a rever:</strong> <code>index.html</code> (4a) +
+            <code>participate.html</code> (4b).</div>
+          <ul>
+            <li><strong>4a – index.html:</strong> site sobre Mark Ryden com estrutura semântica
+              (header/nav/main/section/article/figure/footer).</li>
+            <li>Layout centrado com <code>width: 1000px</code> e <code>margin: auto</code>.</li>
+            <li>Seletores avançados (descendente, child, pseudo-classes, attribute) e heading h2 com hover que inverte
+              cores sem provocar salto.</li>
+            <li><strong>4b – participate.html:</strong> página com formulário completo que envia via
+              <code>method="post"</code> para <code>https://formtester.goodbytes.be/post.php</code>.</li>
+            <li>Campos: First name, Last name, Email, Educational level (select), Age (number), radio
+              (Drawings/Paintings), 6 checkboxes, textarea e botões submit/reset.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title"><span class="card-title-dot"></span> Ex. 5 – Blog Mr. Fig (5a/5b)</div>
+          </div>
+          <div class="warn"><strong>Ex. 5 – páginas a rever:</strong> <code>index.html</code> +
+            <code>article1.html</code> (5a), <code>about.html</code> + <code>404.html</code> (5b).</div>
+          <ul>
+            <li><strong>5a – index.html + article1.html:</strong> blog com <code>aside</code> e <code>header</code>
+              fixos, <code>main</code> deslocado com margens.</li>
+            <li>Combinação de <code>position: fixed</code>, <code>relative</code> e <code>absolute</code>, e uso de
+              <code>z-index</code> em elementos sobrepostos.</li>
+            <li>Estilos no nav (links com border-bottom e transição) e input de pesquisa com transição em largura e cor
+              no <code>:focus</code>.</li>
+            <li><strong>5b – about.html:</strong> section com <code>height: 75vh</code>, <code>overflow-y: scroll</code>
+              e borda tracejada.</li>
+            <li><strong>5b – 404.html:</strong> animação em <code>dino.gif</code> com <code>@keyframes</code>, duração
+              3s, <code>forwards</code>, e translação no eixo X.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title"><span class="card-title-dot"></span> Tipos de pergunta no prático</div>
+          </div>
+          <ul>
+            <li><strong>"O que aparece no browser?"</strong> – descrever cores, posições, tamanhos, estados de links,
+              etc.</li>
+            <li><strong>"O que está errado?"</strong> – apontar problemas: falta de <code>name</code>, seletor errado,
+              ordem de pseudo-classes, Box Model mal calculado.</li>
+            <li><strong>"O que esta regra faz?"</strong> – explicar seletor/propriedade (posição, overflow, transition,
+              animation).</li>
+            <li><strong>"Propõe uma correção"</strong> – escrever o código correto para o comportamento descrito.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- HTML ESSENCIAL -->
+      <section class="section" id="html-essencial">
+        <h2 class="section-title">HTML essencial</h2>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title"><span class="card-title-dot"></span> Estrutura base HTML5</div>
+          </div>
+          <pre>&lt;!DOCTYPE html&gt;
+&lt;html lang="pt"&gt;
+  &lt;head&gt;...&lt;/head&gt;
+  &lt;body&gt;
+    &lt;header&gt;...&lt;/header&gt;
+    &lt;nav&gt;...&lt;/nav&gt;
+    &lt;main&gt;...&lt;/main&gt;
+    &lt;aside&gt;...&lt;/aside&gt;
+    &lt;footer&gt;...&lt;/footer&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</pre>
+          <pre>&lt;img src="gato.jpg" alt="Um gato"&gt;
+&lt;a href="https://www.ua.pt" target="_blank"&gt;UA&lt;/a&gt;
+&lt;ul&gt;&lt;li&gt;Item&lt;/li&gt;&lt;/ul&gt;
+&lt;ol type="A" start="3"&gt;&lt;li&gt;Item&lt;/li&gt;&lt;/ol&gt;</pre>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title"><span class="card-title-dot"></span> Formulário típico de teste</div>
+          </div>
+          <pre>&lt;form action="https://formtester.goodbytes.be/post.php" method="post"&gt;
+  &lt;label for="fname"&gt;First name&lt;/label&gt;
+  &lt;input type="text" id="fname" name="fname" size="60"&gt;
+
+  &lt;input type="email" name="email" size="60" required&gt;
+  &lt;input type="password" name="pwd" placeholder="Senha"&gt;
+  &lt;input type="number" name="idade"&gt;
+
+  &lt;input type="search" name="pesquisa" placeholder="search this site"&gt;
+  &lt;textarea name="opiniao" rows="10" cols="60"&gt;&lt;/textarea&gt;
+
+  &lt;input type="radio"   name="cor" value="azul"&gt; Azul
+  &lt;input type="radio"   name="cor" value="verde" checked&gt; Verde
+
+  &lt;input type="checkbox" name="opt1" value="a" checked&gt; A
+  &lt;input type="checkbox" name="opt2" value="b"&gt; B
+
+  &lt;select name="nivel"&gt;
+    &lt;option value="0"&gt;-- Seleciona --&lt;/option&gt;
+    &lt;option value="1"&gt;Básico&lt;/option&gt;
+    &lt;option value="2" selected&gt;Médio&lt;/option&gt;
+  &lt;/select&gt;
+
+  &lt;input type="submit" value="Enviar"&gt;
+  &lt;input type="reset"  value="Limpar"&gt;
+&lt;/form&gt;</pre>
+        </div>
+      </section>
+
+      <!-- CSS ESSENCIAL -->
+      <section class="section" id="css-essencial">
+        <h2 class="section-title">CSS essencial</h2>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title"><span class="card-title-dot"></span> Formas de aplicar CSS</div>
+          </div>
+          <pre>&lt;!-- Externo (recomendado) --&gt;
+&lt;link rel="stylesheet" href="estilos.css"&gt;
+
+&lt;!-- Interno / embedded --&gt;
+&lt;style&gt; p { color: blue; } &lt;/style&gt;
+
+&lt;!-- Inline (evitar) --&gt;
+&lt;p style="color: red;"&gt;Texto&lt;/p&gt;</pre>
+          <p>Prioridade (sem <code>!important</code>): <strong>inline &gt; interno &gt; externo</strong>.
+            Especificidade: <strong>id &gt; classe/pseudo-classe &gt; tag</strong>.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title"><span class="card-title-dot"></span> Box model & centralização</div>
+          </div>
+          <pre>.box {
+  width: 200px;
+  padding: 20px;
+  border: 5px solid red;
+  margin: 10px auto; /* centra horizontalmente */
+}</pre>
+          <p>Para centrar um elemento block: precisa de largura definida e <code>margin-left/right: auto</code>.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title"><span class="card-title-dot"></span> Seletores importantes</div>
+          </div>
+          <pre>article p   { } /* descendente */
+article &gt; p { } /* filho direto */
+article + p { } /* irmão adjacente */
+article ~ p { } /* irmãos gerais */
+
+a[href^="https://"] { } /* começa com */
+a[href$=".pdf"]    { } /* termina em */
+a[href*="aveiro"]  { } /* contém */
+
+p:first-child    { }
+p:nth-child(2)   { }
+p:nth-child(odd) { }
+input:focus      { }
+
+p::first-line { }
+h1::before    { content: "→"; }</pre>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title"><span class="card-title-dot"></span> Overflow, transição e animação</div>
+          </div>
+          <pre>section {
+  height: 75vh;
+  overflow-y: scroll;
+}</pre>
+          <pre>a {
+  border-bottom: 5px solid white;
+  transition: border-bottom 1s ease;
+}
+a:hover {
+  border-bottom: 5px solid #444;
+}</pre>
+          <pre>@keyframes deslizar {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(150%); }
+}
+img {
+  width: 400px;
+  animation: deslizar 3s ease forwards 1;
+}</pre>
+        </div>
+      </section>
+
+      <!-- CHECKLIST FINAL -->
+      <section class="section" id="checklist-final">
+        <h2 class="section-title">Checklist final antes do teste</h2>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title"><span class="card-title-dot"></span> Conhecimentos teóricos (T01–T06)</div>
+          </div>
+          <ul class="checklist-group">
+            <li class="check-item"><input type="checkbox" /><label>Consigo descrever o modelo cliente‑servidor e o papel
+                dos browsers/W3C (T01).</label></li>
+            <li class="check-item"><input type="checkbox" /><label>Sei escrever de memória a estrutura base HTML5
+                (doctype, head, body, semântica) (T02).</label></li>
+            <li class="check-item"><input type="checkbox" /><label>Domino imagens, ligações, favicons e âncoras internas
+                (T02b).</label></li>
+            <li class="check-item"><input type="checkbox" /><label>Domino pseudo‑classes de links, tabelas, listas e
+                unidades relativas (T03).</label></li>
+            <li class="check-item"><input type="checkbox" /><label>Faço contas ao Box Model sem hesitar e conheço
+                seletores avançados e herança (T04a/b).</label></li>
+            <li class="check-item"><input type="checkbox" /><label>Sei construir e analisar formulários completos, e
+                explicar GET vs POST (T05a).</label></li>
+            <li class="check-item"><input type="checkbox" /><label>Diferencio claramente static/fixed/relative/absolute
+                e sei dar exemplos (T05b).</label></li>
+            <li class="check-item"><input type="checkbox" /><label>Entendo overflow, transições, animações,
+                transformações e <code>!important</code> (T06).</label></li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title"><span class="card-title-dot"></span> Foco em exercícios (para o prático)</div>
+          </div>
+          <ul class="checklist-group">
+            <li class="check-item"><input type="checkbox" /><label>Revisei o Ex. 4a e compreendo a função de cada
+                seletor e de cada parte da estrutura.</label></li>
+            <li class="check-item"><input type="checkbox" /><label>Revisei o Ex. 4b e consigo explicar cada secção do
+                formulário de <code>participate.html</code>.</label></li>
+            <li class="check-item"><input type="checkbox" /><label>Revisei o Ex. 5a e entendo por que aside/header são
+                fixed e como o main se adapta.</label></li>
+            <li class="check-item"><input type="checkbox" /><label>Revisei o Ex. 5b e entendo overflow na about.html,
+                sprites e animação em 404.html.</label></li>
+            <li class="check-item"><input type="checkbox" /><label>Treinei prever o layout a partir de excertos de CSS
+                (sem abrir no browser).</label></li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title"><span class="card-title-dot"></span> Preparação pessoal</div>
+          </div>
+          <ul class="checklist-group">
+            <li class="check-item"><input type="checkbox" /><label>Dormi o suficiente e vou chegar com tempo à sala (sem
+                stress extra).</label></li>
+            <li class="check-item"><input type="checkbox" /><label>Tenho caneta, cartão de estudante e tudo o que é
+                preciso para o teste.</label></li>
+            <li class="check-item"><input type="checkbox" /><label>Vou começar pelas perguntas que domino melhor e gerir
+                o tempo com calma.</label></li>
+            <li class="check-item"><input type="checkbox" /><label>Conto reservar alguns minutos para rever rapidamente
+                as respostas, à procura de pequenos detalhes (tipo URL, método, seletores).</label></li>
+          </ul>
+          <div class="button-row">
+            <button type="button" id="btn-exportar">Exportar checklist (.txt)</button>
+            <button type="button" class="secondary" id="btn-limpar">Limpar todos os checks</button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <footer class="site-footer">
+    LabMM2 – HTML &amp; CSS · Guia para os testes Teórico (T01–T06) e Prático (Ex. 4–5) · Universidade de Aveiro
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var navItems = document.querySelectorAll('.nav-item');
+      var sections = document.querySelectorAll('.section');
+      var progressBar = document.getElementById('progress-bar');
+      var progressLabel = document.getElementById('progress-label');
+
+      function updateProgress() {
+        var checks = document.querySelectorAll('.check-item input[type="checkbox"]');
+        var total = checks.length;
+        var done = 0;
+        checks.forEach(function (cb) { if (cb.checked) done++; });
+        var pct = total ? Math.round((done / total) * 100) : 0;
+        if (progressBar) progressBar.style.width = pct + '%';
+        if (progressLabel) progressLabel.textContent = done + ' / ' + total;
+      }
+
+      document.body.addEventListener('change', function (e) {
+        if (e.target.matches('.check-item input[type="checkbox"]')) {
+          updateProgress();
+        }
+      });
+
+      navItems.forEach(function (item) {
+        item.addEventListener('click', function () {
+          var target = item.getAttribute('data-target');
+          navItems.forEach(function (i) { i.classList.remove('active'); });
+          item.classList.add('active');
+          sections.forEach(function (sec) {
+            if (sec.id === target) {
+              sec.classList.add('active');
+            } else {
+              sec.classList.remove('active');
+            }
+          });
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      });
+
+      var btnLimpar = document.getElementById('btn-limpar');
+      if (btnLimpar) {
+        btnLimpar.addEventListener('click', function () {
+          if (!confirm('Limpar todos os itens marcados?')) return;
+          document.querySelectorAll('.check-item input[type="checkbox"]')
+            .forEach(function (cb) { cb.checked = false; });
+          updateProgress();
+        });
+      }
+
+      var btnExportar = document.getElementById('btn-exportar');
+      if (btnExportar) {
+        btnExportar.addEventListener('click', function () {
+          var lines = [];
+          document.querySelectorAll('.check-item').forEach(function (ci) {
+            var cb = ci.querySelector('input[type="checkbox"]');
+            var lbl = ci.querySelector('label');
+            lines.push((cb.checked ? '[x]' : '[ ]') + ' ' + lbl.textContent.trim());
+          });
+          var blob = new Blob([lines.join('\n')], { type: 'text/plain;charset=utf-8' });
+          var url = URL.createObjectURL(blob);
+          var a = document.createElement('a');
+          a.href = url;
+          a.download = 'labmm2_checklist.txt';
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+        });
+      }
+
+      updateProgress();
+    });
+  </script>
+</body>
+
+</html>
