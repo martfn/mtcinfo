@@ -1,44 +1,6 @@
 [
   {
     "subject": "SC",
-    "label": "Ex. TP1 – representação das personagens",
-    "date": "2026-03-26",
-    "time": null,
-    "pct": 15,
-    "type": null,
-    "section": null,
-    "porMarcar": false,
-    "unconfirmed": false,
-    "recursoOnly": false
-  },
-  {
-    "subject": "LM2",
-    "label": "HTML/CSS – Teste teórico e prático (⚠️ RESUMOS)",
-    "date": "2026-03-30",
-    "time": null,
-    "pct": "15",
-    "type": "Individual",
-    "section": null,
-    "link": "https://martfn.github.io/mtcinfo/teste1_lm2.html",
-    "porMarcar": false,
-    "unconfirmed": false,
-    "recursoOnly": false,
-    "display": null
-  },
-  {
-    "subject": "G",
-    "label": "Planificação do Trabalho Prático 1 (TP1)",
-    "date": "2026-04-07",
-    "time": null,
-    "pct": null,
-    "type": null,
-    "section": null,
-    "porMarcar": false,
-    "unconfirmed": false,
-    "recursoOnly": false
-  },
-  {
-    "subject": "SC",
     "label": "Ex. TP2 – semiótica da curta",
     "date": "2026-04-23",
     "time": null,
