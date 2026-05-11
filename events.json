@@ -1,31 +1,5 @@
 [
   {
-    "subject": "SC",
-    "label": "Ex. TP2 – semiótica da curta",
-    "date": "2026-04-23",
-    "time": null,
-    "pct": 15,
-    "type": null,
-    "section": null,
-    "porMarcar": false,
-    "unconfirmed": false,
-    "recursoOnly": false
-  },
-  {
-    "subject": "G",
-    "label": "Trabalho Individual",
-    "date": "2026-05-05",
-    "time": null,
-    "pct": "10",
-    "type": "Individual",
-    "section": null,
-    "link": null,
-    "porMarcar": false,
-    "unconfirmed": false,
-    "recursoOnly": false,
-    "display": null
-  },
-  {
     "subject": "LM2",
     "label": "Projeto Final – Entrega da Prototipagem",
     "date": "2026-05-18",
@@ -130,35 +104,55 @@
     "date": "2026-06-09",
     "time": "09:00",
     "pct": null,
-    "type": null,
+    "type": "Grupo",
     "section": null,
+    "link": null,
+    "porMarcar": false,
+    "unconfirmed": false,
+    "recursoOnly": false,
+    "display": null
+  },
+  {
+    "subject": "G",
+    "label": "Teste Teórico",
+    "date": "2026-06-10",
+    "time": "15:00",
+    "pct": null,
+    "type": "Individual",
+    "section": null,
+    "link": null,
     "porMarcar": false,
     "unconfirmed": true,
-    "recursoOnly": false
+    "recursoOnly": false,
+    "display": null
   },
   {
     "subject": "VD",
     "label": "Teste teórico",
     "date": "2026-06-18",
     "time": "10:00",
-    "pct": 25,
+    "pct": "25",
     "type": "Individual",
     "section": null,
+    "link": null,
     "porMarcar": false,
     "unconfirmed": false,
-    "recursoOnly": false
+    "recursoOnly": false,
+    "display": null
   },
   {
     "subject": "SC",
-    "label": "Época de Exames",
+    "label": "Teste Teórico",
     "date": "2026-06-22",
     "time": "15:00",
-    "pct": 35,
-    "type": null,
+    "pct": "35",
+    "type": "Individual",
     "section": null,
+    "link": null,
     "porMarcar": false,
     "unconfirmed": false,
-    "recursoOnly": false
+    "recursoOnly": false,
+    "display": null
   },
   {
     "subject": "LM2",
@@ -222,30 +216,6 @@
   },
   {
     "subject": "VD",
-    "label": "Curta Metragem",
-    "date": null,
-    "time": null,
-    "pct": 50,
-    "type": "Grupo",
-    "section": null,
-    "porMarcar": true,
-    "unconfirmed": false,
-    "recursoOnly": false
-  },
-  {
-    "subject": "VD",
-    "label": "Trailer da Curta",
-    "date": null,
-    "time": null,
-    "pct": 10,
-    "type": "Individual",
-    "section": null,
-    "porMarcar": true,
-    "unconfirmed": false,
-    "recursoOnly": false
-  },
-  {
-    "subject": "VD",
     "label": "Curta Al Al",
     "date": null,
     "time": null,
@@ -257,46 +227,10 @@
     "recursoOnly": false
   },
   {
-    "subject": "G",
-    "label": "Desenvolvimento do TP1",
-    "date": null,
-    "time": null,
-    "pct": 30,
-    "type": null,
-    "section": null,
-    "porMarcar": true,
-    "unconfirmed": false,
-    "recursoOnly": false
-  },
-  {
-    "subject": "Geral",
-    "display": "info",
-    "label": "Início 2.º Semestre",
-    "value": "9 de Fevereiro"
-  },
-  {
-    "subject": "Geral",
-    "display": "info",
-    "label": "Férias da Páscoa",
-    "value": "1 a 10 de Abril"
-  },
-  {
-    "subject": "Geral",
-    "display": "info",
-    "label": "Semana Académica",
-    "value": "27 a 30 de Abril"
-  },
-  {
     "subject": "Geral",
     "display": "info",
     "label": "Fim das Aulas",
     "value": "3 de Junho"
-  },
-  {
-    "subject": "Geral",
-    "display": "info",
-    "label": "Época de Exames",
-    "value": "8 a 22 de Junho"
   },
   {
     "subject": "Geral",
