@@ -115,14 +115,14 @@
   {
     "subject": "G",
     "label": "Teste Teórico",
-    "date": "2026-06-10",
+    "date": "2026-06-16",
     "time": "15:00",
     "pct": null,
     "type": "Individual",
     "section": null,
     "link": null,
     "porMarcar": false,
-    "unconfirmed": true,
+    "unconfirmed": false,
     "recursoOnly": false,
     "display": null
   },
