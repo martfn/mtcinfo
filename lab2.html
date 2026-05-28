@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="pt" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guia de Estudo — Bootstrap 5</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+ <style>
+  :root, [data-theme="light"] {
+    --bg:#f7f6f2; --surface:#fbfaf7; --surface-2:#f1eee8; --surface-3:#e8e4dc; --border:#d8d3cb;
+    --text:#1f1c17; --muted:#6f6a62; --faint:#a8a39a; --primary:#0b6b74; --primary-2:#084b51;
+    --success:#2f6f3a; --success-bg:#e7f3ea; --warning:#9b5b15; --warning-bg:#f8ebdc; --danger:#a13a33; --danger-bg:#f7e5e3;
+    --info:#2d6e9f; --info-bg:#e2f0f8; --code-bg:#17181d; --code-text:#d7dbef; --shadow:0 12px 30px rgba(15,15,20,.08);
+    --radius-sm:.35rem; --radius-md:.55rem; --radius-lg:.9rem; --radius-xl:1.2rem;
+    --font-body:'Inter',sans-serif; --font-mono:'JetBrains Mono',monospace;
+  }
+  [data-theme="dark"] {
+    --bg:#11110f; --surface:#171714; --surface-2:#1c1c18; --surface-3:#23231e; --border:#2b2a26;
+    --text:#e8e4dc; --muted:#9a948b; --faint:#6f6a62; --primary:#66aeb5; --primary-2:#3f8c94;
+    --success:#75a87a; --success-bg:#132017; --warning:#d8a15b; --warning-bg:#251a0f; --danger:#d07b74; --danger-bg:#251412;
+    --info:#7fb0d4; --info-bg:#111d27; --code-bg:#0d0e12; --code-text:#d7dbef; --shadow:0 14px 34px rgba(0,0,0,.32);
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:88px}
+  body{min-height:100dvh;font:16px/1.65 var(--font-body);background:var(--bg);color:var(--text)}
+  a{color:inherit} img,svg,video{max-width:100%;display:block} button,input,select,textarea{font:inherit;color:inherit}
+  :focus-visible{outline:2px solid var(--primary);outline-offset:3px;border-radius:var(--radius-sm)}
+  .skip{position:absolute;left:-999px;top:auto}.skip:focus{left:1rem;top:1rem;background:var(--surface);padding:.6rem .8rem;border:1px solid var(--border);z-index:9999}
+
+  /* ── LAYOUT SHELL ── */
+  .shell{display:grid;grid-template-columns:280px minmax(0,1fr);min-height:100dvh}
+
+  /* ── SIDEBAR (desktop: estática e visível) ── */
+  aside{
+    position:sticky;top:0;height:100dvh;overflow-y:auto;
+    background:var(--surface);border-right:1px solid var(--border);
+  }
+  .brand{display:flex;gap:.8rem;align-items:center;padding:1.1rem 1.2rem;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--surface);z-index:2}
+  .logo{width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,var(--primary),var(--primary-2));display:grid;place-items:center;color:white;font-weight:800;flex:none}
+  .brand h1{font-size:.95rem;line-height:1.15}.brand p{font-size:.72rem;color:var(--muted)}
+  nav{padding:1rem 0 1.5rem}
+  .sec-title{padding:.9rem 1.2rem .4rem;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);font-weight:800}
+  nav a{display:block;padding:.46rem 1.2rem;text-decoration:none;color:var(--muted);border-left:2px solid transparent}
+  .nav-active,nav a:hover{color:var(--primary);background:color-mix(in oklab,var(--primary) 10%,transparent);border-left-color:var(--primary)}
+
+  /* ── MAIN ── */
+  main{min-width:0}
+  .topbar{position:sticky;top:0;z-index:3;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.85rem 1.2rem;background:color-mix(in oklab,var(--surface) 92%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+  .tools{display:flex;gap:.65rem;align-items:center}
+  .btn{border:1px solid var(--border);background:var(--surface-2);padding:.6rem .85rem;border-radius:999px;cursor:pointer}
+  .btn:hover{border-color:var(--primary);color:var(--primary)}
+  .content{padding:1.4rem 1.2rem 4rem;max-width:1100px}
+
+  /* ── HERO ── */
+  .hero{background:linear-gradient(135deg,color-mix(in oklab,var(--primary) 14%,var(--surface)),var(--surface));border:1px solid var(--border);border-radius:var(--radius-xl);padding:2rem;box-shadow:var(--shadow);margin-bottom:1.3rem}
+  .hero .eyebrow{display:inline-flex;gap:.45rem;align-items:center;font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--primary);background:color-mix(in oklab,var(--primary) 10%,transparent);padding:.35rem .7rem;border-radius:999px;margin-bottom:.9rem}
+  .hero h2{font-size:clamp(1.8rem,3.6vw,2.6rem);line-height:1.1;letter-spacing:-.04em;margin-bottom:.65rem}
+  .hero p{max-width:70ch;color:var(--muted)}
+  .stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.8rem;margin-top:1.2rem}
+  .stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);padding:.9rem}
+  .stat strong{display:block;font-size:1.35rem;color:var(--primary)}
+  .stat span{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+
+  /* ── SECTIONS & CARDS ── */
+  section{margin-top:1.6rem}
+  .head{display:flex;gap:.9rem;align-items:flex-start;margin-bottom:.9rem;border-bottom:1px solid var(--border);padding-bottom:.75rem}
+  .ic{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:color-mix(in oklab,var(--primary) 12%,var(--surface));flex:none}
+  h3{font-size:1.35rem;line-height:1.15;letter-spacing:-.03em}
+  .sub{color:var(--muted);font-size:.9rem}
+  .grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1rem 1.1rem;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+  .card h4{font-size:1rem;margin-bottom:.6rem}
+  .card p,.card li{font-size:.93rem}
+  .card ul{padding-left:1.1rem}
+  .tag{display:inline-block;border-radius:999px;padding:.18rem .5rem;font-size:.72rem;font-family:var(--font-mono);font-weight:700}
+  .tag.blue{background:var(--info-bg);color:var(--info)}.tag.green{background:var(--success-bg);color:var(--success)}.tag.orange{background:var(--warning-bg);color:var(--warning)}.tag.red{background:var(--danger-bg);color:var(--danger)}
+  .call{border-left:4px solid var(--primary);background:color-mix(in oklab,var(--primary) 8%,var(--surface));padding:1rem 1.1rem;border-radius:var(--radius-md);margin:1rem 0}
+  .call strong{display:block;margin-bottom:.25rem}
+  .call.info{border-left-color:var(--info)}.call.ok{border-left-color:var(--success)}.call.warn{border-left-color:var(--warning)}
+
+  /* ── CODE & TABELAS ── */
+  pre{background:var(--code-bg);color:var(--code-text);border-radius:var(--radius-md);padding:1rem 1.1rem;overflow:auto;font:12.5px/1.55 var(--font-mono);margin:.85rem 0;border:1px solid color-mix(in oklab,white 8%,transparent)}
+  code{font-family:var(--font-mono);font-size:.93em;background:color-mix(in oklab,var(--primary) 8%,transparent);padding:.14em .35em;border-radius:.3rem}
+  table{width:100%;border-collapse:collapse;overflow:hidden}
+  .tbl{overflow:auto;border:1px solid var(--border);border-radius:var(--radius-md);background:var(--surface)}
+  th,td{padding:.7rem .8rem;border-bottom:1px solid var(--border);vertical-align:top;font-size:.92rem;text-align:left}
+  th{background:var(--surface-2);font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+  tr:last-child td{border-bottom:none}
+  .code-label{font-size:.68rem;font-weight:800;letter-spacing:.11em;text-transform:uppercase;color:var(--muted);margin-top:.2rem}
+  .list{padding-left:1.2rem}.list li{margin:.28rem 0}
+  .mini{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:.5rem}
+  .mini div{background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:.55rem .45rem;text-align:center}
+  .footer{margin-top:2rem;padding-top:1rem;border-top:1px solid var(--border);color:var(--muted);font-size:.9rem}
+
+  /* ── MOBILE-ONLY ELEMENTS (escondidos em desktop) ── */
+  .mobile-only{display:none}
+  .hide-md{display:none}
+  .overlay{display:none}
+
+  /* ── TABLET / MOBILE: ≤ 900px ── */
+  @media (max-width: 900px) {
+    /* Colapsa o grid para coluna única */
+    .shell{grid-template-columns:1fr}
+
+    /* Sidebar passa a drawer deslizante */
+    aside{
+      position:fixed;
+      inset:0 auto 0 0;
+      width:280px;
+      transform:translateX(-100%);
+      transition:transform .22s ease;
+      z-index:20;
+      height:100dvh;
+    }
+    .sidebar-open aside{transform:translateX(0)}
+
+    /* Overlay escuro atrás da sidebar */
+    .overlay{
+      display:none;
+      position:fixed;inset:0;
+      background:rgba(0,0,0,.45);
+      z-index:10;
+    }
+    .sidebar-open .overlay{display:block}
+
+    /* Botão hambúrguer visível */
+    .mobile-only{display:inline-flex}
+
+    .content{padding-inline:1rem}
+    .stats,.grid2,.mini{grid-template-columns:1fr 1fr}
+  }
+
+  /* ── PEQUENOS ECRÃS: ≤ 560px ── */
+  @media (max-width: 560px) {
+    .stats,.grid2,.mini{grid-template-columns:1fr}
+    .topbar{padding:.75rem .9rem}
+    .content{padding:.95rem .8rem 3rem}
+    .hero{padding:1.25rem}
+    .brand{padding:1rem}
+    .hide-md{display:block}
+  }
+</style>
+
+</head>
+<body>
+<a class="skip" href="#conteudo">Saltar para o conteúdo</a>
+<div class="overlay" onclick="closeSidebar()"></div>
+<div class="shell" id="app">
+  <aside>
+    <div class="brand">
+      <div class="logo" aria-hidden="true">B5</div>
+      <div>
+        <h1>Bootstrap 5</h1>
+        <p>Guia de estudo para teste teórico/prático</p>
+      </div>
+    </div>
+    <nav aria-label="Secções do guia">
+      <div class="sec-title">Base</div>
+      <a href="#intro">Introdução</a>
+      <a href="#integracao">Integração</a>
+      <a href="#breakpoints">Breakpoints</a>
+      <a href="#container">Container</a>
+      <a href="#grid">Grid e colunas</a>
+      <a href="#alinhamento">Alinhamento</a>
+      <a href="#nesting">Nesting</a>
+      <div class="sec-title">Utilities</div>
+      <a href="#cores">Cores</a>
+      <a href="#tipografia">Tipografia</a>
+      <a href="#spacing">Spacing</a>
+      <a href="#sizing">Sizing</a>
+      <a href="#borders">Borders</a>
+      <a href="#icons">Icons</a>
+      <div class="sec-title">Componentes</div>
+      <a href="#navbar">Navbar</a>
+      <a href="#navtabs">Nav Tabs</a>
+      <a href="#forms">Forms</a>
+      <a href="#buttons">Botões e Badges</a>
+      <a href="#carousel">Carousel</a>
+      <a href="#alerts">Alerts</a>
+      <a href="#images">Imagens</a>
+      <div class="sec-title">Revisão</div>
+      <a href="#exam">Como responder no teste</a>
+      <a href="#quiz">Perguntas frequentes</a>
+    </nav>
+  </aside>
+  <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+  <main>
+    <div class="topbar">
+      <div style="display:flex;align-items:center;gap:.75rem;min-width:0">
+        <button class="btn mobile-only" onclick="toggleSidebar()" aria-label="Abrir menu">☰</button>
+        <div style="font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Guia de Estudo · Bootstrap 5.3.8</div>
+      </div>
+      <div class="tools">
+        <button class="btn" id="themeBtn" onclick="toggleTheme()">🌙 Tema</button>
+      </div>
+    </div>
+    <div class="content" id="conteudo">
+      <div class="hero">
+        <div class="eyebrow">Resumo completo + prática</div>
+        <h2>Bootstrap 5 — tudo o que precisas para reconhecer, explicar e implementar</h2>
+        <p>Este guia junta a matéria das aulas T09a, T09b e T10a num formato orientado para exame: caracterizar conceitos, interpretar código e prever o que acontece no browser.</p>
+        <div class="stats">
+          <div class="stat"><strong>6</strong><span>Breakpoints</span></div>
+          <div class="stat"><strong>12</strong><span>Colunas</span></div>
+          <div class="stat"><strong>3</strong><span>Aulas</span></div>
+          <div class="stat"><strong>10+</strong><span>Componentes</span></div>
+        </div>
+      </div>
+      <section id="intro"><div class="head"><div class="ic">📦</div><div><h3>O que é Bootstrap</h3><div class="sub">Framework front-end open-source</div></div></div><div class="grid2"><div class="card"><h4>Características</h4><ul class="list"><li>Framework <strong>gratuito</strong> e <strong>open-source</strong>.</li><li>Simplifica e acelera o desenvolvimento de interfaces responsivas.</li><li>Baseado em HTML, CSS e JavaScript.</li><li>Uniformiza estilos com o <strong>Reboot</strong>.</li><li>Adota a filosofia <strong>Mobile First</strong>.</li><li>Usa uma grelha responsiva de <strong>12 colunas</strong>.</li></ul></div><div class="card"><h4>História</h4><ul class="list"><li>Criado por Mark Otto e Jacob Thornton.</li><li>Originalmente chamado <em>Twitter Blueprint</em>.</li><li>Lançado publicamente em Agosto de 2011.</li><li>Versão em foco: <span class="tag blue">5.3.8</span>.</li></ul></div></div></section>
+      <section id="integracao"><div class="head"><div class="ic">🔗</div><div><h3>Integração</h3><div class="sub">CDN e local</div></div></div><div class="call ok"><strong>Regra de ouro</strong>O CSS do Bootstrap é obrigatório; o JavaScript do Bootstrap também é obrigatório para componentes interativos como dropdowns, tabs, navbar colapsável e carousel.</div><div class="code-label">CDN</div><pre>&lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"&gt;
+&lt;link href="css/meusestilos.css" rel="stylesheet"&gt;
+&lt;script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"&gt;&lt;/script&gt;
+&lt;script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"&gt;&lt;/script&gt;</pre><div class="code-label">Local</div><pre>&lt;link href="css/bootstrap.css" rel="stylesheet"&gt;
+&lt;link href="css/meusestilos.css" rel="stylesheet"&gt;
+&lt;script src="js/bootstrap.js"&gt;&lt;/script&gt;</pre></section>
+      <section id="breakpoints"><div class="head"><div class="ic">📐</div><div><h3>Breakpoints</h3><div class="sub">Classes responsivas</div></div></div><div class="mini"><div><strong>xs</strong><br><span>&lt;576</span></div><div><strong>sm</strong><br><span>≥576</span></div><div><strong>md</strong><br><span>≥768</span></div><div><strong>lg</strong><br><span>≥992</span></div><div><strong>xl</strong><br><span>≥1200</span></div><div><strong>xxl</strong><br><span>≥1400</span></div></div><div class="call info"><strong>Mobile First</strong>Uma classe como <code>col-sm-6</code> significa 6 colunas em <strong>sm ou superior</strong>; abaixo disso, a caixa ocupa por defeito as 12 colunas.</div></section>
+      <section id="container"><div class="head"><div class="ic">🧱</div><div><h3>Container</h3><div class="sub">Base do layout</div></div></div><div class="tbl"><table><thead><tr><th>Classe</th><th>Comportamento</th></tr></thead><tbody><tr><td><code>.container</code></td><td>Centraliza o conteúdo e aplica uma largura máxima por breakpoint.</td></tr><tr><td><code>.container-fluid</code></td><td>Ocupa toda a largura disponível.</td></tr><tr><td><code>.container-lg</code></td><td>Fluid abaixo de lg; comporta-se como container em lg e acima.</td></tr></tbody></table></div></section>
+      <section id="grid"><div class="head"><div class="ic">🗂</div><div><h3>Grid e colunas</h3><div class="sub">Container → Row → Col</div></div></div><p>O layout pensa-se em linhas horizontais, e cada linha reparte o espaço por 12 colunas. As rows têm de estar dentro de um container.</p><pre>&lt;main class="container"&gt;
+  &lt;section class="row"&gt;
+    &lt;article class="col-6"&gt;Caixa 1&lt;/article&gt;
+    &lt;article class="col-6"&gt;Caixa 2&lt;/article&gt;
+  &lt;/section&gt;
+&lt;/main&gt;</pre><div class="tbl"><table><thead><tr><th>Classe</th><th>Leitura correta</th></tr></thead><tbody><tr><td><code>col</code></td><td>Divide o espaço igualmente entre as caixas da row.</td></tr><tr><td><code>col-6</code></td><td>Ocupa 6 colunas em todos os ecrãs.</td></tr><tr><td><code>col-sm-8 col-lg-6 col-xl-3</code></td><td>12 colunas em xs, 8 em sm/md, 6 em lg, 3 em xl.</td></tr><tr><td><code>col-sm-auto</code></td><td>A largura adapta-se ao conteúdo a partir de sm.</td></tr></tbody></table></div></section>
+      <section id="alinhamento"><div class="head"><div class="ic">↔</div><div><h3>Alinhamento</h3><div class="sub">Horizontal e vertical</div></div></div><div class="grid2"><div class="card"><h4>Horizontal na row</h4><ul class="list"><li><code>justify-content-start</code></li><li><code>justify-content-center</code></li><li><code>justify-content-end</code></li><li><code>justify-content-between</code></li><li><code>justify-content-around</code></li><li><code>justify-content-evenly</code></li></ul></div><div class="card"><h4>Vertical</h4><ul class="list"><li><code>align-items-start</code>, <code>center</code>, <code>end</code>, <code>stretch</code>.</li><li><code>align-self-start</code>, <code>center</code>, <code>end</code>, <code>stretch</code>.</li></ul></div></div></section>
+      <section id="nesting"><div class="head"><div class="ic">🪆</div><div><h3>Nesting</h3><div class="sub">Grelhas dentro de grelhas</div></div></div><p>Uma <strong>row dentro de uma col</strong> cria uma nova grelha com 12 colunas. É útil para subdividir uma área do layout sem sair da estrutura Bootstrap.</p><pre>&lt;section class="row"&gt;
+  &lt;article class="col-sm-6"&gt;Caixa normal&lt;/article&gt;
+  &lt;article class="col-sm-6"&gt;
+    &lt;section class="row"&gt;
+      &lt;article class="col-sm-3"&gt;A&lt;/article&gt;
+      &lt;article class="col-sm-9"&gt;B&lt;/article&gt;
+    &lt;/section&gt;
+  &lt;/article&gt;
+&lt;/section&gt;</pre></section>
+      <section id="cores"><div class="head"><div class="ic">🎨</div><div><h3>Cores</h3><div class="sub">Texto, fundo e dark mode</div></div></div><div class="grid2"><div class="card"><h4>Texto e links</h4><p><code>.text-danger</code>, <code>.text-opacity-75</code>, <code>.link-primary</code>.</p></div><div class="card"><h4>Fundo</h4><p><code>.bg-warning</code>, <code>.bg-gradient</code>, <code>.bg-opacity-25</code>.</p></div></div><div class="call warn"><strong>Dark mode</strong>Para toda a página: <code>&lt;html data-bs-theme="dark"&gt;</code>. Também pode aplicar-se a secções específicas com <code>data-bs-theme="dark"</code>.</div></section>
+      <section id="tipografia"><div class="head"><div class="ic">🔤</div><div><h3>Tipografia</h3><div class="sub">Peso, estilo, alinhamento e tamanho</div></div></div><div class="grid2"><div class="card"><h4>Peso e estilo</h4><ul class="list"><li><code>fw-bold</code>, <code>fw-bolder</code>, <code>fw-normal</code>, <code>fw-light</code>, <code>fw-lighter</code>.</li><li><code>fst-italic</code>, <code>fst-normal</code>.</li></ul></div><div class="card"><h4>Tamanho</h4><ul class="list"><li><code>fs-1</code> a <code>fs-6</code>.</li><li><code>display-1</code> a <code>display-4</code>.</li></ul></div></div><div class="card"><h4>Alinhamento e transformação</h4><p><code>text-start</code>, <code>text-center</code>, <code>text-end</code>, <code>text-uppercase</code>, <code>text-lowercase</code>, <code>text-capitalize</code>.</p></div></section>
+      <section id="spacing"><div class="head"><div class="ic">📏</div><div><h3>Spacing</h3><div class="sub">Margins e paddings</div></div></div><p>Sintaxe: <code>{property}{sides}-{size}</code>. Ex.: <code>mt-2</code>, <code>mx-auto</code>, <code>p-3</code>, <code>mt-md-3</code>, <code>p-lg-4</code>.</p><div class="tbl"><table><thead><tr><th>Property</th><th>Significado</th></tr></thead><tbody><tr><td><code>m</code></td><td>margin</td></tr><tr><td><code>p</code></td><td>padding</td></tr><tr><td><code>t / b / s / e / x / y</code></td><td>top / bottom / start / end / x / y</td></tr><tr><td><code>0..5, auto</code></td><td>Escala de espaçamento</td></tr></tbody></table></div></section>
+      <section id="sizing"><div class="head"><div class="ic">📐</div><div><h3>Sizing</h3><div class="sub">Largura e altura</div></div></div><div class="grid2"><div class="card"><h4>Largura</h4><p><code>w-25</code>, <code>w-50</code>, <code>w-75</code>, <code>w-100</code>, <code>w-auto</code>.</p></div><div class="card"><h4>Altura</h4><p><code>h-25</code>, <code>h-50</code>, <code>h-75</code>, <code>h-100</code>.</p></div></div><div class="call info"><strong>Importante</strong>As classes de altura dependem da altura do elemento pai para funcionarem corretamente.</div></section>
+      <section id="borders"><div class="head"><div class="ic">◻</div><div><h3>Borders</h3><div class="sub">Aditivo e subtrativo</div></div></div><p><code>border</code> adiciona contorno em todos os lados. <code>border-top</code> e <code>border-bottom-0</code> permitem construir e remover lados específicos. <code>border-1</code> a <code>border-5</code> controlam a espessura; <code>rounded</code> e <code>rounded-pill</code> controlam o raio.</p></section>
+      <section id="icons"><div class="head"><div class="ic">✨</div><div><h3>Bootstrap Icons</h3><div class="sub">Integração via CSS</div></div></div><pre>&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"&gt;
+&lt;i class="bi bi-instagram fs-1 text-danger"&gt;&lt;/i&gt;
+&lt;i class="bi bi-bootstrap fs-3"&gt;&lt;/i&gt;</pre><div class="call info"><strong>Nota de exame</strong>O nome do ícone usa sempre o prefixo <code>bi</code> e o tamanho pode ser ajustado com classes como <code>fs-1</code>, <code>fs-2</code>, etc.</div></section>
+      <section id="navbar"><div class="head"><div class="ic">🗂</div><div><h3>Navbar</h3><div class="sub">Barra de navegação</div></div></div><pre>&lt;nav class="navbar navbar-expand-md bg-dark navbar-dark"&gt;
+  &lt;div class="container"&gt;
+    &lt;a class="navbar-brand" href="index.html"&gt;Marca&lt;/a&gt;
+    &lt;ul class="navbar-nav"&gt;
+      &lt;li class="nav-item"&gt;&lt;a class="nav-link active" href="#"&gt;Produtos&lt;/a&gt;&lt;/li&gt;
+      &lt;li class="nav-item"&gt;&lt;a class="nav-link disabled" href="#"&gt;Contactos&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/div&gt;
+&lt;/nav&gt;</pre><div class="call warn"><strong>Ponto-chave</strong><code>.navbar-expand-md</code> faz a navbar colapsar abaixo de <strong>md</strong>. O botão toggler usa <code>data-bs-toggle="collapse"</code> e <code>data-bs-target</code>.</div></section>
+      <section id="navtabs"><div class="head"><div class="ic">📑</div><div><h3>Nav Tabs</h3><div class="sub">Navegação por tabs</div></div></div><p>As tabs podem ser só visuais ou podem controlar painéis com JavaScript.</p><pre>&lt;ul class="nav nav-tabs"&gt;
+  &lt;li class="nav-item"&gt;&lt;a class="nav-link active" href="#"&gt;Active&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;button class="nav-link active" data-bs-toggle="tab" data-bs-target="#home-tab-pane"&gt;Home&lt;/button&gt;
+
+&lt;div class="tab-content"&gt;
+  &lt;div class="tab-pane fade show active" id="home-tab-pane"&gt;...&lt;/div&gt;
+&lt;/div&gt;</pre></section>
+      <section id="forms"><div class="head"><div class="ic">📝</div><div><h3>Forms</h3><div class="sub">Campos e layout</div></div></div><div class="grid2"><div class="card"><h4>Estrutura base</h4><p><code>form-label</code>, <code>form-control</code> e <code>form-text</code> são as classes-chave.</p></div><div class="card"><h4>Extras</h4><p><code>form-check-input</code>, <code>form-check-label</code>, <code>form-control-lg</code>, <code>form-control-sm</code>, <code>input-group</code>.</p></div></div><pre>&lt;label for="email" class="form-label"&gt;e-mail&lt;/label&gt;
+&lt;input type="email" class="form-control" id="email" name="email"&gt;
+&lt;div class="form-text"&gt;Não partilhamos o seu e-mail&lt;/div&gt;</pre></section>
+      <section id="buttons"><div class="head"><div class="ic">🔘</div><div><h3>Botões e badges</h3><div class="sub">Componentes muito frequentes</div></div></div><p>As classes de botão podem ser usadas em <code>button</code>, <code>a</code> e <code>input</code>. Existem versões <code>btn-outline-*</code>, <code>btn-lg</code>, <code>btn-sm</code>, estados <code>active</code> e <code>disabled</code>.</p><pre>&lt;button type="button" class="btn btn-primary"&gt;Primário&lt;/button&gt;
+&lt;button type="button" class="btn btn-outline-success"&gt;Outline&lt;/button&gt;
+&lt;button type="button" class="btn btn-danger btn-sm"&gt;Pequeno&lt;/button&gt;
+&lt;span class="badge bg-warning text-dark"&gt;Novo&lt;/span&gt;
+&lt;span class="badge rounded-pill bg-success"&gt;Ativo&lt;/span&gt;</pre></section>
+      <section id="carousel"><div class="head"><div class="ic">🖼</div><div><h3>Carousel</h3><div class="sub">Imagens, indicadores e controlos</div></div></div><p>Os slides precisam de imagens com dimensões idênticas para evitar que o layout salte. O carousel pode ter indicadores, controlos e caption.</p><pre>&lt;div id="demo" class="carousel slide carousel-fade" data-bs-ride="carousel"&gt;
+  &lt;div class="carousel-indicators"&gt;...&lt;/div&gt;
+  &lt;div class="carousel-inner"&gt;
+    &lt;div class="carousel-item active"&gt;
+      &lt;img src="carousel1.jpg" class="d-block w-100"&gt;
+      &lt;div class="carousel-caption"&gt;...&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre></section>
+      <section id="alerts"><div class="head"><div class="ic">⚠</div><div><h3>Alerts</h3><div class="sub">Mensagens para o utilizador</div></div></div><pre>&lt;div class="alert alert-warning alert-dismissible fade show"&gt;
+  &lt;h4 class="alert-heading"&gt;Alerta!&lt;/h4&gt;
+  &lt;p&gt;Este site usa cookies...&lt;/p&gt;
+  &lt;button type="button" class="btn-close" data-bs-dismiss="alert"&gt;&lt;/button&gt;
+&lt;/div&gt;</pre><p>O texto do alerta pode ser fechado com um botão ou com um link com <code>data-bs-dismiss="alert"</code>.</p></section>
+      <section id="images"><div class="head"><div class="ic">🖼</div><div><h3>Imagens</h3><div class="sub">Responsive e efeitos visuais</div></div></div><div class="grid2"><div class="card"><h4>Responsive</h4><p><code>img-fluid</code> faz a imagem adaptar-se à largura do contentor sem ultrapassar as suas dimensões originais.</p></div><div class="card"><h4>Efeitos</h4><p><code>rounded</code>, <code>rounded-circle</code>, <code>rounded-pill</code> e <code>img-thumbnail</code>.</p></div></div></section>
+      <section id="exam"><div class="head"><div class="ic">🧠</div><div><h3>Como responder no teste</h3><div class="sub">Teórico e prático</div></div></div><div class="grid2"><div class="card"><h4>Teste teórico</h4><ul class="list"><li>Identificar características do Bootstrap.</li><li>Explicar diferenças entre container, container-fluid e breakpoints.</li><li>Reconhecer classes de grid, cores, tipografia e componentes.</li></ul></div><div class="card"><h4>Teste prático</h4><ul class="list"><li>Prever o que o browser vai mostrar.</li><li>Apontar problemas no código.</li><li>Corrigir classes e estrutura.</li><li>Propor melhorias funcionais e responsivas.</li></ul></div></div><div class="call info"><strong>Checklist rápido</strong>Verifica sempre: ordem <code>container → row → col</code>, uso correto dos breakpoints, classes obrigatórias dos componentes e dependência de JavaScript quando o componente for interativo.</div></section>
+      <section id="quiz"><div class="head"><div class="ic">❓</div><div><h3>Perguntas frequentes</h3><div class="sub">Revisão ativa</div></div></div><div class="tbl"><table><thead><tr><th>Pergunta</th><th>Resposta curta</th></tr></thead><tbody><tr><td>O que faz <code>.container-fluid</code>?</td><td>Ocupa toda a largura da viewport.</td></tr><tr><td>O que significa <code>col-sm-6</code>?</td><td>6 colunas em sm ou superior; 12 colunas abaixo de sm.</td></tr><tr><td>Para que serve <code>navbar-toggler</code>?</td><td>Mostra/esconde a navbar colapsada.</td></tr><tr><td>Quando se usa <code>data-bs-toggle="tab"</code>?</td><td>Quando a tab controla conteúdo com JavaScript.</td></tr><tr><td>Como criar uma imagem responsiva?</td><td>Usar <code>img-fluid</code>.</td></tr></tbody></table></div></section>
+      <div class="footer">Baseado nos documentos T09a, T09b e T10a. Guia focado em reconhecer padrões, interpretar código e aplicar Bootstrap 5 de forma funcional.</div>
+    </div>
+  </main>
+</div>
+<script>
+  const app = document.getElementById('app');
+  const themeBtn = document.getElementById('themeBtn');
+  const savedTheme = 'dark';
+  document.documentElement.setAttribute('data-theme', savedTheme);
+  themeBtn.textContent = '🌙 Tema';
+  function toggleTheme(){
+    const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    themeBtn.textContent = next === 'dark' ? '🌙 Tema' : '☀️ Tema';
+  }
+  function toggleSidebar(){ app.classList.toggle('sidebar-open'); }
+  function closeSidebar(){ app.classList.remove('sidebar-open'); }
+  const links = [...document.querySelectorAll('nav a')];
+  const ids = links.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        links.forEach(a => a.classList.remove('nav-active'));
+        const a = links.find(x => x.getAttribute('href') === '#' + e.target.id);
+        if(a) a.classList.add('nav-active');
+      }
+    });
+  }, {rootMargin:'-35% 0px -60% 0px', threshold:0.01});
+  ids.forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
