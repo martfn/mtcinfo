@@ -1,10 +1,10 @@
 [
   {
     "subject": "LM2",
-    "label": "Projeto Final – Entrega da Prototipagem",
-    "date": "2026-05-18",
+    "label": "Projeto Final – Entrega da Implementação",
+    "date": "2026-06-05",
     "time": null,
-    "pct": 10,
+    "pct": null,
     "type": null,
     "section": null,
     "porMarcar": false,
@@ -100,7 +100,7 @@
   },
   {
     "subject": "LM2",
-    "label": "Projeto Final – Apresentações – Entrega e Pitch da Implementação",
+    "label": "Projeto Final – Apresentações – Pitch da Implementação",
     "date": "2026-06-09",
     "time": "09:00",
     "pct": null,
