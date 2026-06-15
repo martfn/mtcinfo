@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="pt" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guionismo 25/26 — Resumo para Teste</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root, [data-theme="light"] {
+    --bg: #f7f6f2; --surface: #f0eeea; --surface2: #e8e5e0;
+    --border: rgba(40,37,29,0.12); --text: #1a1810; --muted: #6b6960;
+    --faint: #a8a79f; --accent: #01696f; --accent-h: #0c4e54;
+    --accent-hl: #cedcd8; --warn: #964219; --tag-bg: #cedcd8;
+    --tag-text: #01696f; --heading-font: 'Instrument Serif', Georgia, serif;
+    --body-font: 'Inter', system-ui, sans-serif;
+    --shadow: 0 2px 8px rgba(40,37,29,0.08), 0 1px 2px rgba(40,37,29,0.05);
+    --radius: 0.625rem;
+  }
+  [data-theme="dark"] {
+    --bg: #131210; --surface: #1c1b19; --surface2: #252421;
+    --border: rgba(255,255,255,0.08); --text: #d4d3cf; --muted: #888780;
+    --faint: #55544f; --accent: #4f98a3; --accent-h: #227f8b;
+    --accent-hl: #1e3538; --warn: #bb653b; --tag-bg: #1e3538;
+    --tag-text: #4f98a3; --heading-font: 'Instrument Serif', Georgia, serif;
+    --body-font: 'Inter', system-ui, sans-serif;
+    --shadow: 0 2px 12px rgba(0,0,0,0.3), 0 1px 3px rgba(0,0,0,0.2);
+    --radius: 0.625rem;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; scroll-padding-top: 4.5rem; font-size: 16px; }
+  body {
+    font-family: var(--body-font);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.65;
+    min-height: 100dvh;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(12px);
+    padding: 0.75rem 1.5rem;
+    display: flex; align-items: center; gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .nav-logo {
+    font-family: var(--heading-font);
+    font-size: 1.1rem;
+    color: var(--accent);
+    font-style: italic;
+    white-space: nowrap;
+    margin-right: auto;
+  }
+  .nav-links {
+    display: flex; gap: 0.25rem; flex-wrap: wrap; list-style: none;
+  }
+  .nav-links a {
+    text-decoration: none; color: var(--muted); font-size: 0.8rem;
+    padding: 0.3rem 0.6rem; border-radius: 0.375rem;
+    transition: background 150ms, color 150ms;
+  }
+  .nav-links a:hover { background: var(--surface2); color: var(--text); }
+  .theme-btn {
+    background: none; border: 1px solid var(--border);
+    color: var(--muted); cursor: pointer;
+    padding: 0.3rem 0.5rem; border-radius: 0.375rem;
+    font-size: 0.85rem; transition: all 150ms;
+  }
+  .theme-btn:hover { color: var(--text); background: var(--surface2); }
+
+  /* LAYOUT */
+  .container { max-width: 860px; margin: 0 auto; padding: 2.5rem 1.5rem 5rem; }
+
+  /* HERO */
+  .hero { text-align: center; padding: 3rem 0 2rem; margin-bottom: 2rem; }
+  .hero-label {
+    font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--accent); font-weight: 600; margin-bottom: 0.5rem;
+  }
+  .hero h1 {
+    font-family: var(--heading-font);
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 400; font-style: italic;
+    color: var(--text); line-height: 1.15;
+    margin-bottom: 0.75rem;
+  }
+  .hero-sub { color: var(--muted); font-size: 0.95rem; max-width: 520px; margin: 0 auto; }
+
+  /* TOC */
+  .toc {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+  .toc h2 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.75rem; }
+  .toc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 0.25rem; list-style: none; }
+  .toc-grid li a {
+    text-decoration: none; color: var(--accent); font-size: 0.875rem;
+    display: block; padding: 0.3rem 0.5rem; border-radius: 0.375rem;
+    transition: background 150ms;
+  }
+  .toc-grid li a:hover { background: var(--accent-hl); }
+
+  /* SECTIONS */
+  section { margin-bottom: 2.5rem; }
+
+  .section-header {
+    display: flex; align-items: center; gap: 0.75rem;
+    margin-bottom: 1.25rem; padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-num {
+    background: var(--accent); color: #fff;
+    font-size: 0.7rem; font-weight: 700;
+    width: 1.6rem; height: 1.6rem; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; letter-spacing: 0;
+  }
+  .section-header h2 {
+    font-family: var(--heading-font);
+    font-size: 1.4rem; font-weight: 400; font-style: italic;
+    color: var(--text);
+  }
+
+  /* CARDS */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: var(--shadow);
+  }
+  .card-title {
+    font-size: 0.9rem; font-weight: 600; color: var(--accent);
+    text-transform: uppercase; letter-spacing: 0.06em;
+    margin-bottom: 0.5rem;
+  }
+  .card p { font-size: 0.9rem; color: var(--text); margin-bottom: 0.5rem; }
+  .card p:last-child { margin-bottom: 0; }
+
+  /* GRID 2 */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+  @media (max-width: 600px) { .grid-2 { grid-template-columns: 1fr; } }
+
+  /* HIGHLIGHT BOX */
+  .highlight {
+    background: var(--accent-hl);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+    margin: 0.75rem 0;
+    color: var(--text);
+  }
+  .highlight strong { color: var(--accent); }
+
+  /* LISTS */
+  .list-clean { list-style: none; }
+  .list-clean li {
+    padding: 0.4rem 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.9rem;
+    display: flex; gap: 0.6rem; align-items: flex-start;
+  }
+  .list-clean li:last-child { border-bottom: none; }
+  .list-clean li::before { content: "→"; color: var(--accent); flex-shrink: 0; font-size: 0.8rem; margin-top: 0.15rem; }
+
+  /* TAGS */
+  .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.6rem; }
+  .tag {
+    background: var(--tag-bg); color: var(--tag-text);
+    font-size: 0.75rem; font-weight: 600; padding: 0.2rem 0.55rem;
+    border-radius: 9999px; text-transform: uppercase; letter-spacing: 0.05em;
+  }
+  .tag.orange { background: rgba(150,66,25,0.15); color: var(--warn); }
+
+  /* TABLE */
+  table {
+    width: 100%; border-collapse: collapse; font-size: 0.875rem;
+    margin: 0.75rem 0;
+  }
+  th {
+    text-align: left; padding: 0.5rem 0.75rem;
+    background: var(--surface2); color: var(--muted);
+    font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em;
+    font-weight: 600;
+  }
+  td { padding: 0.5rem 0.75rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: var(--surface); }
+
+  /* STEPS */
+  .steps { display: flex; flex-direction: column; gap: 0.5rem; }
+  .step {
+    display: flex; gap: 1rem; align-items: flex-start;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 0.75rem 1rem;
+  }
+  .step-num {
+    background: var(--surface2); color: var(--accent);
+    font-size: 0.75rem; font-weight: 700; min-width: 1.5rem; height: 1.5rem;
+    border-radius: 0.3rem; display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .step-body { flex: 1; }
+  .step-body strong { font-size: 0.875rem; display: block; margin-bottom: 0.2rem; }
+  .step-body span { font-size: 0.825rem; color: var(--muted); }
+
+  /* QUOTE */
+  blockquote {
+    border-left: 2px solid var(--accent);
+    padding: 0.5rem 1rem;
+    margin: 0.75rem 0;
+    font-style: italic; color: var(--muted); font-size: 0.875rem;
+  }
+  blockquote cite { display: block; margin-top: 0.3rem; font-style: normal; font-size: 0.8rem; color: var(--faint); }
+
+  /* CONFLICT PILLS */
+  .conflict-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; }
+  @media (max-width: 500px) { .conflict-grid { grid-template-columns: 1fr; } }
+  .conflict-pill {
+    text-align: center; padding: 0.75rem;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); font-size: 0.8rem;
+  }
+  .conflict-pill .icon { font-size: 1.5rem; display: block; margin-bottom: 0.3rem; }
+  .conflict-pill strong { display: block; color: var(--accent); margin-bottom: 0.2rem; }
+
+  /* PYRAMID */
+  .pyramid {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1rem 1.5rem;
+    overflow-x: auto;
+  }
+  .pyramid-steps { display: flex; flex-direction: column; gap: 0.4rem; }
+  .pstep {
+    display: flex; align-items: center; gap: 0.75rem;
+    padding: 0.45rem 0.75rem; border-radius: 0.375rem;
+    background: var(--surface2); font-size: 0.85rem;
+  }
+  .pstep .num { color: var(--accent); font-weight: 700; min-width: 1.5rem; }
+  .pstep .label { font-weight: 600; min-width: 120px; }
+  .pstep .desc { color: var(--muted); font-size: 0.8rem; }
+
+  /* FOOTER */
+  footer {
+    text-align: center; padding: 2rem;
+    border-top: 1px solid var(--border);
+    color: var(--faint); font-size: 0.78rem;
+  }
+
+  /* DIVIDER */
+  .section-divider { height: 1px; background: var(--border); margin: 0.5rem 0 1.5rem; }
+
+  h3 { font-family: var(--heading-font); font-size: 1.05rem; font-weight: 400; font-style: italic; color: var(--text); margin: 1rem 0 0.5rem; }
+
+  p { font-size: 0.9rem; margin-bottom: 0.5rem; }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-logo">Guionismo 25/26</span>
+  <ul class="nav-links">
+    <li><a href="#narrativa">Narrativa</a></li>
+    <li><a href="#sinopse">Sinopse & Personagens</a></li>
+    <li><a href="#estrutura">Estrutura</a></li>
+    <li><a href="#guiao">Guião & Storyboard</a></li>
+    <li><a href="#crossmedia">Cross/Transmedia</a></li>
+    <li><a href="#consumo">Consumo</a></li>
+    <li><a href="#engagement">Engagement</a></li>
+  </ul>
+  <button class="theme-btn" data-theme-toggle aria-label="Mudar tema">🌙</button>
+</nav>
+
+<div class="container">
+
+  <div class="hero">
+    <p class="hero-label">Resumo de Estudo · Teste Teórico</p>
+    <h1>Guionismo 2025/26</h1>
+    <p class="hero-sub">Narrativa AV · Estrutura Dramática · Crossmedia & Transmedia · Consumo de Novos Media · Engagement</p>
+  </div>
+
+  <div class="toc">
+    <h2>Índice rápido</h2>
+    <ul class="toc-grid">
+      <li><a href="#narrativa">1. Conceito de Narrativa</a></li>
+      <li><a href="#sinopse">2. Sinopse & Personagens</a></li>
+      <li><a href="#estrutura-narrativa">3. Estrutura Narrativa</a></li>
+      <li><a href="#estrutura-dramatica">4. Estrutura Dramática</a></li>
+      <li><a href="#guiao">5. Guião Literário & Técnico</a></li>
+      <li><a href="#storyboard">6. Storyboard</a></li>
+      <li><a href="#crossmedia">7. Crossmedia vs Transmedia</a></li>
+      <li><a href="#tipos-transmedia">8. Tipos de Transmedia</a></li>
+      <li><a href="#consumo">9. Hábitos de Consumo</a></li>
+      <li><a href="#partilha">10. Comportamentos de Partilha</a></li>
+      <li><a href="#engagement">11. Engagement (3 Fases)</a></li>
+      <li><a href="#instagram">12. Instagram & Plataformas</a></li>
+    </ul>
+  </div>
+
+  <!-- 1. NARRATIVA -->
+  <section id="narrativa">
+    <div class="section-header">
+      <div class="section-num">1</div>
+      <h2>Conceito & Características da Narrativa</h2>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Definição</div>
+      <blockquote>
+        "Any report of connected events, real or imaginary, presented in a sequence of written or spoken words, and/or still or moving images."
+        <cite>— Oxford Dictionary</cite>
+      </blockquote>
+      <blockquote>
+        "A series of events that are linked together in a number of ways, including cause and effect, time and place."
+        <cite>— Garrand, 2001. Writing for Multimedia and the Web</cite>
+      </blockquote>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">Suportes expressivos</div>
+        <ul class="list-clean">
+          <li>Verbal (discurso)</li>
+          <li>Icónico (pintura)</li>
+          <li>Verbo-icónico (cinema, animação, BD)</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title">Características (Reis et al.)</div>
+        <ul class="list-clean">
+          <li><strong>Distanciamento</strong> — entre narrador e história; dimensão cognitiva</li>
+          <li><strong>Exteriorização</strong> — universo autónomo; narrador neutro</li>
+          <li><strong>Dinâmica temporal</strong> — temporalidade da história vs. ato de contar</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Componentes da Narrativa (2 eixos)</div>
+      <div class="grid-2">
+        <div>
+          <p><strong>História / Conteúdo</strong></p>
+          <ul class="list-clean">
+            <li>Personagem(ns)</li>
+            <li>Espaço</li>
+            <li>Ação</li>
+          </ul>
+        </div>
+        <div>
+          <p><strong>Discurso / Expressão</strong></p>
+          <ul class="list-clean">
+            <li>Tempo (ordem e velocidade narrativa)</li>
+            <li>Forma (sistema semiótico)</li>
+            <li>Perspetiva narrativa</li>
+            <li>Registos do discurso</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Tipos de Narrador</div>
+      <table>
+        <thead><tr><th>Tipo</th><th>Pessoa</th><th>Descrição</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Autodiegético</strong></td><td>1.ª pessoa</td><td>Narrador = personagem principal; reflexão posterior à história</td></tr>
+          <tr><td><strong>Heterodiegético</strong> (omnisciente)</td><td>3.ª pessoa</td><td>Narra história que não viveu; distanciamento natural (visão de fora)</td></tr>
+          <tr><td><strong>Homodiegético</strong></td><td>1.ª/2.ª pessoa</td><td>Personagem secundário; participa indiretamente</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 2. SINOPSE & PERSONAGENS -->
+  <section id="sinopse">
+    <div class="section-header">
+      <div class="section-num">2</div>
+      <h2>Desenvolvimento da Narrativa AV — Fases</h2>
+    </div>
+
+    <div class="card" style="margin-bottom: 1.25rem;">
+      <div class="card-title">Sequência de desenvolvimento (8 fases)</div>
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div><div class="step-body"><strong>Definição da Ideia</strong><span>Ponto de partida criativo</span></div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-body"><strong>Story-line</strong><span>Conflito em poucas linhas: apresentação → desenvolvimento → resolução</span></div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-body"><strong>Sinopse + Personagens</strong><span>Essência da história + construção de personagens</span></div></div>
+        <div class="step"><div class="step-num">4</div><div class="step-body"><strong>Tratamento</strong><span>5–8 pág. com detalhes, movimentos, efeitos</span></div></div>
+        <div class="step"><div class="step-num">5</div><div class="step-body"><strong>Estrutura</strong><span>Decisão: narrativa + dramática; sequências, cenas, planos</span></div></div>
+        <div class="step"><div class="step-num">6</div><div class="step-body"><strong>Guião Literário</strong><span>~1 pág./min; ações, diálogos, referências visuais/sonoras</span></div></div>
+        <div class="step"><div class="step-num">7</div><div class="step-body"><strong>Guião Técnico</strong><span>Especificações técnicas; responsabilidade do realizador</span></div></div>
+        <div class="step"><div class="step-num">8</div><div class="step-body"><strong>Storyboard</strong><span>Representação visual dos planos/cenas + dados técnicos</span></div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Story-line: Tipos de Conflito (Comparato, 2004)</div>
+      <div class="conflict-grid">
+        <div class="conflict-pill"><span class="icon">⚔️</span><strong>Homem vs Homem</strong>Confronto interpessoal</div>
+        <div class="conflict-pill"><span class="icon">🧠</span><strong>Homem vs Ele próprio</strong>Conflito interno</div>
+        <div class="conflict-pill"><span class="icon">🌍</span><strong>Homem vs Forças não-humanas</strong>Natureza, sociedade, sobrenatural</div>
+      </div>
+    </div>
+
+    <div class="card" id="personagens">
+      <div class="card-title">Sinopse</div>
+      <p>Essência da história de modo narrativo — Quem, Quando, Onde, Qual (ação dramática). <strong>Longa-metragem:</strong> 3–5 pág. | <strong>Curta:</strong> ½–1 pág. Estilo claro, fluído e sólido.</p>
+      <div class="highlight"><strong>Permite decisões de:</strong> produção (custos), mercado (rentabilidade), técnica/artística (casting) e autoria (guião).</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Construção de Personagens (5 passos)</div>
+      <div class="steps">
+        <div class="step"><div class="step-num">0</div><div class="step-body"><strong>Papel na narrativa</strong><span>Protagonista / Antagonista / Secundário / Componente dramático</span></div></div>
+        <div class="step"><div class="step-num">1</div><div class="step-body"><strong>Fraquezas & Motivações</strong><span>O que limita a personagem e o que a move</span></div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-body"><strong>Catalisador</strong><span>O evento que lança a personagem para a ação</span></div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-body"><strong>Reação ao evento marcante</strong><span>Como a personagem responde ao catalisador</span></div></div>
+        <div class="step"><div class="step-num">4</div><div class="step-body"><strong>Traços físicos, sociais & psicológicos</strong><span>Contexto sociocultural</span></div></div>
+        <div class="step"><div class="step-num">5</div><div class="step-body"><strong>Ações & Comportamentos</strong><span>"Psicologia → comportamentos" (observar pessoas de referência)</span></div></div>
+      </div>
+      <div class="highlight" style="margin-top:0.75rem;"><strong>Arco da personagem:</strong> possíveis transformações ao longo da história (ex.: John McClane em Die Hard).</div>
+    </div>
+  </section>
+
+  <!-- 3. ESTRUTURA NARRATIVA -->
+  <section id="estrutura-narrativa">
+    <div class="section-header">
+      <div class="section-num">3</div>
+      <h2>Estrutura Narrativa</h2>
+    </div>
+    <div class="card">
+      <div class="card-title">Conceitos base: Sequência → Cena → Plano</div>
+      <table>
+        <thead><tr><th>Elemento</th><th>Definição</th><th>Exemplo</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Sequência</strong></td><td>Divisão mais extensa; mesmo fio narrativo; conjunto de cenas</td><td>Acto I de Inception</td></tr>
+          <tr><td><strong>Cena</strong></td><td>Ação dramática num mesmo espaço, partilhando intervenientes principais</td><td>Interrogatório numa sala</td></tr>
+          <tr><td><strong>Plano</strong></td><td>Parte da ação num único take (pode incluir movimentos de câmara)</td><td>Close-up de uma personagem</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card" id="estrutura">
+      <div class="card-title">Tipos de Estrutura Narrativa (elemento: sequência)</div>
+      <table>
+        <thead><tr><th>Tipo</th><th>Descrição</th><th>Exemplo</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Linear</strong></td><td>Relato fiel à ordem cronológica</td><td><em>The Straight Story</em> (D. Lynch)</td></tr>
+          <tr><td><strong>In media res</strong></td><td>Começa no meio da história; recupera início depois</td><td><em>Crash</em> (Paul Haggis)</td></tr>
+          <tr><td><strong>Paralela</strong></td><td>2+ linhas narrativas sem aparente ligação</td><td><em>Pulp Fiction</em> (Tarantino)</td></tr>
+          <tr><td><strong>Inclusiva</strong></td><td>Histórias que contêm outras histórias</td><td><em>Beleza Americana</em> (Sam Mendes)</td></tr>
+          <tr><td><strong>Intercalada</strong></td><td>Linear "cortada" por sequências fora da linha</td><td><em>Matrix</em> (Wachowski)</td></tr>
+          <tr><td><strong>Inversão temporal</strong></td><td>Flashbacks/flashforwards; não-cronológica</td><td><em>Slumdog Millionaire</em> (Danny Boyle)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 4. ESTRUTURA DRAMÁTICA -->
+  <section id="estrutura-dramatica">
+    <div class="section-header">
+      <div class="section-num">4</div>
+      <h2>Estrutura Dramática</h2>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Definição</div>
+      <p>Forma como as cenas são ordenadas e o impacto emocional no espetador. Como as emoções "fluem" entre cenas. Elemento principal: <strong>a cena</strong>.</p>
+      <div class="tags"><span class="tag">Aristóteles</span><span class="tag">Pirâmide de Freytag</span><span class="tag">Jornada do Herói (Campbell)</span></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Pirâmide de Freytag (1863) — adaptada ao modelo Hollywood</div>
+      <div class="pyramid">
+        <div class="pyramid-steps">
+          <div class="pstep"><span class="num">1</span><span class="label">Exposição</span><span class="desc">Situação inicial; apresentação de personagens e contexto</span></div>
+          <div class="pstep"><span class="num">2</span><span class="label">Incidente desencadeador</span><span class="desc">Evento que apresenta o conflito central</span></div>
+          <div class="pstep"><span class="num">3</span><span class="label">Elevação da ação</span><span class="desc">Tensão crescente; complicações</span></div>
+          <div class="pstep"><span class="num">4</span><span class="label">Clímax</span><span class="desc">Momento de maior tensão emocional/dramática</span></div>
+          <div class="pstep"><span class="num">5</span><span class="label">Declínio da ação</span><span class="desc">Consequências do clímax</span></div>
+          <div class="pstep"><span class="num">6</span><span class="label">Desenlace</span><span class="desc">Resolução; novo equilíbrio</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Tempo da narrativa (Gerard Genette, 1980)</div>
+      <div class="grid-2">
+        <div>
+          <p><strong>Tempo da história</strong></p>
+          <p style="color:var(--muted); font-size:0.85rem;">Sequência cronológica real dos eventos</p>
+        </div>
+        <div>
+          <p><strong>Tempo narrativo</strong></p>
+          <p style="color:var(--muted); font-size:0.85rem;">"Pseudo-temporal order" — como os eventos são arranjados na narrativa para gerar tensão</p>
+        </div>
+      </div>
+      <div class="highlight"><strong>Gestão dramática</strong> inclui também: planos, música, efeitos sonoros e transições.</div>
+    </div>
+  </section>
+
+  <!-- 5. GUIÃO -->
+  <section id="guiao">
+    <div class="section-header">
+      <div class="section-num">5</div>
+      <h2>Guião Literário & Técnico</h2>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">Guião Literário (fase 6)</div>
+        <ul class="list-clean">
+          <li>Narração completa ordenada em sequências/cenas</li>
+          <li>Inclui ações, tempo, espaço, diálogos, referências AV</li>
+          <li>~1 página por minuto de narrativa</li>
+          <li>Produto final para transposição AV</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title">Guião Técnico (fase 7)</div>
+        <ul class="list-clean">
+          <li>Especificações técnicas do realizador</li>
+          <li>Revisto ao longo do processo criativo</li>
+          <li>Base para o storyboard (fase 8)</li>
+          <li>Referências: Kill Bill, Matrix</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Elementos fundamentais (Steven Sachen)</div>
+      <table>
+        <thead><tr><th>Elemento</th><th>Formato</th><th>Notas</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Caracterização da cena</strong></td><td>MAIÚSCULAS</td><td>INT./EXT. + Local + DIA/NOITE</td></tr>
+          <tr><td><strong>Ação</strong></td><td>Texto corrido</td><td>Descrever atitudes (não pensamentos); voz ativa; parágrafos = intensidade dramática</td></tr>
+          <tr><td><strong>Nome da personagem</strong></td><td>MAIÚSCULAS</td><td>V.O. = voice-over; O.S. = off-screen</td></tr>
+          <tr><td><strong>Diálogos</strong></td><td>Centrados, margem larga</td><td>Incluir notas de entoação entre parênteses</td></tr>
+          <tr><td><strong>Planos</strong></td><td>MAIÚSCULAS</td><td>Mudança de plano ou focalização</td></tr>
+          <tr><td><strong>Transições</strong></td><td>MAIÚSCULAS, dir.</td><td>CUT PARA: / PAN PARA: / FADE OUT</td></tr>
+        </tbody>
+      </table>
+      <div class="highlight"><strong>1.ª referência</strong> a personagem ou efeitos sonoros → sempre em MAIÚSCULAS.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Normas de formatação</div>
+      <p>Seguem os padrões da <strong>Writers Guild of America (WGA)</strong> — normas usadas pelo cinema e TV. Software recomendado: <em>WriterDuet</em> (3 projetos gratuitos), <em>Celtx</em>, <em>Final Draft</em> (trial 30 dias).</p>
+    </div>
+  </section>
+
+  <!-- 6. STORYBOARD -->
+  <section id="storyboard">
+    <div class="section-header">
+      <div class="section-num">6</div>
+      <h2>Storyboard</h2>
+    </div>
+    <div class="card">
+      <div class="card-title">O que é</div>
+      <p>Complemento ou alternativa ao guião técnico. Representação visual dos planos/cenas + referências técnicas. Realizado pelo guionista, storyboard artist ou realizador.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">Regras de criação</div>
+      <ul class="list-clean">
+        <li><strong>Dimensão:</strong> obedecer à proporcionalidade do formato de output (4:3, 16:9, 1.85:1, 2.39:1)</li>
+        <li><strong>Dados técnicos e literários:</strong> diálogos, movimentos de câmara</li>
+        <li><strong>Identificação:</strong> referenciar sequência e cena</li>
+        <li><strong>Setas:</strong> diferenciadas por cor/forma indicam movimentos de câmara e personagens</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">IA no Storyboard — notas</div>
+      <ul class="list-clean">
+        <li>GenAI tem muitas falhas — otimizar prompts e verificar resultado</li>
+        <li>Garantir coerência entre desenhos: estilo e personagens consistentes</li>
+        <li>Respeitar direitos de autor e uso ético</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 7. CROSSMEDIA / TRANSMEDIA -->
+  <section id="crossmedia">
+    <div class="section-header">
+      <div class="section-num">7</div>
+      <h2>Crossmedia vs Transmedia</h2>
+    </div>
+
+    <blockquote>
+      "Media convergence makes the flow of content across multiple media inevitable."
+      <cite>— Henry Jenkins, MIT</cite>
+    </blockquote>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">Crossmedia</div>
+        <p>Conteúdo disseminado, diversificado e reproduzido em/para múltiplos meios sem implicar alteração na narrativa fundamental.</p>
+        <div class="tags"><span class="tag">Mesmo conteúdo</span><span class="tag">Várias plataformas</span></div>
+        <p style="margin-top:0.75rem; font-size:0.82rem; color:var(--muted);">Ex.: The Peanuts Movie adaptado para diferentes formatos mantendo a mesma história.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">Transmedia</div>
+        <p>Conteúdo desenvolve-se em múltiplas formas e meios gerando múltiplos pontos de entrada e desenvolvimento na história. Cada meio faz contribuição única.</p>
+        <div class="tags"><span class="tag">Narrativa distribuída</span><span class="tag">Múltiplos pontos de entrada</span></div>
+        <p style="margin-top:0.75rem; font-size:0.82rem; color:var(--muted);">Ex.: Star Wars, Matrix — primeiras referências transmedia.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Definição-chave (Jenkins, 2017)</div>
+      <blockquote>
+        "Transmedia storytelling represents a process where integral elements of a fiction get dispersed systematically across multiple delivery channels for the purpose of creating a unified and coordinated entertainment experience. Ideally, each medium makes its own unique contribution to the unfolding of the story."
+        <cite>— Jenkins, 2017</cite>
+      </blockquote>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Scolari (2009)</div>
+      <p style="font-size:0.875rem;">Transmedia é uma <em>estrutura narrativa particular</em> que se expande através de diferentes linguagens (verbal, icónica…) e meios (cinema, BD, TV, jogos). <strong>Não é adaptação</strong> — cada meio contribui para a construção do mundo narrativo transmedia.</p>
+    </div>
+  </section>
+
+  <!-- 8. TIPOS TRANSMEDIA -->
+  <section id="tipos-transmedia">
+    <div class="section-header">
+      <div class="section-num">8</div>
+      <h2>3 Tipos de Transmedia (Robert Pratten)</h2>
+    </div>
+
+    <div class="card">
+      <div class="card-title">1. Transmedia Franchise</div>
+      <p>Conteúdos independentes mas que contribuem para a satisfação narrativa — <strong>o todo satisfaz mais que as partes.</strong></p>
+      <div class="highlight">Web-série (introduz) → Prequel → <strong>Evento principal</strong> → Sequel / Jogo (consolida)</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">2. Portmanteau</div>
+      <p>Conteúdos distribuídos por várias plataformas que contribuem de forma <strong>distinta e interligada</strong> para a mesma narrativa.</p>
+      <div class="highlight">Exemplo típico: <strong>ARG</strong> (Alternate Reality Game) — cada capítulo/plataforma revela uma parte da história que só faz sentido no todo.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">3. Transmedia Complexa</div>
+      <p><strong>Franchise + Portmanteau</strong> — um meio principal concentra parte relevante do enquadramento da história; outros meios completam com factos relevantes.</p>
+      <div class="highlight">Ex.: Westworld — série TV + Twitter/X (acompanhar vida das personagens) + experiência física no SXSW (3.000 pessoas).</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Transmedia em ecossistemas sociais (hoje)</div>
+      <ul class="list-clean">
+        <li>Micro-histórias serializadas (TikTok, Instagram Reels, Threads)</li>
+        <li>Participação e criação colaborativa de fãs</li>
+        <li>Memetic storytelling e remix culture</li>
+        <li>Mundos narrativos liderados por influencers</li>
+        <li>Real-time storytelling (ARGs, live role-play, streaming)</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 9. CONSUMO -->
+  <section id="consumo">
+    <div class="section-header">
+      <div class="section-num">9</div>
+      <h2>Hábitos de Consumo de Media</h2>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Mudanças aceleradas nos últimos anos</div>
+      <ul class="list-clean">
+        <li>Reforço do consumo em plataformas online</li>
+        <li>Alteração dos géneros consumidos</li>
+        <li>Dispersão por diferentes dispositivos</li>
+        <li>Incremento do consumo em mobilidade</li>
+      </ul>
+      <div class="highlight"><strong>Streaming (2024):</strong> +1,9 mil milhões de subscrições e 1,4 mil milhões de subscritores. (Nielsen/Straits Research, 2024–25)</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Consequências para a estrutura dramática</div>
+      <p>A fragmentação do consumo e a competição pela atenção impactam diretamente como as histórias são estruturadas. Análise de curvas de engagement em obras como <em>She-Ra</em> e <em>American Dragon</em> (dissertação Joana Matos, MCANM) mostra que a estrutura dramática deve acompanhar os novos padrões de atenção.</p>
+    </div>
+  </section>
+
+  <!-- 10. PARTILHA -->
+  <section id="partilha">
+    <div class="section-header">
+      <div class="section-num">10</div>
+      <h2>Comportamentos de Partilha & Remix</h2>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Do like ao UGC — gradação de intervenção</div>
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div><div class="step-body"><strong>Interação</strong><span>Likes, shares — ex.: Charlie Bit My Finger</span></div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-body"><strong>Produção (UGC)</strong><span>User-Generated Content — ex.: Evolution of Dance</span></div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-body"><strong>Transformação (Remix)</strong><span>Alteração criativa do conteúdo original</span></div></div>
+        <div class="step"><div class="step-num">4</div><div class="step-body"><strong>Circulação (Memes)</strong><span>Hábitos/ideias copiados de pessoa para pessoa</span></div></div>
+        <div class="step"><div class="step-num">5</div><div class="step-body"><strong>Participação estruturada (Desafios)</strong><span>ex.: ALS Ice Bucket Challenge</span></div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Cultura Meme (Susan Blackmore, 2000)</div>
+      <blockquote>
+        "Memes are habits, skills, songs, stories, or any other kind of information that is copied from person to person. Memes, like genes, are replicators — they are copied with variation and selection."
+        <cite>— Susan Blackmore, "The Meme Machine" (2000)</cite>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- 11. ENGAGEMENT -->
+  <section id="engagement">
+    <div class="section-header">
+      <div class="section-num">11</div>
+      <h2>Engagement — 3 Fases (Robert Pratten)</h2>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Regra 90-9-1 (Jakob Nielsen)</div>
+      <div class="conflict-grid">
+        <div class="conflict-pill"><span class="icon">👀</span><strong>90%</strong>Nunca contribuem</div>
+        <div class="conflict-pill"><span class="icon">💬</span><strong>9%</strong>Contribuem um pouco</div>
+        <div class="conflict-pill"><span class="icon">⚡</span><strong>1%</strong>Fazem quase tudo</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">As 3 etapas de engagement (Pratten)</div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <strong>Teaser / Descoberta</strong>
+            <span>Captar atenção com mínimo de informação; não revelar a história; reduzir risco; conteúdo de confiança e qualidade</span>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <strong>Trailer / Experiência central</strong>
+            <span>Revelar algum conteúdo principal; abrir porta à experiência; ultrapassar barreira (valor, atratividade, preço) → convencer à experiência</span>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <strong>Reforço / Participação</strong>
+            <span>Após a experiência: feedback, comentários, backstories, bios de personagens; conteúdo que enriquece e premia a compreensão; espaços de colaboração e criação de conteúdo adicional</span>
+          </div>
+        </div>
+      </div>
+      <div class="highlight" style="margin-top:0.75rem;">
+        <strong>Atenção:</strong> evitar participação cedo demais (audiência ainda a descobrir) e evitar exploração no momento da experiência (a história pode não ser contada). Cada etapa requer identificar objetivos e conteúdos específicos.
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Notas finais sobre planning (Pratten)</div>
+      <ul class="list-clean">
+        <li>O universo da história pode ser grande demais para ser apresentado de uma vez</li>
+        <li>Entregar pequenos blocos de informação para cativar e orientar a audiência</li>
+        <li>Adotar estratégia de crescimento progressivo na densidade e quantidade de conteúdo</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 12. INSTAGRAM -->
+  <section id="instagram">
+    <div class="section-header">
+      <div class="section-num">12</div>
+      <h2>Plataformas & Instagram</h2>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Uso complementar das plataformas</div>
+      <ul class="list-clean">
+        <li>Considerar os tipos de conteúdo que cada plataforma privilegia</li>
+        <li>Estabelecer relações de complementaridade entre os conteúdos</li>
+        <li>Instagram: gamificação, geolocalização, do digital para o real</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Após lançar conteúdo — analytics</div>
+      <ul class="list-clean">
+        <li>Acompanhar estatísticas: Impressions, Reach, Profile Visits</li>
+        <li>Usar ferramentas do Meta Business Suite</li>
+        <li>Iterar com base nos dados de engagement</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Casos de estudo relevantes</div>
+      <table>
+        <thead><tr><th>Projeto</th><th>Estratégia</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Blair Witch Project (1999)</strong></td><td>Marketing viral antes das redes sociais</td></tr>
+          <tr><td><strong>Westworld (HBO)</strong></td><td>Sets físicos no SXSW 2018 + Twitter das personagens — 3.000 pessoas experiência imersiva</td></tr>
+          <tr><td><strong>#corpodormente (Bruno Nogueira)</strong></td><td>Instagram → Podcast → Evento físico como parte da narrativa</td></tr>
+          <tr><td><strong>Star Wars / Matrix</strong></td><td>Primeiras grandes referências transmedia</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  Guionismo 2025/26 · Resumo para teste · Gerado em junho 2026
+</footer>
+
+<script>
+(function(){
+  const t=document.querySelector('[data-theme-toggle]');
+  const r=document.documentElement;
+  let d=r.getAttribute('data-theme')||'dark';
+  function updateIcon(){ if(t) t.textContent = d==='dark' ? '☀️' : '🌙'; }
+  updateIcon();
+  if(t) t.addEventListener('click',()=>{
+    d=d==='dark'?'light':'dark';
+    r.setAttribute('data-theme',d);
+    updateIcon();
+  });
+})();
+</script>
+
+</body>
+</html>
