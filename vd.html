@@ -1,330 +1,746 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt" data-theme="dark">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Resumo Compacto — Vídeo Digital</title>
-  <style>
-    :root {
-      --bg: #f5f2eb;
-      --panel: #fffdfa;
-      --panel-2: #f2ede5;
-      --text: #1f1b16;
-      --muted: #655e56;
-      --accent: #0c6b70;
-      --accent-soft: #dceeee;
-      --border: #d8d0c5;
-      --shadow: 0 8px 24px rgba(0,0,0,.06);
-      --radius: 16px;
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      color: var(--text);
-      background: linear-gradient(180deg, #f7f4ee, #efe7dc);
-      line-height: 1.5;
-    }
-    .container { width: min(1080px, calc(100% - 28px)); margin: 0 auto; }
-    .hero { padding: 42px 0 18px; }
-    .hero-card {
-      background: rgba(255,253,250,.88);
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      box-shadow: var(--shadow);
-      padding: 26px;
-    }
-    h1 {
-      margin: 0 0 10px;
-      font-size: clamp(2rem, 5vw, 3.6rem);
-      line-height: 1.02;
-      letter-spacing: -0.04em;
-    }
-    .lead { margin: 0; color: var(--muted); max-width: 80ch; }
-    .meta { display:flex; flex-wrap:wrap; gap:10px; margin-top:16px; }
-    .meta span {
-      background: var(--accent-soft);
-      color: var(--accent);
-      border: 1px solid rgba(12,107,112,.12);
-      padding: 7px 11px;
-      border-radius: 999px;
-      font-size: .88rem;
-      font-weight: 700;
-    }
-    nav {
-      position: sticky; top: 0; z-index: 10;
-      background: rgba(245,242,235,.84);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(0,0,0,.06);
-    }
-    nav .container {
-      display:flex; gap:10px; overflow-x:auto; padding:10px 0;
-    }
-    nav a {
-      color: var(--muted); text-decoration:none; white-space:nowrap;
-      padding: 8px 12px; border-radius: 999px; font-size: .95rem;
-    }
-    nav a:hover { background: var(--panel-2); color: var(--text); }
-    main { padding: 20px 0 50px; }
-    .grid { display:grid; grid-template-columns: repeat(12, 1fr); gap: 16px; }
-    .card {
-      grid-column: span 6;
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 20px 20px 18px;
-    }
-    .full { grid-column: 1 / -1; }
-    h2 {
-      margin: 0 0 10px;
-      font-size: 1.22rem;
-      letter-spacing: -0.02em;
-    }
-    h3 {
-      margin: 14px 0 8px;
-      font-size: 1rem;
-    }
-    p { margin: 0 0 8px; }
-    .intro { color: var(--muted); }
-    ul { margin: 8px 0 0 1.1rem; padding: 0; }
-    li { margin: 5px 0; }
-    .mini {
-      margin-top: 12px;
-      background: var(--panel-2);
-      border-left: 4px solid var(--accent);
-      padding: 12px 14px;
-      border-radius: 12px;
-      font-size: .96rem;
-    }
-    .cols { display:grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-    table {
-      width: 100%; border-collapse: collapse; margin-top: 10px; background:white;
-      border-radius: 12px; overflow:hidden;
-    }
-    th, td {
-      padding: 10px 12px; text-align:left; vertical-align: top;
-      border-bottom: 1px solid var(--border); font-size: .95rem;
-    }
-    th { background: #f4eee7; }
-    .tagline { color: var(--muted); font-size: .94rem; margin-top: 10px; }
-    @media (max-width: 860px) {
-      .card { grid-column: 1 / -1; }
-      .cols { grid-template-columns: 1fr; }
-      .hero-card { padding: 20px; }
-    }
-    @media print {
-      nav { display:none; }
-      body { background: white; }
-      .card, .hero-card { box-shadow:none; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vídeo Digital — Resumo para Teste Teórico</title>
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&f[]=cabinet-grotesk@700,800&display=swap" rel="stylesheet">
+<style>
+:root, [data-theme="light"] {
+  --bg: #f7f6f2; --surface: #f9f8f5; --surface-2: #fbfbf9;
+  --border: #d4d1ca; --divider: #dcd9d5;
+  --text: #28251d; --muted: #7a7974; --faint: #bab9b4;
+  --primary: #01696f; --primary-hl: #cedcd8;
+  --accent: #964219; --accent-hl: #ddcfc6;
+  --tag-bg: #e6e4df;
+  --shadow: 0 2px 8px rgba(40,37,29,.08);
+}
+[data-theme="dark"] {
+  --bg: #171614; --surface: #1c1b19; --surface-2: #201f1d;
+  --border: #393836; --divider: #262523;
+  --text: #cdccca; --muted: #797876; --faint: #5a5957;
+  --primary: #4f98a3; --primary-hl: #313b3b;
+  --accent: #bb653b; --accent-hl: #564942;
+  --tag-bg: #2d2c2a;
+  --shadow: 0 2px 12px rgba(0,0,0,.3);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+body{font-family:'Satoshi',sans-serif;font-size:clamp(0.95rem,0.9rem + 0.25vw,1.05rem);
+  background:var(--bg);color:var(--text);line-height:1.65}
+a{color:var(--primary);text-decoration:none}
+
+/* NAV */
+header{position:sticky;top:0;z-index:100;background:var(--bg);
+  border-bottom:1px solid var(--border);padding:.75rem 1.5rem;
+  display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.logo{font-family:'Cabinet Grotesk',sans-serif;font-size:1.1rem;font-weight:800;
+  color:var(--primary);letter-spacing:-.02em;flex-shrink:0}
+nav{display:flex;gap:.25rem;flex-wrap:wrap}
+nav a{font-size:.8rem;padding:.3rem .65rem;border-radius:999px;color:var(--muted);
+  border:1px solid transparent;transition:all .18s}
+nav a:hover{color:var(--text);border-color:var(--border)}
+.theme-btn{background:none;border:1px solid var(--border);border-radius:999px;
+  padding:.3rem .65rem;font-size:.8rem;color:var(--muted);cursor:pointer;
+  transition:all .18s;white-space:nowrap}
+.theme-btn:hover{color:var(--text);border-color:var(--primary)}
+
+/* HERO */
+.hero{padding:3rem 1.5rem 2rem;max-width:900px;margin:0 auto}
+.hero-eyebrow{font-size:.78rem;font-weight:700;text-transform:uppercase;
+  letter-spacing:.1em;color:var(--primary);margin-bottom:.75rem}
+.hero h1{font-family:'Cabinet Grotesk',sans-serif;font-size:clamp(2rem,1rem+3vw,3rem);
+  font-weight:800;line-height:1.1;letter-spacing:-.03em;color:var(--text);margin-bottom:1rem}
+.hero-sub{color:var(--muted);max-width:60ch;font-size:.95rem}
+.topics-bar{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.5rem}
+.topic-chip{font-size:.75rem;font-weight:700;padding:.3rem .7rem;
+  border-radius:999px;background:var(--tag-bg);color:var(--muted);border:1px solid var(--border)}
+
+/* MAIN */
+main{max-width:900px;margin:0 auto;padding:0 1.5rem 4rem}
+
+/* SECTION */
+.section{margin-bottom:2.5rem;border:1px solid var(--border);border-radius:1rem;
+  overflow:hidden;background:var(--surface);box-shadow:var(--shadow)}
+.section-header{padding:1.25rem 1.5rem;border-bottom:1px solid var(--divider);
+  display:flex;align-items:center;gap:.75rem;cursor:pointer;
+  user-select:none;transition:background .15s}
+.section-header:hover{background:var(--surface-2)}
+.section-icon{width:32px;height:32px;border-radius:.5rem;display:flex;
+  align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+.section-title{font-family:'Cabinet Grotesk',sans-serif;font-size:1.05rem;
+  font-weight:800;letter-spacing:-.02em}
+.section-badge{margin-left:auto;font-size:.7rem;font-weight:700;
+  padding:.2rem .55rem;border-radius:999px;background:var(--primary-hl);color:var(--primary)}
+.chevron{margin-left:.5rem;transition:transform .25s;color:var(--muted);font-size:.8rem}
+.section-body{padding:1.5rem;display:flex;flex-direction:column;gap:1.25rem}
+.section-body.collapsed{display:none}
+
+/* CARDS */
+.card{background:var(--surface-2);border:1px solid var(--border);
+  border-radius:.75rem;padding:1rem 1.25rem}
+.card h3{font-family:'Cabinet Grotesk',sans-serif;font-size:.9rem;font-weight:800;
+  letter-spacing:-.01em;color:var(--primary);margin-bottom:.5rem}
+.card p,.card li{font-size:.88rem;color:var(--muted);line-height:1.6}
+.card ul{padding-left:1rem;display:flex;flex-direction:column;gap:.2rem}
+.card li{list-style:disc}
+.card strong{color:var(--text);font-weight:700}
+
+/* GRID */
+.grid-2{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem}
+
+/* TABLE */
+.tbl-wrap{overflow-x:auto;border-radius:.75rem;border:1px solid var(--border)}
+table{width:100%;border-collapse:collapse;font-size:.84rem}
+th{background:var(--surface-2);padding:.65rem 1rem;text-align:left;
+  font-weight:700;color:var(--primary);border-bottom:1px solid var(--border)}
+td{padding:.6rem 1rem;border-bottom:1px solid var(--divider);color:var(--muted)}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:var(--surface-2)}
+
+/* CALLOUT */
+.callout{background:var(--primary-hl);border-left:3px solid var(--primary);
+  border-radius:0 .5rem .5rem 0;padding:.75rem 1rem;font-size:.85rem;color:var(--text)}
+.callout.warn{background:var(--accent-hl);border-color:var(--accent)}
+
+/* DEFINITION LIST */
+dl{display:flex;flex-direction:column;gap:.4rem}
+dt{font-weight:700;font-size:.88rem;color:var(--text)}
+dd{font-size:.86rem;color:var(--muted);padding-left:.75rem;margin-bottom:.25rem}
+
+/* TAG ROW */
+.tag-row{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.5rem}
+.tag{font-size:.74rem;font-weight:700;padding:.2rem .55rem;
+  border-radius:999px;background:var(--tag-bg);color:var(--muted)}
+
+/* PROGRESS */
+.progress-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:.75rem}
+.progress-item{background:var(--surface-2);border:1px solid var(--border);
+  border-radius:.75rem;padding:.75rem 1rem}
+.progress-label{font-size:.78rem;font-weight:700;color:var(--muted);margin-bottom:.35rem}
+.progress-bar-bg{background:var(--border);border-radius:999px;height:6px}
+.progress-bar{background:var(--primary);height:6px;border-radius:999px}
+.progress-val{font-family:'Cabinet Grotesk',sans-serif;font-size:1.1rem;
+  font-weight:800;color:var(--text)}
+
+@media(max-width:600px){
+  header{flex-wrap:wrap;gap:.5rem}
+  nav{display:none}
+  .hero{padding:2rem 1rem 1.5rem}
+  main{padding:0 1rem 3rem}
+  .section-body{padding:1rem}
+}
+</style>
 </head>
 <body>
-  <header class="hero">
-    <div class="container">
-      <div class="hero-card">
-        <h1>Vídeo Digital — resumo compacto</h1>
-        <p class="lead">Versão mais compacta, mas ligeiramente mais detalhada: organizada em tópicos, com distinções essenciais, palavras-chave e pontos que têm mais probabilidade de aparecer num teste teórico global.</p>
-        <div class="meta">
-          <span>Mais compacto</span>
-          <span>Mais detalhado</span>
-          <span>Em tópicos</span>
-          <span>Focado no teste</span>
+
+<header>
+  <span class="logo">VD · Resumo Teórico</span>
+  <nav>
+    <a href="#composicao">Composição</a>
+    <a href="#iluminacao">Iluminação</a>
+    <a href="#audio">Áudio</a>
+    <a href="#cor">Cor</a>
+    <a href="#edicao">Edição</a>
+    <a href="#keying">Keying</a>
+    <a href="#creditos">Créditos</a>
+    <a href="#trailers">Trailers</a>
+    <a href="#imersivos">Imersivos</a>
+  </nav>
+  <button class="theme-btn" onclick="toggleTheme()" id="themeBtn">☀ Claro</button>
+</header>
+
+<div class="hero">
+  <p class="hero-eyebrow">MTC · 2025/2026 · Vídeo Digital</p>
+  <h1>Resumo para<br>Teste Teórico</h1>
+  <p class="hero-sub">Todos os tópicos essenciais condensados: composição, iluminação, áudio, cor, edição, keying, créditos, trailers e vídeos imersivos.</p>
+  <div class="topics-bar">
+    <span class="topic-chip">Enquadramento &amp; Planos</span>
+    <span class="topic-chip">Iluminação 3-pontos</span>
+    <span class="topic-chip">Áudio &amp; Paisagem Sonora</span>
+    <span class="topic-chip">Correção &amp; Gradação de Cor</span>
+    <span class="topic-chip">Edição Linear vs NLE</span>
+    <span class="topic-chip">Chroma Key</span>
+    <span class="topic-chip">Créditos &amp; Title Sequences</span>
+    <span class="topic-chip">Anatomia do Trailer</span>
+    <span class="topic-chip">Vídeo 360° &amp; VR</span>
+  </div>
+</div>
+
+<main>
+
+<!-- ═══════════════ 1. COMPOSIÇÃO & ENQUADRAMENTO ═══════════════ -->
+<div class="section" id="composicao">
+  <div class="section-header" onclick="toggle(this)">
+    <div class="section-icon" style="background:#e6f4f5;color:#01696f">🎞</div>
+    <span class="section-title">1 · Composição &amp; Enquadramento</span>
+    <span class="section-badge">Fundamental</span>
+    <span class="chevron">▾</span>
+  </div>
+  <div class="section-body">
+    <div class="callout">
+      <strong>Enquadramento</strong> = como apresentamos o(s) sujeito(s) na ação para reforçar a narrativa.<br>
+      <strong>Composição</strong> = colocação e arranjo dos elementos visuais para guiar a atenção do espectador.
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3>Tipos de Planos</h3>
+        <ul>
+          <li><strong>Grande Plano Geral (GPG)</strong> — contextualiza o espaço</li>
+          <li><strong>Plano Geral (PG)</strong> — personagem + ambiente</li>
+          <li><strong>Plano Médio (PM)</strong> — da cintura para cima</li>
+          <li><strong>Plano Americano (PA)</strong> — dos joelhos para cima</li>
+          <li><strong>Plano Aproximado / Primeiro Plano (PP)</strong> — rosto + ombros</li>
+          <li><strong>Grande Plano (GP) / Close-up</strong> — expressões faciais</li>
+          <li><strong>Plano de Detalhe (PD)</strong> — objeto/pormenor</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Ângulos da Câmara</h3>
+        <p style="margin-bottom:.5rem"><strong>Horizontal:</strong></p>
+        <ul>
+          <li>Frontal, ¾, Perfil, Traseiro</li>
+        </ul>
+        <p style="margin:.5rem 0"><strong>Vertical:</strong></p>
+        <ul>
+          <li><strong>Cenital (Bird's eye)</strong> — câmara a 90° acima</li>
+          <li><strong>Picado</strong> — câmara acima do nível dos olhos; sujeito parece menor</li>
+          <li><strong>Normal</strong> — nível dos olhos; neutro</li>
+          <li><strong>Contrapicado</strong> — câmara abaixo; sujeito parece imponente</li>
+          <li><strong>Nadir</strong> — câmara a 90° abaixo</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Movimentos de Câmara</h3>
+      <div class="grid-2">
+        <dl>
+          <dt>Pan</dt><dd>Rotação horizontal sobre eixo fixo (esquerda/direita)</dd>
+          <dt>Tilt</dt><dd>Rotação vertical sobre eixo fixo (cima/baixo)</dd>
+          <dt>Travel</dt><dd>Câmara move-se lateralmente (translação horizontal)</dd>
+        </dl>
+        <dl>
+          <dt>Dolly In / Out</dt><dd>Câmara avança/recua em direção ao sujeito</dd>
+          <dt>Zoom</dt><dd>Variação da lente (não há movimento físico da câmara)</dd>
+          <dt>Steadicam / Handheld</dt><dd>Movimento estabilizado / abalado (tensão, urgência)</dd>
+        </dl>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Ferramentas de Composição</h3>
+      <ul>
+        <li><strong>Regra dos Terços</strong> — divide o frame em 9 partes iguais; pontos fortes nas interseções</li>
+        <li><strong>Linhas Guia</strong> — diagonais e linhas conduzem o olhar</li>
+        <li><strong>Espaço Negativo</strong> — área vazia que valoriza o sujeito e cria emoção</li>
+        <li><strong>Profundidade de Campo</strong> — controlo do foco para isolar o sujeito (blur no fundo)</li>
+        <li><strong>Ritmo e Simetria</strong> — padrões que criam harmonia ou tensão intencional</li>
+        <li><strong>Eye-tracking</strong> — o olho humano segue rostos e movimento; composição deve prever este trajeto</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ 2. ILUMINAÇÃO ═══════════════ -->
+<div class="section" id="iluminacao">
+  <div class="section-header" onclick="toggle(this)">
+    <div class="section-icon" style="background:#fef3e6;color:#964219">💡</div>
+    <span class="section-title">2 · Iluminação</span>
+    <span class="section-badge">Fundamental</span>
+    <span class="chevron">▾</span>
+  </div>
+  <div class="section-body">
+    <div class="callout">
+      A iluminação define o <strong>ambiente emocional</strong> da cena e separa visualmente os planos da imagem.
+    </div>
+
+    <div class="card">
+      <h3>Setup de 3 Pontos (Three-Point Lighting)</h3>
+      <ul>
+        <li><strong>Key Light (Luz Principal)</strong> — fonte primária; define sombras e textura</li>
+        <li><strong>Fill Light (Luz de Preenchimento)</strong> — suaviza e controla as sombras criadas pela Key</li>
+        <li><strong>Backlight / Rim Light</strong> — separa o sujeito do fundo; cria contorno de luz nos ombros/cabelo</li>
+      </ul>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3>Temperatura de Cor (Kelvin)</h3>
+        <ul>
+          <li><strong>~1800–3200K</strong> — Quente (laranja/âmbar): velas, tungstênio → aconchego, drama</li>
+          <li><strong>~5600K</strong> — Neutro / Luz do dia</li>
+          <li><strong>~6500K+</strong> — Frio (azul): flash, luz fluorescente → modernidade, isolamento</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Tipos de Luz</h3>
+        <ul>
+          <li><strong>Luz Dura (Hard)</strong> — sombras definidas, contraste alto (sol direto, fresnel)</li>
+          <li><strong>Luz Suave (Soft)</strong> — sombras difusas (softbox, céu nublado, rebatedor)</li>
+          <li><strong>Overhead</strong> — fonte acima; cria sombras profundas sob nariz e olhos (dramático)</li>
+          <li><strong>Practical Light</strong> — fontes visíveis na cena (candeeiro, TV, janela)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout warn">
+      <strong>Nota:</strong> A luz define o género. Noir usa iluminação de alto contraste com sombras duras. Comédia usa luz suave e uniforme. O tom da cor de luz reforça o estado emocional da cena.
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ 3. ÁUDIO ═══════════════ -->
+<div class="section" id="audio">
+  <div class="section-header" onclick="toggle(this)">
+    <div class="section-icon" style="background:#eef5e6;color:#437a22">🔊</div>
+    <span class="section-title">3 · Áudio</span>
+    <span class="section-badge">Fundamental</span>
+    <span class="chevron">▾</span>
+  </div>
+  <div class="section-body">
+    <div class="callout">
+      <em>"Os filmes mudos nunca o foram"</em> — o som sempre acompanhou o audiovisual, mesmo antes do sync técnico.
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3>Tipos de Som</h3>
+        <ul>
+          <li><strong>Speech</strong> — diálogos, monólogos, narração</li>
+          <li><strong>Music</strong> — música diegética (ouvida na cena) e não-diegética (só o espectador ouve)</li>
+          <li><strong>Noise / Ambiente</strong> — sons de fundo que compõem o contexto</li>
+        </ul>
+        <p style="margin-top:.5rem">Um som pode pertencer a mais do que uma categoria simultaneamente.</p>
+      </div>
+      <div class="card">
+        <h3>Paisagem Sonora</h3>
+        <p>Somatório dos sons que compõem um contexto, contribuindo para a compreensão do espaço onde decorre a ação.</p>
+        <div class="tag-row" style="margin-top:.75rem">
+          <span class="tag">Foley</span><span class="tag">Dry Recording</span>
+          <span class="tag">Binaural</span><span class="tag">Surround</span>
         </div>
       </div>
     </div>
-  </header>
 
-  <nav>
-    <div class="container">
-      <a href="#base">Base</a>
-      <a href="#audio">Áudio</a>
-      <a href="#imagem">Imagem</a>
-      <a href="#cor">Cor</a>
-      <a href="#keying">Keying</a>
-      <a href="#edicao">Edição</a>
-      <a href="#trailers">Trailers</a>
-      <a href="#imersivos">Imersivos</a>
-      <a href="#perguntas">Perguntas</a>
+    <div class="card">
+      <h3>Funções do Som na Edição</h3>
+      <ul>
+        <li><strong>Continuidade</strong> — o som une planos e cenas, criando fluxo narrativo</li>
+        <li><strong>Cue (Deixa)</strong> — som chama a atenção do espectador para algo fora de campo ou cria expectativa</li>
+        <li><strong>Ausência de som</strong> — silêncio como ferramenta de desconforto e tensão</li>
+        <li><strong>Música</strong> — tem o efeito mais emocional e direto; define ritmo, intensidade e aura emocional (Holland, 2016)</li>
+      </ul>
     </div>
-  </nav>
 
-  <main>
-    <div class="container">
-      <section class="grid">
-        <article class="card full" id="base">
-          <h2>1. Estrutura geral da matéria</h2>
-          <ul>
-            <li>A UC pretende dar base teórica sobre história, evolução, géneros, formatos e contextos dos conteúdos audiovisuais.</li>
-            <li>Organiza-se em grandes blocos: pré-produção, produção, pós-produção, SFX/VFX, conteúdos imersivos e IA generativa.</li>
-            <li>Pré-produção = planeamento e documentação; produção = captação de imagem e som, iluminação, produção e realização; pós-produção = edição, montagem, correção/gradação de cor e exportação.</li>
-            <li>No teste, é provável que seja exigida capacidade de relacionar técnica, linguagem audiovisual e adequação à plataforma de distribuição.</li>
-          </ul>
-          <div class="mini"><strong>Fórmula mental:</strong> planear → captar → organizar → editar → finalizar → adaptar ao meio de publicação.</div>
-        </article>
-
-        <article class="card" id="audio">
-          <h2>2. Áudio</h2>
-          <ul>
-            <li>O som não acompanha apenas a imagem: ajuda a construir narrativa, continuidade, espaço e emoção.</li>
-            <li>Tipos principais: <strong>speech</strong> (diálogos/monólogos), music (música) e noise/ambiente (sons de contexto).</li>
-            <li>Um som pode acumular funções; por exemplo, vozes num espaço cheio podem ser speech e noise ao mesmo tempo.</li>
-            <li>Paisagem sonora = soma dos sons que permite compreender melhor o espaço onde a ação decorre.</li>
-            <li>O som pode funcionar como cue: chama a atenção, cria expectativa, altera a interpretação do que vemos ou até gera desconforto pela sua ausência.</li>
-            <li>A música é particularmente relevante porque define ritmo, intensidade e aura emocional.</li>
-            <li>Formas de obtenção/manipulação sonora: dry recording, mistura de sons, foley, transcrição automática e ferramentas de IA.</li>
-            <li>Noções técnicas úteis: mono, estéreo, surround, 5.1 e 7.1.</li>
-          </ul>
-          <div class="mini"><strong>O que dizer numa resposta:</strong> tipo de som + função narrativa + efeito no espectador.</div>
-        </article>
-
-        <article class="card" id="imagem">
-          <h2>3. Composição, enquadramento e iluminação</h2>
-          <ul>
-            <li>Composição organiza os elementos visuais e orienta a leitura da imagem.</li>
-            <li>Enquadramento define o que entra ou fica fora da imagem; por isso controla foco, hierarquia visual e sentido narrativo.</li>
-            <li>A escala de planos influencia proximidade emocional, quantidade de informação e intensidade dramática.</li>
-            <li>A escolha do plano nunca é neutra: aproxima, afasta, revela, esconde ou cria tensão.</li>
-            <li>A iluminação modela volume, destaca elementos, cria atmosfera e reforça legibilidade e profundidade.</li>
-            <li>Em teste, interessa mostrar que composição e iluminação não são apenas técnicas, mas parte da linguagem audiovisual.</li>
-          </ul>
-          <div class="mini"><strong>Ideia-chave:</strong> imagem bem construída = atenção guiada + emoção controlada + informação clara.</div>
-        </article>
-
-        <article class="card" id="cor">
-          <h2>4. Correção e gradação de cor</h2>
-          <ul>
-            <li><strong>Correção de cor</strong> = equilibrar/normalizar a imagem; ajustar exposição, balanço, consistência entre planos e fidelidade cromática.</li>
-            <li><strong>Gradação de cor</strong> = estilizar a imagem; criar ambiente, identidade visual, intenção emocional e associação de género.</li>
-            <li>Ordem lógica: primeiro corrige-se, depois grada-se.</li>
-            <li>A cor ajuda a unificar cenas, estabelecer tom e reforçar continuidade visual.</li>
-          </ul>
-        </article>
-
-        <article class="card" id="keying">
-          <h2>5. Keying / chroma key</h2>
-          <ul>
-            <li>Consiste em remover uma cor de fundo para integrar outro fundo ou elementos visuais.</li>
-            <li>Depende muito da captação: fundo uniforme, boa separação entre sujeito e fundo, iluminação controlada e redução de spill.</li>
-            <li>Problemas frequentes: recorte mal definido, transparências indesejadas, contaminação da cor de fundo, sombras e ruído.</li>
-            <li>Logo, o keying é simultaneamente tema de produção e de pós-produção.</li>
-          </ul>
-        </article>
-
-        <article class="card" id="edicao">
-          <h2>6. Edição linear e não linear</h2>
-          <table>
-            <thead>
-              <tr><th>Conceito</th><th>Essencial</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>Edição linear</td><td>Segue ordem sequencial, do início ao fim, com menor margem para alterar facilmente.</td></tr>
-              <tr><td>Edição não linear</td><td>Permite reorganizar, cortar, testar versões e trabalhar com várias pistas sem destruir o original.</td></tr>
-              <tr><td>Timeline</td><td>Na não linear, a timeline com V1, V2, V3 e várias pistas de áudio é central.</td></tr>
-              <tr><td>Vantagem principal</td><td>Flexibilidade criativa e eficiência no processo de montagem.</td></tr>
-            </tbody>
-          </table>
-          <ul>
-            <li>A evolução da edição acompanha a passagem do analógico para o digital.</li>
-            <li>Organização de ficheiros é parte da pós-produção: importar cedo, nomear de forma consistente, criar pastas separadas, etiquetar e fazer backups.</li>
-            <li>Ficheiros bem organizados tornam a pesquisa, montagem e revisão mais rápidas.</li>
-          </ul>
-          <div class="mini"><strong>Palavras-chave:</strong> sequência fixa vs flexibilidade; analógico vs digital; organização = eficiência.</div>
-        </article>
-
-        <article class="card full" id="trailers">
-          <h2>7. Trailers</h2>
-          <div class="cols">
-            <div>
-              <h3>Tipos</h3>
-              <ul>
-                <li>Teaser: 15–60 s; curiosidade, pouca informação.</li>
-                <li>Theatrical trailer: 2–2,5 min; arco mais completo.</li>
-                <li>TV spot: 15–30 s; ritmo alto, muito direto.</li>
-                <li>Social cut: 6–90 s; adaptado à plataforma, muitas vezes vertical/quadrado.</li>
-                <li>Featurette: 2–5 min; bastidores, entrevistas e aprofundamento.</li>
-              </ul>
-            </div>
-            <div>
-              <h3>Anatomia</h3>
-              <ul>
-                <li>Hook (0–5 s): captar atenção imediatamente.</li>
-                <li>Setup (5–20 s): apresentar mundo/personagens.</li>
-                <li>Conflict (20–45 s): aumentar stakes e tensão.</li>
-                <li>Climax (45–55 s): pico visual ou emocional.</li>
-                <li>Tag (55–60 s): título, data, logo, CTA.</li>
-              </ul>
-            </div>
-          </div>
-          <ul>
-            <li>Elementos decisivos: pacing, música, linhas de diálogo/voz-off e color grade coerente com o género.</li>
-            <li>Hoje não existe só um trailer principal; há vários cortes para diferentes plataformas e comportamentos de consumo.</li>
-            <li>Nas redes sociais, o hook inicial é crítico, muitas visualizações são sem som e as legendas tornam-se essenciais.</li>
-            <li>O trailer deve ser pensado logo em pré-produção: target, direitos, múltiplos rácios, calendário de lançamento e métricas.</li>
-            <li>Técnicas de montagem que podem surgir: J-cut, L-cut, match cut, smash cut e freeze frame.</li>
-          </ul>
-          <table>
-            <thead>
-              <tr><th>Plataforma</th><th>Ponto a reter</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>TikTok / Reels</td><td>Vertical, curto, scroll-stopper, forte leitura sem som.</td></tr>
-              <tr><td>YouTube</td><td>Formato clássico do trailer, thumbnail e SEO relevantes.</td></tr>
-              <tr><td>X / Facebook</td><td>Adaptação de duração, copy, engagement e publicação nativa.</td></tr>
-            </tbody>
-          </table>
-        </article>
-
-        <article class="card full" id="imersivos">
-          <h2>8. Vídeos imersivos / 360</h2>
-          <ul>
-            <li>Vídeo 360º é conteúdo audiovisual captado de forma omnidirecional, cobrindo o campo visual esférico em torno do ponto de gravação.</li>
-            <li>O utilizador pode controlar o ângulo de visão, o que cria sensação de presença espacial diferente do vídeo convencional.</li>
-            <li>Importante: 360º não é o mesmo que fulldome, halfdome ou IMAX.</li>
-            <li>Contextos de uso: jornalismo/documentário, turismo/cultura, educação/formação, saúde/terapia, arquitetura/engenharia, marketing/vendas e entretenimento.</li>
-            <li>Em VR, a visão estereoscópica é fundamental para simular profundidade e reforçar imersão.</li>
-          </ul>
-          <table>
-            <thead>
-              <tr><th>Vantagens</th><th>Desvantagens</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>Maior imersão e envolvimento.</td><td>Produção e edição mais exigentes tecnicamente.</td></tr>
-              <tr><td>Experiência mais memorável.</td><td>Custos e requisitos técnicos mais elevados.</td></tr>
-              <tr><td>Exploração ativa do conteúdo pelo utilizador.</td><td>Necessidade de dispositivos adequados para melhor experiência.</td></tr>
-              <tr><td>Novas oportunidades narrativas e educacionais.</td><td>Desafios de direção, enquadramento e guiamento do olhar.</td></tr>
-              <tr><td>Diferenciação e inovação.</td><td>Maior largura de banda, armazenamento e risco de náuseas/cibersickness.</td></tr>
-            </tbody>
-          </table>
-          <p class="tagline">Em resposta teórica, vale a pena referir sempre a tensão central deste tema: mais imersão e inovação, mas também mais exigência técnica e maior probabilidade de desconforto do utilizador.</p>
-        </article>
-
-        <article class="card" id="perguntas">
-          <h2>9. Perguntas clássicas</h2>
-          <ul>
-            <li>Distingue correção de cor de gradação de cor.</li>
-            <li>Explica a diferença entre edição linear e não linear.</li>
-            <li>Define paisagem sonora e tipos principais de som.</li>
-            <li>Explica como o som pode orientar a narrativa.</li>
-            <li>Descreve as condições necessárias para um bom chroma key.</li>
-            <li>Indica a anatomia de um bom trailer.</li>
-            <li>Refere vantagens e desvantagens do vídeo 360º.</li>
-          </ul>
-        </article>
-
-        <article class="card" id="resposta">
-          <h2>10. Modelo de resposta curta</h2>
-          <ul>
-            <li><strong>Definir</strong> o conceito com precisão.</li>
-            <li><strong>Distinguir</strong> de conceitos próximos, se existirem.</li>
-            <li><strong>Explicar</strong> a função prática/narrativa.</li>
-            <li><strong>Concluir</strong> com efeito no espectador, no workflow ou na plataforma.</li>
-          </ul>
-          <div class="mini"><strong>Exemplo:</strong> “A correção de cor serve para equilibrar e uniformizar a imagem entre planos; a gradação de cor serve para construir uma intenção estética e emocional.”</div>
-        </article>
-      </section>
+    <div class="card">
+      <h3>Canais de Áudio</h3>
+      <div class="tbl-wrap">
+        <table>
+          <tr><th>Canais</th><th>Formato</th></tr>
+          <tr><td>1</td><td>Mono</td></tr>
+          <tr><td>2</td><td>Estéreo</td></tr>
+          <tr><td>3</td><td>Estéreo Surround</td></tr>
+          <tr><td>4</td><td>Quadrifonia</td></tr>
+          <tr><td>5.1 (6)</td><td>Surround — Dolby Digital / DTS</td></tr>
+          <tr><td>7.1 (8)</td><td>Surround — Dolby Pro Logic IIz / DTS HD</td></tr>
+        </table>
+      </div>
     </div>
-  </main>
+
+    <div class="card">
+      <h3>Produção de Som (como obter)</h3>
+      <ul>
+        <li><strong>Dry Recording</strong> — gravação em estúdio sem ruído</li>
+        <li><strong>Sound Design</strong> — mistura e manipulação de sons para criar efeitos</li>
+        <li><strong>Foley</strong> — recriação de sons com objetos quotidianos em estúdio</li>
+        <li><strong>IA Generativa</strong> — geração de músicas (Suno), efeitos sonoros (myedit.io), separação de pistas</li>
+      </ul>
+      <div class="callout warn" style="margin-top:.75rem">
+        <strong>Atenção:</strong> Direitos de Autor &amp; Creative Commons, deepfakes de áudio — questões éticas e legais relevantes.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ 4. COR ═══════════════ -->
+<div class="section" id="cor">
+  <div class="section-header" onclick="toggle(this)">
+    <div class="section-icon" style="background:#f5e6f5;color:#7a39bb">🎨</div>
+    <span class="section-title">4 · Cor, Correção e Gradação</span>
+    <span class="section-badge">Fundamental</span>
+    <span class="chevron">▾</span>
+  </div>
+  <div class="section-body">
+    <div class="callout">
+      <strong>Correção de cor</strong> = tornar a imagem tecnicamente correta (exposição, balanço de branco).<br>
+      <strong>Gradação de cor</strong> = processo criativo de dar à imagem um look intencional que reforça a narrativa.
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3>Perceção Visual</h3>
+        <ul>
+          <li><strong>Cones S</strong> — comprimentos curtos → azul</li>
+          <li><strong>Cones M</strong> — comprimentos médios → verde</li>
+          <li><strong>Cones L</strong> — comprimentos longos → vermelho</li>
+          <li><strong>Bastonetes</strong> — sensíveis à luminosidade (baixa luz)</li>
+          <li><strong>Daltonismo</strong> — dificuldade em distinguir verde/vermelho</li>
+          <li><strong>Tetracromatas</strong> — 4 cones; visão de cor expandida</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Esquemas Cromáticos</h3>
+        <ul>
+          <li><strong>Monocromático</strong> — uma cor base + shades (branco) e tints (preto)</li>
+          <li><strong>Análogo</strong> — cor dominante + duas adjacentes na roda</li>
+          <li><strong>Complementar</strong> — duas cores opostas na roda (max. contraste)</li>
+          <li><strong>Triádico</strong> — três cores igualmente espaçadas</li>
+          <li><strong>Quadrangular / Retangular</strong> — esquemas geométricos com 4 cores</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Psicologia das Cores no Audiovisual</h3>
+      <div class="tbl-wrap">
+        <table>
+          <tr><th>Cor</th><th>Conotações</th></tr>
+          <tr><td><strong style="color:#e55">Vermelho</strong></td><td>Amor, paixão, perigo, ira, poder, violência</td></tr>
+          <tr><td><strong style="color:#55f">Azul</strong></td><td>Frio, isolado, cerebral, melancólico, calmo, passivo</td></tr>
+          <tr><td><strong style="color:#bb0">Amarelo</strong></td><td>Loucura, doença, insegurança, obsessão, ingenuidade, ciúme</td></tr>
+          <tr><td><strong style="color:#5a5">Verde</strong></td><td>Natureza, esperança, veneno, crescimento</td></tr>
+          <tr><td><strong style="color:#fa7">Laranja</strong></td><td>Energia, calor, criatividade, perigo</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Ferramentas Online de Cor</h3>
+      <div class="tag-row">
+        <span class="tag">color.adobe.com</span><span class="tag">coolors.co</span>
+        <span class="tag">khroma.co</span><span class="tag">colorhunt.co</span>
+        <span class="tag">paletton.com</span><span class="tag">colorleap.app</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ 5. EDIÇÃO LINEAR vs NÃO-LINEAR ═══════════════ -->
+<div class="section" id="edicao">
+  <div class="section-header" onclick="toggle(this)">
+    <div class="section-icon" style="background:#e6eef5;color:#006494">✂</div>
+    <span class="section-title">5 · Edição Linear vs Não-Linear</span>
+    <span class="section-badge">Fundamental</span>
+    <span class="chevron">▾</span>
+  </div>
+  <div class="section-body">
+
+    <div class="tbl-wrap">
+      <table>
+        <tr><th></th><th>Edição Linear</th><th>Edição Não-Linear (NLE)</th></tr>
+        <tr><td><strong>Suporte</strong></td><td>Película / Fita magnética</td><td>Digital (ficheiros)</td></tr>
+        <tr><td><strong>Fluxo</strong></td><td>Início → meio → fim (sequencial)</td><td>Acesso aleatório a qualquer ponto</td></tr>
+        <tr><td><strong>Versões</strong></td><td>Uma versão de cada vez</td><td>V1, V2, V3... múltiplas versões</td></tr>
+        <tr><td><strong>Correções</strong></td><td>Difíceis; implicam re-editar tudo</td><td>Não-destrutiva; sempre reversível</td></tr>
+        <tr><td><strong>Exemplos</strong></td><td>Moviola, Steenbeck</td><td>Avid Media Composer, Premiere, DaVinci</td></tr>
+        <tr><td><strong>Era</strong></td><td>Cinema analógico (até ~1990)</td><td>Padrão atual desde anos 90</td></tr>
+      </table>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3>Organização de Ficheiros (boas práticas)</h3>
+        <ul>
+          <li>Formato: <strong>AAMMDD_descrição.mp4</strong> (ex: 250312_exterior_deca)</li>
+          <li>Subpastas: vídeo / áudio / imagens por projeto</li>
+          <li>Backup em disco externo ou cloud</li>
+          <li>Tags/palavras-chave no software (Premiere)</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Realizadores que Filmam em Película (ainda)</h3>
+        <ul>
+          <li>Christopher Nolan — IMAX 35/65mm</li>
+          <li>Quentin Tarantino — 35/70mm</li>
+          <li>Steven Spielberg — West Side Story, Fabelmans</li>
+          <li>Wes Anderson — 35mm meticuloso</li>
+          <li>Jordan Peele — IMAX 65mm (Nope)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout">
+      O NLE tornou o cinema mais acessível e a edição não-destrutiva: podes sempre voltar atrás, criar versões, e experimentar sem destruir o material original.
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ 6. KEYING / CHROMA KEY ═══════════════ -->
+<div class="section" id="keying">
+  <div class="section-header" onclick="toggle(this)">
+    <div class="section-icon" style="background:#e6f5ec;color:#437a22">🟩</div>
+    <span class="section-title">6 · Keying / Chroma Key</span>
+    <span class="section-badge">Técnica</span>
+    <span class="chevron">▾</span>
+  </div>
+  <div class="section-body">
+    <div class="callout">
+      <strong>Chroma Keying</strong> = fusão da conveniência de filmar em estúdio controlado com a possibilidade de transportar o espectador para qualquer local ou realidade.
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3>Para que serve?</h3>
+        <ul>
+          <li>Redução de custos de produção</li>
+          <li>Criação/recriação de locais, épocas, contextos</li>
+          <li>Cenas mais controladas e seguras</li>
+          <li>Flexibilidade na pós-produção (edição do fundo)</li>
+          <li>Reaproveitamento de cenas gravadas</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>O que envolve?</h3>
+        <ul>
+          <li><strong>Espaço</strong> — estúdio adequado</li>
+          <li><strong>Tela</strong> — verde ou azul uniforme</li>
+          <li><strong>Iluminação</strong> — uniforme na tela; separada no sujeito</li>
+          <li><strong>Câmara</strong> — qualidade e posicionamento</li>
+          <li><strong>Software</strong> — Premiere Pro, DaVinci Resolve</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Especificações do Verde Standard</h3>
+      <ul>
+        <li>Pantone: <strong>354C</strong></li>
+        <li>Hex: <strong>#00b140</strong></li>
+        <li>RGB: <strong>0, 177, 64</strong></li>
+        <li>CMYK: <strong>81, 0, 92, 0</strong></li>
+        <li>Web Safe: <strong>#009933</strong></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>Virtual Production (evolução do keying)</h3>
+      <p>Uso de <strong>LED Walls</strong> (paredes LED gigantes) como substituto do green screen. Permite reflexos e iluminação realistas no set em tempo real. Exemplo: <em>The Mandalorian</em> (Disney).</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ 7. CRÉDITOS ═══════════════ -->
+<div class="section" id="creditos">
+  <div class="section-header" onclick="toggle(this)">
+    <div class="section-icon" style="background:#f5ebe6;color:#964219">🎬</div>
+    <span class="section-title">7 · Créditos Iniciais e Finais</span>
+    <span class="section-badge">Narrativa</span>
+    <span class="chevron">▾</span>
+  </div>
+  <div class="section-body">
+    <div class="grid-2">
+      <div class="card">
+        <h3>Créditos de Abertura</h3>
+        <ul>
+          <li>Incluem: elenco, equipa, produtores, estúdios</li>
+          <li>Podem surgir sobre: cena de abertura, composição dinâmica, ecrã preto ou imagem estática</li>
+          <li><strong>Não há regras rígidas</strong> — alguns conteúdos ignoram-nos completamente</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Title Sequence</h3>
+        <p>Conteúdo audiovisual dinâmico criado especificamente para apresentar os créditos de abertura. Pode tornar-se icónico por si só.</p>
+        <p style="margin-top:.5rem">Exemplos icónicos: <em>True Detective S1, Stranger Things, Succession, Jack Ryan</em></p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Tipos de Genérico</h3>
+      <div class="tag-row">
+        <span class="tag">Baseado em vídeo</span>
+        <span class="tag">Baseado em animação</span>
+        <span class="tag">Mistura vídeo + animação</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Créditos Finais — Estratégias para Reter o Espectador</h3>
+      <ul>
+        <li><strong>Depoimentos / extra narrativo</strong> — continuação da história (ex: Páginas da Vida)</li>
+        <li><strong>Bloopers</strong> — erros e making-of divertido (ex: Pixar)</li>
+        <li><strong>Informação extra sobre a narrativa</strong> — epilogo ou twist (ex: The Hangover)</li>
+        <li><strong>Nonsense / Humor</strong> — conteúdo absurdo (ex: Deadpool 2016)</li>
+        <li><strong>Post-credit scenes</strong> — cenas extra após os créditos (Marvel)</li>
+      </ul>
+    </div>
+
+    <div class="callout warn">
+      <strong>Retenção:</strong> A maioria dos espectadores abandona o conteúdo nos créditos finais. É estratégico incluir algo que os mantenha até ao fim.
+    </div>
+
+    <div class="card">
+      <h3>Estrutura de um Vídeo</h3>
+      <p style="text-align:center;font-size:1.1rem;letter-spacing:.1em;color:var(--primary);font-weight:700;padding:.5rem">
+        Opening Titles → Main Content → Closing Credits
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ 8. TRAILERS ═══════════════ -->
+<div class="section" id="trailers">
+  <div class="section-header" onclick="toggle(this)">
+    <div class="section-icon" style="background:#f0e6f5;color:#7a39bb">📽</div>
+    <span class="section-title">8 · Trailers</span>
+    <span class="section-badge">Marketing AV</span>
+    <span class="chevron">▾</span>
+  </div>
+  <div class="section-body">
+    <div class="callout">
+      93% dos consumidores decidem com base em vídeo social. 72% preferem vídeo a texto para aprender sobre um produto.
+    </div>
+
+    <div class="card">
+      <h3>Tipos de Trailer</h3>
+      <div class="tbl-wrap">
+        <table>
+          <tr><th>Tipo</th><th>Duração</th><th>Propósito</th></tr>
+          <tr><td><strong>Teaser</strong></td><td>15–60s</td><td>Gera curiosidade, plot mínimo; lançado 12–18 meses antes</td></tr>
+          <tr><td><strong>Theatrical</strong></td><td>2–2.5 min</td><td>Arco narrativo completo; formato clássico de cinema</td></tr>
+          <tr><td><strong>TV Spot</strong></td><td>15–30s</td><td>Alta energia, hook-first; paid placement</td></tr>
+          <tr><td><strong>Social Cut</strong></td><td>6–90s</td><td>Otimizado por plataforma; vertical ou quadrado</td></tr>
+          <tr><td><strong>Red-Band</strong></td><td>2+ min</td><td>Público adulto; conteúdo explícito</td></tr>
+          <tr><td><strong>Featurette</strong></td><td>2–5 min</td><td>Making-of, entrevistas, story deep-dives</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Anatomia de um Trailer de Sucesso</h3>
+      <ul>
+        <li><strong>Hook (0–5s)</strong> — interrompe o scroll instantaneamente</li>
+        <li><strong>Setup (5–20s)</strong> — estabelece o mundo e personagens</li>
+        <li><strong>Conflict (20–45s)</strong> — stakes escalam, tensão cresce</li>
+        <li><strong>Climax (45–55s)</strong> — pico emocional / ação</li>
+        <li><strong>Tag (55–60s)</strong> — título, data de estreia, logotipo</li>
+        <li><strong>Música</strong> — track licenciado ou score original que drive emoção</li>
+        <li><strong>Pacing</strong> — ritmo dos cortes reflete o tom (slow burn vs. rapid-fire)</li>
+        <li><strong>Colour Grade</strong> — LUT consistente que define o género</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>Trailers por Plataforma</h3>
+      <div class="tbl-wrap">
+        <table>
+          <tr><th>Plataforma</th><th>Formato</th><th>Duração ideal</th><th>Dica chave</th></tr>
+          <tr><td><strong>TikTok</strong></td><td>9:16 · 1080×1920</td><td>15–60s</td><td>Hook nos primeiros 1–2s; sempre legendas</td></tr>
+          <tr><td><strong>Instagram Reels</strong></td><td>9:16</td><td>até 90s</td><td>Começa com ação, não com logotipo</td></tr>
+          <tr><td><strong>YouTube</strong></td><td>16:9 · 4K preferido</td><td>2–2.5 min</td><td>Thumbnail custom; SEO no título</td></tr>
+          <tr><td><strong>Twitter/X</strong></td><td>16:9 ou 1:1</td><td>max 2min20s</td><td>Post Qua–Sex 12–15h; momento cut de 6s</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ 9. VÍDEOS IMERSIVOS ═══════════════ -->
+<div class="section" id="imersivos">
+  <div class="section-header" onclick="toggle(this)">
+    <div class="section-icon" style="background:#e6f0f5;color:#006494">🥽</div>
+    <span class="section-title">9 · Vídeos Imersivos (360° / VR)</span>
+    <span class="section-badge">Tecnologia</span>
+    <span class="chevron">▾</span>
+  </div>
+  <div class="section-body">
+    <div class="callout">
+      <strong>Vídeo 360°</strong> = conteúdo audiovisual que usa captação omnidirecional para captar na íntegra o campo visual esférico em redor do ponto de gravação. O utilizador controla dinamicamente o ângulo de visão.
+    </div>
+
+    <div class="callout warn">
+      <strong>360° ≠ Fulldome / Halfdome / IMAX</strong> — são formatos distintos com projeção e propósitos diferentes.
+    </div>
+
+    <div class="card">
+      <h3>Contextos de Uso</h3>
+      <ul>
+        <li><strong>Entretenimento</strong> — concertos, filmes imersivos, VR gaming, eventos desportivos</li>
+        <li><strong>Educação</strong> — aulas imersivas, simulações de laboratório, visitas de estudo virtuais</li>
+        <li><strong>Saúde e Terapia</strong> — mindfulness, terapia de exposição (fobias), treino de habilidades sociais</li>
+        <li><strong>Jornalismo e Documentários</strong> — reportagens imersivas, documentários de natureza</li>
+        <li><strong>Marketing e Vendas</strong> — visitas virtuais a imóveis, demos de produto em 360°</li>
+        <li><strong>Engenharia e Arquitetura</strong> — visualização de projetos 3D antes da construção</li>
+        <li><strong>Cultura e Património</strong> — preservação digital, museus virtuais, recriações históricas</li>
+      </ul>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3>✅ Vantagens</h3>
+        <ul>
+          <li>Maior imersão e envolvimento emocional</li>
+          <li>Experiência mais memorável e diferenciadora</li>
+          <li>Exploração ativa: espectador controla o ponto de vista</li>
+          <li>Novas oportunidades narrativas</li>
+          <li>Aplicações versáteis em vários setores</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>❌ Desvantagens</h3>
+        <ul>
+          <li>Requisitos técnicos elevados (equipment + software especializados)</li>
+          <li>Custos de produção mais altos</li>
+          <li>Desafios de direção: pensar de forma omnidirecional</li>
+          <li>Potencial para desorientação ou cybersickness (náuseas)</li>
+          <li>Largura de banda e armazenamento maiores</li>
+          <li>Acessibilidade limitada (nem todos têm headsets VR)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Conceitos Técnicos VR</h3>
+      <dl>
+        <dt>Visão Estereoscópica</dt>
+        <dd>Simula a visão binocular humana para criar perceção de profundidade e 3D em VR.</dd>
+        <dt>Degrees of Freedom (DoF)</dt>
+        <dd>3DoF = rotação; 6DoF = rotação + translação (movimento físico no espaço).</dd>
+        <dt>Cybersickness</dt>
+        <dd>Desconforto causado pela discrepância entre movimento visual e sensação física; agravado por movimentos rápidos de câmara ou hardware de baixa qualidade.</dd>
+      </dl>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<script>
+function toggle(header) {
+  const body = header.nextElementSibling;
+  const chevron = header.querySelector('.chevron');
+  if (body.classList.contains('collapsed')) {
+    body.classList.remove('collapsed');
+    chevron.style.transform = 'rotate(0deg)';
+  } else {
+    body.classList.add('collapsed');
+    chevron.style.transform = 'rotate(-90deg)';
+  }
+}
+
+function toggleTheme() {
+  const html = document.documentElement;
+  const btn = document.getElementById('themeBtn');
+  if (html.getAttribute('data-theme') === 'dark') {
+    html.setAttribute('data-theme', 'light');
+    btn.textContent = '🌙 Escuro';
+  } else {
+    html.setAttribute('data-theme', 'dark');
+    btn.textContent = '☀ Claro';
+  }
+}
+</script>
+
 </body>
 </html>
