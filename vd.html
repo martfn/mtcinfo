@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resumo Compacto — Vídeo Digital</title>
+  <style>
+    :root {
+      --bg: #f5f2eb;
+      --panel: #fffdfa;
+      --panel-2: #f2ede5;
+      --text: #1f1b16;
+      --muted: #655e56;
+      --accent: #0c6b70;
+      --accent-soft: #dceeee;
+      --border: #d8d0c5;
+      --shadow: 0 8px 24px rgba(0,0,0,.06);
+      --radius: 16px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background: linear-gradient(180deg, #f7f4ee, #efe7dc);
+      line-height: 1.5;
+    }
+    .container { width: min(1080px, calc(100% - 28px)); margin: 0 auto; }
+    .hero { padding: 42px 0 18px; }
+    .hero-card {
+      background: rgba(255,253,250,.88);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      padding: 26px;
+    }
+    h1 {
+      margin: 0 0 10px;
+      font-size: clamp(2rem, 5vw, 3.6rem);
+      line-height: 1.02;
+      letter-spacing: -0.04em;
+    }
+    .lead { margin: 0; color: var(--muted); max-width: 80ch; }
+    .meta { display:flex; flex-wrap:wrap; gap:10px; margin-top:16px; }
+    .meta span {
+      background: var(--accent-soft);
+      color: var(--accent);
+      border: 1px solid rgba(12,107,112,.12);
+      padding: 7px 11px;
+      border-radius: 999px;
+      font-size: .88rem;
+      font-weight: 700;
+    }
+    nav {
+      position: sticky; top: 0; z-index: 10;
+      background: rgba(245,242,235,.84);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0,0,0,.06);
+    }
+    nav .container {
+      display:flex; gap:10px; overflow-x:auto; padding:10px 0;
+    }
+    nav a {
+      color: var(--muted); text-decoration:none; white-space:nowrap;
+      padding: 8px 12px; border-radius: 999px; font-size: .95rem;
+    }
+    nav a:hover { background: var(--panel-2); color: var(--text); }
+    main { padding: 20px 0 50px; }
+    .grid { display:grid; grid-template-columns: repeat(12, 1fr); gap: 16px; }
+    .card {
+      grid-column: span 6;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 20px 20px 18px;
+    }
+    .full { grid-column: 1 / -1; }
+    h2 {
+      margin: 0 0 10px;
+      font-size: 1.22rem;
+      letter-spacing: -0.02em;
+    }
+    h3 {
+      margin: 14px 0 8px;
+      font-size: 1rem;
+    }
+    p { margin: 0 0 8px; }
+    .intro { color: var(--muted); }
+    ul { margin: 8px 0 0 1.1rem; padding: 0; }
+    li { margin: 5px 0; }
+    .mini {
+      margin-top: 12px;
+      background: var(--panel-2);
+      border-left: 4px solid var(--accent);
+      padding: 12px 14px;
+      border-radius: 12px;
+      font-size: .96rem;
+    }
+    .cols { display:grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    table {
+      width: 100%; border-collapse: collapse; margin-top: 10px; background:white;
+      border-radius: 12px; overflow:hidden;
+    }
+    th, td {
+      padding: 10px 12px; text-align:left; vertical-align: top;
+      border-bottom: 1px solid var(--border); font-size: .95rem;
+    }
+    th { background: #f4eee7; }
+    .tagline { color: var(--muted); font-size: .94rem; margin-top: 10px; }
+    @media (max-width: 860px) {
+      .card { grid-column: 1 / -1; }
+      .cols { grid-template-columns: 1fr; }
+      .hero-card { padding: 20px; }
+    }
+    @media print {
+      nav { display:none; }
+      body { background: white; }
+      .card, .hero-card { box-shadow:none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="container">
+      <div class="hero-card">
+        <h1>Vídeo Digital — resumo compacto</h1>
+        <p class="lead">Versão mais compacta, mas ligeiramente mais detalhada: organizada em tópicos, com distinções essenciais, palavras-chave e pontos que têm mais probabilidade de aparecer num teste teórico global.</p>
+        <div class="meta">
+          <span>Mais compacto</span>
+          <span>Mais detalhado</span>
+          <span>Em tópicos</span>
+          <span>Focado no teste</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <nav>
+    <div class="container">
+      <a href="#base">Base</a>
+      <a href="#audio">Áudio</a>
+      <a href="#imagem">Imagem</a>
+      <a href="#cor">Cor</a>
+      <a href="#keying">Keying</a>
+      <a href="#edicao">Edição</a>
+      <a href="#trailers">Trailers</a>
+      <a href="#imersivos">Imersivos</a>
+      <a href="#perguntas">Perguntas</a>
+    </div>
+  </nav>
+
+  <main>
+    <div class="container">
+      <section class="grid">
+        <article class="card full" id="base">
+          <h2>1. Estrutura geral da matéria</h2>
+          <ul>
+            <li>A UC pretende dar base teórica sobre história, evolução, géneros, formatos e contextos dos conteúdos audiovisuais.</li>
+            <li>Organiza-se em grandes blocos: pré-produção, produção, pós-produção, SFX/VFX, conteúdos imersivos e IA generativa.</li>
+            <li>Pré-produção = planeamento e documentação; produção = captação de imagem e som, iluminação, produção e realização; pós-produção = edição, montagem, correção/gradação de cor e exportação.</li>
+            <li>No teste, é provável que seja exigida capacidade de relacionar técnica, linguagem audiovisual e adequação à plataforma de distribuição.</li>
+          </ul>
+          <div class="mini"><strong>Fórmula mental:</strong> planear → captar → organizar → editar → finalizar → adaptar ao meio de publicação.</div>
+        </article>
+
+        <article class="card" id="audio">
+          <h2>2. Áudio</h2>
+          <ul>
+            <li>O som não acompanha apenas a imagem: ajuda a construir narrativa, continuidade, espaço e emoção.</li>
+            <li>Tipos principais: <strong>speech</strong> (diálogos/monólogos), music (música) e noise/ambiente (sons de contexto).</li>
+            <li>Um som pode acumular funções; por exemplo, vozes num espaço cheio podem ser speech e noise ao mesmo tempo.</li>
+            <li>Paisagem sonora = soma dos sons que permite compreender melhor o espaço onde a ação decorre.</li>
+            <li>O som pode funcionar como cue: chama a atenção, cria expectativa, altera a interpretação do que vemos ou até gera desconforto pela sua ausência.</li>
+            <li>A música é particularmente relevante porque define ritmo, intensidade e aura emocional.</li>
+            <li>Formas de obtenção/manipulação sonora: dry recording, mistura de sons, foley, transcrição automática e ferramentas de IA.</li>
+            <li>Noções técnicas úteis: mono, estéreo, surround, 5.1 e 7.1.</li>
+          </ul>
+          <div class="mini"><strong>O que dizer numa resposta:</strong> tipo de som + função narrativa + efeito no espectador.</div>
+        </article>
+
+        <article class="card" id="imagem">
+          <h2>3. Composição, enquadramento e iluminação</h2>
+          <ul>
+            <li>Composição organiza os elementos visuais e orienta a leitura da imagem.</li>
+            <li>Enquadramento define o que entra ou fica fora da imagem; por isso controla foco, hierarquia visual e sentido narrativo.</li>
+            <li>A escala de planos influencia proximidade emocional, quantidade de informação e intensidade dramática.</li>
+            <li>A escolha do plano nunca é neutra: aproxima, afasta, revela, esconde ou cria tensão.</li>
+            <li>A iluminação modela volume, destaca elementos, cria atmosfera e reforça legibilidade e profundidade.</li>
+            <li>Em teste, interessa mostrar que composição e iluminação não são apenas técnicas, mas parte da linguagem audiovisual.</li>
+          </ul>
+          <div class="mini"><strong>Ideia-chave:</strong> imagem bem construída = atenção guiada + emoção controlada + informação clara.</div>
+        </article>
+
+        <article class="card" id="cor">
+          <h2>4. Correção e gradação de cor</h2>
+          <ul>
+            <li><strong>Correção de cor</strong> = equilibrar/normalizar a imagem; ajustar exposição, balanço, consistência entre planos e fidelidade cromática.</li>
+            <li><strong>Gradação de cor</strong> = estilizar a imagem; criar ambiente, identidade visual, intenção emocional e associação de género.</li>
+            <li>Ordem lógica: primeiro corrige-se, depois grada-se.</li>
+            <li>A cor ajuda a unificar cenas, estabelecer tom e reforçar continuidade visual.</li>
+          </ul>
+        </article>
+
+        <article class="card" id="keying">
+          <h2>5. Keying / chroma key</h2>
+          <ul>
+            <li>Consiste em remover uma cor de fundo para integrar outro fundo ou elementos visuais.</li>
+            <li>Depende muito da captação: fundo uniforme, boa separação entre sujeito e fundo, iluminação controlada e redução de spill.</li>
+            <li>Problemas frequentes: recorte mal definido, transparências indesejadas, contaminação da cor de fundo, sombras e ruído.</li>
+            <li>Logo, o keying é simultaneamente tema de produção e de pós-produção.</li>
+          </ul>
+        </article>
+
+        <article class="card" id="edicao">
+          <h2>6. Edição linear e não linear</h2>
+          <table>
+            <thead>
+              <tr><th>Conceito</th><th>Essencial</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Edição linear</td><td>Segue ordem sequencial, do início ao fim, com menor margem para alterar facilmente.</td></tr>
+              <tr><td>Edição não linear</td><td>Permite reorganizar, cortar, testar versões e trabalhar com várias pistas sem destruir o original.</td></tr>
+              <tr><td>Timeline</td><td>Na não linear, a timeline com V1, V2, V3 e várias pistas de áudio é central.</td></tr>
+              <tr><td>Vantagem principal</td><td>Flexibilidade criativa e eficiência no processo de montagem.</td></tr>
+            </tbody>
+          </table>
+          <ul>
+            <li>A evolução da edição acompanha a passagem do analógico para o digital.</li>
+            <li>Organização de ficheiros é parte da pós-produção: importar cedo, nomear de forma consistente, criar pastas separadas, etiquetar e fazer backups.</li>
+            <li>Ficheiros bem organizados tornam a pesquisa, montagem e revisão mais rápidas.</li>
+          </ul>
+          <div class="mini"><strong>Palavras-chave:</strong> sequência fixa vs flexibilidade; analógico vs digital; organização = eficiência.</div>
+        </article>
+
+        <article class="card full" id="trailers">
+          <h2>7. Trailers</h2>
+          <div class="cols">
+            <div>
+              <h3>Tipos</h3>
+              <ul>
+                <li>Teaser: 15–60 s; curiosidade, pouca informação.</li>
+                <li>Theatrical trailer: 2–2,5 min; arco mais completo.</li>
+                <li>TV spot: 15–30 s; ritmo alto, muito direto.</li>
+                <li>Social cut: 6–90 s; adaptado à plataforma, muitas vezes vertical/quadrado.</li>
+                <li>Featurette: 2–5 min; bastidores, entrevistas e aprofundamento.</li>
+              </ul>
+            </div>
+            <div>
+              <h3>Anatomia</h3>
+              <ul>
+                <li>Hook (0–5 s): captar atenção imediatamente.</li>
+                <li>Setup (5–20 s): apresentar mundo/personagens.</li>
+                <li>Conflict (20–45 s): aumentar stakes e tensão.</li>
+                <li>Climax (45–55 s): pico visual ou emocional.</li>
+                <li>Tag (55–60 s): título, data, logo, CTA.</li>
+              </ul>
+            </div>
+          </div>
+          <ul>
+            <li>Elementos decisivos: pacing, música, linhas de diálogo/voz-off e color grade coerente com o género.</li>
+            <li>Hoje não existe só um trailer principal; há vários cortes para diferentes plataformas e comportamentos de consumo.</li>
+            <li>Nas redes sociais, o hook inicial é crítico, muitas visualizações são sem som e as legendas tornam-se essenciais.</li>
+            <li>O trailer deve ser pensado logo em pré-produção: target, direitos, múltiplos rácios, calendário de lançamento e métricas.</li>
+            <li>Técnicas de montagem que podem surgir: J-cut, L-cut, match cut, smash cut e freeze frame.</li>
+          </ul>
+          <table>
+            <thead>
+              <tr><th>Plataforma</th><th>Ponto a reter</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>TikTok / Reels</td><td>Vertical, curto, scroll-stopper, forte leitura sem som.</td></tr>
+              <tr><td>YouTube</td><td>Formato clássico do trailer, thumbnail e SEO relevantes.</td></tr>
+              <tr><td>X / Facebook</td><td>Adaptação de duração, copy, engagement e publicação nativa.</td></tr>
+            </tbody>
+          </table>
+        </article>
+
+        <article class="card full" id="imersivos">
+          <h2>8. Vídeos imersivos / 360</h2>
+          <ul>
+            <li>Vídeo 360º é conteúdo audiovisual captado de forma omnidirecional, cobrindo o campo visual esférico em torno do ponto de gravação.</li>
+            <li>O utilizador pode controlar o ângulo de visão, o que cria sensação de presença espacial diferente do vídeo convencional.</li>
+            <li>Importante: 360º não é o mesmo que fulldome, halfdome ou IMAX.</li>
+            <li>Contextos de uso: jornalismo/documentário, turismo/cultura, educação/formação, saúde/terapia, arquitetura/engenharia, marketing/vendas e entretenimento.</li>
+            <li>Em VR, a visão estereoscópica é fundamental para simular profundidade e reforçar imersão.</li>
+          </ul>
+          <table>
+            <thead>
+              <tr><th>Vantagens</th><th>Desvantagens</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Maior imersão e envolvimento.</td><td>Produção e edição mais exigentes tecnicamente.</td></tr>
+              <tr><td>Experiência mais memorável.</td><td>Custos e requisitos técnicos mais elevados.</td></tr>
+              <tr><td>Exploração ativa do conteúdo pelo utilizador.</td><td>Necessidade de dispositivos adequados para melhor experiência.</td></tr>
+              <tr><td>Novas oportunidades narrativas e educacionais.</td><td>Desafios de direção, enquadramento e guiamento do olhar.</td></tr>
+              <tr><td>Diferenciação e inovação.</td><td>Maior largura de banda, armazenamento e risco de náuseas/cibersickness.</td></tr>
+            </tbody>
+          </table>
+          <p class="tagline">Em resposta teórica, vale a pena referir sempre a tensão central deste tema: mais imersão e inovação, mas também mais exigência técnica e maior probabilidade de desconforto do utilizador.</p>
+        </article>
+
+        <article class="card" id="perguntas">
+          <h2>9. Perguntas clássicas</h2>
+          <ul>
+            <li>Distingue correção de cor de gradação de cor.</li>
+            <li>Explica a diferença entre edição linear e não linear.</li>
+            <li>Define paisagem sonora e tipos principais de som.</li>
+            <li>Explica como o som pode orientar a narrativa.</li>
+            <li>Descreve as condições necessárias para um bom chroma key.</li>
+            <li>Indica a anatomia de um bom trailer.</li>
+            <li>Refere vantagens e desvantagens do vídeo 360º.</li>
+          </ul>
+        </article>
+
+        <article class="card" id="resposta">
+          <h2>10. Modelo de resposta curta</h2>
+          <ul>
+            <li><strong>Definir</strong> o conceito com precisão.</li>
+            <li><strong>Distinguir</strong> de conceitos próximos, se existirem.</li>
+            <li><strong>Explicar</strong> a função prática/narrativa.</li>
+            <li><strong>Concluir</strong> com efeito no espectador, no workflow ou na plataforma.</li>
+          </ul>
+          <div class="mini"><strong>Exemplo:</strong> “A correção de cor serve para equilibrar e uniformizar a imagem entre planos; a gradação de cor serve para construir uma intenção estética e emocional.”</div>
+        </article>
+      </section>
+    </div>
+  </main>
+</body>
+</html>
