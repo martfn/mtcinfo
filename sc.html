@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="pt" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Semiótica da Comunicação — Resumo para Teste</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300..700&display=swap" rel="stylesheet">
+<style>
+ :root, [data-theme="light"] {
+  --color-bg: #f7f6f2; --color-surface: #f9f8f5; --color-surface-2: #fbfbf9;
+  --color-surface-offset: #f0ede8; --color-divider: #dcd9d5; --color-border: #d4d1ca;
+  --color-text: #1e1c17; --color-text-muted: #6a6966; --color-text-faint: #b0afaa;
+  --color-primary: #01696f; --color-primary-hover: #0c4e54;
+  --color-primary-highlight: #d4e6e3;
+  --color-accent2: #964219; --color-accent2-hl: #ddcfc6;
+  --color-accent3: #a12c7b; --color-accent3-hl: #e0ced7;
+  --color-success: #437a22; --color-success-hl: #d4dfcc;
+  --color-gold: #b07a00; --color-gold-hl: #e9e0c6;
+  --font-display: 'Instrument Serif', Georgia, serif;
+  --font-body: 'DM Sans', system-ui, sans-serif;
+  --shadow-sm: 0 1px 3px oklch(0.2 0.01 80 / 0.07);
+  --shadow-md: 0 4px 14px oklch(0.2 0.01 80 / 0.09);
+  --radius-sm: 0.375rem; --radius-md: 0.5rem; --radius-lg: 0.875rem; --radius-xl: 1.25rem;
+  --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+  --text-sm: clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
+  --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+  --text-lg: clamp(1.125rem, 1rem + 0.75vw, 1.5rem);
+  --text-xl: clamp(1.5rem, 1.2rem + 1.25vw, 2.25rem);
+  --text-2xl: clamp(2rem, 1.2rem + 2.5vw, 3rem);
+  --space-1:0.25rem;--space-2:0.5rem;--space-3:0.75rem;--space-4:1rem;
+  --space-5:1.25rem;--space-6:1.5rem;--space-8:2rem;--space-10:2.5rem;
+  --space-12:3rem;--space-16:4rem;--space-20:5rem;
+}
+[data-theme="dark"] {
+  --color-bg: #141310; --color-surface: #1a1918; --color-surface-2: #1f1e1c;
+  --color-surface-offset: #252421; --color-divider: #2a2927; --color-border: #333230;
+  --color-text: #d4d2ce; --color-text-muted: #878683; --color-text-faint: #5a5957;
+  --color-primary: #4f98a3; --color-primary-hover: #227f8b;
+  --color-primary-highlight: #1e3033;
+  --color-accent2: #bb653b; --color-accent2-hl: #3d2a1e;
+  --color-accent3: #d163a7; --color-accent3-hl: #3a1f30;
+  --color-success: #6daa45; --color-success-hl: #1e3018;
+  --color-gold: #e8af34; --color-gold-hl: #302810;
+  --shadow-sm: 0 1px 3px oklch(0 0 0 / 0.25);
+  --shadow-md: 0 4px 14px oklch(0 0 0 / 0.35);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: 5rem; -webkit-font-smoothing: antialiased; }
+body {
+  font-family: var(--font-body); font-size: var(--text-base);
+  color: var(--color-text); background: var(--color-bg);
+  line-height: 1.65; transition: background 0.25s, color 0.25s;
+}
+h1,h2,h3,h4 { font-family: var(--font-display); line-height: 1.15; text-wrap: balance; }
+p, li { text-wrap: pretty; }
+a { color: var(--color-primary); text-decoration: none; }
+a:hover { color: var(--color-primary-hover); }
+
+/* ── NAV ── */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: color-mix(in oklch, var(--color-bg) 85%, transparent);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-divider);
+  padding: var(--space-3) var(--space-8);
+  display: flex; align-items: center; justify-content: space-between; gap: var(--space-4);
+}
+.nav-logo { display: flex; align-items: center; gap: var(--space-3); }
+.nav-logo svg { color: var(--color-primary); flex-shrink: 0; }
+.nav-title { font-family: var(--font-display); font-size: var(--text-lg); color: var(--color-text); }
+.nav-subtitle { font-size: var(--text-xs); color: var(--color-text-muted); letter-spacing: 0.04em; }
+.nav-actions { display: flex; align-items: center; gap: var(--space-3); }
+.nav-links { display: flex; gap: var(--space-1); }
+.nav-links a {
+  font-size: var(--text-xs); color: var(--color-text-muted);
+  padding: var(--space-1) var(--space-2); border-radius: var(--radius-sm);
+  transition: background 0.18s, color 0.18s;
+  white-space: nowrap;
+}
+.nav-links a:hover { background: var(--color-surface-offset); color: var(--color-text); }
+.theme-toggle {
+  width: 36px; height: 36px; border-radius: var(--radius-md);
+  border: 1px solid var(--color-border); background: var(--color-surface);
+  color: var(--color-text-muted); cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.18s, color 0.18s;
+}
+.theme-toggle:hover { background: var(--color-surface-offset); color: var(--color-text); }
+
+/* ── LAYOUT ── */
+.container { max-width: 980px; margin-inline: auto; padding-inline: var(--space-6); }
+.hero {
+  padding: var(--space-16) 0 var(--space-12);
+  text-align: center;
+}
+.hero-eyebrow {
+  display: inline-block; font-size: var(--text-xs); font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--color-primary); background: var(--color-primary-highlight);
+  padding: var(--space-1) var(--space-3); border-radius: var(--radius-full, 9999px);
+  margin-bottom: var(--space-4);
+}
+.hero h1 { font-size: var(--text-2xl); color: var(--color-text); margin-bottom: var(--space-3); }
+.hero p { font-size: var(--text-base); color: var(--color-text-muted); max-width: 55ch; margin-inline: auto; }
+.toc-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(min(220px, 100%), 1fr));
+  gap: var(--space-3); margin: var(--space-8) 0;
+}
+.toc-card {
+  background: var(--color-surface); border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg); padding: var(--space-4) var(--space-5);
+  text-decoration: none; display: flex; align-items: center; gap: var(--space-3);
+  transition: box-shadow 0.2s, background 0.2s, transform 0.2s;
+}
+.toc-card:hover { background: var(--color-surface-offset); box-shadow: var(--shadow-md); transform: translateY(-1px); }
+.toc-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.toc-card span { font-size: var(--text-sm); color: var(--color-text); font-weight: 500; }
+main { padding-bottom: var(--space-20); }
+
+/* ── SECTIONS ── */
+.section { padding: var(--space-10) 0; border-top: 1px solid var(--color-divider); }
+.section-header { display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-6); }
+.section-icon {
+  width: 40px; height: 40px; border-radius: var(--radius-md);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem; flex-shrink: 0;
+}
+.section-label { font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; color: var(--color-text-muted); }
+.section-title { font-size: var(--text-xl); color: var(--color-text); margin-top: var(--space-1); }
+
+/* ── CARDS ── */
+.card {
+  background: var(--color-surface); border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg); padding: var(--space-5) var(--space-6);
+  box-shadow: var(--shadow-sm);
+}
+.card + .card { margin-top: var(--space-4); }
+.card h3 { font-size: var(--text-lg); color: var(--color-text); margin-bottom: var(--space-3); }
+.card h4 { font-size: var(--text-sm); font-weight: 700; color: var(--color-text); margin: var(--space-4) 0 var(--space-2); font-family: var(--font-body); text-transform: uppercase; letter-spacing: 0.05em; }
+.card p, .card li { font-size: var(--text-sm); color: var(--color-text-muted); }
+.card ul, .card ol { padding-left: var(--space-5); }
+.card li { margin-bottom: var(--space-1); }
+
+/* FIX: card-grid com min menor e alinhamento stretch */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(240px, 100%), 1fr));
+  gap: var(--space-4);
+  align-items: stretch;
+}
+
+/* FIX: card-2col com stretch, breakpoint 768px e sem overflow */
+.card-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+  align-items: stretch;
+}
+.card-2col > * { min-width: 0; word-break: break-word; overflow-wrap: break-word; }
+@media (max-width: 768px) { .card-2col { grid-template-columns: 1fr; } }
+
+
+/* ── HIGHLIGHT BOXES ── */
+.highlight {
+  border-radius: var(--radius-md); padding: var(--space-4) var(--space-5);
+  font-size: var(--text-sm); margin: var(--space-4) 0;
+  border-left: 3px solid;
+}
+.hl-blue { background: var(--color-primary-highlight); border-color: var(--color-primary); color: var(--color-text); }
+.hl-orange { background: var(--color-accent2-hl); border-color: var(--color-accent2); color: var(--color-text); }
+.hl-purple { background: var(--color-accent3-hl); border-color: var(--color-accent3); color: var(--color-text); }
+.hl-green { background: var(--color-success-hl); border-color: var(--color-success); color: var(--color-text); }
+.hl-gold { background: var(--color-gold-hl); border-color: var(--color-gold); color: var(--color-text); }
+.highlight strong { color: var(--color-text); }
+
+/* ── TAGS / BADGES ── */
+.tag {
+  display: inline-block; font-size: var(--text-xs); font-weight: 600;
+  padding: 2px var(--space-2); border-radius: 9999px;
+  background: var(--color-surface-offset); color: var(--color-text-muted);
+  margin: 2px;
+}
+.tag-primary { background: var(--color-primary-highlight); color: var(--color-primary); }
+.tag-orange { background: var(--color-accent2-hl); color: var(--color-accent2); }
+.tag-purple { background: var(--color-accent3-hl); color: var(--color-accent3); }
+.tag-green { background: var(--color-success-hl); color: var(--color-success); }
+.tag-gold { background: var(--color-gold-hl); color: var(--color-gold); }
+
+/* ── TABLE ── */
+.table-wrap { overflow-x: auto; border-radius: var(--radius-lg); border: 1px solid var(--color-border); }
+table { width: 100%; border-collapse: collapse; font-size: var(--text-sm); }
+th { background: var(--color-surface-offset); font-weight: 700; text-align: left; padding: var(--space-3) var(--space-4); color: var(--color-text); font-family: var(--font-body); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.07em; }
+td { padding: var(--space-3) var(--space-4); color: var(--color-text-muted); border-top: 1px solid var(--color-divider); }
+tr:hover td { background: var(--color-surface-offset); color: var(--color-text); }
+
+/* ── TRIADA VISUAL ── */
+/* FIX: min-width maior e word-break para evitar texto partido */
+.triad { display: flex; gap: var(--space-4); flex-wrap: wrap; }
+.triad-item {
+  flex: 1; min-width: 180px; background: var(--color-surface);
+  border: 1px solid var(--color-border); border-radius: var(--radius-lg);
+  padding: var(--space-4) var(--space-5); text-align: center;
+  word-break: break-word; overflow-wrap: break-word;
+}
+.triad-num { font-size: var(--text-xl); font-family: var(--font-display); color: var(--color-primary); }
+.triad-title { font-weight: 700; font-size: var(--text-sm); color: var(--color-text); margin-bottom: var(--space-1); }
+.triad-desc { font-size: var(--text-xs); color: var(--color-text-muted); }
+
+/* ── PRISMA ── */
+/* FIX: breakpoint subido para 768px */
+.prisma-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-3); }
+@media (max-width: 768px) { .prisma-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 480px) { .prisma-grid { grid-template-columns: 1fr; } }
+.prisma-item {
+  background: var(--color-surface); border: 1px solid var(--color-border);
+  border-radius: var(--radius-md); padding: var(--space-3) var(--space-4);
+  min-width: 0; word-break: break-word; overflow-wrap: break-word;
+}
+.prisma-item strong { display: block; font-size: var(--text-sm); color: var(--color-text); margin-bottom: 4px; }
+.prisma-item span { font-size: var(--text-xs); color: var(--color-text-muted); }
+
+/* ── QA SECTION ── */
+.qa-list { list-style: none; padding: 0; }
+.qa-item {
+  background: var(--color-surface); border: 1px solid var(--color-border);
+  border-radius: var(--radius-md); margin-bottom: var(--space-3); overflow: hidden;
+}
+.qa-q {
+  padding: var(--space-4) var(--space-5); font-size: var(--text-sm);
+  font-weight: 600; color: var(--color-text); cursor: pointer;
+  display: flex; justify-content: space-between; align-items: center;
+  user-select: none; gap: var(--space-3);
+}
+.qa-q::after { content: "▸"; color: var(--color-primary); flex-shrink: 0; transition: transform 0.2s; }
+.qa-item.open .qa-q::after { transform: rotate(90deg); }
+.qa-a {
+  display: none; padding: 0 var(--space-5) var(--space-4);
+  font-size: var(--text-sm); color: var(--color-text-muted); line-height: 1.7;
+  border-top: 1px solid var(--color-divider);
+  padding-top: var(--space-3);
+}
+.qa-item.open .qa-a { display: block; }
+
+/* ── FOOTER ── */
+footer {
+  border-top: 1px solid var(--color-divider); padding: var(--space-6) 0;
+  text-align: center; font-size: var(--text-xs); color: var(--color-text-faint);
+}
+
+/* ── DIVIDER ── */
+.divider { border: none; border-top: 1px solid var(--color-divider); margin: var(--space-6) 0; }
+
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">
+    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-label="Logo Semiótica">
+      <rect width="32" height="32" rx="8" fill="currentColor" opacity="0.08"/>
+      <circle cx="16" cy="10" r="4" stroke="currentColor" stroke-width="1.8" fill="none"/>
+      <circle cx="8" cy="24" r="4" stroke="currentColor" stroke-width="1.8" fill="none"/>
+      <circle cx="24" cy="24" r="4" stroke="currentColor" stroke-width="1.8" fill="none"/>
+      <line x1="16" y1="14" x2="8" y2="20" stroke="currentColor" stroke-width="1.4" opacity="0.6"/>
+      <line x1="16" y1="14" x2="24" y2="20" stroke="currentColor" stroke-width="1.4" opacity="0.6"/>
+      <line x1="8" y1="24" x2="24" y2="24" stroke="currentColor" stroke-width="1.4" opacity="0.6"/>
+    </svg>
+    <div>
+      <div class="nav-title">Semiótica</div>
+      <div class="nav-subtitle">Resumo para Teste</div>
+    </div>
+  </div>
+  <div class="nav-actions">
+    <div class="nav-links">
+      <a href="#semiotica-base">Bases</a>
+      <a href="#saussure">Saussure</a>
+      <a href="#peirce">Peirce</a>
+      <a href="#social">Social</a>
+      <a href="#marca">Marca</a>
+      <a href="#revisoes">Revisões</a>
+    </div>
+    <button class="theme-toggle" data-theme-toggle aria-label="Alternar tema">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+  </div>
+</nav>
+
+<main>
+<div class="container">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-eyebrow">Semiótica da Comunicação · Catarina Lelis 2026</div>
+    <h1>Resumo Completo para o Teste</h1>
+    <p>Todos os conceitos essenciais da disciplina — das bases da semiologia às marcas e ao storytelling — organizados para revisão rápida e eficaz.</p>
+    <nav class="toc-grid" aria-label="Índice">
+      <a href="#semiotica-base" class="toc-card"><div class="toc-dot" style="background:var(--color-primary)"></div><span>1. Bases da Semiótica</span></a>
+      <a href="#realidade-signo" class="toc-card"><div class="toc-dot" style="background:var(--color-accent2)"></div><span>2. Realidade como Signo</span></a>
+      <a href="#percepcao" class="toc-card"><div class="toc-dot" style="background:var(--color-accent3)"></div><span>3. Perceção</span></a>
+      <a href="#representacao" class="toc-card"><div class="toc-dot" style="background:var(--color-success)"></div><span>4. Representação</span></a>
+      <a href="#saussure" class="toc-card"><div class="toc-dot" style="background:var(--color-primary)"></div><span>5. Dualidade (Saussure)</span></a>
+      <a href="#peirce" class="toc-card"><div class="toc-dot" style="background:var(--color-accent2)"></div><span>6. Tríade (Peirce)</span></a>
+      <a href="#classificacao" class="toc-card"><div class="toc-dot" style="background:var(--color-accent3)"></div><span>7. Classificação do Signo</span></a>
+      <a href="#social" class="toc-card"><div class="toc-dot" style="background:var(--color-success)"></div><span>8. Semiótica Social</span></a>
+      <a href="#barthes" class="toc-card"><div class="toc-dot" style="background:var(--color-gold)"></div><span>9. Barthes & Mitologias</span></a>
+      <a href="#marca" class="toc-card"><div class="toc-dot" style="background:var(--color-primary)"></div><span>10. Semiótica da Marca</span></a>
+      <a href="#identidade-marca" class="toc-card"><div class="toc-dot" style="background:var(--color-accent2)"></div><span>11. Identidade da Marca</span></a>
+      <a href="#iv" class="toc-card"><div class="toc-dot" style="background:var(--color-accent3)"></div><span>12. Identidade Visual</span></a>
+      <a href="#storytelling" class="toc-card"><div class="toc-dot" style="background:var(--color-success)"></div><span>13. Brand Storytelling</span></a>
+      <a href="#revisoes" class="toc-card"><div class="toc-dot" style="background:var(--color-gold)"></div><span>📝 Perguntas de Revisão</span></a>
+    </nav>
+  </div>
+
+  <!-- 1. BASES DA SEMIÓTICA / ORIGEM -->
+  <section class="section" id="semiotica-base">
+    <div class="section-header">
+      <div class="section-icon" style="background:var(--color-primary-highlight); color:var(--color-primary)">◉</div>
+      <div>
+        <div class="section-label">Módulo 1</div>
+        <h2 class="section-title">Bases & Origem da Semiologia</h2>
+      </div>
+    </div>
+    <div class="card-2col">
+      <div class="card">
+        <h3>O que é a Semiótica / Semiologia?</h3>
+        <p>Ciência que estuda os <strong>signos</strong> — qualquer coisa que representa outra coisa. Saussure chamou-lhe <em>Semiologia</em>; Peirce chamou-lhe <em>Semiótica</em>.</p>
+        <div class="highlight hl-blue" style="margin-top:var(--space-4)">
+          <strong>Saussure</strong> (linguista suíço, 1857–1913): foco na língua como sistema social de signos.<br>
+          <strong>Peirce</strong> (filósofo americano, 1839–1914): abordagem lógica e triádica; os signos têm três componentes.
+        </div>
+        <h4>Contexto histórico de surgimento</h4>
+        <p>A semiologia surge no séc. XIX–XX, época de grandes transformações culturais, industriais e comunicacionais — a massificação da imprensa, publicidade e comunicação de massas gerou a necessidade de estudar sistematicamente os sistemas de significação.</p>
+      </div>
+      <div class="card">
+        <h3>Antropossemiótica</h3>
+        <p>Estuda a <strong>linguagem humana como sistema de signos</strong>, integrando dimensões verbal, não-verbal e cultural.</p>
+        <h4>6 Elementos Básicos da Comunicação Humana</h4>
+        <ol>
+          <li><strong>Emissor</strong> — quem envia</li>
+          <li><strong>Receptor</strong> — quem recebe</li>
+          <li><strong>Mensagem</strong> — o que é transmitido</li>
+          <li><strong>Canal</strong> — meio de transmissão</li>
+          <li><strong>Código</strong> — sistema de signos partilhado</li>
+          <li><strong>Contexto / Referente</strong> — o assunto/situação</li>
+        </ol>
+        <div class="highlight hl-blue" style="margin-top:var(--space-4)">
+          <strong>Signo não é entidade isolada!</strong> O seu significado depende da relação com outros signos e com o contexto cultural/social.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. REALIDADE COMO SIGNO -->
+  <section class="section" id="realidade-signo">
+    <div class="section-header">
+      <div class="section-icon" style="background:var(--color-accent2-hl); color:var(--color-accent2)">◈</div>
+      <div>
+        <div class="section-label">Módulo 2</div>
+        <h2 class="section-title">A Realidade como Signo</h2>
+      </div>
+    </div>
+    <div class="card-2col">
+      <div class="card">
+        <h3>Tipos de Significado</h3>
+        <div class="card-2col">
+          <div>
+            <h4>Naturais vs. Culturais</h4>
+            <ul>
+              <li><strong>Naturais:</strong> derivam de causas físicas/biológicas (fumo → fogo). São universais.</li>
+              <li><strong>Culturais:</strong> construídos socialmente, variam entre culturas (cor de luto varia por país).</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Formas de Significado</h4>
+            <ul>
+              <li><strong>Literal:</strong> o sentido direto e denotativo.</li>
+              <li><strong>Análogo:</strong> baseado em semelhança/analogia.</li>
+              <li><strong>Metafórico:</strong> transferência de significado entre domínios distintos.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="highlight hl-orange" style="margin-top:var(--space-4)">
+          <strong>Importância dos signos para a realidade:</strong> a nossa perceção da realidade é mediada por signos — não acedemos diretamente ao mundo, mas através de representações sígnicas.
+        </div>
+      </div>
+      <div class="card">
+        <h3>Signos & Entidades Relacionadas</h3>
+        <ul>
+          <li>Os signos são <strong>relacionais</strong>: só têm significado em relação a outros signos e a um sistema de referência.</li>
+          <li>O mesmo significante pode gerar <strong>diferentes significados</strong> consoante o contexto cultural, o receptor e o momento histórico.</li>
+          <li>A <em>Cultura</em> é um sistema de signos partilhados que define como grupos humanos interpretam a realidade.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. PERCEÇÃO -->
+  <section class="section" id="percepcao">
+    <div class="section-header">
+      <div class="section-icon" style="background:var(--color-accent3-hl); color:var(--color-accent3)">◬</div>
+      <div>
+        <div class="section-label">Módulo 3</div>
+        <h2 class="section-title">Perceção</h2>
+      </div>
+    </div>
+    <div class="card-2col">
+      <div class="card">
+        <h3>O que é a Perceção?</h3>
+        <p>Processo cognitivo pelo qual interpretamos os estímulos sensoriais com base nos nossos <strong>schemas</strong> mentais, experiências e contextos culturais.</p>
+        <h4>Schema</h4>
+        <p>Estrutura mental de conhecimento prévio que organiza e interpreta nova informação. Um schema pode causar <strong>mal-entendidos</strong> quando o mesmo signo é interpretado com schemas diferentes por emissor e receptor.</p>
+        <div class="highlight hl-purple">
+          <strong>Schema e mal-entendido:</strong> quando o schema do recetor não coincide com o do emissor, o significado intencionado não é o significado recebido. A comunicação falha.
+        </div>
+      </div>
+      <div class="card">
+        <h3>Signos e Perceção da Realidade</h3>
+        <ul>
+          <li>Percebemos a realidade <em>filtrada</em> pelos signos disponíveis na nossa cultura e língua.</li>
+          <li>O que não tem signo é mais difícil de perceber e comunicar.</li>
+          <li>A Gestalt mostra como o sistema visual organiza automaticamente os elementos — os signos visuais são percebidos em estruturas, não isoladamente.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. REPRESENTAÇÃO -->
+  <section class="section" id="representacao">
+    <div class="section-header">
+      <div class="section-icon" style="background:var(--color-success-hl); color:var(--color-success)">◆</div>
+      <div>
+        <div class="section-label">Módulo 4</div>
+        <h2 class="section-title">Representação</h2>
+      </div>
+    </div>
+    <div class="card">
+      <h3>O Processo de Representação</h3>
+      <p>Representar é <em>fazer presente</em> algo ausente através de um signo. A representação é sempre parcial e culturalmente condicionada — nunca é neutra.</p>
+      <div class="card-2col" style="margin-top:var(--space-4)">
+        <div>
+          <h4>Denotação</h4>
+          <p>Significado literal, dicionarizado, consensual. O nível mais objetivo de representação.</p>
+        </div>
+        <div>
+          <h4>Conotação</h4>
+          <p>Significados associativos, culturais, subjetivos que uma representação evoca além do sentido literal.</p>
+        </div>
+      </div>
+      <div class="highlight hl-green" style="margin-top:var(--space-4)">
+        A representação é <strong>sempre uma escolha</strong> — o que se inclui, o que se exclui, o ângulo, o enquadramento — e essas escolhas carregam valores e ideologias.
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. SAUSSURE -->
+  <section class="section" id="saussure">
+    <div class="section-header">
+      <div class="section-icon" style="background:var(--color-primary-highlight); color:var(--color-primary)">⧖</div>
+      <div>
+        <div class="section-label">Módulo 5</div>
+        <h2 class="section-title">Dualidade do Signo — Saussure</h2>
+      </div>
+    </div>
+    <div class="card">
+      <h3>O Signo Linguístico (Saussure)</h3>
+      <p>Para Saussure, o signo é uma <strong>entidade psíquica de duas faces</strong>, indissociáveis:</p>
+      <div class="card-2col" style="margin-top:var(--space-4)">
+        <div style="background:var(--color-surface-offset); border-radius:var(--radius-md); padding:var(--space-4); text-align:center;">
+          <div style="font-size:var(--text-lg); font-family:var(--font-display); color:var(--color-primary)">Significante</div>
+          <div style="font-size:var(--text-xs); color:var(--color-text-muted); margin-top:4px">Imagem acústica / forma</div>
+          <div style="font-size:var(--text-sm); color:var(--color-text); margin-top:var(--space-2)">A "impressão psíquica" do som, a forma como o signo se manifesta. Ex.: o som /kão/</div>
+        </div>
+        <div style="background:var(--color-surface-offset); border-radius:var(--radius-md); padding:var(--space-4); text-align:center;">
+          <div style="font-size:var(--text-lg); font-family:var(--font-display); color:var(--color-accent2)">Significado</div>
+          <div style="font-size:var(--text-xs); color:var(--color-text-muted); margin-top:4px">Conceito / conteúdo</div>
+          <div style="font-size:var(--text-sm); color:var(--color-text); margin-top:var(--space-2)">O conceito mental evocado. Ex.: a ideia mental de "cão"</div>
+        </div>
+      </div>
+      <div class="highlight hl-blue" style="margin-top:var(--space-5)">
+        <strong>Arbitrariedade:</strong> a relação entre significante e significado é arbitrária (convencional). Não há razão natural para que /kão/ designe o animal — é uma convenção social.
+      </div>
+      <hr class="divider">
+      <h4>Sintagma vs. Paradigma</h4>
+      <div class="card-2col">
+        <div>
+          <span class="tag tag-primary">Sintagma</span>
+          <p style="margin-top:var(--space-2)">Combinação linear de signos — a sequência na frase. <em>"O cão late."</em> Os signos estão em relação de presença.</p>
+        </div>
+        <div>
+          <span class="tag tag-orange">Paradigma</span>
+          <p style="margin-top:var(--space-2)">Conjunto de signos alternativos que podiam ocupar a mesma posição. Quando um sintagma se repete tanto que a substituição deixa de ser óbvia, passa a ser percebido como paradigma.</p>
+        </div>
+      </div>
+      <div class="highlight hl-orange" style="margin-top:var(--space-4)">
+        <strong>Mesmo significante, diferentes significados</strong> quando o contexto muda, o código difere, ou há polissemia cultural — ex.: "manga" (fruta vs. parte da roupa).
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. PEIRCE -->
+  <section class="section" id="peirce">
+    <div class="section-header">
+      <div class="section-icon" style="background:var(--color-accent2-hl); color:var(--color-accent2)">△</div>
+      <div>
+        <div class="section-label">Módulo 6</div>
+        <h2 class="section-title">Filosofia Triádica — Peirce</h2>
+      </div>
+    </div>
+    <div class="card">
+      <h3>A Tríade Semiótica de Peirce</h3>
+      <div class="triad" style="margin:var(--space-4) 0">
+        <div class="triad-item">
+          <div class="triad-num">1ª</div>
+          <div class="triad-title">Representâmen<br><small>(Signo)</small></div>
+          <div class="triad-desc">A forma material do signo — o que representa. Algo que está no lugar de outra coisa.</div>
+        </div>
+        <div class="triad-item">
+          <div class="triad-num">2ª</div>
+          <div class="triad-title">Objeto</div>
+          <div class="triad-desc">Aquilo a que o signo se refere — o referente no mundo real ou mental.</div>
+        </div>
+        <div class="triad-item">
+          <div class="triad-num">3ª</div>
+          <div class="triad-title">Interpretante</div>
+          <div class="triad-desc">O efeito produzido na mente do intérprete — o significado gerado pela relação entre signo e objeto.</div>
+        </div>
+      </div>
+      <div class="highlight hl-orange">
+        O signo é um processo <strong>triádico</strong>: não é apenas relação entre forma e conteúdo, mas envolve sempre um intérprete. O significado é dinâmico e contextual.
+      </div>
+      <hr class="divider">
+      <h4>As Três Categorias (Primeiridade, Secundidade, Terceiridade)</h4>
+      <div class="table-wrap" style="margin-top:var(--space-2)">
+        <table>
+          <thead><tr><th>Categoria</th><th>Descrição</th><th>Exemplo</th></tr></thead>
+          <tbody>
+            <tr><td><span class="tag tag-primary">1ª Primeiridade</span></td><td>Qualidade pura, sem relação — sensação imediata, potencial</td><td>A sensação de "peso" (existe antes de qualquer relação)</td></tr>
+            <tr><td><span class="tag tag-orange">2ª Secundidade</span></td><td>Existência em relação a algo — facto, reação, resistência</td><td>Bater na parede e sentir resistência</td></tr>
+            <tr><td><span class="tag tag-purple">3ª Terceiridade</span></td><td>Mediação, lei, representação, pensamento sígnico</td><td>Uma lei, uma palavra, um símbolo cultural</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="highlight hl-purple" style="margin-top:var(--space-4)">
+        <strong>Nota de teste:</strong> A sensação de peso pertence à <strong>Primeiridade</strong> — é uma qualidade pura, ainda sem relação.
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. CLASSIFICAÇÃO DO SIGNO -->
+  <section class="section" id="classificacao">
+    <div class="section-header">
+      <div class="section-icon" style="background:var(--color-accent3-hl); color:var(--color-accent3)">◧</div>
+      <div>
+        <div class="section-label">Módulo 7</div>
+        <h2 class="section-title">Classificação do Signo</h2>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Tricotomia de Peirce: Ícone, Índice, Símbolo</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Tipo</th><th>Relação com o Objeto</th><th>Exemplo</th><th>Princípio</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><span class="tag tag-primary">Ícone</span></td>
+              <td>Semelhança — assemelha-se ao objeto</td>
+              <td>Fotografia, mapa, retrato, emoji</td>
+              <td>Semelhança visual/estrutural</td>
+            </tr>
+            <tr>
+              <td><span class="tag tag-orange">Índice</span></td>
+              <td>Contiguidade — existe relação causal ou física</td>
+              <td>Fumo (→ fogo), pegadas (→ animal), febre (→ doença)</td>
+              <td>Indicação, causa-efeito</td>
+            </tr>
+            <tr>
+              <td><span class="tag tag-purple">Símbolo</span></td>
+              <td>Convenção — relação arbitrária e culturalmente definida</td>
+              <td>Palavras, bandeiras, logótipos</td>
+              <td>Arbitrariedade convencional</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="highlight hl-purple" style="margin-top:var(--space-4)">
+        Um mesmo signo pode ser simultaneamente ícone, índice e símbolo — as categorias não são mutuamente exclusivas. A classificação depende do aspeto que se privilegia na análise.
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. SEMIÓTICA SOCIAL -->
+  <section class="section" id="social">
+    <div class="section-header">
+      <div class="section-icon" style="background:var(--color-success-hl); color:var(--color-success)">⬡</div>
+      <div>
+        <div class="section-label">Módulo 8</div>
+        <h2 class="section-title">Semiótica Social</h2>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Kress & van Leeuwen — Multimodalidade</h3>
+      <p>A semiótica social estuda como os signos são usados em <strong>contextos sociais</strong> para produzir significado. Reconhece que a comunicação é <strong>multimodal</strong> — usa texto, imagem, cor, layout, som, etc., simultaneamente.</p>
+      <hr class="divider">
+      <h4>As Três Metafunções (Halliday)</h4>
+      <div class="card-grid" style="margin-top:var(--space-2)">
+        <div style="background:var(--color-surface-offset); border-radius:var(--radius-md); padding:var(--space-4);">
+          <span class="tag tag-primary">Ideacional / Representacional</span>
+          <p style="margin-top:var(--space-2); font-size:var(--text-sm)">O que o texto/imagem representa do mundo. Participantes, processos, circunstâncias.</p>
+        </div>
+        <div style="background:var(--color-surface-offset); border-radius:var(--radius-md); padding:var(--space-4);">
+          <span class="tag tag-orange">Interpessoal / Interativa</span>
+          <p style="margin-top:var(--space-2); font-size:var(--text-sm)">A relação entre o criador do texto e o receptor. Contacto, distância social, atitude.</p>
+        </div>
+        <div style="background:var(--color-surface-offset); border-radius:var(--radius-md); padding:var(--space-4);">
+          <span class="tag tag-purple">Composicional / Textual</span>
+          <p style="margin-top:var(--space-2); font-size:var(--text-sm)">Como os elementos se organizam no espaço visual. Valor de informação, saliência, enquadramento.</p>
+        </div>
+      </div>
+      <div class="highlight hl-green" style="margin-top:var(--space-4)">
+        <strong>Por que analisar a metafunção composicional por último?</strong> Porque ela descreve <em>como</em> os outros significados (representacional e interativo) são organizados e apresentados — é uma metafunção sobre a estruturação das outras duas.
+      </div>
+      <hr class="divider">
+      <h4>Conceitos-Chave da Semiótica Social</h4>
+      <div class="card-2col">
+        <ul>
+          <li><strong>Modo:</strong> recurso semiótico (imagem, texto, cor, som).</li>
+          <li><strong>Recurso semiótico:</strong> qualquer meio disponível para produzir significado num contexto social.</li>
+          <li><strong>Modalidade:</strong> grau de realismo/credibilidade de uma representação.</li>
+        </ul>
+        <ul>
+          <li><strong>Enquadramento:</strong> o que está dentro/fora do frame; determina relações entre elementos.</li>
+          <li><strong>Saliência:</strong> o que capta mais a atenção (tamanho, cor, posição).</li>
+          <li><strong>Valor de informação:</strong> posição no espaço visual tem significado (dado/novo; ideal/real).</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. BARTHES -->
+  <section class="section" id="barthes">
+    <div class="section-header">
+      <div class="section-icon" style="background:var(--color-gold-hl); color:var(--color-gold)">✦</div>
+      <div>
+        <div class="section-label">Módulo 9</div>
+        <h2 class="section-title">Barthes & Mitologias</h2>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Roland Barthes — Dois Sistemas de Significação</h3>
+      <div class="card-2col" style="margin-top:var(--space-4)">
+        <div style="border: 1px solid var(--color-border); border-radius:var(--radius-md); padding:var(--space-4);">
+          <span class="tag tag-primary">1.º Ordem — Denotação</span>
+          <p style="font-size:var(--text-sm); margin-top:var(--space-2)">Signo = Significante + Significado<br>O nível literal, a relação direta entre forma e conceito.</p>
+        </div>
+        <div style="border: 1px solid var(--color-border); border-radius:var(--radius-md); padding:var(--space-4);">
+          <span class="tag tag-gold">2.ª Ordem — Conotação / Mito</span>
+          <p style="font-size:var(--text-sm); margin-top:var(--space-2)">O signo de 1.ª ordem torna-se <em>significante</em> de um novo sistema. O significado é agora cultural, ideológico — o <strong>Mito</strong>.</p>
+        </div>
+      </div>
+      <div class="highlight hl-gold" style="margin-top:var(--space-5)">
+        <strong>Mito (Barthes):</strong> discurso que transforma história em natureza — faz parecer natural o que é cultural e ideologicamente construído. O mito "fala" mas esconde o processo pelo qual foi construído.
+      </div>
+      <hr class="divider">
+      <h4>Ancoragem e Derivação (nas imagens)</h4>
+      <ul>
+        <li><strong>Ancoragem:</strong> o texto verbal fixa o significado da imagem, reduzindo a polissemia.</li>
+        <li><strong>Derivação / Relay:</strong> texto e imagem complementam-se, cada um acrescenta informação nova.</li>
+      </ul>
+      <hr class="divider">
+      <h4>Punctum e Studium</h4>
+      <div class="card-2col">
+        <div>
+          <strong class="tag tag-primary">Studium</strong>
+          <p style="font-size:var(--text-sm); margin-top:var(--space-2)">O interesse cultural geral da fotografia — o que é codificado, intencional, convencional.</p>
+        </div>
+        <div>
+          <strong class="tag tag-gold">Punctum</strong>
+          <p style="font-size:var(--text-sm); margin-top:var(--space-2)">O detalhe que "punge" o observador — imprevisível, pessoal, que escapa ao código.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. SEMIÓTICA DA MARCA -->
+  <section class="section" id="marca">
+    <div class="section-header">
+      <div class="section-icon" style="background:var(--color-primary-highlight); color:var(--color-primary)">◉</div>
+      <div>
+        <div class="section-label">Módulo 10</div>
+        <h2 class="section-title">Semiótica da Marca</h2>
+      </div>
+    </div>
+    <div class="card">
+      <h3>O que é uma Marca?</h3>
+      <p>Uma marca é um <strong>sinal</strong> composto por termos, nome, logo, símbolo. Recorre a valores <strong>tangíveis</strong> (produto, preço, pessoas, comunicação) e <strong>intangíveis</strong> (promessas, associações, estórias). O conjunto dos seus valores é único.</p>
+      <hr class="divider">
+      <h4>Valor Semiótico da Marca</h4>
+      <div class="triad" style="margin:var(--space-4) 0">
+        <div class="triad-item">
+          <div class="triad-num" style="font-size:var(--text-lg)">💶</div>
+          <div class="triad-title">Valor Comercial</div>
+          <div class="triad-desc">Preço de venda — o que o mercado cobra pela marca</div>
+        </div>
+        <div class="triad-item">
+          <div class="triad-num" style="font-size:var(--text-lg)">🔧</div>
+          <div class="triad-title">Valor Utilitário</div>
+          <div class="triad-desc">Benefício funcional — o que o produto faz</div>
+        </div>
+        <div class="triad-item">
+          <div class="triad-num" style="font-size:var(--text-lg)">🌍</div>
+          <div class="triad-title">Valor Sociocultural</div>
+          <div class="triad-desc">Valor cultural e mítico — o que a marca representa na sociedade</div>
+        </div>
+      </div>
+      <div class="highlight hl-blue">
+        <strong>A "Verdade" do Valor Semiótico</strong> encontra-se na interseção de três verdades: <br>
+        Verdade do Produto/Serviço + Verdade da Cultura/Contexto + Verdade do Cliente/Utilizador.
+      </div>
+      <hr class="divider">
+      <h4>Pirâmide de Keller (CBBE)</h4>
+      <ol>
+        <li><strong>Identidade</strong> — "Who are you?" (reconhecimento, salience)</li>
+        <li><strong>Significado</strong> — "What are you?" (desempenho, imagem)</li>
+        <li><strong>Resposta</strong> — "What about you?" (julgamentos, sentimentos)</li>
+        <li><strong>Ressonância</strong> — "What about you and me?" (lealdade, envolvimento)</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 11. IDENTIDADE DA MARCA -->
+  <section class="section" id="identidade-marca">
+    <div class="section-header">
+      <div class="section-icon" style="background:var(--color-accent2-hl); color:var(--color-accent2)">◈</div>
+      <div>
+        <div class="section-label">Módulo 11</div>
+        <h2 class="section-title">Identidade da Marca</h2>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Prisma da Identidade de Marca — Kapferer</h3>
+      <p style="margin-bottom:var(--space-4)">A identidade não é o produto — é a <em>visão e os valores</em> que impulsionam a criação de produtos (Kapferer, 2008). O prisma tem 6 dimensões:</p>
+      <div class="prisma-grid">
+        <div class="prisma-item">
+          <strong>🖐️ Física</strong>
+          <span>Atributos físicos, logo/símbolo, produto flagship, padrões visuais, características do design.</span>
+        </div>
+        <div class="prisma-item">
+          <strong>🎭 Personalidade</strong>
+          <span>Tom de voz, traços de personalidade. Modelo Jennifer Aaker: Sincerity, Excitement, Competence, Sophistication, Ruggedness.</span>
+        </div>
+        <div class="prisma-item">
+          <strong>🌐 Cultura</strong>
+          <span>Sistema de valores e princípios. Pode estar ligada ao país de origem, subculturas, etc.</span>
+        </div>
+        <div class="prisma-item">
+          <strong>🔗 Relação</strong>
+          <span>Tipo de vínculo que a marca simboliza entre a marca e o consumidor (amizade, confiança, proteção, amor…).</span>
+        </div>
+        <div class="prisma-item">
+          <strong>🪞 Reflexo</strong>
+          <span>O estereótipo do cliente — como a marca retrata os seus utilizadores para o exterior.</span>
+        </div>
+        <div class="prisma-item">
+          <strong>💭 Auto-Imagem</strong>
+          <span>Como o consumidor se quer ver a si próprio ao usar a marca. Projeção interna do cliente.</span>
+        </div>
+      </div>
+      <div class="highlight hl-orange" style="margin-top:var(--space-5)">
+        <strong>Personalidade é importante</strong> porque define <em>como</em> a marca se expressa e se relaciona com o mundo. Sem personalidade definida, a comunicação é inconsistente e a marca não cria laço emocional.
+      </div>
+    </div>
+  </section>
+
+  <!-- 12. IDENTIDADE VISUAL -->
+  <section class="section" id="iv">
+    <div class="section-header">
+      <div class="section-icon" style="background:var(--color-accent3-hl); color:var(--color-accent3)">◧</div>
+      <div>
+        <div class="section-label">Módulo 12</div>
+        <h2 class="section-title">Identidade Visual da Marca</h2>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Abordagem Semiótica — Chaves &amp; Belluccia (2003)</h3>
+      <div class="card-2col" style="margin-top:var(--space-4)">
+        <div>
+          <h4>Identificadores Verbais</h4>
+          <p>O <strong>nome</strong> da marca.</p>
+          <ul style="margin-top:var(--space-2)">
+            <li><strong>Logotipo:</strong> forma como a marca escolhe escrever o nome — glifos alfanuméricos.</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Identificadores Visuais</h4>
+          <p>A <strong>marca gráfica</strong>.</p>
+          <ul style="margin-top:var(--space-2)">
+            <li><strong>Emblema:</strong> sinal não-verbal que se agrega ao logotipo; pode revelar o nome automaticamente.</li>
+          </ul>
+        </div>
+      </div>
+      <hr class="divider">
+      <h4>Tipologia de Identidades Visuais</h4>
+      <div class="card-grid" style="margin-top:var(--space-2)">
+        <div style="background:var(--color-surface-offset); border-radius:var(--radius-md); padding:var(--space-4)">
+          <span class="tag tag-primary">Focadas no Nome</span>
+          <ul style="margin-top:var(--space-2)">
+            <li>Logotipo Puro</li>
+            <li>Logotipo com Fundo</li>
+            <li>Logotipo com Complemento</li>
+          </ul>
+          <p style="font-size:var(--text-xs); color:var(--color-text-muted); margin-top:var(--space-2)">→ Garante que o nome está sempre presente; transmite credibilidade.</p>
+        </div>
+        <div style="background:var(--color-surface-offset); border-radius:var(--radius-md); padding:var(--space-4)">
+          <span class="tag tag-orange">Focadas no Emblema</span>
+          <ul style="margin-top:var(--space-2)">
+            <li>Emblema &amp; Logotipo</li>
+            <li>Logo-Emblema</li>
+          </ul>
+          <p style="font-size:var(--text-xs); color:var(--color-text-muted); margin-top:var(--space-2)">→ Maior envolvimento e tarefa de representação. Requer mais tempo para ser reconhecido.</p>
+        </div>
+      </div>
+      <hr class="divider">
+      <h4>Método para Construção da IV (Chaves &amp; Belluccia)</h4>
+      <ol>
+        <li><strong>Inventário</strong> — listar todas as aplicações possíveis da marca.</li>
+        <li><strong>Analisar o contexto</strong> — setor, concorrentes, líderes visuais. <em>(Importante para diferenciação e não mimetismo.)</em></li>
+        <li><strong>Definir estratégia visual</strong> — estilo, tipologia, durabilidade, aplicações, atratividade, diferenciação.</li>
+        <li><strong>Criar a IV</strong> — marca gráfica, paleta de cores, tipografia, aplicações, manual de normas.</li>
+      </ol>
+      <div class="highlight hl-purple" style="margin-top:var(--space-4)">
+        <strong>Herança Visual:</strong> ao redesenhar uma marca, preservar os elementos que ainda funcionam. A familiaridade acumulada pelo público tem valor semiótico que não deve ser desperdiçado.
+      </div>
+      <div class="highlight hl-green">
+        <strong>Diferenciação:</strong> menos diferenciação do que o necessário atrasa o reconhecimento; mais diferenciação do que o necessário pode levar a identificação incorreta.
+      </div>
+    </div>
+  </section>
+
+  <!-- 13. BRAND STORYTELLING -->
+  <section class="section" id="storytelling">
+    <div class="section-header">
+      <div class="section-icon" style="background:var(--color-success-hl); color:var(--color-success)">◆</div>
+      <div>
+        <div class="section-label">Módulo 13</div>
+        <h2 class="section-title">Brand Storytelling</h2>
+      </div>
+    </div>
+    <div class="card">
+      <h3>O que é Brand Storytelling?</h3>
+      <p>Em vez de contar estórias <em>sobre si mesma</em>, a marca direciona os "holofotes" para o <strong>cliente/público</strong>. Branding é o objetivo; storytelling é o meio.</p>
+      <div class="highlight hl-green" style="margin-top:var(--space-4)">
+        Uma marca forte = <strong>valores claros</strong> + <strong>conexão emocional</strong> com o público-alvo + <strong>narrativa</strong> que fala às emoções.
+      </div>
+      <hr class="divider">
+      <h4>Os 4 Elementos do Storytelling</h4>
+      <div class="card-grid" style="margin-top:var(--space-2)">
+        <div style="background:var(--color-surface-offset); border-radius:var(--radius-md); padding:var(--space-4)">
+          <span class="tag tag-primary">1. Mensagem</span>
+          <p style="font-size:var(--text-sm); margin-top:var(--space-2)">A <strong>premissa</strong> — declaração ideológica ou moral como tema central. <em>Apenas uma.</em> Pode ser um mito.</p>
+        </div>
+        <div style="background:var(--color-surface-offset); border-radius:var(--radius-md); padding:var(--space-4)">
+          <span class="tag tag-orange">2. Conflito</span>
+          <p style="font-size:var(--text-sm); margin-top:var(--space-2)">O ponto de viragem. Evita o aborrecido e previsível. Força a ação e a busca de solução.</p>
+        </div>
+        <div style="background:var(--color-surface-offset); border-radius:var(--radius-md); padding:var(--space-4)">
+          <span class="tag tag-purple">3. Personagens</span>
+          <p style="font-size:var(--text-sm); margin-top:var(--space-2)"><strong>Herói</strong> (+ suporte), <strong>Adversário</strong> (cria conflito), <strong>Benfeitor</strong> (olha positivamente para o herói), <strong>Beneficiário</strong> (quem ganha com a resolução).</p>
+        </div>
+        <div style="background:var(--color-surface-offset); border-radius:var(--radius-md); padding:var(--space-4)">
+          <span class="tag tag-green">4. Trama (Plot)</span>
+          <p style="font-size:var(--text-sm); margin-top:var(--space-2)">Fluxo da história — começo, meio e fim. A progressão narrativa.</p>
+        </div>
+      </div>
+      <hr class="divider">
+      <h4>Critérios Essenciais numa Boa Estória de Marca</h4>
+      <ul>
+        <li>Um <strong>gancho emocional</strong></li>
+        <li><strong>Conflito, tensão ou surpresa</strong></li>
+        <li>Conteúdo <strong>relevante ou interessante</strong></li>
+        <li>Clarificação da mensagem ("A-HA")</li>
+        <li><strong>Impacto no futuro</strong></li>
+      </ul>
+      <hr class="divider">
+      <h4>Regras Básicas do Brand Storytelling</h4>
+      <ul>
+        <li><strong>Conhecer a audiência intimamente</strong> — as grandes estórias são sobre o público, não sobre a marca.</li>
+        <li>O <strong>propósito vem sempre em primeiro</strong> — qual a mensagem e porquê?</li>
+        <li><strong>Co-construção com a audiência</strong> — user-generated content é endosso pessoal, extremamente eficaz.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- REVISÕES -->
+  <section class="section" id="revisoes">
+    <div class="section-header">
+      <div class="section-icon" style="background:var(--color-gold-hl); color:var(--color-gold)">📝</div>
+      <div>
+        <div class="section-label">Revisões Oficiais</div>
+        <h2 class="section-title">Perguntas do Teste</h2>
+      </div>
+    </div>
+    <p style="color:var(--color-text-muted); font-size:var(--text-sm); margin-bottom:var(--space-5)">Clica em cada pergunta para ver a resposta síntese.</p>
+    <ul class="qa-list">
+
+      <li class="qa-item"><div class="qa-q">Por que motivo se diz que os signos não podem ser considerados entidades isoladas?</div><div class="qa-a">Porque o significado de um signo só existe em relação a outros signos e ao sistema em que se insere. Um signo isolado não tem valor — o valor é relacional e diferencial: cada signo define-se pelo que não é (Saussure). O contexto cultural e os outros signos do sistema determinam o que um signo significa.</div></li>
+
+      <li class="qa-item"><div class="qa-q">Em que diferem os significados naturais dos culturais?</div><div class="qa-a">Os significados naturais derivam de relações causais ou biológicas universais (fumo → fogo, febre → doença) e não dependem de aprendizagem cultural. Os significados culturais são convencionados socialmente, variam entre culturas e épocas, e requerem partilha do mesmo código para serem interpretados corretamente.</div></li>
+
+      <li class="qa-item"><div class="qa-q">Em que diferem as formas de significado literais, análogas e metafóricas?</div><div class="qa-a">O significado literal é direto e denotativo — o sentido mais básico e convencional. O análogo baseia-se em semelhança ou analogia entre o signo e aquilo que representa. O metafórico transfere significado de um domínio para outro concetualmente diferente, enriquecendo a interpretação através da tensão entre os dois domínios.</div></li>
+
+      <li class="qa-item"><div class="qa-q">Qual a importância dos signos para a perceção da realidade?</div><div class="qa-a">Os signos mediam a nossa relação com a realidade — não acedemos diretamente ao mundo, mas através de representações sígnicas. O que não tem signo é mais difícil de perceber e comunicar. A cultura em que vivemos fornece o repertório de signos que estrutura como vemos o mundo.</div></li>
+
+      <li class="qa-item"><div class="qa-q">Qual a relação de um schema com o mal-entendido?</div><div class="qa-a">Um schema é uma estrutura mental de conhecimento prévio usada para interpretar novos signos. Quando emissor e receptor têm schemas diferentes, o mesmo signo recebe interpretações diferentes — o significado intencionado não coincide com o recebido. Esta divergência de schemas é a principal causa de mal-entendidos comunicativos.</div></li>
+
+      <li class="qa-item"><div class="qa-q">Quais os 6 elementos básicos na comunicação humana?</div><div class="qa-a">Emissor, Receptor, Mensagem, Canal, Código e Contexto/Referente. (Modelo de Jakobson, retomado na Antropossemiótica.)</div></li>
+
+      <li class="qa-item"><div class="qa-q">De que forma se relaciona o surgimento da Semiologia com a época em que esta surgiu?</div><div class="qa-a">A semiologia surge no final do séc. XIX / início do séc. XX, época de industrialização, massificação da imprensa, publicidade e comunicação de massas. Este contexto criou a necessidade de estudar sistematicamente os sistemas de significação e o papel dos signos na cultura e na sociedade moderna.</div></li>
+
+      <li class="qa-item"><div class="qa-q">Quando é que um mesmo significante dá origem a diferentes significados?</div><div class="qa-a">Quando o contexto muda (situação comunicativa diferente), quando o código difere (culturas ou grupos distintos partilham convenções diferentes), quando há polissemia (o mesmo signo tem múltiplos significados convencionados) ou quando o schema do recetor é diferente do do emissor.</div></li>
+
+      <li class="qa-item"><div class="qa-q">De que consta a dualidade do signo, de acordo com Saussure?</div><div class="qa-a">Para Saussure, o signo é composto por duas faces indissociáveis: o Significante (imagem acústica / forma) e o Significado (conceito mental). A relação entre ambos é arbitrária — não existe razão natural para que determinado significante corresponda a determinado significado.</div></li>
+
+      <li class="qa-item"><div class="qa-q">Em que circunstâncias é que um sintagma passa a ser um paradigma?</div><div class="qa-a">Um sintagma (combinação linear de signos presente na cadeia) torna-se paradigma quando se repete de tal forma que a possibilidade de substituição deixa de ser evidente para os falantes — a sequência convencionaliza-se e passa a ser percebida como um todo ou como a forma "natural" de expressar algo, perdendo a consciência das alternativas possíveis.</div></li>
+
+      <li class="qa-item"><div class="qa-q">A sensação de peso pertence à primeiridade ou à terceiridade?</div><div class="qa-a">À Primeiridade — é uma qualidade pura, imediata e pré-relacional. A sensação de peso existe como qualidade em si mesma, antes de qualquer relação com outro elemento ou de qualquer representação sígnica.</div></li>
+
+      <li class="qa-item"><div class="qa-q">De que consta a tríade semiótica de Peirce?</div><div class="qa-a">De três elementos interdependentes: Representâmen (a forma/signo em si), Objeto (aquilo a que o signo se refere, o referente) e Interpretante (o efeito/significado produzido na mente do intérprete). O significado não é fixo — emerge da relação triádica e é sempre mediado por um intérprete.</div></li>
+
+      <li class="qa-item"><div class="qa-q">Por que motivo apenas se analisa a metafunção composicional depois de se analisar as outras duas?</div><div class="qa-a">Porque a metafunção composicional descreve como as outras duas metafunções (representacional e interativa) são organizadas e dispostas no espaço visual. É uma metafunção de segundo nível — organiza e articula os significados já produzidos pelas outras duas, portanto só faz sentido analisá-la depois de conhecermos o que está a ser organizado.</div></li>
+
+      <li class="qa-item"><div class="qa-q">Quais os sinais tangíveis e intangíveis que uma marca pode transmitir?</div><div class="qa-a">Tangíveis: produto, preço, pessoas, comunicação, espaços, eventos, país de origem, logo/símbolo. Intangíveis: promessas, associações, estórias, valores culturais, personalidade, mito, tom de voz.</div></li>
+
+      <li class="qa-item"><div class="qa-q">Como se encontra a verdade do valor semiótico da marca?</div><div class="qa-a">Na interseção de três verdades: a Verdade do Produto/Serviço (o que o produto realmente é e faz), a Verdade da Cultura/Contexto (o que a sociedade e o momento cultural valorizam), e a Verdade do Cliente/Utilizador (o que o cliente precisa, deseja e como se quer ver). O valor semiótico autentico da marca resulta da mensagem certa, no momento certo, à pessoa certa.</div></li>
+
+      <li class="qa-item"><div class="qa-q">Por que motivo é importante determinar a personalidade de uma marca?</div><div class="qa-a">A personalidade define o tom de voz e o caráter comunicativo da marca, tornando a comunicação consistente e autêntica. Permite criar associações emocionais duradouras com o público e diferencia a marca da concorrência. Sem personalidade definida, a marca comunica de forma inconsistente e não cria laço emocional com o consumidor.</div></li>
+
+      <li class="qa-item"><div class="qa-q">Quais os subtipos a que podem pertencer as identidades visuais focadas no nome da marca?</div><div class="qa-a">Logotipo Puro, Logotipo com Fundo e Logotipo com Complemento.</div></li>
+
+      <li class="qa-item"><div class="qa-q">Por que se deve analisar e avaliar a concorrência da marca ao construir uma IV?</div><div class="qa-a">Para garantir diferenciação adequada — a identidade visual deve ser única no seu setor. Conhecer as características visuais dos concorrentes evita o mimetismo involuntário e garante que a nova IV se destaque de forma relevante. Permite também identificar convenções do setor (que podem ser úteis manter) e oportunidades de distinção.</div></li>
+
+      <li class="qa-item"><div class="qa-q">Qual a relevância do storytelling para as marcas?</div><div class="qa-a">O storytelling é o meio mais poderoso de criar conexão emocional com o público. Permite comunicar valores de forma que o público compreenda e com que se identifique. Uma boa estória de marca transforma o público de espectador passivo em participante ativo — e quando as pessoas se identificam com uma estória, agem. Branding é o objetivo; storytelling é o meio.</div></li>
+
+      <li class="qa-item"><div class="qa-q">Quais os quatro elementos do storytelling?</div><div class="qa-a">1. Mensagem (premissa/mito central), 2. Conflito (ponto de viragem que força a ação), 3. Personagens (herói, adversário, benfeitor, beneficiário), 4. Trama/Plot (fluxo narrativo: começo, meio e fim).</div></li>
+
+    </ul>
+  </section>
+
+</div><!-- /container -->
+</main>
+
+<footer>
+  <div class="container">
+    <p>Semiótica da Comunicação · Catarina Lelis © 2026 · Resumo de estudo</p>
+  </div>
+</footer>
+
+<script>
+// Theme toggle
+(function(){
+  const t=document.querySelector('[data-theme-toggle]'), r=document.documentElement;
+  let d=r.getAttribute('data-theme')||'dark';
+  function setIcon(mode){ if(!t)return; t.innerHTML = mode==='dark' ? '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>' : '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>'; }
+  setIcon(d);
+  if(t) t.addEventListener('click',()=>{ d=d==='dark'?'light':'dark'; r.setAttribute('data-theme',d); setIcon(d); });
+})();
+
+// QA accordion
+document.querySelectorAll('.qa-q').forEach(q=>{
+  q.addEventListener('click',()=>{
+    const item=q.closest('.qa-item');
+    const wasOpen=item.classList.contains('open');
+    document.querySelectorAll('.qa-item.open').forEach(i=>i.classList.remove('open'));
+    if(!wasOpen) item.classList.add('open');
+  });
+});
+</script>
+</body>
+</html>
