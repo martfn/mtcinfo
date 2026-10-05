@@ -70,6 +70,13 @@ code,.k{background:var(--bg2);border:1px solid var(--line);border-radius:6px;pad
 .flip.on>div{transform:rotateY(180deg)}.flip p{position:absolute;inset:0;margin:0;padding:16px;display:flex;align-items:center;justify-content:center;text-align:center;backface-visibility:hidden;border-radius:var(--r);border:1px solid var(--line);background:var(--card);font-size:14px;overflow:auto}
 .flip p+p{transform:rotateY(180deg);background:color-mix(in srgb,var(--a) 16%,var(--card));border-color:var(--a)}
 footer{border-top:1px solid var(--line);padding:30px 24px;text-align:center;color:var(--mut);font-size:13px}
+ .hero-cta{display:flex;justify-content:center;margin-top:28px;position:relative;z-index:2}
+.btn-nlm{display:inline-flex;align-items:center;gap:10px;padding:14px 28px;border-radius:999px;
+  background:linear-gradient(135deg,var(--a),var(--b));color:#fff;font-weight:700;font-size:16px;
+  text-decoration:none;box-shadow:0 10px 30px rgba(124,140,255,.35);transition:transform .2s,box-shadow .2s}
+.btn-nlm:hover{transform:translateY(-2px);box-shadow:0 14px 36px rgba(124,140,255,.5)}
+.btn-nlm:active{transform:translateY(0)}
+.btn-nlm:focus-visible{outline:3px solid var(--d);outline-offset:3px}
 @media(max-width:900px){.layout{grid-template-columns:1fr}nav.side{display:none}.hero{padding:36px 22px}.bars .row{grid-template-columns:90px 1fr 80px}}
 @media print{header.top,nav.side,#bar,#score{display:none}.layout{display:block}}
 </style>
@@ -92,6 +99,13 @@ footer{border-top:1px solid var(--line);padding:30px 24px;text-align:center;colo
 <span class="chip">Universidade de Aveiro · UC 42401 · 6 ECTS</span><span class="chip">Avaliação Oral 1</span><span class="chip">Docente: Isaac Raimundo</span>
 <h1>Sonorização para Multimédia<br>Guia de estudo completo</h1>
 <p>Tudo o que foi lecionado nas Aulas 1, 2 e 3, organizado pelas 4 perguntas do teste oral, com respostas-modelo, esquemas, quiz e checklist.</p>
+ <div class="hero-cta">
+  <a class="btn-nlm" href="https://notebook.google.com/notebook/77e08ce1-12dc-4983-8e5a-4cff672cb74d" target="_blank" rel="noopener noreferrer">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+    NotebookLM
+    <span aria-hidden="true">↗</span>
+  </a>
+</div>
 <svg class="wave" viewBox="0 0 600 120" fill="none" stroke="currentColor"><path id="w1" stroke="#7c8cff" stroke-width="3" d=""/><path id="w2" stroke="#35e0c2" stroke-width="3" d=""/></svg>
 </div>
 <div class="stats">
