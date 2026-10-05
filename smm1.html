@@ -3,451 +3,399 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Sonorização para Multimédia — Guia de Estudo</title>
+<title>Sonorização para Multimédia — Guia de Estudo (Avaliação Oral 1)</title>
 <style>
-:root{--bg:#f7f8fc;--card:#fff;--text:#111321;--muted:#58607a;--accent:#5b5fff;--ok:#16a34a;--warn:#f59e0b;--bad:#ef4444;--border:#e2e6f3;--shadow:0 10px 30px rgba(40,40,90,.08)}
-[data-theme=dark]{--bg:#0b0e1a;--card:#121630;--text:#e8ebff;--muted:#9aa3c7;--accent:#8a8dff;--border:#2a2f55;--shadow:0 10px 30px rgba(0,0,0,.4)}
+:root{--bg:#0b0f1a;--bg2:#121829;--card:#161d31;--line:#263052;--tx:#e8ecf8;--mut:#9aa6c7;--a:#7c8cff;--b:#35e0c2;--c:#ff7aa8;--d:#ffc857;--o:#f59a45;--r:18px;--sh:0 10px 40px rgba(0,0,0,.35)}
+[data-theme=light]{--bg:#f5f7fd;--bg2:#fff;--card:#fff;--line:#dfe4f3;--tx:#161b2e;--mut:#5b6685;--a:#2f6fc4;--b:#00a88c;--c:#e0457b;--d:#c78a00;--o:#e07b1a;--sh:0 10px 30px rgba(40,50,100,.10)}
 *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:80px}
-body{margin:0;font:16px/1.65 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--text)}
-#progress{position:fixed;top:0;left:0;height:4px;width:0;background:linear-gradient(90deg,var(--accent),#00d4ff);z-index:100}
-header.top{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:12px;padding:12px 24px;backdrop-filter:blur(14px);background:color-mix(in srgb,var(--bg) 80%,transparent);border-bottom:1px solid var(--border)}
-header.top b{font-size:15px}header.top .sp{flex:1}
-button,.btn{font:inherit;cursor:pointer;border:1px solid var(--border);background:var(--card);color:var(--text);padding:8px 14px;border-radius:12px;transition:.2s}
-button:hover{border-color:var(--accent);transform:translateY(-1px)}
-.hero{padding:60px 24px 40px;text-align:center}
-.hero h1{font-size:clamp(1.9rem,5vw,3rem);margin:.2em 0;letter-spacing:-.03em}
-.hero p{max-width:720px;margin:0 auto;color:var(--muted);font-size:1.05rem}
-.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:18px}
-.chip{padding:6px 14px;border-radius:999px;background:var(--card);border:1px solid var(--border);font-size:.85rem;color:var(--muted)}
-.layout{display:grid;grid-template-columns:260px minmax(0,1fr);gap:28px;max-width:1200px;margin:0 auto;padding:24px}
-nav.toc{position:sticky;top:76px;align-self:start;max-height:calc(100vh - 100px);overflow:auto;padding:16px;background:var(--card);border:1px solid var(--border);border-radius:16px;box-shadow:var(--shadow)}
-nav.toc a{display:block;padding:7px 12px;border-radius:10px;color:var(--muted);text-decoration:none;font-size:.92rem}
-nav.toc a:hover{background:color-mix(in srgb,var(--accent) 12%,transparent);color:var(--text)}
-nav.toc a.active{background:linear-gradient(90deg,color-mix(in srgb,var(--accent) 18%,transparent),transparent);color:var(--accent);font-weight:600}
-main section{margin-bottom:50px}
-h2{font-size:1.8rem;letter-spacing:-.02em;margin:0 0 .4em}
-h3{margin:1.4em 0 .4em;font-size:1.2rem}h4{margin:1em 0 .2em;color:var(--accent)}
-.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px;box-shadow:var(--shadow);margin:14px 0}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+body{margin:0;font:16px/1.65 Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--tx);
+background-image:radial-gradient(900px 500px at 85% -5%,rgba(124,140,255,.18),transparent),radial-gradient(700px 400px at -5% 10%,rgba(53,224,194,.12),transparent);background-attachment:fixed}
+#bar{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--a),var(--b),var(--c));z-index:100}
+header.top{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);background:color-mix(in srgb,var(--bg) 78%,transparent);border-bottom:1px solid var(--line)}
+.top .in{max-width:1200px;margin:auto;padding:12px 24px;display:flex;align-items:center;gap:16px;justify-content:space-between}
+.brand{font-weight:700;letter-spacing:.2px}.brand span{color:var(--a)}
+button.tg{background:var(--card);color:var(--tx);border:1px solid var(--line);border-radius:999px;padding:8px 14px;cursor:pointer;font:inherit;font-size:14px}
+.layout{max-width:1200px;margin:auto;padding:0 24px;display:grid;grid-template-columns:240px 1fr;gap:40px}
+nav.side{position:sticky;top:76px;align-self:start;max-height:calc(100vh - 100px);overflow:auto;padding:24px 0}
+nav.side a{display:block;padding:8px 14px;margin:2px 0;border-left:2px solid var(--line);color:var(--mut);text-decoration:none;font-size:14px;border-radius:0 10px 10px 0;transition:.2s}
+nav.side a:hover{color:var(--tx);background:var(--card)}nav.side a.on{color:var(--tx);border-color:var(--a);background:var(--card);font-weight:600}
+nav.side small{display:block;text-transform:uppercase;letter-spacing:.12em;color:var(--mut);font-size:11px;margin:18px 14px 6px}
+main{padding:30px 0 100px;min-width:0}
+.hero{padding:56px 40px;border-radius:28px;background:linear-gradient(135deg,rgba(124,140,255,.25),rgba(53,224,194,.15) 60%,rgba(255,122,168,.15));border:1px solid var(--line);box-shadow:var(--sh);position:relative;overflow:hidden}
+.hero h1{font-size:clamp(30px,5vw,52px);line-height:1.1;margin:10px 0 14px;letter-spacing:-.02em}
+.hero p{color:var(--mut);max-width:640px;margin:0}
+.chip{display:inline-block;padding:4px 12px;border-radius:999px;border:1px solid var(--line);background:var(--card);font-size:12px;color:var(--mut);margin:4px 6px 0 0}
+.wave{position:absolute;right:-20px;bottom:-10px;opacity:.5;width:60%}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:22px 0}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px}
+.stat b{display:block;font-size:26px;color:var(--a)}.stat span{font-size:13px;color:var(--mut)}
+section{margin-top:64px}
+h2{font-size:clamp(24px,3.4vw,34px);letter-spacing:-.02em;margin:0 0 6px;display:flex;gap:12px;align-items:center}
+h2 .n{font-size:13px;background:var(--a);color:#fff;border-radius:10px;padding:3px 10px;font-weight:700}
+h3{margin:28px 0 8px;font-size:20px}h4{margin:18px 0 6px;color:var(--b)}
+.lead{color:var(--mut);margin:0 0 20px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:22px 24px;box-shadow:var(--sh);margin:16px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
 .grid .card{margin:0}
-.callout{border-left:5px solid var(--accent);background:color-mix(in srgb,var(--accent) 10%,var(--card));padding:12px 16px;border-radius:0 12px 12px 0;margin:14px 0}
-.callout.tip{border-color:var(--ok)}.callout.warn{border-color:var(--warn)}.callout.exam{border-color:var(--bad)}
-.callout b.t{display:block;text-transform:uppercase;font-size:.7rem;letter-spacing:.08em;color:var(--muted);margin-bottom:4px}
-.formula{font-family:ui-monospace,Menlo,Consolas,monospace;background:color-mix(in srgb,var(--accent) 8%,var(--card));padding:10px 14px;border-radius:12px;margin:8px 0;overflow-x:auto;font-size:.95rem;text-align:center}
-code{font-family:ui-monospace,Menlo,monospace;background:color-mix(in srgb,var(--accent) 10%,var(--card));padding:2px 6px;border-radius:6px;font-size:.9em}
-table{width:100%;border-collapse:collapse;background:var(--card);border-radius:14px;overflow:hidden;border:1px solid var(--border);font-size:.92rem}
-.tw{overflow-x:auto;margin:12px 0;border-radius:14px}
-th,td{padding:9px 12px;text-align:left;border-bottom:1px solid var(--border);vertical-align:top}
-th{background:color-mix(in srgb,var(--accent) 10%,var(--card));font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
-tr:last-child td{border-bottom:0}
-.tag{display:inline-block;font-size:.7rem;padding:2px 8px;border-radius:999px;background:color-mix(in srgb,var(--accent) 16%,var(--card));color:var(--accent);font-weight:700}
-.tag.g{background:color-mix(in srgb,var(--ok) 16%,var(--card));color:var(--ok)}.tag.o{background:color-mix(in srgb,var(--warn) 18%,var(--card));color:var(--warn)}
-details{background:var(--card);border:1px solid var(--border);border-radius:14px;margin:8px 0;overflow:hidden}
-summary{cursor:pointer;padding:12px 16px;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:10px}
-summary::after{content:"＋";color:var(--accent)}details[open] summary::after{content:"－"}
-details>div{padding:0 16px 14px;color:var(--text)}
-.tools{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
-label{display:block;font-size:.8rem;color:var(--muted);margin-top:8px}
-input,select{font:inherit;width:100%;padding:8px 11px;border-radius:10px;border:1px solid var(--border);background:var(--bg);color:var(--text)}
-.out{margin-top:10px;padding:10px;border-radius:10px;background:color-mix(in srgb,var(--accent) 10%,var(--card));font-weight:600}
-.flash{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
-.fc{perspective:900px;height:160px;cursor:pointer}
-.fc>div{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
-.fc.flip>div{transform:rotateY(180deg)}
-.fc .f,.fc .b{position:absolute;inset:0;backface-visibility:hidden;border-radius:14px;padding:16px;display:flex;align-items:center;justify-content:center;text-align:center;border:1px solid var(--border);font-size:.92rem;overflow:auto}
-.fc .f{background:var(--card);font-weight:600}.fc .b{background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 22%,var(--card)),var(--card));transform:rotateY(180deg)}
-.q{margin:12px 0}.q p{font-weight:600;margin:0 0 6px}
-.opt{display:block;width:100%;text-align:left;margin:5px 0}
-.opt.ok{background:color-mix(in srgb,var(--ok) 22%,var(--card));border-color:var(--ok)}.opt.bad{background:color-mix(in srgb,var(--bad) 20%,var(--card));border-color:var(--bad)}
-.score{font-size:1.15rem;font-weight:700;margin-top:8px}
-.timeline{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:12px 0}
-.step{padding:8px 14px;border-radius:12px;background:var(--card);border:1px solid var(--border);font-weight:600;font-size:.88rem}.arrow{color:var(--accent)}
-ul{padding-left:1.1em}li{margin:.2em 0}
-footer{text-align:center;color:var(--muted);padding:30px 20px 50px;font-size:.9rem}
-@media(max-width:900px){.layout{grid-template-columns:1fr}nav.toc{position:fixed;left:0;top:0;bottom:0;width:260px;max-height:none;z-index:90;transform:translateX(-110%);transition:.3s;border-radius:0}nav.toc.open{transform:none}#menu{display:inline-block}}
-@media print{header.top,nav.toc,#progress,.tools{display:none}.layout{display:block}details{break-inside:avoid}details>div{display:block}.card{box-shadow:none}}
+.callout{border-left:4px solid var(--d);background:color-mix(in srgb,var(--d) 10%,var(--card));padding:14px 18px;border-radius:0 14px 14px 0;margin:16px 0}
+.callout.ok{border-color:var(--b);background:color-mix(in srgb,var(--b) 10%,var(--card))}
+.callout.no{border-color:var(--c);background:color-mix(in srgb,var(--c) 10%,var(--card))}
+.callout b.t{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:2px}
+table{width:100%;border-collapse:separate;border-spacing:0;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--card);font-size:15px}
+th,td{padding:12px 14px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+th{background:var(--bg2);font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut)}tr:last-child td{border:0}
+.tw{overflow-x:auto}
+ul,ol{padding-left:22px}li{margin:6px 0}
+code,.k{background:var(--bg2);border:1px solid var(--line);border-radius:6px;padding:1px 7px;font-size:.9em}
+.pts{float:right;font-size:12px;background:var(--d);color:#1a1300;padding:3px 10px;border-radius:999px;font-weight:700}
+.ans{border:1px solid var(--a);background:linear-gradient(180deg,color-mix(in srgb,var(--a) 12%,var(--card)),var(--card));border-radius:var(--r);padding:20px 24px;margin:18px 0}
+.ans>b.t{display:inline-block;background:var(--a);color:#fff;border-radius:8px;padding:2px 10px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px}
+.pol{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin:18px 0 6px}
+.pol .card{text-align:center;padding:14px}.pol svg{width:100%;max-width:170px;height:auto}
+.pol h4{margin:6px 0 2px;color:var(--tx)}.pol p{font-size:13px;color:var(--mut);margin:4px 0}
+.axis{text-align:center;color:var(--mut);font-size:14px;margin:0 0 18px}
+.flow{display:flex;flex-wrap:wrap;gap:8px;align-items:stretch;margin:16px 0}
+.flow div{flex:1 1 120px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;text-align:center;font-size:13px}
+.flow div b{display:block;color:var(--a);font-size:14px}.flow div.ac{border-color:var(--b)}.flow div.el{border-color:var(--d)}
+.bars .row{display:grid;grid-template-columns:130px 1fr 110px;gap:10px;align-items:center;margin:8px 0;font-size:13px}
+.bars .bar{height:12px;border-radius:99px;background:linear-gradient(90deg,var(--a),var(--b))}
+.check label{display:flex;gap:10px;align-items:flex-start;padding:8px 0;cursor:pointer}
+.check input{margin-top:6px;accent-color:var(--a);width:18px;height:18px}
+.quiz .q{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:18px 22px;margin:14px 0}
+.quiz .opts button{display:block;width:100%;text-align:left;margin:8px 0;padding:10px 14px;border-radius:12px;border:1px solid var(--line);background:var(--bg2);color:var(--tx);font:inherit;cursor:pointer;transition:.15s}
+.quiz .opts button:hover{border-color:var(--a)}.quiz .opts button.good{border-color:var(--b);background:color-mix(in srgb,var(--b) 18%,var(--bg2))}.quiz .opts button.bad{border-color:var(--c);background:color-mix(in srgb,var(--c) 18%,var(--bg2))}
+.quiz .fb{font-size:14px;color:var(--mut);margin-top:6px;display:none}
+#score{position:sticky;bottom:16px;display:inline-block;background:var(--a);color:#fff;padding:8px 16px;border-radius:999px;font-weight:700;box-shadow:var(--sh)}
+.flip{perspective:900px;height:170px;cursor:pointer}.flip>div{position:relative;width:100%;height:100%;transition:transform .55s;transform-style:preserve-3d}
+.flip.on>div{transform:rotateY(180deg)}.flip p{position:absolute;inset:0;margin:0;padding:16px;display:flex;align-items:center;justify-content:center;text-align:center;backface-visibility:hidden;border-radius:var(--r);border:1px solid var(--line);background:var(--card);font-size:14px;overflow:auto}
+.flip p+p{transform:rotateY(180deg);background:color-mix(in srgb,var(--a) 16%,var(--card));border-color:var(--a)}
+footer{border-top:1px solid var(--line);padding:30px 24px;text-align:center;color:var(--mut);font-size:13px}
+@media(max-width:900px){.layout{grid-template-columns:1fr}nav.side{display:none}.hero{padding:36px 22px}.bars .row{grid-template-columns:90px 1fr 80px}}
+@media print{header.top,nav.side,#bar,#score{display:none}.layout{display:block}}
 </style>
 </head>
 <body>
-<div id="progress"></div>
-<header class="top"><button id="menu" aria-label="Menu">☰</button><b>🎧 Sonorização para Multimédia</b><span class="sp"></span><button id="expand">Abrir tudo</button><button id="theme">🌓 Tema</button></header>
-
-<div class="hero">
-<span class="tag">UA · 42401 · 6 ECTS · Ciências e Tecnologias da Comunicação</span>
-<h1>Guia de estudo</h1>
-<p>Resumo detalhado da matéria das aulas (ondas sonoras, acústica básica, decibéis, microfones, técnicas de captação), com fórmulas, tabelas, calculadoras, flashcards, quiz e perguntas prováveis de oral. Todos os números foram verificados contra os PDFs das aulas.</p>
-<div class="chips"><span class="chip">Teste escrito 35%</span><span class="chip">Exercícios 25%</span><span class="chip">Projeto multimédia 40%</span><span class="chip">Assiduidade ≥ 80%</span></div>
-</div>
-
+<div id="bar"></div>
+<header class="top"><div class="in"><div class="brand">🎧 SNMM <span>· Guia de Estudo</span></div><button class="tg" id="theme">☀️ / 🌙 Tema</button></div></header>
 <div class="layout">
-<nav class="toc" id="toc">
-<a href="#uc">0 · A unidade curricular</a>
-<a href="#som">1 · O que é o som</a>
-<a href="#onda">2 · Onda: f, λ, fase</a>
-<a href="#db">3 · Decibel e níveis</a>
-<a href="#acust">4 · Acústica da sala</a>
-<a href="#transd">5 · Transdutores</a>
-<a href="#mics">6 · Tipos de microfone</a>
-<a href="#polar">7 · Direcionalidade</a>
-<a href="#specs">8 · Especificações</a>
-<a href="#tecn">9 · Técnicas de captação</a>
-<a href="#ferr">10 · Calculadoras</a>
-<a href="#oral">11 · Perguntas de oral</a>
-<a href="#cards">12 · Flashcards</a>
-<a href="#quiz">13 · Quiz</a>
-<a href="#check">14 · Checklist final</a>
+<nav class="side" id="nav">
+<small>Início</small><a href="#intro">Visão geral</a><a href="#plano">Como estudar</a>
+<small>Pergunta 1 e 2</small><a href="#p1">1 · Onda sonora vs. onda do mar</a><a href="#p2">2 · Partículas e consequências</a><a href="#aula1">Base teórica (Aula 1)</a>
+<small>Eletricidade</small><a href="#aula2">Aula 2 · Eletroacústica</a>
+<small>Pergunta 3 e 4</small><a href="#p3">3 · Princípio de funcionamento</a><a href="#p4">4 · Padrões de sensibilidade</a>
+<small>Revisão</small><a href="#glossario">Glossário</a><a href="#cards">Cartões relâmpago</a><a href="#quiz">Quiz</a><a href="#check">Checklist final</a>
 </nav>
-
 <main>
 
-<section id="uc"><h2>0 · A unidade curricular</h2>
-<div class="card">
-<p><b>Objetivo geral:</b> desenvolver competências na conceção de materiais multimédia, em concreto nas técnicas de produção e pós-produção de áudio, e na articulação som/imagem para consolidar narrativas sonoras com edição áudio e design sonoro.</p>
-<h4>Resultados de aprendizagem (a–d)</h4>
-<ul>
-<li><b>a)</b> Compreender o potencial comunicacional do discurso áudio no contexto audiovisual.</li>
-<li><b>b)</b> Compreender os mecanismos semióticos da articulação som/imagem.</li>
-<li><b>c)</b> Autonomia em software áudio: edição áudio/MIDI, mistura e design sonoro.</li>
-<li><b>d)</b> Autonomia na consolidação de um projeto que use o áudio como elemento integrante de um documento multimédia, aumentando a eficácia comunicacional.</li>
-</ul></div>
-<h3>Mapa dos conteúdos</h3>
-<div class="grid">
-<div class="card"><span class="tag">Semiótica</span><p>Discurso áudio, reflexões sobre som/imagem, semiótica da música. Bibliografia: Chion, <i>AudioVision</i> e <i>The Voice in Cinema</i>.</p></div>
-<div class="card"><span class="tag">Acústica</span><p>Princípios gerais, acústica arquitetural, superfícies acústicas, psicoacústica, audição e ouvido humano.</p></div>
-<div class="card"><span class="tag">Eletroacústica</span><p>Eletricidade e eletromagnetismo aplicados a transdutores (microfones, altifalantes).</p></div>
-<div class="card"><span class="tag">Tecnologias áudio</span><p>Interfaces AD/DA, codificação, <b>microfones</b> (tipos, padrões polares), técnicas de captação mono e multicanal, processamento.</p></div>
-<div class="card"><span class="tag">Produção</span><p>Edição em DAW, técnicas de mistura, instrumentos virtuais (VST/RTAS). Loudness: EBU R-128.</p></div>
+<section id="intro" style="margin-top:0">
+<div class="hero">
+<span class="chip">Universidade de Aveiro · UC 42401 · 6 ECTS</span><span class="chip">Avaliação Oral 1</span><span class="chip">Docente: Isaac Raimundo</span>
+<h1>Sonorização para Multimédia<br>Guia de estudo completo</h1>
+<p>Tudo o que foi lecionado nas Aulas 1, 2 e 3, organizado pelas 4 perguntas do teste oral, com respostas-modelo, esquemas, quiz e checklist.</p>
+<svg class="wave" viewBox="0 0 600 120" fill="none" stroke="currentColor"><path id="w1" stroke="#7c8cff" stroke-width="3" d=""/><path id="w2" stroke="#35e0c2" stroke-width="3" d=""/></svg>
 </div>
-<div class="callout warn"><b class="t">Nota de cobertura</b>Este guia cobre em detalhe <b>o material das aulas que enviaste</b> (ondas sonoras, fundamentos de áudio, microfones, técnicas). Semiótica, AD/DA, codificação, mistura e VST estão no programa oficial mas <b>não nos ficheiros enviados</b>; revê os slides do Moodle dessas partes. Nenhum resumo garante nota máxima: o que ajuda é perceber, saber explicar com exemplos e fazer as contas de cabeça.</div>
+<div class="stats">
+<div class="stat"><b>4</b><span>perguntas no teste</span></div>
+<div class="stat"><b>10</b><span>valores (2+2+3+3), depois ajustados a 0–20</span></div>
+<div class="stat"><b>≥ 4</b><span>itens pedidos nas P1, P2 e P4</span></div>
+<div class="stat"><b>2+2</b><span>vantagens por tipo na P3</span></div>
+</div>
+<div class="callout"><b class="t">Estratégia para nota máxima</b>As perguntas pedem “pelo menos 4” aspetos/consequências/padrões. Dá sempre <b>5 ou 6</b>, cada um com uma frase de explicação (não só o nome). Fala com estrutura: <i>“Vou dar quatro aspetos: primeiro…, segundo…”</i>. Assim o docente conta facilmente os pontos.</div>
+<div class="callout no"><b class="t">Nota sobre as fontes</b>Tudo vem dos materiais enviados. <span class="k">slides</span> = slides das Aulas 1–3 (base do teste). <span class="k">Henrique</span> = Acústica Musical (L. Henrique), caps. 4 e 22. <span class="k">Everest</span> = Master Handbook of Acoustics, cap. 1. <span class="k">Corbett</span> = capítulos de Mic It! (“Audio Basics” e “About Microphones”). <span class="k">Shure</span> = Mic Techniques for Live Sound. Só a coluna “geral” da pergunta 1 (que a onda do mar se vê a olho nu) é senso comum.</div>
 </section>
 
-<section id="som"><h2>1 · O que é o som</h2>
-<p>O som tem duas leituras: como <b>estímulo</b> (perturbação física num meio elástico, problema de física) e como <b>sensação</b> (excitação do mecanismo auditivo, problema de psicoacústica). Em áudio interessam as duas [file:3].</p>
-<div class="tw"><table><thead><tr><th>Objetivo (físico)</th><th>Subjetivo (percebido)</th><th>Relação</th></tr></thead><tbody>
-<tr><td><b>Frequência</b> (Hz)</td><td><b>Altura</b> (pitch)</td><td>Análogas, não iguais: em tons graves, mais intensidade baixa a altura percebida; em agudos, sobe [file:3].</td></tr>
-<tr><td><b>Intensidade / amplitude</b></td><td><b>Volume</b> (loudness)</td><td>Relação não linear [file:3].</td></tr>
-<tr><td><b>Espectro / forma de onda</b></td><td><b>Timbre</b></td><td>Complicada pela interação frequência–altura e pelo ouvido [file:3].</td></tr></tbody></table></div>
+<section id="plano">
+<h2><span class="n">00</span>Como está organizado</h2>
+<p class="lead">Estrutura da UC e do teste, para saberes onde isto se encaixa.</p>
+<div class="grid">
+<div class="card"><h4>Avaliação da UC</h4><ul><li>Teste escrito: 35%</li><li>Exercícios de aplicação: 25%</li><li>Projeto multimédia: 40%</li><li>Assiduidade mínima: 80% das aulas</li></ul></div>
+<div class="card"><h4>Objetivos da UC</h4><ul><li>Potencial comunicacional do áudio</li><li>Articulação som/imagem (semiótica)</li><li>Autonomia em software: edição, mistura, design sonoro</li><li>Projeto multimédia com áudio integrado</li></ul></div>
+<div class="card"><h4>Mapa das aulas</h4><ul><li><b>Aula 1</b> → Perguntas 1 e 2</li><li><b>Aula 2</b> → base da Pergunta 3</li><li><b>Aula 3</b> → Perguntas 3 e 4</li></ul></div>
+</div>
+<div class="card"><b>Plano de estudo sugerido (3 sessões):</b>
+<ol><li>Lê as secções 1, 2 e Aula 1; tenta responder em voz alta sem ver.</li><li>Lê a Aula 2 e a pergunta 3; faz a tabela de memória.</li><li>Pergunta 4: desenha os 5 diagramas polares de cabeça; depois faz o quiz e os cartões.</li></ol>
+</div>
+</section>
 
-<h3>Como se produz e propaga</h3>
+<section id="p1">
+<h2><span class="n">P1</span>Onda sonora vs. onda do mar <span class="pts" style="margin-left:auto">2 pontos</span></h2>
+<p class="lead">“Em que é que difere uma onda sonora de uma onda do mar? Descreve pelo menos 4 aspetos.”</p>
+<div class="tw"><table>
+<tr><th>Aspeto</th><th>Onda sonora (no ar)</th><th>Onda do mar</th><th>Origem</th></tr>
+<tr><td><b>Movimento das partículas</b></td><td>Longitudinal: as partículas movem-se na mesma direção em que o som viaja; não sobem nem descem</td><td>Na superfície da água as partículas descrevem órbitas circulares (em águas profundas)</td><td>slides, Everest</td></tr>
+<tr><td><b>Dimensão da propagação</b></td><td>Em todas as direções (3D): frentes de onda esféricas, a partir de uma fonte pequena</td><td>À superfície (2D): circunferências concêntricas, como uma pedra caída na água</td><td>Henrique</td></tr>
+<tr><td><b>Tipo de onda e meio</b></td><td>Onda de pressão (compressão/rarefação) num meio elástico; sem meio não há som (no vácuo, silêncio)</td><td>Henrique: nos fluidos só há ondas longitudinais, <i>excluindo as ondas de superfície nos líquidos</i>, que é o caso da onda do mar</td><td>slides, Everest, Henrique</td></tr>
+<tr><td><b>Grandeza em variação</b></td><td>Variação minúscula da pressão do ar: na analogia do prédio de 100 m, de 0,00002 mm (limiar) a 6 cm (~130 dB)</td><td>Os materiais não descrevem; é a altura da superfície a variar</td><td>slides / geral</td></tr>
+<tr><td><b>Velocidade</b></td><td>≈ 344 m/s no ar a 20 °C; depende do meio e da temperatura, e praticamente não depende da frequência nem da intensidade</td><td>Os materiais não dão valores; não uses números aqui</td><td>Everest, Henrique</td></tr>
+<tr><td><b>Perceção</b></td><td>Invisível; o ouvido só sente variações rápidas (≥ ~20 por segundo), de 20 Hz a 20 000 Hz, com comprimentos de onda de ~1,7 cm a 21,5 m</td><td>Vê-se a olho nu</td><td>slides, Henrique / geral</td></tr>
+<tr><td><b>O que têm em comum</b></td><td>A onda transporta energia, mas não matéria. Da Vinci: a onda foge do local onde foi criada, mas a água não; o mesmo com o trigo ao vento</td><td>(igual)</td><td>Henrique, Everest</td></tr>
+</table></div>
+<div class="callout"><b class="t">Confusões típicas (slides)</b>Uma onda sonora não é ar a viajar, não é o desenho da forma de onda, não sobe nem desce, não existe no vácuo, não é o sinal elétrico e não é aquilo que ouvimos.</div>
+<div class="ans"><b class="t">Resposta-modelo (≈ 40 s)</b>
+<p>“Uma onda sonora difere de uma onda do mar em pelo menos quatro aspetos. Primeiro, o movimento das partículas: no som, as partículas do ar movem-se na direção em que a onda avança, é longitudinal, formando compressões e rarefações; na onda do mar, as partículas de água descrevem órbitas circulares à superfície. Segundo, a dimensão: o som propaga-se em todas as direções, em frentes esféricas, e a onda do mar propaga-se à superfície, em círculos concêntricos. Terceiro, o meio: o som é uma onda de pressão que precisa de um meio elástico e não existe no vácuo. Quarto, a grandeza: o som é uma variação minúscula da pressão do ar, invisível, que viaja a cerca de 344 m/s e que ouvimos entre 20 Hz e 20 kHz. O que têm em comum é que transportam energia, mas não matéria.”</p></div>
+<div class="callout ok"><b class="t">Dica de ouro</b>Liga ao tema do slide “o que uma onda sonora <u>não</u> é”: o ar não viaja, só a perturbação. É a mesma ideia de Da Vinci com a água e o trigo.</div>
+</section>
+
+<section id="p2">
+<h2><span class="n">P2</span>Partículas de ar e consequências <span class="pts" style="margin-left:auto">2 pontos</span></h2>
+<p class="lead">“As partículas do ar movem-se e embatem umas contra as outras. Explica esse processo e indica, pelo menos, 4 consequências.”</p>
+<h3>O processo, passo a passo</h3>
+<ol>
+<li>Uma fonte (membrana de coluna, régua a vibrar, diapasão) empurra as partículas vizinhas → <b>compressão</b> (zona de pressão mais alta).</li>
+<li>Essas partículas embatem nas seguintes e transmitem-lhes o movimento (transferência de momento): a zona seguinte comprime-se.</li>
+<li>No movimento de retorno da fonte, a inércia das partículas cria uma <b>rarefação</b> (pressão mais baixa); as diferenças de pressão tendem a repor o equilíbrio (Henrique).</li>
+<li>Cada partícula só oscila à volta da sua posição (alguns milionésimos de mm numa conversa); o padrão avança a ~340 m/s. O meio precisa de elasticidade e de inércia (Everest).</li>
+</ol>
+<svg viewBox="0 0 700 150" style="width:100%;max-width:700px" id="particles"></svg>
+<p style="font-size:13px;color:var(--mut)">Esquema ilustrativo: zonas densas = compressão; zonas escassas = rarefação.</p>
+<h3>Consequências (dá 5 ou 6)</h3>
+<div class="grid">
+<div class="card"><h4>1. Onda longitudinal</h4>O ar oscila na mesma direção em que a onda avança.</div>
+<div class="card"><h4>2. O que viaja é a perturbação</h4>As partículas ficam no sítio, como a “onda” num estádio: a onda transporta energia e momento, mas não matéria (Henrique).</div>
+<div class="card"><h4>3. Variações de pressão</h4>Alternam-se compressões e rarefações; o som é uma variação minúscula de pressão (o ouvido sente variações ≥ 20 por segundo). O processo continua até a energia ser demasiado fraca para se ouvir (Shure).</div>
+<div class="card"><h4>4. Velocidade finita</h4>≈ 344 m/s no ar a 20 °C. Depende do meio (mais rápida em meios mais densos) e da temperatura, e não é apreciavelmente afetada pela frequência nem pela intensidade (Everest).</div>
+<div class="card"><h4>5. Precisa de meio material</h4>Sem partículas para comprimir, não há som: no vácuo, silêncio. Na experiência da campânula, o som vai enfraquecendo à medida que se retira o ar (Everest).</div>
+<div class="card"><h4>6. Frequência e amplitude</h4>Quantas oscilações por segundo → frequência (Hz) → altura; quanto a pressão varia → amplitude (dB) → intensidade.</div>
+</div>
+<div class="callout"><b class="t">Complemento (Shure, Everest)</b>Ao propagar-se, o som pode ser alterado pelo ambiente: reflexão, absorção, difração e refração. O nível desce 6 dB cada vez que a distância à fonte duplica. A velocidade do som não é a velocidade das partículas, que é muito pequena e depende da intensidade do som.</div>
+<div class="ans"><b class="t">Resposta-modelo</b><p>“Quando uma fonte move o ar, empurra as partículas vizinhas, que embatem nas seguintes e lhes passam o momento. Cria-se uma compressão que se propaga, seguida de uma rarefação quando a fonte recua. Cada partícula só oscila à volta do seu sítio; o que avança é o padrão. Daqui resultam várias consequências: o som é uma onda longitudinal; o que viaja é a perturbação e não o ar; o som é uma variação minúscula de pressão; propaga-se a cerca de 344 m/s; precisa de um meio material, por isso não há som no vácuo; e a taxa de oscilação define a frequência e a amplitude da variação define a intensidade.”</p></div>
+</section>
+
+<section id="aula1">
+<h2><span class="n">A1</span>Base teórica da Aula 1</h2>
+<p class="lead">Acústica aplicada: o que é (e o que não é) uma onda sonora.</p>
+<h3>O som é uma variação minúscula de pressão</h3>
+<p>Analogia dos slides: se a pressão atmosférica fosse um prédio de 100 m de altura, o som seria apenas…</p>
+<div class="card bars">
+<div class="row"><span>Som mais fraco (0 dB)</span><div class="bar" style="width:3%"></div><span>0,00002 mm</span></div>
+<div class="row"><span>Conversa normal</span><div class="bar" style="width:35%"></div><span>0,02 mm</span></div>
+<div class="row"><span>Som que dói (~130 dB)</span><div class="bar" style="width:100%"></div><span>6 cm</span></div>
+</div>
+<p style="font-size:13px;color:var(--mut)">O comprimento das barras é só ilustrativo.</p>
+<p>O barómetro mede a pressão; o ouvido só sente variações rápidas (pelo menos ~20 por segundo). Por isso não ouvimos o tempo a mudar nem o elevador a subir.</p>
+<h3>Comprimentos de onda e porque importa</h3>
+<p>A relação é <code>λ = v / f</code>. Exemplos calculados com v ≈ 340 m/s: 20 Hz → 17 m; 100 Hz → 3,4 m; 1 kHz → 34 cm; 10 kHz → 3,4 cm; 20 kHz → 1,7 cm. Henrique, com 344 m/s, obtém de 1,7 cm (20 kHz) a 21,5 m (16 Hz).</p>
 <ul>
-<li>Fontes (corda de guitarra, palheta, lábios, pele de tambor, cone de altifalante) <b>vibram</b> e criam variações de pressão do ar [file:1].</li>
-<li>Para existir vibração, o meio precisa de <b>elasticidade</b> (repõe a posição) e <b>inércia</b> (faz ultrapassar a posição de repouso) [file:3].</li>
-<li><b>Sem meio não há som</b>: experiência da campainha numa campânula de vidro; no vácuo do espaço não se propaga som [file:3].</li>
-<li>Propaga-se em gases, líquidos e sólidos. Exemplo do carril: ouve-se primeiro o som pelo aço, depois pelo ar [file:3].</li>
-<li>As <b>partículas não viajam</b>: oscilam em torno da posição de equilíbrio e passam a energia/momento à vizinha (analogia das searas ao vento). A velocidade de partícula é máxima no equilíbrio e nula nos extremos de deslocamento (como um pêndulo) [file:3].</li>
-<li><b>Compressão</b> = zona de alta pressão (crista, acima da pressão atmosférica); <b>rarefação</b> = baixa pressão (vale). As flutuações são minúsculas: o som mais fraco audível (20 µPa) é cerca de 5 000 milhões de vezes menor que a pressão atmosférica [file:3][file:6].</li>
+<li><b>Graves</b>: ondas enormes, contornam obstáculos e atravessam paredes (da festa do vizinho ouve-se o baixo, não a voz).</li>
+<li><b>Agudos</b>: comportam-se quase como luz; um obstáculo do tamanho de uma cabeça já faz sombra.</li>
+<li><b>Colunas</b>: altifalantes grandes para graves, pequenos para agudos.</li>
 </ul>
-
-<h3>Tipos de onda</h3>
-<div class="tw"><table><thead><tr><th>Critério</th><th>Tipos</th><th>Exemplo / nota</th></tr></thead><tbody>
-<tr><td>Natureza</td><td>Mecânicas vs eletromagnéticas</td><td>Som = mecânica (precisa de meio). Luz visível: 0,4–0,7 µm [file:4].</td></tr>
-<tr><td>Direção de vibração</td><td><b>Longitudinais</b> vs <b>transversais</b></td><td>Som no ar = longitudinal (partículas oscilam na direção de propagação). Corda de violino = transversal. Água = órbitas circulares [file:3][file:4].</td></tr>
-<tr><td>Dispersão</td><td>Não dispersivas vs dispersivas</td><td>No ar, o som é não dispersivo: todas as frequências à mesma velocidade, senão os agudos chegavam antes dos graves. Ondas de flexão numa barra são dispersivas [file:4].</td></tr>
-<tr><td>Forma da frente</td><td>Esféricas vs planas</td><td>Fonte pontual (monopolo) emite esferas; longe da fonte (distância ≫ λ) a frente é localmente plana [file:4].</td></tr></tbody></table></div>
-<div class="callout"><b class="t">Princípio de Huygens</b>Cada ponto do meio atingido pela onda comporta-se como nova fonte: a vibração num ponto a distância x repete a da fonte com um atraso x/c (válido para ondas não dispersivas) [file:4].</div>
-</section>
-
-<section id="onda"><h2>2 · Onda: frequência, comprimento de onda, fase</h2>
-<div class="card">
-<h4>Velocidade do som</h4>
-<p><b>≈ 344 m/s</b> (1130 ft/s) em ar seco a 20 °C, nível do mar (≈ 1240 km/h; ~5 s por milha, ~3 s por km). Não depende da intensidade, frequência nem pressão atmosférica (na gama audível) [file:1][file:3].</p>
-<ul>
-<li>Sobe com a <b>temperatura</b> (~1,1 ft/s por °F) [file:3].</li>
-<li>Sobe ligeiramente com a <b>humidade</b> [file:1][file:3].</li>
-<li>Desce ligeiramente com a altitude (sobretudo por arrefecer) [file:1].</li>
-<li>Mais rápido em meios densos/rígidos: água doce ≈ 4900 ft/s, aço ≈ 16 700 ft/s [file:3].</li>
-<li><b>Velocidade do som ≠ velocidade de partícula</b>: a primeira depende do meio; a segunda da intensidade do som [file:3].</li>
-</ul></div>
-<h3>A relação fundamental</h3>
-<div class="formula">c = f · λ &nbsp;&nbsp;⇒&nbsp;&nbsp; λ = c / f &nbsp;&nbsp;⇒&nbsp;&nbsp; f = c / λ &nbsp;&nbsp;&nbsp; (T = 1/f)</div>
+<h3>Frequência e amplitude: medir não é ouvir</h3>
+<div class="tw"><table><tr><th>Física (mede-se)</th><th>Unidade</th><th>Perceção (ouve-se)</th></tr>
+<tr><td>Frequência</td><td>Hz (20 Hz – 20 kHz; o limite superior desce com a idade)</td><td>Altura (grave ↔ agudo)</td></tr>
+<tr><td>Amplitude</td><td>dB (escala logarítmica; +10 dB ≈ 2× mais forte)</td><td>Intensidade (volume)</td></tr></table></div>
+<div class="callout">Andam juntas mas não são o mesmo: com o volume baixo, os graves parecem desaparecer.</div>
+<h3>O que uma onda sonora NÃO é</h3>
 <div class="grid">
-<div class="card"><h4>Exemplos (corrigidos)</h4><ul>
-<li>16 Hz → 344/16 = <b>21,5 m</b></li><li>100 Hz → <b>3,44 m</b></li><li>500 Hz → <b>68,8 cm</b></li><li>1 kHz → <b>34,4 cm</b></li><li>20 kHz → 344/20000 = <b>1,72 cm</b></li></ul>
-<p>Gama audível 20 Hz–20 kHz ⇒ λ entre ~1,7 cm e ~21,5 m [file:1][file:3].</p></div>
-<div class="card"><h4>Porque interessa</h4><ul>
-<li>A frequência <b>não muda</b> ao passar de um meio para outro; muda a velocidade e logo o λ [file:4].</li>
-<li>Comparar λ com as dimensões de objetos explica reflexão, difração, absorção, sombras acústicas e modos de sala [file:6].</li>
-<li>Regra: graves têm λ grande, dão a volta a obstáculos e são quase omnidirecionais; agudos têm λ pequeno e são direcionais [file:6].</li></ul></div></div>
+<div class="card"><b>✕ Ar a viajar</b><br>O ar oscila no sítio.</div>
+<div class="card"><b>✕ O desenho da forma de onda</b><br>É um gráfico pressão–tempo (“Ceci n’est pas une onde”).</div>
+<div class="card"><b>✕ Algo que sobe e desce</b><br>É longitudinal.</div>
+<div class="card"><b>✕ Algo que existe no vácuo</b><br>Sem matéria, silêncio.</div>
+<div class="card"><b>✕ O sinal elétrico</b><br>No cabo vai uma corrente que imita a onda.</div>
+<div class="card"><b>✕ Aquilo que ouvimos</b><br>Medir ≠ perceber.</div>
+</div>
+</section>
 
-<h3>Ondas sinusoidais, complexas e harmónicos</h3>
-<ul>
-<li>Massa-mola → movimento harmónico simples → <b>sinusoide</b> (tom puro, uma só frequência) [file:3].</li>
-<li>Qualquer onda periódica complexa decompõe-se em sinusoides de várias frequências, amplitudes e fases (<b>Fourier</b>) [file:3].</li>
-<li><b>Fundamental</b> = componente mais grave, define a altura (nota). <b>Harmónicos</b> = múltiplos da fundamental, em geral mais fracos, definem o <b>timbre</b> [file:1][file:3].</li>
-<li>Onda quadrada = harmónicos ímpares; triangular = ímpares e pares (segundo o material das aulas) [file:1].</li>
-<li>Duas notas do mesmo instrumento têm timbre distinto de dois instrumentos diferentes (ex.: trompete vs oboé têm número e nível de harmónicos diferentes) [file:6].</li>
-<li><b>Oitava</b> = dobrar/metade da frequência (A4 = 440 Hz; 880 Hz; 220 Hz). A frequência é uma escala <b>exponencial</b>, não linear [file:1].</li>
-<li><b>Resposta em frequência</b> de um sistema = gama que consegue captar/reproduzir; padrão humano 20 Hz–20 kHz [file:1].</li>
-</ul>
-
-<h3>Fase e interferência</h3>
-<div class="tw"><table><thead><tr><th>Fase</th><th>Posição no ciclo</th></tr></thead><tbody>
-<tr><td>0° / 360°</td><td>Início/fim do ciclo, cruzamento por zero</td></tr>
-<tr><td>90°</td><td>Pico positivo</td></tr>
-<tr><td>180°</td><td>Cruzamento por zero a meio do ciclo</td></tr>
-<tr><td>270°</td><td>Pico negativo</td></tr></tbody></table></div>
+<section id="aula2">
+<h2><span class="n">A2</span>Eletricidade para eletroacústica</h2>
+<p class="lead">Ponte entre a acústica e os microfones; essencial para a Pergunta 3.</p>
 <div class="grid">
-<div class="card"><span class="tag g">Construtiva</span><p>Duas ondas idênticas em fase: amplitude somada. <b>+3 dB</b> se somam no ar (potência duplica, ex.: dois altifalantes iguais); <b>+6 dB</b> se somam eletricamente num mixer/DAW (tensão duplica) [file:1].</p></div>
-<div class="card"><span class="tag o">Destrutiva</span><p>180° fora de fase: cancelamento total dessas frequências. Fases intermédias: aumentos e cortes alternados, o que dá <b>filtragem em pente</b> [file:1].</p></div></div>
-<div class="callout exam"><b class="t">Pergunta clássica</b>A fase depende da frequência: o mesmo atraso temporal produz fases diferentes em frequências diferentes [file:1].</div>
+<div class="card"><h4>DC (corrente contínua)</h4>Sentido constante.</div>
+<div class="card"><h4>AC (corrente alterna)</h4>Inverte o sentido continuamente. A tomada de casa e o sinal de áudio são ambos AC; mudam a forma e a rapidez das oscilações.</div>
+</div>
+<div class="card"><b>“Só os eletrões se movem! Nada mais.”</b>
+<ul><li>Velocidade média de um eletrão num fio de cobre: &lt; 0,1 mm/s (mais lento que um caracol).</li><li>O “empurrão” percorre o cabo a ≈ 200 000 km/s.</li><li>Em AC, os eletrões só oscilam para a frente e para trás, tal como as partículas de ar numa onda sonora.</li></ul>
+<i>O que viaja depressa não são os eletrões: é a perturbação. Outra vez.</i></div>
+<h3>Sinal de áudio analógico</h3>
+<ul><li>O microfone converte variações de pressão em variações de tensão com a mesma forma.</li><li>Mais pressão → mais tensão; menos pressão → tensão negativa (a corrente inverte).</li><li>É “analógico” por ser um análogo do som. Não é o som.</li></ul>
+<h3>Cadeia eletroacústica</h3>
+<div class="flow">
+<div class="ac"><b>Som</b>variações de pressão</div><div class="el"><b>Microfone</b>pressão → tensão (mV)</div><div class="el"><b>Pré-amp</b>eleva ao nível de trabalho</div><div class="el"><b>Mistura / gravação</b>processar, guardar, transmitir</div><div class="el"><b>Amplificador</b>dá força para mover cones</div><div class="el"><b>Altifalante</b>tensão → movimento → pressão</div><div class="ac"><b>Som</b>variações de pressão</div>
+</div>
+<p style="font-size:13px;color:var(--mut)">Azul-esverdeado = domínio acústico; amarelo = domínio elétrico. Cada transdutor muda a forma da energia e tenta manter a forma da onda; cada passo pode preservar, perder ou alterar essa forma. Em qualquer transdutor existe um elemento móvel, o diafragma (Henrique).</p>
+<h3>Lei de Faraday e microfone ↔ altifalante</h3>
+<ul><li><b>Lei de Faraday</b> (indução eletromagnética): base do microfone dinâmico, que por isso gera a sua própria tensão elétrica.</li><li><b>Microfone dinâmico</b>: som → diafragma e bobina mexem-se junto ao íman → tensão elétrica.</li><li><b>Altifalante</b>: tensão → bobina empurrada pelo íman move o cone → som.</li><li>Um microfone dinâmico é um altifalante minúsculo a funcionar ao contrário; o dínamo da bicicleta faz o mesmo (movimento → eletricidade).</li></ul>
 </section>
 
-<section id="db"><h2>3 · Decibel, níveis e gama dinâmica</h2>
-<p>O dB é uma unidade <b>logarítmica de conveniência</b>: comprime uma gama enorme (o ouvido deteta de ~10⁻¹² W a ~100 W) numa escala manejável. Exprime <b>razões</b>, por isso exige sempre referência: "dB algo" (dB SPL, dBV, dBu, dBFS) [file:1].</p>
-<div class="formula">Potência: dB = 10·log₁₀(P₁/P₂) &nbsp;|&nbsp; Tensão/pressão: dB = 20·log₁₀(V₁/V₂)</div>
+<section id="p3">
+<h2><span class="n">P3</span>Princípio de funcionamento dos microfones <span class="pts" style="margin-left:auto">3 pontos</span></h2>
+<p class="lead">“Diz quais são as tipologias de funcionamento e descreve duas vantagens (ou desvantagens) para cada uma.” Apenas as <b>duas mais comuns</b> foram dadas nas aulas: dinâmico e condensador.</p>
 <div class="grid">
-<div class="card"><h4>Regras de bolso (corrigidas)</h4><ul>
-<li>Potência ×2 ⇒ <b>+3 dB</b> (ligeiramente mais alto)</li>
-<li>Tensão ×2 ⇒ <b>+6 dB</b> (não é o dobro do volume)</li>
-<li>Tensão ×10 ⇒ +20 dB; 100 V vs 1 V = 40 dB; 0,001 V vs 1 V = −60 dB [file:1][file:6].</li>
-<li><b>+9/10 dB ≈ "duas vezes mais alto"</b>; −9/10 dB ≈ metade [file:1].</li></ul></div>
-<div class="card"><h4>Perceção (Shure)</h4><ul><li>1 dB: a menor diferença percetível</li><li>3 dB: geralmente notória</li><li>6 dB: bem notória</li><li>10 dB: "o dobro" [file:6].</li></ul>
-<p class="tag">Nota: as aulas dizem 9 ou 10 dB; ambos são aceitáveis no oral, refere que é uma aproximação [file:1].</p></div></div>
-<div class="callout tip"><b class="t">Exemplos</b>Um ampli de 200 W não é duas vezes mais alto que um de 100 W (só +3 dB). Para "dobrar" o volume percebido faz falta potência ×8 (100 W → 800 W, +9 dB). Mistura: voz "ligeiramente baixa" → +3 dB no fader; saxofone "metade" → ≈ −9 dB [file:1].</div>
-
-<h3>Escalas de dB (corrigidas)</h3>
-<div class="tw"><table><thead><tr><th>Escala</th><th>Mede</th><th>Onde</th><th>Detalhes</th></tr></thead><tbody>
-<tr><td><b>dB SPL</b></td><td>Quão alto o som é, num ponto do espaço</td><td>Sonómetro</td><td>0 dB SPL = limiar de audição (20 µPa); ~130 dB SPL limiar da dor (Everest); o Shure indica 120 dB. Escala vai até ~194 dB SPL, onde o ar distorce [file:1][file:6].</td></tr>
-<tr><td><b>dBV</b></td><td>Tensão elétrica (ref. 1 V)</td><td>Analógico e emulações</td><td>Medidores de <b>pico</b>. 0 = nominal; margem até +15/+18 dB. Picos nos "+" são normais; não acender o overload [file:1].</td></tr>
-<tr><td><b>dBu / VU</b></td><td>Nível médio (perceção de volume)</td><td>Consolas, fita analógica</td><td>Agulha não reage a picos instantâneos; escala −20/−30 a +6. Deixar <i>headroom</i>; não existe em digital [file:1].</td></tr>
-<tr><td><b>dBFS</b></td><td>Decibéis relativos à escala completa</td><td>Digital / DAW</td><td>Medidores de pico instantâneo; máximo = 0 dBFS, só existe o indicador de clip. 0 dBV (com máx. +15) ≈ −15 dBFS; 0 dBu ≈ −14 dBFS no medidor híbrido [file:1].</td></tr></tbody></table></div>
-
-<h3>Distorção e gama dinâmica</h3>
-<ul>
-<li><b>Gama dinâmica</b> = diferença entre o nível mais baixo e mais alto que o sistema regista/reproduz. O limite inferior é o <b>ruído de fundo</b> (noise floor); o superior é o nível máximo antes de distorção (dita "para x% THD"). Maior é melhor [file:1].</li>
-<li><b>Analógico</b>: saturação suave, por vezes agradável. <b>Digital</b>: clipping abrupto (onda quadrada, cantos vivos), desagradável e potencialmente danoso para altifalantes [file:1].</li>
-<li><b>SNR</b> (relação sinal/ruído) = diferença entre um nível de referência (não o máximo) e o ruído de fundo. A gama dinâmica usa o nível máximo [file:1].</li></ul>
-<div class="callout exam"><b class="t">Dica de oral</b>Diz sempre "dB <i>de quê</i>?". É o erro mais comum [file:1].</div>
-</section>
-
-<section id="acust"><h2>4 · Acústica da sala e propagação</h2>
-<h3>Quatro fenómenos de propagação</h3>
+<div class="card"><h3 style="margin-top:0">🔵 Dinâmico (eletrodinâmico)</h3>
+<ul><li>Lei de Faraday: diafragma + bobina movem-se junto a um íman.</li><li>Gera a sua própria tensão → <b>passivo</b>, não requer alimentação.</li></ul></div>
+<div class="card"><h3 style="margin-top:0">🟣 Condensador</h3>
+<ul><li>Diafragma + placa traseira formam um condensador; o som varia a <b>capacitância</b>.</li><li>Tem eletrónica ativa → <b>necessita de alimentação</b> (phantom 48 V ou pilha).</li></ul></div>
+</div>
+<div class="tw"><table>
+<tr><th></th><th>Dinâmico</th><th>Condensador</th></tr>
+<tr><td>Alimentação</td><td>Não precisa</td><td>Precisa (phantom ou pilha); a eletrónica tem um pré-amplificador incorporado e gera algum ruído (Henrique indica ~14 dB-A)</td></tr>
+<tr><td>Robustez</td><td>Aguenta quedas, humidade e sons muito fortes; reage bem a condições climáticas difíceis e é pouco sensível a choques (Henrique, Shure)</td><td>Mais delicado (Shure: temperaturas e humidade extremas podem afetá-lo)</td></tr>
+<tr><td>Sensibilidade</td><td>Menor: capta sobretudo o que está perto</td><td>Maior: capta detalhe, e também a sala (Henrique: os eletrostáticos são mais sensíveis que os eletrodinâmicos)</td></tr>
+<tr><td>Ataques rápidos (transientes)</td><td>Mais lento: diafragma e bobina pesam (Shure: até 1000× mais que o diafragma de um condensador)</td><td>Mais rápido: diafragma levíssimo; é o que tem menor massa e melhor resposta aos transitórios (Henrique)</td></tr>
+<tr><td>Preço</td><td>Em geral mais barato (Henrique, Corbett)</td><td>Em geral o mais caro (Henrique)</td></tr>
+<tr><td>Usos típicos</td><td>Voz ao vivo, tarola, amplificadores de guitarra</td><td>Voz em estúdio, locução, instrumentos acústicos, ambientes</td></tr>
+</table></div>
+<div class="ans"><b class="t">Resposta-modelo</b><p>“Quanto ao princípio de funcionamento, os microfones mais comuns são os dinâmicos e os de condensador. O dinâmico funciona pela Lei de Faraday e gera a sua própria tensão, por isso é passivo: não precisa de alimentação e é muito robusto, aguenta quedas, humidade e sons fortes. Como desvantagem, é menos sensível e mais lento nos ataques rápidos, porque o diafragma e a bobina têm massa. O condensador funciona pela variação da capacitância entre o diafragma e a placa traseira, e tem eletrónica ativa, por isso precisa de alimentação, phantom 48 V ou pilha. Tem a vantagem de ser mais sensível, captando mais detalhe, e de responder mais depressa aos ataques, por ter um diafragma levíssimo; mas é mais delicado e capta também a sala.”</p></div>
+<h3>Alimentação: phantom power e eletreto</h3>
 <div class="grid">
-<div class="card"><h4>Reflexão</h4><p>Ocorre se o obstáculo for pelo menos tão grande como o λ. Graves precisam de superfícies grandes; agudos refletem em objetos pequenos. Origina <b>eco</b> (repetição distinta, atraso &gt; ~50 ms), <b>reverberação</b> (muitas reflexões, persistência após cessar a fonte) e <b>ondas estacionárias</b> [file:6].</p></div>
-<div class="card"><h4>Absorção</h4><p>Depende do λ: materiais finos (alcatifa, tetos) só absorvem agudos; para graves são precisos absorsores espessos (cortinas, mobília estofada, <i>bass traps</i>). Mais absorção = menos reverberação. Pessoas absorvem médios/agudos [file:6].</p></div>
-<div class="card"><h4>Difração</h4><p>A onda contorna obstáculos menores que o λ. Graves contornam, agudos são bloqueados: agudos mais direcionais, graves quase omni [file:6].</p></div>
-<div class="card"><h4>Refração</h4><p>Curvatura da onda por mudança de densidade/temperatura do meio; relevante ao ar livre, a grande distância (vento, gradientes térmicos) [file:6].</p></div></div>
-<h3>Ondas estacionárias</h3>
-<p>Surgem entre paredes paralelas quando a distância é múltiplo de meio λ; afetam sobretudo os graves [file:6].</p>
-<h3>Som direto vs ambiente</h3>
-<div class="formula">Lei do inverso do quadrado: dobrar a distância ⇒ −6 dB</div>
-<ul>
-<li>Exemplo: ampli a 100 dB a 1 ft → 94 dB a 2 ft → 88 dB a 4 ft → 82 dB a 8 ft; a 6 in → 106 dB; a 3 in → 112 dB [file:6].</li>
-<li>O som <b>ambiente/reverberante</b> é praticamente constante na sala (refletido muitas vezes, sem direção) [file:6].</li>
-<li><b>Distância crítica</b> = onde o som direto iguala o reverberante. Em mic a essa distância ou mais, soa a "eco", "fundo de barril". Um mic unidirecional deve ficar a ≤ 50% da distância crítica [file:6].</li>
-</ul>
-<h3>Filtragem em pente (comb filtering)</h3>
-<ul>
-<li>Resposta com entalhes regulares, dente a dente. Ocorre quando o mesmo som chega com atraso (dois mics a distâncias diferentes somados, ou um mic que capta direto + reflexão) [file:6].</li>
-<li>Grande diferença de tempo (distância longa) ⇒ pente começa nos graves; pequena ⇒ desloca-se para os agudos [file:6].</li>
-<li><b>Regra 3:1</b>: distância entre mics ≥ 3× a distância de cada mic à fonte (o mais distante fica ≥ 12 dB abaixo). Para superfícies reflectoras, mic ≥ 1,5× mais afastado da superfície do que da fonte. A regra baseia-se em omnis; com direcionais pode relaxar-se [file:6].</li>
-<li><b>Inversão de fase</b> (switch Ø): útil, por exemplo, em snare com mic em cima e em baixo, pois os dois captam o mesmo evento em pontos opostos da onda [file:6].</li></ul>
-<h3>Psicoacústica em 30 segundos</h3>
-<p>O ouvido não é linear. Frequência ≠ altura, intensidade ≠ volume, espectro ≠ timbre. Gama útil 20 Hz–20 kHz, limiar de audição 0 dB SPL (20 µPa). A dB-scale aproxima a sensibilidade do ouvido, que é logarítmica [file:3].</p>
+<div class="card"><h4>Phantom power (P48)</h4><ul><li>A mesa ou interface envia 48 V pelo próprio cabo XLR, nos mesmos fios do sinal.</li><li>O sinal de áudio não “vê” esta tensão: daí “fantasma”.</li><li>Liga-se no botão “48V” / “+48V” do canal.</li><li>Os dinâmicos ignoram-no; atenção a microfones de fita antigos e a cabos mal feitos. (Shure: a tensão é igual nos pinos 2 e 3 do XLR, por isso não há diferença de potencial e não passa corrente num dinâmico balanceado.)</li></ul></div>
+<div class="card"><h4>Eletreto</h4><ul><li>Material que guarda carga elétrica de forma permanente (um “íman” de cargas).</li><li>Dispensa tensão para carregar as placas, mas o amplificador interno ainda precisa de energia (pilha ou plug-in power).</li><li>Está em telemóveis, portáteis, microfones de lapela e headsets.</li><li>Henrique: são mais compactos, só precisam de uma pequena pilha para o pré-amplificador.</li></ul></div>
+</div>
+<div class="callout"><b class="t">Porque precisa de energia?</b>As placas têm de estar carregadas e o sinal da cápsula é tão fraco que precisa de um pequeno amplificador lá dentro.</div>
+<div class="callout no"><b class="t">Não confundir!</b>Princípio de funcionamento (dinâmico, condensador) é uma coisa; padrão de sensibilidade (omni, cardióide…) é outra. Perguntas diferentes: P3 vs. P4.</div>
 </section>
 
-<section id="transd"><h2>5 · Transdutores e eletroacústica</h2>
-<div class="timeline"><span class="step">Onda sonora (pressão)</span><span class="arrow">→</span><span class="step">Diafragma (força/velocidade)</span><span class="arrow">→</span><span class="step">Elemento transdutor</span><span class="arrow">→</span><span class="step">Sinal elétrico (tensão/corrente)</span></div>
-<ul>
-<li><b>Transdutor</b> converte uma forma de energia noutra. Eletroacústico: elétrica ↔ acústica. Emissor (elétrico → acústico, altifalante); recetor (acústico → elétrico, microfone) [file:5].</li>
-<li>A conversão passa sempre por uma <b>etapa mecânica</b>: o <b>diafragma</b> (grandezas mecânicas: força e velocidade) [file:5].</li>
-<li>Microfones e altifalantes são inversos: o dinâmico funciona ao contrário de um altifalante (por isso cones de altifalante podem servir de micro) [file:5].</li>
-<li>Tipos eletromecânicos principais: <b>bobina móvel</b> (dinâmico), <b>piezoelétricos</b> (cristais de quartzo; cerâmicos PZT; plásticos PVF; acelerómetros, hidrofones) e <b>eletrostáticos/condensador</b> [file:5].</li>
-<li><b>Indução eletromagnética</b> (Faraday, 1831): condutor em campo magnético variável gera corrente. É o princípio dos dinâmicos e de fita [file:5][file:6].</li>
-<li>Condensador: capacidade variável entre placa fixa e diafragma móvel; requer polarização [file:5].</li></ul>
-<div class="callout exam"><b class="t">Pergunta provável</b>"Como é que um microfone converte som em eletricidade?" Resposta: a variação de pressão move o diafragma; o elemento (bobina num ímane / placa de condensador / fita) converte esse movimento numa tensão análoga em amplitude e frequência à onda sonora; um pré-amp eleva o nível [file:5].</div>
+<section id="p4">
+<h2><span class="n">P4</span>Padrões de sensibilidade <span class="pts" style="margin-left:auto">3 pontos</span></h2>
+<p class="lead">“Descreve pelo menos 4 padrões de sensibilidade e detalha o motivo principal para a existência destes padrões.”</p>
+<div class="callout ok"><b class="t">O motivo principal (decora isto!)</b>Existem porque os microfones podem medir a <b>pressão</b> do ar (omnidirecional: não importa para onde estão apontados) ou a <b>velocidade das partículas</b> (direcional: a velocidade é uma grandeza vetorial, tem direção). Ao medir pressão ou velocidade, altera-se o padrão espacial de sensibilidade. Henrique: um transdutor associa a pressão e a velocidade volúmica às grandezas elétricas, e os microfones de fita chamam-se por vezes “de velocidade” ou “de gradiente de pressão”.</div>
+<h3>Os 5 padrões</h3>
+<div class="pol" id="pol"></div>
+<p class="axis">← mais pressão &nbsp;&nbsp;·&nbsp;&nbsp; mais diferença frente/trás →</p>
+<div class="tw"><table>
+<tr><th>Padrão</th><th>Mede</th><th>Características</th></tr>
+<tr><td><b>Omnidirecional</b></td><td>Pressão</td><td>Capta igual de todos os lados; invariável com a posição/apontamento; resposta em frequência idealmente perfeita (slides). Nos agudos há “sombra acústica” e fica mais direcional (Henrique, Corbett); capta mais ambiente (Shure)</td></tr>
+<tr><td><b>Cardióide</b></td><td>Velocidade</td><td>Direcional; resposta geralmente não linear; efeito de proximidade (slides). Ângulo de captação ≈ 130°; sensibilidade mínima a 180°; capta o som direto 3× mais que o reverberante, ≈ 4,8 dB (Henrique, Shure)</td></tr>
+<tr><td><b>Super-cardióide</b></td><td>Velocidade</td><td>Mais direcional que o cardióide, com lóbulo traseiro (slides). Ângulo ≈ 115°; mínimo a ≈ 126°; rejeição atrás de −12 dB (Shure)</td></tr>
+<tr><td><b>Hiper-cardióide</b></td><td>Velocidade</td><td>Ainda mais direcional, com efeito de proximidade (slides). Ângulo ≈ 105°; mínimo a ≈ 110°; rejeição atrás de apenas −6 dB (Shure, Henrique)</td></tr>
+<tr><td><b>Figura de 8</b></td><td>Velocidade</td><td>Bidirecional; sofre muito de efeito de proximidade (slides). Máxima à frente e atrás; mínima a 90°, nos lados; ângulo ≈ 90° (Henrique, Shure, Corbett)</td></tr>
+</table></div>
+<h3>Cardióide = omni + figura de 8</h3>
+<svg id="sum" viewBox="0 0 560 170" style="width:100%;max-width:640px;display:block;margin:6px auto 12px"></svg>
+<ul><li>O omni capta igual de todo o lado, sempre com o mesmo sinal (+).</li><li>A figura de 8 capta à frente (+) e atrás com o sinal trocado (−, a tracejado).</li><li>Somados: à frente reforçam-se, atrás anulam-se.</li><li>Com mais figura de 8 na mistura, a frente estreita e aparece um lóbulo atrás: super e hipercardióide.</li></ul>
+<div class="card"><b>Experimenta:</b> mistura de figura de 8
+<input type="range" min="0" max="100" value="50" id="mix" style="width:100%;accent-color:var(--a)">
+<div style="display:flex;gap:20px;align-items:center;flex-wrap:wrap"><svg id="mixsvg" viewBox="-100 -100 200 200" style="width:220px"></svg><div id="mixtxt" style="font-size:14px;color:var(--mut)"></div></div></div>
+<h3>Como ler um diagrama polar</h3>
+<ul><li>Microfone no centro, a apontar para cima: 0° é a frente.</li><li>A linha mostra quanto capta em cada direção: mais longe do centro = mais sensível.</li><li>Os anéis são degraus de sensibilidade, normalmente de 5 ou 10 dB.</li><li>O diagrama é uma fatia; o padrão real é tridimensional (balões).</li><li>Várias curvas costumam ser várias frequências: o padrão muda entre graves e agudos.</li></ul>
+<h3>Como ler uma resposta em frequência</h3>
+<ul><li>Horizontal: frequências, dos graves aos agudos; cada marca vale 10× a anterior (logarítmico).</li><li>Vertical: quanto realça (+) ou atenua (−) cada frequência.</li><li>Linha plana: entrega o som tal como chegou.</li><li>Saliências e quedas: a “cor” do microfone, não são defeitos, são escolhas.</li></ul>
+<h3>Três classificações (não misturar)</h3>
+<div class="tw"><table>
+<tr><th>Critério</th><th>Categorias</th></tr>
+<tr><td>Princípio de funcionamento (transdutor)</td><td>Dinâmico · Condensador</td></tr>
+<tr><td>Forma como captam o som</td><td>Pressão (omnidirecionais) · Velocidade (todos os direcionais)</td></tr>
+<tr><td>Sensibilidade espacial</td><td>Omni (sempre pressão) · Cardióide · Super · Hiper · Figura de 8 (sempre velocidade)</td></tr>
+</table></div>
+<h3>Efeito de proximidade</h3>
+<p>Os slides indicam que cardióide e hiper-cardióide sofrem de efeito de proximidade, que a figura de 8 sofre “muito”, e não o referem para o omnidirecional. Segundo Corbett, é um reforço de graves e médios-graves quando um microfone direcional está perto da fonte: quanto mais direcional, maior o efeito (figura de 8 &gt; hiper &gt; cardióide &gt; cardióide largo); pode chegar a 400–500 Hz e costuma ter o pico entre 100 e 200 Hz. O omnidirecional não o tem.</p>
+<div class="ans"><b class="t">Resposta-modelo</b><p>“A sensibilidade de um microfone ao som à sua volta chama-se padrão de sensibilidade. O motivo principal para existirem vários é que os microfones podem medir a pressão do ar ou a velocidade das partículas. A pressão não tem direção, por isso o omnidirecional capta igual de todo o lado e tem resposta em frequência idealmente plana. A velocidade é um vetor, por isso os restantes são direcionais: o cardióide capta sobretudo à frente e rejeita a traseira; o super e o hiper-cardióide são mais estreitos, com um pequeno lóbulo traseiro; e a figura de 8 capta à frente e atrás com polaridades opostas. Um cardióide resulta de somar um omni com uma figura de 8. Os de velocidade têm efeito de proximidade e resposta menos linear.”</p></div>
 </section>
 
-<section id="mics"><h2>6 · Tipos de microfone</h2>
-<div class="callout"><b class="t">Conceitos de base</b>O mic é o primeiro elo da cadeia: a qualidade da gravação é limitada pelo elo mais fraco e nenhum processamento posterior compensa má escolha ou má técnica. Cada modelo soa diferente. <b>End address</b> (frente = topo) vs <b>side address</b> (frente = lado do logótipo). Nenhum é melhor [file:2].</div>
-<div class="tw"><table><thead><tr><th>Tipo</th><th>Como funciona</th><th>Pontos fortes</th><th>Pontos fracos</th><th>Usar em</th></tr></thead><tbody>
-<tr><td><b>Dinâmico</b> (bobina móvel)</td><td>Diafragma + bobina num campo magnético; indução eletromagnética. Sem alimentação [file:6].</td><td>Robusto, barato, tolera SPL altíssimo, pouco sensível a humidade e choque, sem ruído próprio relevante [file:6].</td><td>Diafragma + bobina pesado ⇒ transitórios lentos, fraco em agudos, baixa sensibilidade e "alcance". Só omni ou cardioide [file:6].</td><td>Bombo, caixa, timbalões, amplis de guitarra/baixo, voz ao vivo, exteriores. Compressão "natural" que engorda o som [file:6].</td></tr>
-<tr><td><b>Condensador</b> (capacitor)</td><td>Diafragma finíssimo (metalizado, tipicamente ouro) e placa traseira perfurada formam um condensador polarizado. Precisa de <b>phantom power 48 V</b> e de pré-amp interno [file:6].</td><td>Agudos extensos (até 20 kHz e mais), alta sensibilidade, melhor transitório, detalhe, maior alcance, qualquer padrão polar possível [file:6].</td><td>Caro, frágil (vento e choque podem danificar), sensível a humidade/temperatura, ruído eletrónico e nível máximo limitados pelo pré-amp [file:6].</td><td>Vozes, guitarra acústica, piano, pratos, fontes suaves, gravação detalhada em estúdio. Usar pop filter e windscreen [file:6].</td></tr>
-<tr><td><b>Electreto</b></td><td>Condensador com carga permanente; só o pré-amp é alimentado (pilha 1,5/9 V ou phantom) [file:5].</td><td>Compacto, barato (lapela, telemóveis) [file:5].</td><td>Geralmente resposta pior e mais ruído; evitar fontes muito suaves. O "back-electret" melhora [file:5].</td><td>Onde um condensador serviria, exceto fontes muito baixas [file:5].</td></tr>
-<tr><td><b>Fita</b> (ribbon)</td><td>Fita de alumínio dobrada (~2 µm) num campo magnético forte; transformador sobe a impedância. Também "velocidade" ou "gradiente de pressão" [file:5].</td><td>Agudos suaves e "sedosos", som vintage, rejeição lateral total (figura-de-8), forte efeito de proximidade, baixo ruído de fundo [file:5].</td><td>Frágeis (vento, plosivas, choque), saída muito baixa (precisa pré-amp limpo e de ganho alto), sensibilidade pior, mais caros; phantom mal ligada pode destruir modelos antigos [file:5].</td><td>Suavizar fontes brilhantes, calor vintage, rejeição de spill lateral [file:5].</td></tr>
-<tr><td><b>Valvulado</b> (tube)</td><td>Condensador com amplificação por válvula [file:5].</td><td>Calor, plenitude, agudos suaves; "maquilhagem sónica" para fontes finas [file:5].</td><td>Mais ruído, válvulas envelhecem e partem, caro (clássicos 5–10 mil $); um clone barato não é garantia [file:5].</td><td>Fontes finas a precisar de corpo; não em fontes já quentes [file:5].</td></tr>
-<tr><td><b>PZM / fronteira</b></td><td>Cápsula condensador pequena virada para uma placa refletora, a &lt; ~1,3 mm; som direto e refletido chegam em fase [file:5].</td><td>Sem filtragem em pente; padrão hemisférico; +6 dB de sensibilidade face ao espaço livre; ambiência [file:6].</td><td>Precisa de superfície grande e dura (≥ 5 ft quadrados p/ graves até 100 Hz) [file:6].</td><td>Paredes, palco, conferências, teatro, tampa de piano, ambiente [file:5].</td></tr>
-<tr><td><b>Cone de altifalante</b></td><td>Altifalante ligado "ao contrário" [file:5].</td><td>Graves enormes [file:5].</td><td>Sem agudos, "mushy"; não usar sozinho [file:5].</td><td>Misturado com mic normal num bombo [file:5].</td></tr>
-<tr><td><b>Shotgun / canhão</b></td><td>Cápsula atrás de tubo com fendas; interferência cancela som lateral [file:2].</td><td>Muito direcional (quanto maior o tubo, mais) [file:2].</td><td>Pouco usado em estúdio [file:2].</td><td>TV, cinema, campo, isolar uma conversa [file:2].</td></tr>
-<tr><td><b>Especiais</b></td><td>Estéreo (duas cápsulas, uma rotativa 180–360°), intermutáveis (2 diafragmas, selector de padrão), sistemas modulares (AKG C414, Neumann U87...) [file:5].</td><td>Flexibilidade [file:5].</td><td>—</td><td>Estúdio versátil, M-S [file:5].</td></tr></tbody></table></div>
-<div class="callout tip"><b class="t">Analogia das aulas</b>Dinâmico = câmara de "poucos megapixels": dá impressão geral, não detalhe fino. Condensador = "muitos megapixels": capta tudo, o que nem sempre é desejável. Em transitórios, o diafragma + bobina de um dinâmico pode pesar até 1000× mais que o de um condensador: é o camião vs carro desportivo (mesmo motor, reação muito diferente) [file:6].</div>
-<h4>Phantom power</h4>
-<ul>
-<li>Tensão DC (12–48 V; habitual 48 V) enviada pelo cabo XLR. Pino 2 e pino 3 recebem a mesma tensão relativamente ao pino 1 (massa/blindagem) [file:6].</li>
-<li>Como não há diferença de tensão entre pinos 2 e 3, <b>não afeta dinâmicos balanceados</b> (os circuitos têm limitação de corrente) [file:6].</li>
-<li>Risco: ligar/desligar ligações (patchbays, jack) com phantom ligada pode causar curto e danificar mics de fita [file:5].</li></ul>
+<section id="glossario">
+<h2><span class="n">GL</span>Glossário rápido</h2>
+<div class="tw"><table>
+<tr><th>Termo</th><th>Significado</th></tr>
+<tr><td>Compressão / rarefação</td><td>Zonas de pressão do ar acima / abaixo do equilíbrio</td></tr>
+<tr><td>Onda longitudinal</td><td>Oscilação na mesma direção do avanço da onda</td></tr>
+<tr><td>Hertz (Hz)</td><td>Oscilações por segundo; mede a frequência</td></tr>
+<tr><td>Decibel (dB)</td><td>Escala logarítmica de amplitude; +10 dB ≈ 2× mais forte</td></tr>
+<tr><td>Comprimento de onda (λ)</td><td>Distância de um ciclo; λ = v / f</td></tr>
+<tr><td>Transdutor</td><td>Converte uma forma de energia noutra (microfone, altifalante)</td></tr>
+<tr><td>Sinal analógico</td><td>Tensão elétrica análoga à variação de pressão</td></tr>
+<tr><td>Phantom power (P48)</td><td>48 V enviados pelo cabo XLR para microfones de condensador</td></tr>
+<tr><td>Eletreto</td><td>Material com carga permanente; dispensa tensão para carregar as placas</td></tr>
+<tr><td>Padrão de sensibilidade</td><td>Como o microfone responde ao som vindo de cada direção</td></tr>
+<tr><td>Efeito de proximidade</td><td>Reforço de graves em microfones direcionais quando a fonte está perto</td></tr>
+<tr><td>Diagrama polar</td><td>Gráfico circular da sensibilidade por ângulo</td></tr>
+</table></div>
 </section>
 
-<section id="polar"><h2>7 · Direcionalidade e padrões polares</h2>
-<p>O <b>diagrama polar</b> mostra a sensibilidade do mic por ângulo (0° = frente, em eixo). Quanto mais longe do centro, mais sensível. <b>Nulo</b> = ângulo de menor sensibilidade. Todos os mics direcionais obtêm direcionalidade deixando entrar som pela traseira da cápsula; <b>tapar as aberturas com a mão</b> torna-os omni, o som fica fino e nasal e aumenta o risco de feedback [file:2][file:6].</p>
-<div class="tw"><table><thead><tr><th>Padrão</th><th>Ângulo de captação (−3 dB / −6 dB)</th><th>Nulo</th><th>Notas</th></tr></thead><tbody>
-<tr><td>Omni</td><td>360° / 360°</td><td>—</td><td>Mais ambiente; mais aberto e transparente; sem efeito de proximidade; mais direcional nos agudos. Colocar cerca de metade da distância de um uni [file:6].</td></tr>
-<tr><td>Wide cardioide</td><td>—</td><td>Atrás (região)</td><td>Entre omni e cardioide [file:2].</td></tr>
-<tr><td>Cardioide</td><td>≈ 130° / 180°</td><td>180°</td><td>Capta ~1/3 do ambiente de um omni (factor de direccionalidade 3 = 4,8 dB). Factor de distância 1,7: omni a 5 m ≈ cardioide a 8,5 m. Rejeição traseira boa: 15–20 dB [file:6].</td></tr>
-<tr><td>Supercardioide</td><td>115°</td><td>≈ 126°</td><td>Lóbulo traseiro: −12 dB [file:6].</td></tr>
-<tr><td>Hipercardioide</td><td>105° / 140°</td><td>≈ 110°</td><td>Lóbulo traseiro: −6 dB; mais rejeição de ambiente [file:6].</td></tr>
-<tr><td>Bidirecional (figura-de-8)</td><td>90° / 120°</td><td>90° e 270°</td><td>Rejeição lateral máxima; usado em M-S, duetos; fitas [file:6].</td></tr></tbody></table></div>
-<div class="callout warn"><b class="t">Atenção às divergências</b>Os materiais diferem nalguns números (ex.: no livro de Corbett os nulos do hipercardioide ficam "35–45° afastados da traseira"; a Shure dá ≈ 110° do eixo frontal; limiar da dor 130 vs 120 dB SPL). Para o oral, explica o conceito (hiper e supercardioide têm nulos laterais-traseiros e um lóbulo atrás) e cita a fonte que usares [file:5][file:6].</div>
-<h4>Outros efeitos ligados à direção</h4>
-<ul>
-<li><b>Efeito de proximidade</b>: mics unidirecionais aumentam os graves quando perto (&lt; ~1 ft, notório até 2 ft). Soluções: roll-off no mixer, mic com switch de corte de graves, mic desenhado para minimizar, ou um omni (não tem) [file:6].</li>
-<li><b>Coloração fora do eixo</b>: perde-se primeiro os agudos, soa "abafado" [file:6].</li>
-<li><b>Sombra acústica</b> em omnis nos agudos (λ comparável à cápsula) [file:5].</li>
-<li><b>Monitor com cardioide</b>: apontar o monitor para a traseira (180°); com supercardioide, ~55° fora do eixo traseiro [file:6].</li></ul>
+<section id="cards">
+<h2><span class="n">FC</span>Cartões relâmpago</h2>
+<p class="lead">Clica para virar. Responde em voz alta antes.</p>
+<div class="grid" id="fc"></div>
 </section>
 
-<section id="specs"><h2>8 · Especificações de um microfone</h2>
-<div class="grid">
-<div class="card"><h4>Sensibilidade</h4><p>Tensão de saída por pressão sonora (mV/Pa ou dBV). Ex.: 10 mV/Pa = 10 mV com 1 Pa. Condensadores são mais sensíveis que dinâmicos. Baixa sensibilidade obriga a aproximar da fonte [file:5].</p></div>
-<div class="card"><h4>Impedância</h4><p><b>Alta</b> (~10–50 kΩ): cabos &gt; 3–6 m (≈ 20 ft) perdem agudos, "amador". <b>Baixa</b> (&lt; 600 Ω, tipicamente 150–200 Ω): cabos de 100 m e mais sem perdas, profissional [file:5][file:6].</p></div>
-<div class="card"><h4>Ruído de fundo (self-noise)</h4><p>Dinâmicos: resistência da bobina/fita; condensador: ruído térmico e do pré-amp (ex.: ~14 dB-A). Relativo à referência 2×10⁻⁵ Pa [file:5].</p></div>
-<div class="card"><h4>SPL máximo</h4><p>Nível para 0,5% de distorção harmónica a 1 kHz. Condensadores saturam no pré-amp; dinâmicos aguentam ~140 dB. Muitos têm <b>atenuador (pad) de 10 dB</b>, que também reduz a SNR em 10 dB [file:5].</p></div>
-<div class="card"><h4>SNR e gama dinâmica</h4><p>SNR = nível máximo − self-noise. Gama dinâmica = níveis onde a saída é proporcional. 60 dB de diferença = 1 milhão de vezes em energia [file:1][file:5].</p></div>
-<div class="card"><h4>Resposta em frequência</h4><p>Gama reproduzida dentro de ±3 dB (referência 1 kHz). <b>Flat</b> (natural, distante, acústicos) vs <b>shaped</b> (pico de presença 2–8 kHz em voz; roll-off grave). Diafragma grande = mais sensível; pequeno = mais linear nos agudos extremos [file:5].</p></div>
-<div class="card"><h4>Resposta a transitórios</h4><p>Quanto maior a massa móvel, pior: condensador &gt; fita &gt; bobina móvel. Faísca de teste: dinâmico demora quase o dobro e "toca" depois [file:6].</p></div>
-<div class="card"><h4>Saída balanceada</h4><p>Dois condutores com sinal igual e polaridade oposta + blindagem. A entrada amplifica a <b>diferença</b> e rejeita ruído/hum igual nos dois. Recomendado: baixa impedância e balanceado [file:6].</p></div></div>
-<h3>Diafragma grande vs pequeno (condensadores)</h3>
-<div class="tw"><table><thead><tr><th></th><th>Pequeno (≤ ½")</th><th>Grande (≥ 1")</th></tr></thead><tbody>
-<tr><td>Agudos</td><td>Mais extensos</td><td>Menos (mas há excelentes) [file:5].</td></tr>
-<tr><td>Carácter</td><td>Preciso, pouca coloração</td><td>"Maior que a vida", mais coloração [file:5].</td></tr>
-<tr><td>Ruído</td><td>Mais ruído próprio (precisa de pré-amps melhores)</td><td>Mais silenciosos [file:5].</td></tr></tbody></table></div>
-<h3>Acessórios</h3>
-<ul>
-<li><b>Pop filter / windscreen</b>: reduz plosivas (p, b, t) e vento. Distância de 3 polegadas é a pior para plosivas (melhor mais perto ou mais longe, ou fora do eixo da boca, ou omni) [file:5][file:6].</li>
-<li><b>Shock mount</b>: corta ruído de manuseamento e pancadas no suporte [file:5].</li>
-<li><b>Pré-amp</b>: sobe o sinal de mic level para line level; fitas antigas precisam de ganho alto e limpo [file:5].</li></ul>
+<section id="quiz" class="quiz">
+<h2><span class="n">QZ</span>Quiz de autoavaliação</h2>
+<p class="lead">Escolhe a resposta; recebes feedback imediato.</p>
+<div id="qs"></div><div id="score">Pontuação: 0 / 0</div>
 </section>
 
-<section id="tecn"><h2>9 · Técnicas de captação</h2>
-<div class="callout exam"><b class="t">Objetivos</b>(1) Maximizar o som desejado, (2) minimizar o indesejado (spill/ruído), (3) ganho suficiente antes de feedback (ao vivo). A técnica é gosto pessoal: escuta e experimenta, mas conhecer os princípios acelera o processo [file:6].</div>
-<h3>Regras gerais</h3>
-<ul>
-<li>Faz a fonte soar bem acusticamente <b>antes</b> de a microfonar [file:6].</li>
-<li>Truque: tapar um ouvido e procurar o sítio onde soa bem; aí vai o mic [file:6].</li>
-<li>Reduzir a distância para metade = +6 dB no mic e mais isolamento e ganho antes de feedback. Mas colocar só tão perto quanto necessário (demasiado perto capta só uma parte do instrumento) [file:6].</li>
-<li>Usar o <b>mínimo de mics</b>: cada duplicação dos mics abertos (NOM) tira 3 dB ao ganho antes de feedback [file:6].</li>
-<li>Instrumentos soam melhor a ≥ 2 ft; ao vivo usa-se captação próxima e experimenta-se posição [file:6].</li>
-<li>Cortar frequências abaixo da fundamental mais grave do instrumento [file:6].</li></ul>
-<h3>Ganho acústico (ao vivo)</h3>
-<div class="formula">NAG = 20·log(D<sub>f</sub>/D<sub>n</sub>) &nbsp;|&nbsp; PAG = 20(log D₁ − log D₂ + log D₀ − log D<sub>s</sub>) − 10·log NOM − 6</div>
-<p>Sistema suficiente se <b>PAG ≥ NAG</b>. Exemplo: 85 dB na 1.ª fila (10 ft) e 67 dB na última (80 ft) ⇒ NAG = 18 dB. Para maximizar PAG: mic perto da fonte, longe do altifalante, altifalante perto do público, poucos mics [file:6].</p>
-<h3>Escolher o mic por fonte</h3>
-<div class="tw"><table><thead><tr><th>Fonte</th><th>Mic/posição sugerida</th><th>Motivo</th></tr></thead><tbody>
-<tr><td>Voz principal</td><td>Cardioide (dinâmico ao vivo; condensador em estúdio) junto aos lábios, pop filter</td><td>Isolamento, ganho; roll-off de graves se necessário [file:6].</td></tr>
-<tr><td>Coro</td><td>1–3 ft acima e 2–4 ft à frente da 1.ª fila; ~1 mic por 15–20 pessoas; condensadores flat</td><td>Cobertura sem sobreposição [file:6].</td></tr>
-<tr><td>Guitarra acústica</td><td>~8 in do buraco (natural); 3 in (baixo, robusto); junto à ponte (menos ruído de cordas)</td><td>Mais perto do buraco = mais graves [file:6].</td></tr>
-<tr><td>Piano de cauda</td><td>~12 in acima das cordas médias, ~8 in dos martelos; par estéreo graves/agudos</td><td>Cuidado com cancelamentos em mono [file:6].</td></tr>
-<tr><td>Amplificador de guitarra</td><td>Dinâmico cardioide a 1–4 in do centro do cone (mais brilho no centro, mais suave no bordo)</td><td>Suporta SPL; altifalante direcional nos agudos [file:6].</td></tr>
-<tr><td>Bombo</td><td>Dinâmico dentro/junto da pele; toalhas de papel reduzem "boominess"</td><td>SPL alto, pouco conteúdo de agudos [file:6].</td></tr>
-<tr><td>Caixa</td><td>Dinâmico acima do bordo; apontar o nulo para o hi-hat</td><td>SPL muito alto; isolamento [file:6].</td></tr>
-<tr><td>Pratos / overhead</td><td>Condensador flat 1 ft acima da cabeça do baterista, ou par estéreo</td><td>Agudos e transitórios [file:6].</td></tr>
-<tr><td>Sopros</td><td>Metais: 1–2 ft do sino (a eixo fica brilhante); sax: entre furos e sino; flauta: perto, com windscreen</td><td>Equilíbrio do som e ruído de respiração [file:6].</td></tr></tbody></table></div>
-<h3>Técnicas estéreo</h3>
-<div class="tw"><table><thead><tr><th>Técnica</th><th>Como</th><th>Resultado</th></tr></thead><tbody>
-<tr><td><b>Coincidente (X-Y)</b></td><td>Cápsulas juntas e alinhadas na vertical, anguladas (ex.: 135°)</td><td>Imagem boa, abertura estéreo estreita, <b>compatível com mono</b> (sem diferenças de tempo) [file:6].</td></tr>
-<tr><td><b>M-S (Mid-Side)</b></td><td>Cardioide frontal (M) + figura-de-8 lateral (S); matriz soma e subtrai (M+S, M−S) para L e R</td><td>Bom spread, excelente imagem e localização, largura ajustável depois, mono-compatível [file:6].</td></tr>
-<tr><td><b>Quase-coincidente</b></td><td>Anguladas e afastadas 6–10 in (ex.: 110°, 7 in)</td><td>Localização precisa [file:6].</td></tr>
-<tr><td><b>Espaçado (A-B)</b></td><td>2 mics a 3–10 ft, a apontar em frente</td><td>Ambiência "quente", imagem vaga; separação exagerada se &gt; 3 ft; 10 ft dá melhor cobertura [file:6].</td></tr>
-<tr><td><b>3 espaçados</b></td><td>3 mics ~5 ft; o central vai a ambos os canais</td><td>Melhor localização que dois [file:6].</td></tr></tbody></table></div>
-<div class="callout tip"><b class="t">Como explicar M-S</b>O canal M é mono, o S contém só a diferença lateral. Somando M+S obténs L; M−S (S com polaridade invertida) obténs R. Aumentando o S, alarga a imagem; baixando, estreita. Colapsando em mono, o S cancela e fica o M limpo [file:6].</div>
-<h3>Problemas típicos</h3>
-<ul>
-<li><b>Feedback</b>: aproximar do source, afastar dos altifalantes, apontar o nulo para o monitor, poucos mics [file:6].</li>
-<li><b>Overload da entrada</b>: usar pad/atenuador da mesa ou em linha [file:6].</li>
-<li><b>Ruído de manuseamento/pancadas</b>: shock mount, omni, ou mic com shock interno [file:6].</li>
-<li><b>Fase entre mics</b>: regra 3:1, inverter polaridade, ou mudar o padrão polar [file:6].</li></ul>
+<section id="check" class="check">
+<h2><span class="n">✓</span>Checklist antes do teste</h2>
+<div class="card" id="cl"></div>
+<div class="callout"><b class="t">No dia</b>Respira, responde com estrutura (“Primeiro… segundo…”), dá mais itens do que o mínimo, e se tiveres dúvida, liga ao princípio central: <i>o que viaja é a perturbação, não a matéria</i>.</div>
 </section>
 
-<section id="ferr"><h2>10 · Calculadoras</h2>
-<div class="tools">
-<div class="card"><h4>Comprimento de onda</h4><label>Frequência (Hz)</label><input id="wf" type="number" value="1000"><label>Velocidade do som (m/s)</label><input id="wc" type="number" value="344"><div class="out" id="wo"></div></div>
-<div class="card"><h4>dB ↔ razão</h4><label>Variação (dB)</label><input id="dbv" type="number" value="6" step="0.5"><div class="out" id="dbo"></div></div>
-<div class="card"><h4>Lei do inverso do quadrado</h4><label>SPL a d₁ (dB)</label><input id="s1" type="number" value="100"><label>Distância d₁ (m)</label><input id="d1" type="number" value="1" step="0.1"><label>Nova distância d₂ (m)</label><input id="d2" type="number" value="4" step="0.1"><div class="out" id="so"></div></div>
-<div class="card"><h4>NAG</h4><label>Distância ao ouvinte mais longe (m)</label><input id="nf" type="number" value="24"><label>Distância ao ouvinte mais perto (m)</label><input id="nn" type="number" value="3"><div class="out" id="no"></div></div>
-</div></section>
-
-<section id="oral"><h2>11 · Perguntas prováveis de oral</h2>
-<p>Clica para abrir. Responde em voz alta antes de ver.</p>
-<div id="qa"></div></section>
-
-<section id="cards"><h2>12 · Flashcards</h2><p>Clica num cartão para virar.</p><div class="seg"><button id="shuf">Baralhar</button></div><div class="flash" id="flash"></div></section>
-
-<section id="quiz"><h2>13 · Quiz rápido</h2><div id="qz"></div><div class="score" id="sc"></div><button id="rq">Recomeçar</button></section>
-
-<section id="check"><h2>14 · Checklist final</h2>
-<div class="card"><ul id="cl" style="list-style:none;padding:0"></ul></div>
-<div class="callout"><b class="t">Em dia de teste</b>Estrutura cada resposta assim: <b>definição → mecanismo (como/porquê) → exemplo prático → limitação/trade-off</b>. Usa números concretos (344 m/s, 48 V, +6 dB, 130°). Se não souberes, raciocina a partir da fórmula, por exemplo c = f·λ.</div>
-<div class="card"><h4>Bibliografia do programa</h4><p>Chion (1994) <i>AudioVision</i>; Chion (1998) <i>The Voice in Cinema</i>; Corbett (2015) <i>Mic it!</i>; Everest &amp; Pohlmann (2009) <i>Master Handbook of Acoustics</i>; Fonseca (2012) <i>Introdução à Engenharia do Som</i>; Henrique (2002) <i>Acústica Musical</i>; Lipshitz (1986) <i>Stereo Microphone Techniques… Are</i>; EBU R-128 (2014).</p></div>
-</section>
 </main></div>
-<footer>Guia de estudo criado a partir do material das aulas. Bom teste! 🎚️</footer>
+<footer>Guia feito a partir dos slides das Aulas 1–3 de Sonorização para Multimédia (2025/26), com complementos de Henrique, Everest, Corbett e Shure, assinalados na origem.</footer>
 
 <script>
-const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
-$('#theme').onclick=()=>{const d=document.documentElement;const t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('t',t)};
-document.documentElement.dataset.theme=localStorage.getItem('t')||(matchMedia('(prefers-color-scheme:dark').matches?'dark':'light');
-$('#menu').onclick=()=>$('#toc').classList.toggle('open');
-$$('#toc a').forEach(a=>a.onclick=()=>$('#toc').classList.remove('open'));
-let allOpen=false;$('#expand').onclick=()=>{allOpen=!allOpen;$$('details').forEach(d=>d.open=allOpen);$('#expand').textContent=allOpen?'Fechar tudo':'Abrir tudo'};
-addEventListener('scroll',()=>{const h=document.documentElement;$('#progress').style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%'});
-const secs=$$('main section'),links=$$('#toc a');
-new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){links.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+e.target.id))}}),{rootMargin:'-30% 0px -60% 0px'}).observe&&secs.forEach(s=>new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)links.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+s.id))}),{rootMargin:'-30% 0px -60% 0px'}).observe(s));
+const $=s=>document.querySelector(s);
+$('#theme').onclick=()=>{const r=document.documentElement;r.dataset.theme=r.dataset.theme==='light'?'dark':'light'};
+addEventListener('scroll',()=>{const h=document.documentElement;$('#bar').style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%'});
+const links=[...document.querySelectorAll('#nav a')];
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){links.forEach(l=>l.classList.toggle('on',l.getAttribute('href')==='#'+e.target.id))}}),{rootMargin:'-30% 0px -60% 0px'});
+document.querySelectorAll('section').forEach(s=>io.observe(s));
+function wv(id,amp,ph){let d='';for(let x=0;x<=600;x+=5){const y=60+amp*Math.sin(x/40+ph);d+=(x?'L':'M')+x+' '+y}$(id).setAttribute('d',d)}
+wv('#w1',30,0);wv('#w2',20,1.5);
+let p='';for(let i=0;i<110;i++){const x0=6+i*6.2;const x=x0-7*Math.sin(x0/28*Math.PI/1.2);for(let r=0;r<3;r++)p+=`<circle cx="${x}" cy="${35+r*40}" r="3.2" fill="var(--a)" opacity=".85"/>`}
+$('#particles').innerHTML=p;
 
-function calc(){const f=+$('#wf').value,c=+$('#wc').value;$('#wo').textContent=f>0?`λ = ${(c/f).toFixed(3)} m (${(c/f*100).toFixed(1)} cm) · T = ${(1000/f).toFixed(2)} ms`:'—';
-const db=+$('#dbv').value;$('#dbo').innerHTML=`Potência ×${Math.pow(10,db/10).toFixed(3)}<br>Tensão/pressão ×${Math.pow(10,db/20).toFixed(3)}`;
-const ds=20*Math.log10(+$('#d2').value/+$('#d1').value);$('#so').textContent=`SPL em d₂ = ${(+$('#s1').value-ds).toFixed(1)} dB (${ds>=0?'−':'+'}${Math.abs(ds).toFixed(1)} dB)`;
-$('#no').textContent=`NAG = ${(20*Math.log10(+$('#nf').value/+$('#nn').value)).toFixed(1)} dB`}
-$$('.tools input').forEach(i=>i.oninput=calc);calc();
+/* Diagramas polares: r = |v(θ)|; lóbulos negativos (polaridade invertida) em segmentos separados */
+function polar(f,o={}){
+ const R=o.R||80,col=o.color||'var(--a)',dash=!!o.dash,N=360;
+ let full='',runs=[],cur=null;
+ for(let i=0;i<=N;i++){
+  const a=i*2*Math.PI/N,v=f(a),r=Math.abs(v)*R,x=(r*Math.sin(a)).toFixed(2),y=(-r*Math.cos(a)).toFixed(2);
+  full+=(i?'L':'M')+x+' '+y+' ';
+  const s=v>=-1e-9;
+  if(!cur||cur.s!==s){ if(cur)cur.d+=`L${x} ${y} `; cur={s,d:`M${x} ${y} `}; runs.push(cur);} else cur.d+=`L${x} ${y} `;
+ }
+ const rings=[.25,.5,.75,1].map(k=>`<circle r="${k*R}" fill="none" stroke="var(--line)"/>`).join('');
+ const axes=`<line x1="${-R*1.1}" x2="${R*1.1}" stroke="var(--line)"/><line y1="${-R*1.1}" y2="${R*1.1}" stroke="var(--line)"/>`;
+ const strokes=runs.map(r=>`<path d="${r.d}" fill="none" stroke="${col}" stroke-width="2.6" stroke-linejoin="round" ${(!r.s&&dash)?'stroke-dasharray="6 4"':''}/>`).join('');
+ return rings+axes+`<path d="${full}Z" fill="${col}" fill-opacity=".16"/>`+strokes;
+}
+const OMNI=a=>1, CARD=a=>.5+.5*Math.cos(a), SUPER=a=>.37+.63*Math.cos(a), HYPER=a=>.25+.75*Math.cos(a), FIG8=a=>Math.cos(a);
+const pats=[
+['Omnidirecional',OMNI,'var(--a)','Pressão. Igual em todas as direções.'],
+['Cardióide',CARD,'var(--o)','Velocidade. Rejeita a traseira.'],
+['Super-cardióide',SUPER,'var(--a)','Mais estreito; pequeno lóbulo traseiro.'],
+['Hiper-cardióide',HYPER,'var(--a)','Ainda mais estreito; lóbulo traseiro maior.'],
+['Figura de 8',FIG8,'var(--a)','Bidirecional; atrás com polaridade invertida.']];
+$('#pol').innerHTML=pats.map(([n,f,c,d])=>`<div class="card"><svg viewBox="-92 -92 184 184">${polar(f,{R:80,color:c})}</svg><h4>${n}</h4><p>${d}</p></div>`).join('');
+/* esquema omni + figura de 8 = cardióide */
+(function(){const P=(f,cx,o)=>`<g transform="translate(${cx} 85)">${polar(f,o)}</g>`;
+ const t=(x,y,s,sz)=>`<text x="${x}" y="${y}" text-anchor="middle" font-size="${sz||12}" font-weight="600" fill="var(--tx)">${s}</text>`;
+ $('#sum').innerHTML=P(OMNI,80,{R:62})+P(FIG8,280,{R:62,dash:true,color:'var(--tx)'})+P(CARD,480,{R:62,color:'var(--o)'})
+  +t(80,12,'Omnidirecional')+t(280,12,'Figura de 8')+t(480,12,'Cardióide')
+  +t(180,92,'+',28)+t(380,92,'=',28)+t(80,72,'+')+t(80,106,'+')+t(280,72,'+')+t(280,106,'−');})();
+function mix(){const m=$('#mix').value/100;$('#mixsvg').innerHTML=polar(a=>(1-m)+m*Math.cos(a),{R:88,color:'var(--a)',dash:true});
+ const name=m==0?'Omnidirecional':m<.55?'Cardióide (≈ 50%)':m<.7?'Super-cardióide (≈ 63%)':m<.85?'Hiper-cardióide (≈ 75%)':'Figura de 8 (100%)';
+ $('#mixtxt').innerHTML=`<b style="color:var(--tx)">${Math.round(m*100)}% figura de 8 + ${100-Math.round(m*100)}% omni</b><br>Padrão aproximado: ${name}<br>Tracejado = polaridade invertida (−).<br><small>Desenho calculado por mim: ≈ 63% (super) e ≈ 75% (hiper) de figura de 8 reproduzem os valores da Shure (mínimos a 126° e 110°; −12 e −6 dB atrás).</small>`}
+$('#mix').oninput=mix;mix();
 
-const QA=[
-['O que é o som e como se propaga?','Perturbação de pressão que se propaga num meio elástico (gás, líquido, sólido) por compressões e rarefações; as partículas oscilam localmente e transferem momento, não viajam. Precisa de elasticidade e inércia. No vácuo não há som. Ondas sonoras no ar são longitudinais.'],
-['Diferença entre frequência e altura, intensidade e volume, espectro e timbre?','O primeiro de cada par é objetivo (mensurável), o segundo é subjetivo (percebido). São análogos mas não lineares: o ouvido interfere.'],
-['Qual é a relação entre frequência, comprimento de onda e velocidade? Dá exemplos.','c = f·λ. Com c = 344 m/s: 100 Hz → 3,44 m; 500 Hz → 68,8 cm; 20 kHz → 1,7 cm; 16 Hz → 21,5 m. A frequência não muda de meio para meio, o λ sim.'],
-['De que depende a velocidade do som?','Do meio (mais rápido em sólidos e líquidos densos) e, no ar, sobe com temperatura e humidade. Não depende da frequência nem da intensidade, por isso o ar é não dispersivo.'],
-['O que é fase? Explica interferência construtiva e destrutiva.','Posição no ciclo em graus (0–360°). Em fase: amplitudes somam (+3 dB no ar, +6 dB electricamente). 180°: cancelam-se. Intermédio: filtragem em pente.'],
-['Explica o decibel. Porque é que se usa?','Unidade logarítmica relativa que comprime gamas enormes. 10·log para potência, 20·log para tensão/pressão. Precisa de referência (SPL, dBV, dBu, dBFS). +3 dB = dobro da potência; +6 dB = dobro da tensão; ~+10 dB = dobro do volume percebido.'],
-['Diferença entre dB SPL, dBV, dBu e dBFS?','SPL: pressão sonora real no espaço (0 dB = 20 µPa). dBV: tensão (ref. 1 V), medidores de pico analógicos. dBu/VU: nível médio analógico. dBFS: digital, 0 dB = máximo antes de clip.'],
-['Distorção analógica vs digital?','Analógico: saturação suave, às vezes agradável. Digital: clipping duro (onda quadrada), desagradável e perigoso para altifalantes. Logo, deixar headroom.'],
-['Gama dinâmica vs SNR?','Gama dinâmica: entre o ruído de fundo e o nível máximo sem distorção. SNR: entre um nível de referência (não o máximo) e o ruído de fundo.'],
-['O que é um microfone e como funciona?','Transdutor acústico-elétrico: a pressão move o diafragma, o elemento converte esse movimento em tensão análoga à onda. É o primeiro elo da cadeia e limita a qualidade final.'],
-['Compara dinâmico e condensador.','Dinâmico: bobina num campo magnético, robusto, sem alimentação, aguenta SPL alto, transitórios e agudos limitados (massa). Condensador: diafragma leve + placa, phantom 48 V, sensível, agudos e transitórios melhores, mais frágil e caro.'],
-['O que é phantom power? Danifica mics dinâmicos?','DC até 48 V no cabo XLR, igual nos pinos 2 e 3 (ref. pino 1). Serve os condensadores. Não afeta dinâmicos balanceados (sem diferença de tensão). Risco em fitas se houver curto (ex.: patchbay).'],
-['Quando usar um mic de fita?','Para suavizar fontes brilhantes, carácter vintage, rejeição lateral (figura-de-8), efeito de proximidade, desde que não haja vento, SPL extremo ou choque. Saída baixa: pré-amp limpo de ganho alto.'],
-['Explica os padrões polares.','Omni: todas as direções. Cardioide: frente, nulo a 180°. Super/hipercardioide: mais direcionais, nulos a ≈126°/110°, com lóbulo traseiro. Figura-de-8: frente e trás, nulos laterais.'],
-['O que é o efeito de proximidade?','Reforço dos graves em mics unidirecionais a menos de ~1 ft da fonte. Mitiga-se com roll-off, switch do mic ou omni.'],
-['Como evitar plosivas e ruído de manuseamento?','Plosivas: pop filter/windscreen, mic fora do eixo da boca, mais perto ou mais longe de 3 in, omni. Manuseamento: shock mount, omni ou shock interno.'],
-['O que é filtragem em pente e como evitá-la?','Interferência de sinais iguais com atraso (2 mics ou reflexão), que cria entalhes regulares na resposta. Regra 3:1, inverter polaridade, mics direcionais, isolamento.'],
-['O que é a lei do inverso do quadrado? E a distância crítica?','Dobrar a distância à fonte = −6 dB no som direto. O ambiente é constante; distância crítica é onde direto = reverberante; o mic deve estar abaixo de ~50% dela.'],
-['Descreve as técnicas estéreo.','X-Y (coincidente), M-S, quase-coincidente (6–10 in) e espaçado A-B (3–10 ft). Coincidentes são mono-compatíveis; espaçadas dão ambiência mas imagem vaga.'],
-['Explica o M-S e porque é mono-compatível.','Cardioide (M) + figura-de-8 lateral (S). L = M+S, R = M−S. Em mono, o S cancela e fica o M. A largura controla-se dosando o S.'],
-['O que são NAG e PAG?','NAG: ganho necessário para o ouvinte mais distante ouvir como o mais próximo = 20·log(Df/Dn). PAG: ganho máximo antes de feedback. Precisa de PAG ≥ NAG.'],
-['Reflexão, absorção, difração e refração?','Reflexão (obstáculo ≥ λ; eco, reverberação, ondas estacionárias); absorção (depende de λ; graves exigem material espesso); difração (contorna obstáculos &lt; λ); refração (curvatura por mudança de densidade/temperatura).'],
-['Porque é que o som no ar é longitudinal e não transversal?','Fluidos não oferecem resistência ao corte, por isso só transmitem compressão/rarefação: partículas oscilam na direção de propagação.']];
-$('#qa').innerHTML=QA.map(([q,a],i)=>`<details><summary>${i+1}. ${q}</summary><div>${a}</div></details>`).join('');
-
-const FC=[['c = ?','c = f·λ (≈ 344 m/s no ar a 20 °C)'],['λ de 20 kHz','≈ 1,72 cm'],['λ de 16 Hz','≈ 21,5 m'],['Potência ×2','+3 dB'],['Tensão ×2','+6 dB'],['"Dobro do volume"','≈ +9/10 dB'],['Distância ×2','−6 dB SPL (inverso do quadrado)'],['0 dB SPL','20 µPa, limiar de audição'],['Limiar da dor','≈ 120–130 dB SPL (segundo a fonte)'],['Phantom power','48 V DC nos pinos 2 e 3 do XLR'],['Dinâmico','Bobina + íman; robusto; sem alimentação; pior em agudos/transitórios'],['Condensador','Diafragma + placa; phantom; agudos e transitórios bons; frágil'],['Fita','Alumínio ~2 µm; figura-de-8; suave, vintage, frágil, saída baixa'],['PZM','Cápsula virada para placa; hemisférico; sem pente; +6 dB'],['Cardioide','Nulo a 180°; ≈130°; factor de distância 1,7'],['Hipercardioide','Nulo ≈110°; lóbulo traseiro −6 dB; 105°'],['Supercardioide','Nulo ≈126°; lóbulo traseiro −12 dB; 115°'],['Efeito de proximidade','Graves sobem em unidireccionais a < 1 ft; omni não tem'],['Regra 3:1','Mics ≥ 3× distância fonte-mic; mais distante ≥ 12 dB abaixo'],['Distância crítica','Direto = reverberante; mic ≤ 50%'],['Fundamental vs harmónicos','Altura vs timbre'],['Oitava','×2 / ÷2 na frequência (440 → 880 Hz)'],['dBFS','Digital; 0 = máximo; clip acima'],['Impedância baixa','< 600 Ω; cabos de 100 m+'],['M-S','L = M+S; R = M−S']];
-function flash(){$('#flash').innerHTML=FC.map(([f,b])=>`<div class="fc"><div><div class="f">${f}</div><div class="b">${b}</div></div></div>`).join('');$$('.fc').forEach(c=>c.onclick=()=>c.classList.toggle('flip'))}
-flash();$('#shuf').onclick=()=>{FC.sort(()=>Math.random()-.5);flash()};
-
-const QZ=[
-['Qual é o comprimento de onda de 1000 Hz no ar (344 m/s)?',['3,44 m','34,4 cm','0,34 cm','344 m'],1],
-['Dobrar a potência acústica corresponde a…',['+3 dB','+6 dB','+10 dB','+20 dB'],0],
-['Que mic precisa de phantom power 48 V?',['Dinâmico de bobina','Condensador','Fita antigo','Nenhum'],1],
-['Um cardioide tem o nulo a…',['90°','110°','126°','180°'],3],
-['Duas ondas iguais 180° fora de fase…',['Somam +6 dB','Cancelam-se','Ficam iguais','Somam +3 dB'],1],
-['Dobrar a distância à fonte (campo direto) provoca…',['−3 dB','−6 dB','−12 dB','Nada'],1],
-['Qual tem melhor resposta a transitórios?',['Dinâmico','Fita','Condensador','Cone de altifalante'],2],
-['0 dBFS é…',['O ruído de fundo','O nível nominal analógico','O máximo digital antes de clip','O limiar de audição'],2],
-['O som no ar é uma onda…',['Transversal','Longitudinal','Eletromagnética','Dispersiva'],1],
-['O efeito de proximidade ocorre em…',['Omnis','Unidirecionais perto da fonte','Mics a 10 m','Só em condensadores'],1],
-['Regra 3:1 serve para…',['Aumentar graves','Reduzir filtragem em pente entre mics','Calcular SPL','Escolher phantom power'],1],
-['Qual padrão é ideal para M-S (componente lateral)?',['Omni','Cardioide','Figura-de-8','Shotgun'],2]];
-let score=0,ans=0;function quiz(){score=0;ans=0;$('#sc').textContent='';$('#qz').innerHTML=QZ.map(([q,o,c],i)=>`<div class="q"><p>${i+1}. ${q}</p>${o.map((t,j)=>`<button class="opt" data-i="${i}" data-j="${j}">${t}</button>`).join('')}</div>`).join('');
-$$('.opt').forEach(b=>b.onclick=()=>{const i=+b.dataset.i,j=+b.dataset.j,grp=$$(`.opt[data-i="${i}"]`);if(grp.some(x=>x.disabled))return;grp.forEach(x=>x.disabled=true);grp[QZ[i][2]].classList.add('ok');if(j===QZ[i][2])score++;else b.classList.add('bad');ans++;if(ans===QZ.length)$('#sc').textContent=`Resultado: ${score}/${QZ.length}`})}
-quiz();$('#rq').onclick=quiz;
-
-const CL=['Sei explicar som como estímulo e sensação','Sei c = f·λ e fazer contas de cabeça','Sei as regras +3 / +6 / +10 dB','Distingo dB SPL, dBV, dBu, dBFS','Sei comparar dinâmico, condensador, fita, electreto, PZM','Sei desenhar os padrões polares e os nulos','Sei as especificações de um microfone','Sei o efeito de proximidade e como resolvê-lo','Sei filtragem em pente e a regra 3:1','Sei as técnicas estéreo X-Y, M-S, A-B','Sei o inverso do quadrado e a distância crítica','Revi semiótica, AD/DA, mistura e VST nos slides do Moodle'];
-$('#cl').innerHTML=CL.map((t,i)=>`<li><label style="display:flex;gap:10px;margin:6px 0;color:var(--text);font-size:1rem"><input type="checkbox" style="width:auto" id="c${i}" ${localStorage.getItem('c'+i)?'checked':''}> ${t}</label></li>`).join('');
-$$('#cl input').forEach(c=>c.onchange=()=>c.checked?localStorage.setItem(c.id,1):localStorage.removeItem(c.id));
+const fc=[['Em que difere o som de uma onda do mar?','Partículas longitudinais (som) vs. órbitas circulares (mar); 3D vs. superfície 2D; som precisa de meio elástico e não existe no vácuo; variação minúscula de pressão, 344 m/s, 20 Hz–20 kHz.'],
+['O que viaja numa onda sonora?','A perturbação (padrão de compressões e rarefações), não o ar. Transporta energia e momento, não matéria.'],
+['+10 dB soa a…?','Mais ou menos 2 vezes mais forte.'],
+['Princípio do microfone dinâmico?','Lei de Faraday: diafragma e bobina junto ao íman geram tensão. Passivo.'],
+['Princípio do condensador?','Variação da capacitância entre diafragma e placa traseira. Precisa de alimentação.'],
+['O que é phantom power?','48 V enviados pelo cabo XLR, nos mesmos fios do sinal; liga-se no botão 48V.'],
+['Porque há padrões de sensibilidade?','Medir pressão (omni, sem direção) ou velocidade das partículas (vetor → direcional).'],
+['Como se forma o cardióide?','Omni + figura de 8: à frente somam-se, atrás anulam-se.'],
+['Que padrões são de pressão / velocidade?','Omni = pressão. Cardióide, super, hiper e figura de 8 = velocidade.'],
+['Onde se usa o dinâmico / condensador?','Dinâmico: voz ao vivo, tarola, amplis. Condensador: estúdio, locução, acústicos, ambientes.']];
+$('#fc').innerHTML=fc.map(c=>`<div class="flip" onclick="this.classList.toggle('on')"><div><p><b>${c[0]}</b></p><p>${c[1]}</p></div></div>`).join('');
+const qz=[
+['Numa onda sonora, o que viaja?',['O ar','A perturbação (compressões e rarefações)','O sinal elétrico'],1,'As partículas só oscilam no sítio.'],
+['O som propaga-se no vácuo?',['Sim, mais depressa','Não, precisa de matéria','Só os graves'],1,'Sem matéria não há nada para comprimir.'],
+['Que tipo de onda é o som no ar?',['Transversal','Longitudinal','Eletromagnética'],1,'O ar oscila na direção do avanço.'],
+['Qual microfone não precisa de alimentação?',['Dinâmico','Condensador','Eletreto'],0,'Gera a sua própria tensão (Faraday).'],
+['O phantom power envia…',['12 V','24 V','48 V'],2,'P48, pelo cabo XLR.'],
+['Qual é sempre de pressão?',['Cardióide','Figura de 8','Omnidirecional'],2,'Os outros medem velocidade.'],
+['Cardióide resulta de…',['Omni + figura de 8','Dois dinâmicos','Figura de 8 − omni'],0,'À frente somam, atrás anulam.'],
+['Qual sofre MUITO de efeito de proximidade?',['Omni','Cardióide','Figura de 8'],2,'Segundo os slides.'],
+['Qual é mais rápido nos ataques?',['Dinâmico','Condensador','São iguais'],1,'Diafragma levíssimo.'],
+['Porque a velocidade das partículas dá padrão direcional?',['É uma grandeza vetorial','É mais forte','É elétrica'],0,'Tem direção.']];
+let ok=0,tot=0;
+$('#qs').innerHTML=qz.map((q,i)=>`<div class="q"><b>${i+1}. ${q[0]}</b><div class="opts">${q[1].map((o,j)=>`<button data-q="${i}" data-j="${j}">${o}</button>`).join('')}</div><div class="fb" id="fb${i}"></div></div>`).join('');
+document.querySelectorAll('.opts button').forEach(b=>b.onclick=()=>{const i=+b.dataset.q,j=+b.dataset.j,box=b.parentNode;if(box.dataset.done)return;box.dataset.done=1;tot++;
+const good=j===qz[i][2];if(good)ok++;b.classList.add(good?'good':'bad');if(!good)box.children[qz[i][2]].classList.add('good');
+const fb=$('#fb'+i);fb.style.display='block';fb.textContent=(good?'✔ Certo. ':'✘ Errado. ')+qz[i][3];$('#score').textContent=`Pontuação: ${ok} / ${tot}`});
+const cl=['Sei explicar 4+ diferenças entre onda sonora e onda do mar','Sei explicar compressão/rarefação e dar 4+ consequências','Sei os dois princípios (dinâmico e condensador) e 2 vantagens de cada','Sei explicar phantom power e eletreto','Sei desenhar e descrever omni, cardióide, super, hiper e figura de 8','Sei o motivo: pressão vs. velocidade das partículas','Sei que cardióide = omni + figura de 8','Sei os valores: 344 m/s, 20 Hz–20 kHz, 48 V, +10 dB ≈ 2×'];
+$('#cl').innerHTML=cl.map((t,i)=>`<label><input type="checkbox" id="c${i}"><span>${t}</span></label>`).join('');
 </script>
 </body></html>
