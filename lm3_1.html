@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LabMM 3: A Bíblia do 1º Teste Prático</title>
+    <style>
+        :root {
+            /* Tema Escuro IDE Avançado */
+            --bg-base: #0d1117;
+            --bg-surface: #161b22;
+            --bg-elevated: #21262d;
+            --text-main: #c9d1d9;
+            --text-muted: #8b949e;
+            --primary: #d2a8ff; 
+            --primary-glow: rgba(210, 168, 255, 0.3);
+            --secondary: #7ee787; 
+            --accent: #79c0ff;
+            --danger: #ff7b72; 
+            --warning: #e3b341; 
+            --border: #30363d;
+            
+            /* Pseudocódigo */
+            --code-bg: #010409;
+            --code-kw: #ff7b72; 
+            --code-type: #79c0ff; 
+            --code-var: #d2a8ff; 
+            --code-str: #a5d6ff; 
+            --code-op: #c9d1d9; 
+            --code-comment: #6a9955;
+            --code-num: #b5cea8;
+        }
+
+        * { box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(180deg, #1a0b2e 0%, var(--bg-base) 100%);
+            padding: 4rem 2rem 2rem;
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+        }
+
+        header h1 { margin: 0; font-size: 3.5rem; color: var(--text-main); text-shadow: 0 0 20px var(--primary-glow); }
+        header p { color: var(--text-muted); font-size: 1.2rem; max-width: 700px; margin: 1rem auto 0; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem 1rem; }
+
+        .section {
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+            position: relative;
+        }
+
+        .section::before {
+            content: '';
+            position: absolute; top: 0; left: 0; right: 0; height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+            border-top-left-radius: 12px; border-top-right-radius: 12px;
+        }
+
+        h2 { color: var(--text-main); font-size: 2.2rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; display: flex; align-items: center; gap: 15px; margin-top: 0; }
+        h2 span { background: var(--bg-elevated); padding: 0.2rem 0.8rem; border-radius: 8px; color: var(--primary); font-family: monospace; font-size: 1.5rem; border: 1px solid var(--border); }
+        h3 { color: var(--accent); margin-top: 2.5rem; font-size: 1.5rem; }
+        h4 { color: var(--secondary); font-size: 1.2rem; margin-bottom: 0.5rem; }
+
+        /* Blocos de Código */
+        .code-block {
+            background: var(--code-bg); border: 1px solid var(--border); border-radius: 8px;
+            padding: 1.5rem; font-family: "JetBrains Mono", "Consolas", monospace; font-size: 0.95rem;
+            overflow-x: auto; white-space: pre; margin: 1rem 0; line-height: 1.5;
+        }
+        .code-header { background: var(--bg-elevated); padding: 0.5rem 1rem; font-size: 0.85rem; color: var(--text-muted); border-top-left-radius: 8px; border-top-right-radius: 8px; margin-bottom: -1rem; border: 1px solid var(--border); border-bottom: none; display: flex; justify-content: space-between; }
+
+        .kw { color: var(--code-kw); font-weight: bold; }
+        .type { color: var(--code-type); }
+        .var { color: var(--code-var); }
+        .str { color: var(--code-str); }
+        .op { color: var(--code-op); }
+        .comment { color: var(--code-comment); font-style: italic; }
+        .num { color: var(--code-num); }
+
+        /* Tabelas */
+        table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; background: var(--bg-elevated); border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        th, td { padding: 1rem; text-align: left; border-bottom: 1px solid var(--border); }
+        th { background: rgba(210, 168, 255, 0.05); color: var(--primary); text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px; }
+        tr:last-child td { border-bottom: none; }
+        .cheatsheet-table td:first-child { font-family: monospace; color: var(--secondary); font-weight: bold; width: 35%; background: rgba(126, 231, 135, 0.05); border-right: 1px solid var(--border); }
+        
+        /* Layouts */
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: start; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+        
+        /* SVGs */
+        .svg-container { background: var(--code-bg); border: 1px solid var(--border); border-radius: 8px; padding: 2rem; text-align: center; margin: 1rem 0; position: relative; overflow: hidden; }
+        svg text { font-family: "JetBrains Mono", monospace; font-size: 14px; font-weight: bold; }
+        .svg-path { stroke: var(--text-muted); stroke-width: 2; fill: none; }
+        .svg-arrow { fill: var(--text-muted); }
+        .svg-term { fill: var(--bg-surface); stroke: var(--primary); stroke-width: 2; }
+        .svg-io { fill: var(--bg-surface); stroke: var(--secondary); stroke-width: 2; }
+        .svg-proc { fill: var(--bg-surface); stroke: var(--accent); stroke-width: 2; }
+        .svg-dec { fill: var(--bg-surface); stroke: var(--warning); stroke-width: 2; }
+
+        /* Alertas */
+        .alert { padding: 1.5rem; border-radius: 8px; margin: 1.5rem 0; border-left: 4px solid; background: rgba(22, 27, 34, 0.8); }
+        .alert h4 { margin: 0 0 0.5rem 0; display: flex; align-items: center; gap: 8px; }
+        .alert-warning { border-color: var(--warning); background: rgba(227, 179, 65, 0.05); }
+        .alert-warning h4 { color: var(--warning); }
+        .alert-danger { border-color: var(--danger); background: rgba(255, 123, 114, 0.05); }
+        .alert-danger h4 { color: var(--danger); }
+        .alert-info { border-color: var(--accent); background: rgba(121, 192, 255, 0.05); }
+        .alert-info h4 { color: var(--accent); }
+
+        kbd { background: var(--bg-surface); border: 1px solid var(--border); padding: 0.2rem 0.5rem; border-radius: 4px; color: var(--primary); font-family: monospace; font-size: 0.9em; box-shadow: inset 0 -1px 0 rgba(0,0,0,0.5); }
+        
+        .strike { text-decoration: line-through; color: var(--danger); opacity: 0.7; }
+        .highlight { color: var(--secondary); font-weight: bold; }
+        
+        /* Soluções / Exemplos */
+        .example-box { border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-top: 2rem; }
+        .example-header { background: var(--bg-elevated); padding: 1rem 1.5rem; border-bottom: 1px solid var(--border); font-weight: bold; color: var(--primary); display: flex; justify-content: space-between;}
+        .example-body { padding: 1.5rem; background: var(--bg-surface); }
+        .badge { background: var(--border); padding: 0.2rem 0.6rem; border-radius: 12px; font-size: 0.8rem; color: var(--text-muted); }
+
+        @media(max-width: 900px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+<!-- Definições SVG globais -->
+<svg width="0" height="0" style="position:absolute;">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" class="svg-arrow" />
+    </marker>
+  </defs>
+</svg>
+
+<header>
+    <h1>LabMM 3: A Bíblia Prática</h1>
+    <p>O compêndio exaustivo de Algoritmia. Teoria detalhada, Simbologia SVG, Cheatsheets e Exemplos Resolvidos passo a passo das fichas práticas.</p>
+</header>
+
+<div class="container">
+
+    <!-- SECÇÃO 1: CHEATSHEET -->
+    <div class="section">
+        <h2><span>01</span> Cheatsheet Absoluta & Variáveis (T3-T4)</h2>
+        <p>A fundação de qualquer algoritmo. O programa só processa informação se esta for armazenada na memória através de variáveis. Cada variável obriga a uma declaração de tipo.</p>
+        
+        <div class="grid-2">
+            <div>
+                <h3>Tipos de Dados e Sintaxe</h3>
+                <p>A declaração tem de ser feita obrigatoriamente a seguir ao <kbd>INÍCIO</kbd>.</p>
+                <table class="cheatsheet-table">
+                    <tr><td>VAR nome : NÚMERO</td><td>Guarda inteiros ou decimais. Permite contas (+, -, *, /).</td></tr>
+                    <tr><td>VAR nome : TEXTO</td><td>Guarda strings/caracteres (ex: "Maria", "Sim").</td></tr>
+                    <tr><td>VAR nome : LÓGICO</td><td>Guarda apenas VERDADEIRO ou FALSO.</td></tr>
+                    <tr><td>VAR nome : DATA</td><td>Guarda datas (menos comum no papel).</td></tr>
+                    <tr><td>INÍCIO / FIM</td><td>Marcadores delimitadores do programa global.</td></tr>
+                </table>
+            </div>
+            <div>
+                <h3>Comandos I/O e Operadores</h3>
+                <table class="cheatsheet-table">
+                    <tr><td>LÊ variavel</td><td>Pausa o programa e guarda a introdução do utilizador na memória.</td></tr>
+                    <tr><td>ESCREVE "txt"</td><td>Imprime para o ecrã texto ou variáveis (ex: <code>ESCREVE "Olá " + nome</code>).</td></tr>
+                    <tr><td>=</td><td><strong>Atribuição.</strong> Ex: <code>soma = 2 + 2</code> (A variável soma passa a valer 4).</td></tr>
+                    <tr><td>==, &ne;, &gt;, &lt;, &ge;, &le;</td><td><strong>Relacionais.</strong> Usados em avaliações de condições (retornam Lógico).</td></tr>
+                    <tr><td>E, OU, NÃO</td><td><strong>Lógicos.</strong> Juntam várias condições. O "E" exige que ambas sejam verdadeiras.</td></tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="alert alert-info">
+            <h4>💡 Detalhe Importante: Operadores Relacionais vs Atribuição</h4>
+            <p>Um erro clássico é confundir <kbd>=</kbd> (Atribuição, ex: <code>A = 5</code>, significa "guarda o valor 5 na variável A") com <kbd>==</kbd> (Comparação, ex: <code>SE A == 5 ENTÃO</code>, significa "Verifica se A é igual a 5"). No pseudocódigo de LabMM3, a avaliação da ficha é rigorosa nestes símbolos.</p>
+        </div>
+    </div>
+
+    <!-- SECÇÃO 2: FLUXOGRAMAS E SIMBOLOGIA -->
+    <div class="section">
+        <h2><span>02</span> Simbologia Oficial de Fluxogramas (T1-T2)</h2>
+        <p>A linguagem visual padrão. O fluxo lê-se sempre de <strong>cima para baixo</strong> e da <strong>esquerda para a direita</strong>. O uso da forma errada desconta cotação direta.</p>
+        
+        <div class="grid-2">
+            <div class="svg-container">
+                <svg width="250" height="120" viewBox="0 0 250 120">
+                    <rect x="25" y="35" width="200" height="50" rx="25" ry="25" class="svg-term" />
+                    <text x="125" y="65" fill="#c9d1d9" text-anchor="middle">INÍCIO / FIM</text>
+                </svg>
+                <p><strong>Terminais (Oval / Elipse)</strong><br>Abre e fecha a execução do algoritmo. Só sai uma seta do INÍCIO e só entra uma seta no FIM.</p>
+            </div>
+            <div class="svg-container">
+                <svg width="250" height="120" viewBox="0 0 250 120">
+                    <polygon points="50,35 225,35 200,85 25,85" class="svg-io" />
+                    <text x="125" y="65" fill="#c9d1d9" text-anchor="middle">LÊ x / ESCREVE y</text>
+                </svg>
+                <p><strong>Input / Output (Paralelogramo)</strong><br>Sempre que o algoritmo comunica com o exterior. Pedir dados ao utilizador ou mostrar resultados.</p>
+            </div>
+            <div class="svg-container">
+                <svg width="250" height="120" viewBox="0 0 250 120">
+                    <rect x="25" y="35" width="200" height="50" class="svg-proc" />
+                    <text x="125" y="65" fill="#c9d1d9" text-anchor="middle">total = preco * 1.23</text>
+                </svg>
+                <p><strong>Processamento (Retângulo)</strong><br>Operações internas. Fórmulas matemáticas, atribuições de variáveis ou reinicializações.</p>
+            </div>
+            <div class="svg-container">
+                <svg width="250" height="120" viewBox="0 0 250 120">
+                    <polygon points="125,10 220,60 125,110 30,60" class="svg-dec" />
+                    <text x="125" y="65" fill="#c9d1d9" text-anchor="middle">idade &ge; 18</text>
+                    <text x="235" y="65" fill="#7ee787">V</text>
+                    <text x="15" y="65" fill="#ff7b72">F</text>
+                </svg>
+                <p><strong>Decisão (Losango)</strong><br>Tem de ter uma expressão lógica no interior. <strong style="color:var(--danger)">Obrigatório:</strong> As setas de saída têm de estar marcadas com V e F.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECÇÃO 3: ESTRUTURAS DE DECISÃO -->
+    <div class="section">
+        <h2><span>03</span> Decisões Complexas: SE vs ESCOLHA (T4-T5)</h2>
+        <p>A base da inteligência do algoritmo. Como obrigar o programa a tomar rotas diferentes consoante os dados processados.</p>
+
+        <h3>1. O Ramo Condicional: SE-ENTÃO-SENÃO</h3>
+        <p>Aceita todo o tipo de lógica relacional (maior, menor, igual). Se o teste avaliar para VERDADEIRO, executa o bloco <kbd>ENTÃO</kbd>. Se for FALSO, salta para o bloco <kbd>SENÃO</kbd>.</p>
+        
+        <div class="code-header"><span>Exemplo Explicativo</span><span>Decisão Composta</span></div>
+        <div class="code-block">
+<span class="kw">SE</span> (<span class="var">media</span> <span class="op">&ge;</span> <span class="num">10</span>) <span class="kw">E</span> (<span class="var">faltas</span> <span class="op">&le;</span> <span class="num">3</span>) <span class="kw">ENTÃO</span>
+    <span class="comment">// Ambas as condições têm de ser cumpridas graças ao "E"</span>
+    <span class="kw">ESCREVE</span> <span class="str">"Aprovação Direta"</span>
+<span class="kw">SENÃO</span>
+    <span class="comment">// Se a média for 9, ou as faltas forem 4, entra aqui.</span>
+    <span class="kw">SE</span> (<span class="var">media</span> <span class="op">&ge;</span> <span class="num">8</span>) <span class="kw">ENTÃO</span>
+        <span class="comment">// Isto é um "SE" aninhado (um SE dentro de um SENÃO)</span>
+        <span class="kw">ESCREVE</span> <span class="str">"Recurso"</span>
+    <span class="kw">SENÃO</span>
+        <span class="kw">ESCREVE</span> <span class="str">"Reprovado"</span>
+    <span class="kw">FIM SE</span>
+<span class="kw">FIM SE</span></div>
+
+        <h3 style="margin-top: 3rem;">2. A Decisão Múltipla Exata: ESCOLHA-CASO</h3>
+        <p>A usar <strong>apenas</strong> quando queres testar uma única variável contra uma lista de valores estritos. Pensa nisto como um "Menu" de opções.</p>
+        
+        <div class="alert alert-danger">
+            <h4>🚨 Erro Fatal de Exame</h4>
+            <p>No comando <kbd>ESCOLHA</kbd>, não podes colocar variáveis ou operadores nos CASOS. O código <code>CASO > 10</code> ou <code>CASO var_limite</code> dará cotação ZERO. Os casos têm de ser estáticos: <code>CASO 1</code>, <code>CASO "A"</code>.</p>
+        </div>
+
+        <div class="code-header"><span>A Estrutura Correta do ESCOLHA</span><span>Decisão Múltipla</span></div>
+        <div class="code-block">
+<span class="kw">VAR</span> <span class="var">dia</span> : <span class="type">NÚMERO</span>
+<span class="kw">ESCREVE</span> <span class="str">"Indique o dia da semana (1-7):"</span>
+<span class="kw">LÊ</span> <span class="var">dia</span>
+
+<span class="kw">ESCOLHA</span> <span class="var">dia</span>
+    <span class="kw">CASO</span> <span class="num">1</span>
+        <span class="kw">ESCREVE</span> <span class="str">"Domingo"</span>
+    <span class="kw">CASO</span> <span class="num">2</span>
+        <span class="kw">ESCREVE</span> <span class="str">"Segunda-feira"</span>
+    <span class="comment">// ... saltando para poupar espaço</span>
+    <span class="kw">CASO OUTRO</span>
+        <span class="comment">// O "CASO OUTRO" captura qualquer input que não seja 1, 2, etc. (ex: se user digitar 9)</span>
+        <span class="kw">ESCREVE</span> <span class="str">"Dia inválido."</span>
+<span class="kw">FIM ESCOLHA</span></div>
+    </div>
+
+    <!-- SECÇÃO 4: CICLOS E REPETIÇÃO -->
+    <div class="section">
+        <h2><span>04</span> A Arte dos Ciclos (T6-T7)</h2>
+        <p>A automatização do código. O algoritmo repete blocos até que a condição seja saciada (ENQUANTO) ou o limite do contador seja atingido (REPETE).</p>
+
+        <div class="grid-2">
+            <div>
+                <h3>ENQUANTO (While)</h3>
+                <p>A condição é verificada <strong>antes</strong> de entrar. Ideal para validações de Input, porque se a condição for inicialmente falsa, o ciclo nunca é executado.</p>
+                <div class="code-header"><span>Ciclo de Validação</span></div>
+                <div class="code-block">
+<span class="kw">VAR</span> <span class="var">senha</span> : <span class="type">TEXTO</span> = <span class="str">""</span>
+
+<span class="comment">// Enquanto a senha for errada, não avança.</span>
+<span class="kw">ENQUANTO</span> <span class="var">senha</span> <span class="op">&ne;</span> <span class="str">"1234"</span> <span class="kw">FAZ</span>
+    <span class="kw">ESCREVE</span> <span class="str">"Introduza password:"</span>
+    <span class="kw">LÊ</span> <span class="var">senha</span> <span class="comment">// Variável de teste atualizada!</span>
+<span class="kw">FIM ENQUANTO</span>
+<span class="kw">ESCREVE</span> <span class="str">"Acesso Permitido"</span></div>
+            </div>
+            
+            <div>
+                <h3>REPETE (For)</h3>
+                <p>Usado quando o número de iterações é predeterminado. A anatomia do ciclo trata da variável contadora automaticamente (inicialização e incremento).</p>
+                <div class="code-header"><span>Anatomia: REPETE (var) DE (inicio) ATÉ (fim) PASSO (inc)</span></div>
+                <div class="code-block">
+<span class="kw">VAR</span> <span class="var">soma</span> : <span class="type">NÚMERO</span> = <span class="num">0</span>
+
+<span class="comment">// Vai correr exatamente 5 vezes (i vale 1, 2, 3, 4, 5)</span>
+<span class="kw">REPETE</span> <span class="var">i</span> <span class="kw">DE</span> <span class="num">1</span> <span class="kw">ATÉ</span> <span class="num">5</span> <span class="kw">PASSO</span> <span class="num">1</span>
+    <span class="kw">ESCREVE</span> <span class="str">"Valor de i é: "</span> <span class="op">+</span> <span class="var">i</span>
+    <span class="var">soma</span> = <span class="var">soma</span> <span class="op">+</span> <span class="var">i</span>
+<span class="kw">FIM REPETE</span></div>
+            </div>
+        </div>
+        
+        <div class="alert alert-warning">
+            <h4>⚠️ O Perigo do Ciclo Infinito</h4>
+            <p>Se, num fluxograma em papel (Ex. 7 Revisões), tiveres um Losango que atira uma seta para cima de volta ao fluxo, <strong>e não houver nenhum Retângulo (Processo) a alterar a variável desse losango</strong>, o programa cracha infinitamente. No papel, isso vale perda de cotação drástica.</p>
+        </div>
+    </div>
+
+    <!-- SECÇÃO 5: TESTE DE MESA -->
+    <div class="section">
+        <h2><span>05</span> Teste de Mesa e Estado de Memória (T8)</h2>
+        <p>A técnica para "correr o código na cabeça". Consiste em criar uma matriz onde controlamos o estado de cada variável no tempo.</p>
+        
+        <div class="grid-2">
+            <div>
+                <h4>Código do Teste:</h4>
+                <div class="code-block">
+<span class="num">1.</span> <span class="kw">INÍCIO</span>
+<span class="num">2.</span> <span class="kw">VAR</span> <span class="var">x</span>: <span class="type">NÚMERO</span> = <span class="num">0</span>
+<span class="num">3.</span> <span class="kw">VAR</span> <span class="var">y</span>: <span class="type">NÚMERO</span> = <span class="num">10</span>
+<span class="num">4.</span> <span class="kw">ENQUANTO</span> <span class="var">x</span> <span class="op">&lt;</span> <span class="num">2</span> <span class="kw">FAZ</span>
+<span class="num">5.</span>     <span class="var">y</span> = <span class="var">y</span> <span class="op">-</span> <span class="num">2</span>
+<span class="num">6.</span>     <span class="var">x</span> = <span class="var">x</span> <span class="op">+</span> <span class="num">1</span>
+<span class="num">7.</span> <span class="kw">FIM ENQUANTO</span>
+<span class="num">8.</span> <span class="var">y</span> = <span class="var">y</span> <span class="op">*</span> <span class="var">x</span>
+<span class="num">9.</span> <span class="kw">FIM</span></div>
+            </div>
+            <div>
+                <h4>A tua Folha de Resposta:</h4>
+                <table>
+                    <tr><th>Iteração / Passo</th><th>Memória [x]</th><th>Memória [y]</th></tr>
+                    <tr><td>Setup (Linhas 2, 3)</td><td><span class="strike">0</span></td><td><span class="strike">10</span></td></tr>
+                    <tr><td>1º Loop (x=0 &lt; 2)</td><td><span class="strike">1</span> <span class="comment">(L6)</span></td><td><span class="strike">8</span> <span class="comment">(L5: 10-2)</span></td></tr>
+                    <tr><td>2º Loop (x=1 &lt; 2)</td><td><span class="strike">2</span> <span class="comment">(L6)</span></td><td><span class="strike">6</span> <span class="comment">(L5: 8-2)</span></td></tr>
+                    <tr><td>Fim Loop (x=2. Sai)</td><td>---</td><td>---</td></tr>
+                    <tr><td>Linha 8 (y = 6 * 2)</td><td><span class="highlight">2</span></td><td><span class="highlight">12</span></td></tr>
+                </table>
+                <p style="font-size: 0.9em; color: var(--text-muted); margin-top: 1rem;">* No teste real, não precisas de escrever a coluna "Iteração". Basta fazeres a tabela com <code>X</code> e <code>Y</code> e ires <strong>riscando</strong> os valores anteriores à medida que calculas os novos.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECÇÃO 6: GALERIA DE EXERCÍCIOS RESOLVIDOS -->
+    <div class="section">
+        <h2><span>06</span> Exercícios Práticos Resolvidos (Masterclass)</h2>
+        <p>Abaixo encontras a resolução detalhada de exercícios tipificados das fichas práticas, com as armadilhas explicadas.</p>
+
+        <!-- Exemplo A -->
+        <div class="example-box">
+            <div class="example-header">
+                <span>Problema A: Verificação de Par ou Ímpar (Ficha 3, Ex 3)</span>
+                <span class="badge">Operador Módulo + SE</span>
+            </div>
+            <div class="example-body">
+                <p><strong>Desafio:</strong> Desenvolva um algoritmo que leia um número e informe se este é par ou ímpar.</p>
+                <div class="code-block" style="margin-top:0;">
+<span class="kw">INÍCIO</span>
+<span class="comment">// 1. Declaração obrigatória da variável de entrada</span>
+<span class="kw">VAR</span> <span class="var">num</span> : <span class="type">NÚMERO</span>
+
+<span class="kw">ESCREVE</span> <span class="str">"Introduza um número inteiro:"</span>
+<span class="kw">LÊ</span> <span class="var">num</span>
+
+<span class="comment">// 2. O truque: Usar MOD (Módulo / Resto da Divisão)</span>
+<span class="comment">// Se o resto da divisão por 2 for zero, o número é par.</span>
+<span class="kw">SE</span> (<span class="var">num</span> <span class="kw">MOD</span> <span class="num">2</span> <span class="op">==</span> <span class="num">0</span>) <span class="kw">ENTÃO</span>
+    <span class="kw">ESCREVE</span> <span class="str">"O número introduzido é PAR."</span>
+<span class="kw">SENÃO</span>
+    <span class="kw">ESCREVE</span> <span class="str">"O número introduzido é ÍMPAR."</span>
+<span class="kw">FIM SE</span>
+
+<span class="kw">FIM</span></div>
+            </div>
+        </div>
+
+        <!-- Exemplo B -->
+        <div class="example-box">
+            <div class="example-header">
+                <span>Problema B: Acumuladores e Filtros M/F (Ficha 6, Ex 13)</span>
+                <span class="badge">Ciclo REPETE + Contadores</span>
+            </div>
+            <div class="example-body">
+                <p><strong>Desafio:</strong> Leia 10 pessoas (Sexo M/F) e apresente o total de estudantes do sexo feminino e masculino.</p>
+                <div class="code-block" style="margin-top:0;">
+<span class="kw">INÍCIO</span>
+<span class="comment">// 1. Definir as variáveis acumuladoras/contadoras (iniciadas a Zero!)</span>
+<span class="kw">VAR</span> <span class="var">sexo</span> : <span class="type">TEXTO</span>
+<span class="kw">VAR</span> <span class="var">conta_M</span> : <span class="type">NÚMERO</span> = <span class="num">0</span>
+<span class="kw">VAR</span> <span class="var">conta_F</span> : <span class="type">NÚMERO</span> = <span class="num">0</span>
+
+<span class="comment">// 2. Ciclo indexado pois sabemos exatamente que são 10 inputs</span>
+<span class="kw">REPETE</span> <span class="var">i</span> <span class="kw">DE</span> <span class="num">1</span> <span class="kw">ATÉ</span> <span class="num">10</span> <span class="kw">PASSO</span> <span class="num">1</span>
+    <span class="kw">ESCREVE</span> <span class="str">"Insira o sexo do aluno "</span> <span class="op">+</span> <span class="var">i</span> <span class="op">+</span> <span class="str">" (M ou F):"</span>
+    <span class="kw">LÊ</span> <span class="var">sexo</span>
+    
+    <span class="comment">// 3. Processamento de contagem (Atenção ao texto entre aspas)</span>
+    <span class="kw">SE</span> (<span class="var">sexo</span> <span class="op">==</span> <span class="str">"M"</span>) <span class="kw">ENTÃO</span>
+        <span class="var">conta_M</span> = <span class="var">conta_M</span> <span class="op">+</span> <span class="num">1</span>
+    <span class="kw">SENÃO</span>
+        <span class="kw">SE</span> (<span class="var">sexo</span> <span class="op">==</span> <span class="str">"F"</span>) <span class="kw">ENTÃO</span>
+            <span class="var">conta_F</span> = <span class="var">conta_F</span> <span class="op">+</span> <span class="num">1</span>
+        <span class="kw">SENÃO</span>
+            <span class="kw">ESCREVE</span> <span class="str">"Erro de Input. Assumido não catalogado."</span>
+        <span class="kw">FIM SE</span>
+    <span class="kw">FIM SE</span>
+<span class="kw">FIM REPETE</span>
+
+<span class="comment">// 4. Output Final (FORA do ciclo, para não repetir a mensagem 10 vezes)</span>
+<span class="kw">ESCREVE</span> <span class="str">"Total Sexo Masculino: "</span> <span class="op">+</span> <span class="var">conta_M</span>
+<span class="kw">ESCREVE</span> <span class="str">"Total Sexo Feminino: "</span> <span class="op">+</span> <span class="var">conta_F</span>
+<span class="kw">FIM</span></div>
+            </div>
+        </div>
+
+        <!-- Exemplo C -->
+        <div class="example-box">
+            <div class="example-header">
+                <span>Problema C: Validação Contínua (Ficha 5, Ex 9 adaptado)</span>
+                <span class="badge">Ciclo ENQUANTO</span>
+            </div>
+            <div class="example-body">
+                <p><strong>Desafio:</strong> Peça ao utilizador números sucessivos. O programa soma-os. Se o valor for menor que 10, termina o ciclo e imprime a soma final.</p>
+                <div class="code-block" style="margin-top:0;">
+<span class="kw">INÍCIO</span>
+<span class="comment">// 1. Iniciar variáveis. A variável de teste deve forçar a entrada no ciclo.</span>
+<span class="kw">VAR</span> <span class="var">numero</span> : <span class="type">NÚMERO</span> = <span class="num">10</span> 
+<span class="kw">VAR</span> <span class="var">soma_total</span> : <span class="type">NÚMERO</span> = <span class="num">0</span>
+
+<span class="comment">// 2. Condição de paragem. Só roda enquanto o número for >= 10</span>
+<span class="kw">ENQUANTO</span> <span class="var">numero</span> <span class="op">&ge;</span> <span class="num">10</span> <span class="kw">FAZ</span>
+    <span class="kw">ESCREVE</span> <span class="str">"Insira um número (menor que 10 para terminar):"</span>
+    <span class="kw">LÊ</span> <span class="var">numero</span>
+    
+    <span class="comment">// Só somamos se o utilizador não colocou a chave de saída.</span>
+    <span class="kw">SE</span> (<span class="var">numero</span> <span class="op">&ge;</span> <span class="num">10</span>) <span class="kw">ENTÃO</span>
+        <span class="var">soma_total</span> = <span class="var">soma_total</span> <span class="op">+</span> <span class="var">numero</span>
+    <span class="kw">FIM SE</span>
+<span class="kw">FIM ENQUANTO</span>
+
+<span class="kw">ESCREVE</span> <span class="str">"Ciclo Terminado. A soma dos valores válidos é: "</span> <span class="op">+</span> <span class="var">soma_total</span>
+<span class="kw">FIM</span></div>
+            </div>
+        </div>
+
+    </div> <!-- Fim Secção 6 -->
+
+</div>
+
+</body>
+</html>
