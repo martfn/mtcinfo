@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="pt" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sistemas de Comunicação Multimédia — Resumo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300..700&display=swap" rel="stylesheet">
+<style>
+:root, [data-theme="light"] {
+  --color-bg: #f7f6f2; --color-surface: #f9f8f5; --color-surface-2: #fbfbf9;
+  --color-surface-offset: #f0ede8; --color-divider: #dcd9d5; --color-border: #d4d1ca;
+  --color-text: #1e1c17; --color-text-muted: #6a6966; --color-text-faint: #b0afaa;
+  --color-primary: #01696f; --color-primary-hover: #0c4e54;
+  --color-primary-highlight: #d4e6e3;
+  --color-accent2: #964219; --color-accent2-hl: #ddcfc6;
+  --color-accent3: #a12c7b; --color-accent3-hl: #e0ced7;
+  --color-success: #437a22; --color-success-hl: #d4dfcc;
+  --color-gold: #b07a00; --color-gold-hl: #e9e0c6;
+  --font-display: 'Instrument Serif', Georgia, serif;
+  --font-body: 'DM Sans', system-ui, sans-serif;
+  --shadow-sm: 0 1px 3px oklch(0.2 0.01 80 / 0.07);
+  --shadow-md: 0 4px 14px oklch(0.2 0.01 80 / 0.09);
+  --radius-sm: 0.375rem; --radius-md: 0.5rem; --radius-lg: 0.875rem; --radius-xl: 1.25rem;
+  --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+  --text-sm: clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
+  --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+  --text-lg: clamp(1.125rem, 1rem + 0.75vw, 1.5rem);
+  --text-xl: clamp(1.5rem, 1.2rem + 1.25vw, 2.25rem);
+  --text-2xl: clamp(2rem, 1.2rem + 2.5vw, 3rem);
+  --space-1:0.25rem;--space-2:0.5rem;--space-3:0.75rem;--space-4:1rem;
+  --space-5:1.25rem;--space-6:1.5rem;--space-8:2rem;--space-10:2.5rem;
+  --space-12:3rem;--space-16:4rem;--space-20:5rem;
+}
+[data-theme="dark"] {
+  --color-bg: #141310; --color-surface: #1a1918; --color-surface-2: #1f1e1c;
+  --color-surface-offset: #252421; --color-divider: #2a2927; --color-border: #333230;
+  --color-text: #d4d2ce; --color-text-muted: #878683; --color-text-faint: #5a5957;
+  --color-primary: #4f98a3; --color-primary-hover: #227f8b;
+  --color-primary-highlight: #1e3033;
+  --color-accent2: #bb653b; --color-accent2-hl: #3d2a1e;
+  --color-accent3: #d163a7; --color-accent3-hl: #3a1f30;
+  --color-success: #6daa45; --color-success-hl: #1e3018;
+  --color-gold: #e8af34; --color-gold-hl: #302810;
+  --shadow-sm: 0 1px 3px oklch(0 0 0 / 0.25);
+  --shadow-md: 0 4px 14px oklch(0 0 0 / 0.35);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: 5rem; -webkit-font-smoothing: antialiased; }
+body {
+  font-family: var(--font-body); font-size: var(--text-base);
+  color: var(--color-text); background: var(--color-bg);
+  line-height: 1.65; transition: background 0.25s, color 0.25s;
+}
+h1,h2,h3,h4 { font-family: var(--font-display); line-height: 1.15; text-wrap: balance; }
+p, li { text-wrap: pretty; }
+a { color: var(--color-primary); text-decoration: none; }
+a:hover { color: var(--color-primary-hover); }
+
+/* ── NAV ── */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: color-mix(in oklch, var(--color-bg) 85%, transparent);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-divider);
+  padding: var(--space-3) var(--space-8);
+  display: flex; align-items: center; justify-content: space-between; gap: var(--space-4);
+}
+.nav-logo { display: flex; align-items: center; gap: var(--space-3); }
+.nav-logo svg { color: var(--color-primary); flex-shrink: 0; }
+.nav-title { font-family: var(--font-display); font-size: var(--text-lg); color: var(--color-text); }
+.nav-subtitle { font-size: var(--text-xs); color: var(--color-text-muted); letter-spacing: 0.04em; }
+.nav-actions { display: flex; align-items: center; gap: var(--space-3); }
+.nav-links { display: flex; gap: var(--space-1); }
+.nav-links a {
+  font-size: var(--text-xs); color: var(--color-text-muted);
+  padding: var(--space-1) var(--space-2); border-radius: var(--radius-sm);
+  transition: background 0.18s, color 0.18s;
+  white-space: nowrap;
+}
+.nav-links a:hover { background: var(--color-surface-offset); color: var(--color-text); }
+.theme-toggle {
+  width: 36px; height: 36px; border-radius: var(--radius-md);
+  border: 1px solid var(--color-border); background: var(--color-surface);
+  color: var(--color-text-muted); cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.18s, color 0.18s;
+}
+.theme-toggle:hover { background: var(--color-surface-offset); color: var(--color-text); }
+
+/* ── LAYOUT ── */
+.container { max-width: 980px; margin-inline: auto; padding-inline: var(--space-6); }
+.hero { padding: var(--space-16) 0 var(--space-12); text-align: center; }
+.hero-eyebrow {
+  display: inline-block; font-size: var(--text-xs); font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--color-primary); background: var(--color-primary-highlight);
+  padding: var(--space-1) var(--space-3); border-radius: var(--radius-full, 9999px);
+  margin-bottom: var(--space-4);
+}
+.hero h1 { font-size: var(--text-2xl); color: var(--color-text); margin-bottom: var(--space-3); }
+.hero p { font-size: var(--text-base); color: var(--color-text-muted); max-width: 55ch; margin-inline: auto; }
+.toc-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(min(220px, 100%), 1fr));
+  gap: var(--space-3); margin: var(--space-8) 0;
+}
+.toc-card {
+  background: var(--color-surface); border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg); padding: var(--space-4) var(--space-5);
+  text-decoration: none; display: flex; align-items: center; gap: var(--space-3);
+  transition: box-shadow 0.2s, background 0.2s, transform 0.2s;
+}
+.toc-card:hover { background: var(--color-surface-offset); box-shadow: var(--shadow-md); transform: translateY(-1px); }
+.toc-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.toc-card span { font-size: var(--text-sm); color: var(--color-text); font-weight: 500; }
+main { padding-bottom: var(--space-20); }
+
+/* ── SECTIONS ── */
+.section { padding: var(--space-10) 0; border-top: 1px solid var(--color-divider); }
+.section-header { display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-6); }
+.section-icon {
+  width: 40px; height: 40px; border-radius: var(--radius-md);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem; flex-shrink: 0;
+}
+.section-label { font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; color: var(--color-text-muted); }
+.section-title { font-size: var(--text-xl); color: var(--color-text); margin-top: var(--space-1); }
+
+/* ── CARDS ── */
+.card {
+  background: var(--color-surface); border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg); padding: var(--space-5) var(--space-6);
+  box-shadow: var(--shadow-sm);
+}
+.card + .card { margin-top: var(--space-4); }
+.card h3 { font-size: var(--text-lg); color: var(--color-text); margin-bottom: var(--space-3); }
+.card h4 { font-size: var(--text-sm); font-weight: 700; color: var(--color-text); margin: var(--space-4) 0 var(--space-2); font-family: var(--font-body); text-transform: uppercase; letter-spacing: 0.05em; }
+.card p, .card li { font-size: var(--text-sm); color: var(--color-text-muted); }
+.card ul, .card ol { padding-left: var(--space-5); }
+.card li { margin-bottom: var(--space-1); }
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(240px, 100%), 1fr));
+  gap: var(--space-4);
+  align-items: stretch;
+}
+.card-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+  align-items: stretch;
+}
+.card-2col > * { min-width: 0; word-break: break-word; overflow-wrap: break-word; }
+@media (max-width: 768px) { .card-2col { grid-template-columns: 1fr; } }
+
+/* ── HIGHLIGHT BOXES ── */
+.highlight {
+  border-radius: var(--radius-md); padding: var(--space-4) var(--space-5);
+  font-size: var(--text-sm); margin: var(--space-4) 0;
+  border-left: 3px solid;
+}
+.hl-blue { background: var(--color-primary-highlight); border-color: var(--color-primary); color: var(--color-text); }
+.hl-orange { background: var(--color-accent2-hl); border-color: var(--color-accent2); color: var(--color-text); }
+.hl-purple { background: var(--color-accent3-hl); border-color: var(--color-accent3); color: var(--color-text); }
+.hl-green { background: var(--color-success-hl); border-color: var(--color-success); color: var(--color-text); }
+.hl-gold { background: var(--color-gold-hl); border-color: var(--color-gold); color: var(--color-text); }
+.highlight strong { color: var(--color-text); }
+
+/* ── TAGS / BADGES ── */
+.tag {
+  display: inline-block; font-size: var(--text-xs); font-weight: 600;
+  padding: 2px var(--space-2); border-radius: 9999px;
+  background: var(--color-surface-offset); color: var(--color-text-muted);
+  margin: 2px;
+}
+.tag-primary { background: var(--color-primary-highlight); color: var(--color-primary); }
+.tag-orange { background: var(--color-accent2-hl); color: var(--color-accent2); }
+.tag-purple { background: var(--color-accent3-hl); color: var(--color-accent3); }
+.tag-green { background: var(--color-success-hl); color: var(--color-success); }
+.tag-gold { background: var(--color-gold-hl); color: var(--color-gold); }
+
+/* ── TABLE ── */
+.table-wrap { overflow-x: auto; border-radius: var(--radius-lg); border: 1px solid var(--color-border); }
+table { width: 100%; border-collapse: collapse; font-size: var(--text-sm); }
+th { background: var(--color-surface-offset); font-weight: 700; text-align: left; padding: var(--space-3) var(--space-4); color: var(--color-text); font-family: var(--font-body); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.07em; }
+td { padding: var(--space-3) var(--space-4); color: var(--color-text-muted); border-top: 1px solid var(--color-divider); }
+tr:hover td { background: var(--color-surface-offset); color: var(--color-text); }
+
+/* ── TRIADA VISUAL ── */
+.triad { display: flex; gap: var(--space-4); flex-wrap: wrap; }
+.triad-item {
+  flex: 1; min-width: 180px; background: var(--color-surface);
+  border: 1px solid var(--color-border); border-radius: var(--radius-lg);
+  padding: var(--space-4) var(--space-5); text-align: center;
+  word-break: break-word; overflow-wrap: break-word;
+}
+.triad-num { font-size: var(--text-xl); font-family: var(--font-display); color: var(--color-primary); }
+.triad-title { font-weight: 700; font-size: var(--text-sm); color: var(--color-text); margin-bottom: var(--space-1); }
+.triad-desc { font-size: var(--text-xs); color: var(--color-text-muted); }
+
+/* ── PRISMA ── */
+.prisma-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-3); }
+@media (max-width: 768px) { .prisma-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 480px) { .prisma-grid { grid-template-columns: 1fr; } }
+.prisma-item {
+  background: var(--color-surface); border: 1px solid var(--color-border);
+  border-radius: var(--radius-md); padding: var(--space-3) var(--space-4);
+  min-width: 0; word-break: break-word; overflow-wrap: break-word;
+}
+.prisma-item strong { display: block; font-size: var(--text-sm); color: var(--color-text); margin-bottom: 4px; }
+.prisma-item span { font-size: var(--text-xs); color: var(--color-text-muted); }
+
+/* ── QA SECTION ── */
+.qa-list { list-style: none; padding: 0; }
+.qa-item {
+  background: var(--color-surface); border: 1px solid var(--color-border);
+  border-radius: var(--radius-md); margin-bottom: var(--space-3); overflow: hidden;
+}
+.qa-q {
+  padding: var(--space-4) var(--space-5); font-size: var(--text-sm);
+  font-weight: 600; color: var(--color-text); cursor: pointer;
+  display: flex; justify-content: space-between; align-items: center;
+  user-select: none; gap: var(--space-3);
+}
+.qa-q::after { content: "▸"; color: var(--color-primary); flex-shrink: 0; transition: transform 0.2s; }
+.qa-item.open .qa-q::after { transform: rotate(90deg); }
+.qa-a {
+  display: none; padding: 0 var(--space-5) var(--space-4);
+  font-size: var(--text-sm); color: var(--color-text-muted); line-height: 1.7;
+  border-top: 1px solid var(--color-divider);
+  padding-top: var(--space-3);
+}
+.qa-item.open .qa-a { display: block; }
+
+/* ── FOOTER ── */
+footer {
+  border-top: 1px solid var(--color-divider); padding: var(--space-6) 0;
+  text-align: center; font-size: var(--text-xs); color: var(--color-text-faint);
+}
+.divider { border: none; border-top: 1px solid var(--color-divider); margin: var(--space-6) 0; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">
+    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-label="Logo Multimédia">
+      <rect width="32" height="32" rx="8" fill="currentColor" opacity="0.08"/>
+      <!-- Símbolo abstrato de broadcast / rede -->
+      <path d="M16 22a2 2 0 100-4 2 2 0 000 4z" fill="currentColor"/>
+      <path d="M11.5 16.5a6.36 6.36 0 019 0" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+      <path d="M8 13a11.31 11.31 0 0116 0" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <div>
+      <div class="nav-title">Comunicação Multimédia</div>
+      <div class="nav-subtitle">Resumo para Teste Teórico</div>
+    </div>
+  </div>
+  <div class="nav-actions">
+    <div class="nav-links">
+      <a href="#info-teste">Info Teste</a>
+      <a href="#mod1-redes">Redes & STB</a>
+      <a href="#mod1-video">Arquiteturas Vídeo</a>
+      <a href="#mod2-processamento">Digitalização</a>
+      <a href="#mod2-gps">GPS & Telemetria</a>
+      <a href="#exercicios">Fórmulas Práticas</a>
+    </div>
+    <button class="theme-toggle" data-theme-toggle aria-label="Alternar tema">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+      </svg>
+    </button>
+  </div>
+</nav>
+
+<main>
+<div class="container">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-eyebrow">Universidade de Aveiro · Sistemas de Comunicação Multimédia · 2026</div>
+    <h1>Resumo Detalhado para o Teste</h1>
+    <p>Todos os conceitos técnicos sobre redes, digitalização, sinal, arquiteturas de entretenimento digital e resoluções práticas de cálculos de transmissão.</p>
+    <nav class="toc-grid" aria-label="Índice">
+      <a href="#info-teste" class="toc-card"><div class="toc-dot" style="background:var(--color-gold)"></div><span>1. Info & Regras do Teste</span></a>
+      <a href="#mod1-redes" class="toc-card"><div class="toc-dot" style="background:var(--color-primary)"></div><span>2. Redes & Set-Top Boxes</span></a>
+      <a href="#mod1-video" class="toc-card"><div class="toc-dot" style="background:var(--color-accent2)"></div><span>3. Arquiteturas de Vídeo</span></a>
+      <a href="#mod2-processamento" class="toc-card"><div class="toc-dot" style="background:var(--color-accent3)"></div><span>4. Digitalização & Cor</span></a>
+      <a href="#mod2-gps" class="toc-card"><div class="toc-dot" style="background:var(--color-success)"></div><span>5. GPS & Telemetria</span></a>
+      <a href="#exercicios" class="toc-card"><div class="toc-dot" style="background:var(--color-primary)"></div><span>6. Exercícios e Fórmulas</span></a>
+      <a href="#revisoes" class="toc-card"><div class="toc-dot" style="background:var(--color-gold)"></div><span>📝 Revisão Rápida (Q&A)</span></a>
+    </nav>
+  </div>
+
+  <!-- 1. INFORMAÇÕES DO TESTE -->
+  <section class="section" id="info-teste">
+    <div class="section-header">
+      <div class="section-icon" style="background:var(--color-gold-hl); color:var(--color-gold)">⏰</div>
+      <div>
+        <div class="section-label">Logística</div>
+        <h2 class="section-title">Informações e Regras do Teste</h2>
+      </div>
+    </div>
+    <div class="card-grid">
+      <div class="card">
+        <h3>Data e Local</h3>
+        <ul>
+          <li><strong>Data:</strong> 28 de outubro de 2026</li>
+          <li><strong>Horário:</strong> 15h30 às 16h30 (chegar às 15h25)</li>
+          <li><strong>Salas:</strong> 3.1.15 (antiga reitoria) ou 8.1.43 (Dep. Biologia)</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Estrutura e Avaliação</h3>
+        <ul>
+          <li><strong>10 P. Escolha Múltipla:</strong> Valem 15 valores</li>
+          <li><strong>Desenvolvimento:</strong> Valem 5 valores</li>
+          <li><strong>Cotação Múltipla:</strong> Certa = +1,5v | Errada = -0,5v (desconta 1/3) | Branco = 0</li>
+        </ul>
+        <p style="margin-top:var(--space-2); font-size:var(--text-xs); color:var(--color-gold)"><em>*Atenção: as perguntas podem ter mais do que uma resposta correta!</em></p>
+      </div>
+      <div class="card">
+        <h3>Regras e Material</h3>
+        <ul>
+          <li><strong>Permitido:</strong> Lápis, borracha, caneta, calculadora simples.</li>
+          <li><strong>Proibido:</strong> Telemóveis e dispositivos eletrónicos (devem ficar desligados junto ao quadro).</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. MÓDULO 1: REDES E STB -->
+  <section class="section" id="mod1-redes">
+    <div class="section-header">
+      <div class="section-icon" style="background:var(--color-primary-highlight); color:var(--color-primary)">📡</div>
+      <div>
+        <div class="section-label">Módulo 1</div>
+        <h2 class="section-title">Redes e Set-Top Boxes</h2>
+      </div>
+    </div>
+    <div class="card-2col">
+      <div class="card">
+        <h3>Set-Top Box (STB) e Modelos</h3>
+        <p>A STB surgiu com as redes CATV para contornar limitações físicas dos sintonizadores de TV. Hoje em dia descodifica sinais digitais, IPTV e TDT, e gere os modelos de subscrição.</p>
+        <ul style="margin-top:var(--space-3)">
+          <li><strong>Pay TV:</strong> Modelo de subscrição genérico (mensalidade).</li>
+          <li><strong>PPV (Pay-per-View):</strong> O utilizador paga uma taxa extra para ver um evento específico (ex: combates de boxe, futebol).</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>TDT e o Dividendo Digital</h3>
+        <p>A Televisão Digital Terrestre opera nas faixas <strong>UHF</strong> e introduziu uma revolução através da compressão digital.</p>
+        <ul style="margin-top:var(--space-3)">
+          <li><strong>Multicasting:</strong> A grande vantagem sobre a analógica. Permite comprimir múltiplos canais digitais no exato mesmo espetro de banda que 1 canal analógico ocupava.</li>
+          <li><strong>Dividendo Digital:</strong> Processo de reestruturação do espetro. As frequências 790-862 MHz (1º dividendo) e 694-790 MHz (2º dividendo) foram libertadas pelas televisões para serem usadas nas redes móveis <strong>4G e 5G</strong>.</li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="card" style="margin-top:var(--space-4)">
+      <h3>Arquiteturas de Fibra/Cabo (HFC)</h3>
+      <p style="margin-bottom:var(--space-3)">As Redes Híbridas de Fibra e Cabo (HFC) classificam-se pela distância a que o conversor Ótico/Elétrico (O/E) fica da casa do cliente.</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Topologia</th>
+              <th>Significado</th>
+              <th>Localização do Conversor O/E</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="tag tag-primary">FTTN</span></td>
+              <td>Fiber to the Node</td>
+              <td>A mais de 300 metros da casa do utilizador (num nó de bairro).</td>
+            </tr>
+            <tr>
+              <td><span class="tag tag-orange">FTTC</span></td>
+              <td>Fiber to the Curb</td>
+              <td>A menos de 300 metros da casa (literalmente "até à berma").</td>
+            </tr>
+            <tr>
+              <td><span class="tag tag-purple">FTTB</span></td>
+              <td>Fiber to the Building</td>
+              <td>Dentro do edifício/prédio (na cave técnica), distribuindo depois por cobre/coaxial.</td>
+            </tr>
+            <tr>
+              <td><span class="tag tag-green">FTTH</span></td>
+              <td>Fiber to the Home</td>
+              <td>A fibra ótica entra diretamente dentro da casa do cliente.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. MÓDULO 1: ARQUITETURAS DE VÍDEO -->
+  <section class="section" id="mod1-video">
+    <div class="section-header">
+      <div class="section-icon" style="background:var(--color-accent2-hl); color:var(--color-accent2)">📺</div>
+      <div>
+        <div class="section-label">Módulo 1</div>
+        <h2 class="section-title">Arquiteturas de Entretenimento Vídeo</h2>
+      </div>
+    </div>
+    
+    <div class="card">
+      <h3>Unicast vs. Multicast na Transmissão de Vídeo</h3>
+      <div class="card-2col" style="margin-top:var(--space-4)">
+        <div>
+          <h4>Unicast (VoD)</h4>
+          <p>O <strong>Video on Demand</strong> requer uma infraestrutura Unicast. Isto significa que é estabelecida uma ligação direta bidirecional (1-para-1) entre o servidor e o recetor. Cada utilizador tem a sua própria *stream* dedicada de dados.</p>
+        </div>
+        <div>
+          <h4>Multicast (TV Direto / IPTV)</h4>
+          <p>Para transmissões em direto, usa-se Multicast (1-para-muitos). O servidor envia uma única *stream* de dados para a rede, e a infraestrutura multiplica o sinal apenas nos nós onde existam clientes a solicitar esse canal. É altamente eficiente na largura de banda.</p>
+        </div>
+      </div>
+      <hr class="divider">
+      
+      <h4>Modelos Específicos de Visualização</h4>
+      <div class="prisma-grid">
+        <div class="prisma-item">
+          <strong>⏳ NVoD (Near Video on Demand)</strong>
+          <span>Pseudo-interatividade linear. O mesmo filme é transmitido repetidamente em múltiplos canais simultâneos, com inícios desfasados (ex: a cada 15 min). Para um filme de 2 horas garantir um tempo máximo de espera de 15 minutos, o operador precisa sacrificar <strong>8 canais dedicados</strong> ($120 \div 15 = 8$).</span>
+        </div>
+        <div class="prisma-item">
+          <strong>⏯️ Time-shift TV</strong>
+          <span>Funcionalidades que alteram a linearidade da emissão: Pause-TV (pausar em direto), Restart-TV (recomeçar o programa atual) e Catch-up TV (ver programas de dias anteriores).</span>
+        </div>
+        <div class="prisma-item">
+          <strong>☁️ Cloud DVR</strong>
+          <span>Tecnologia de gravação onde o ficheiro de vídeo é alojado diretamente nos servidores do operador na rede, removendo a dependência de um disco rígido físico dentro da STB do utilizador.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. MÓDULO 2: PROCESSAMENTO E DIGITALIZAÇÃO -->
+  <section class="section" id="mod2-processamento">
+    <div class="section-header">
+      <div class="section-icon" style="background:var(--color-accent3-hl); color:var(--color-accent3)">🎞️</div>
+      <div>
+        <div class="section-label">Módulo 2</div>
+        <h2 class="section-title">Processamento, Digitalização e Cor</h2>
+      </div>
+    </div>
+    
+    <div class="card-2col">
+      <div class="card">
+        <h3>A Regra dos Prefixos e Bases</h3>
+        <p>Cuidado com as rasteiras nas contas! A base muda consoante estamos a medir ficheiros estáticos ou velocidades de rede.</p>
+        <ul style="margin-top:var(--space-3)">
+          <li><strong>Tamanhos de Ficheiro (Binário - Base 2):</strong> Multiplica-se por 1024.<br><em>Ex: 1 MB = 1024 KB; 1 GB = 1.048.576 KB.</em></li>
+          <li><strong>Velocidades de Transmissão (Decimal - Base 10):</strong> Multiplica-se por 1000.<br><em>Ex: 1 Mbps = 1.000 Kbps = 1.000.000 bps.</em></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Resoluções de Vídeo (16:9)</h3>
+        <p>Saber a quantidade total de píxeis por frame é essencial para o cálculo da taxa de transmissão base.</p>
+        <ul style="margin-top:var(--space-3)">
+          <li><strong>HD (720p):</strong> 1280 &times; 720 = 921.600 píxeis/frame.</li>
+          <li><strong>FHD (1080p):</strong> 1920 &times; 1080 = 2.073.600 píxeis/frame.</li>
+          <li><strong>4K (UHD):</strong> 3840 &times; 2160 = 8.294.400 píxeis/frame.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Espaço de Cor e Subamostragem (Chroma Subsampling)</h3>
+      <p>A engenharia de compressão de vídeo aproveita um limite biológico: o olho humano é muito mais sensível aos detalhes de luz e contraste (Luminância) do que às variações finas de cor (Crominância).</p>
+      
+      <div class="card-2col" style="margin-top:var(--space-4)">
+        <div style="background:var(--color-surface-offset); border-radius:var(--radius-md); padding:var(--space-4);">
+          <span class="tag tag-primary">RGB 4:4:4 (Sem compressão)</span>
+          <p style="margin-top:var(--space-2); font-size:var(--text-sm)">Todos os canais primários (Vermelho, Verde e Azul) recebem resolução total. Usa 8 bits para cada canal, resultando em <strong>24 bits por píxel</strong> na totalidade.</p>
+        </div>
+        <div style="background:var(--color-surface-offset); border-radius:var(--radius-md); padding:var(--space-4);">
+          <span class="tag tag-purple">YCbCr 4:2:2 (Subamostragem)</span>
+          <p style="margin-top:var(--space-2); font-size:var(--text-sm)">A Luminância (Y) mantém os 8 bits integrais para preservar a nitidez. A resolução horizontal da Crominância (Cb e Cr) é cortada para metade (4 bits cada). Resultado: <strong>16 bits por píxel</strong>.</p>
+        </div>
+      </div>
+      
+      <div class="highlight hl-purple" style="margin-top:var(--space-4)">
+        <strong>Ganho prático:</strong> A passagem de RGB 4:4:4 (24 bits) para YCbCr 4:2:2 (16 bits) permite uma <strong>redução imediata de 33,3% da largura de banda</strong> necessária, com perda marginal impercetível ao olho humano comum.
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. MÓDULO 2: GPS E TELEMETRIA -->
+  <section class="section" id="mod2-gps">
+    <div class="section-header">
+      <div class="section-icon" style="background:var(--color-success-hl); color:var(--color-success)">🛰️</div>
+      <div>
+        <div class="section-label">Módulo 2</div>
+        <h2 class="section-title">Funcionamento do GPS & Telemetria</h2>
+      </div>
+    </div>
+    
+    <div class="card-2col">
+      <div class="card">
+        <h3>Princípio do GPS (Global Positioning System)</h3>
+        <p>A localização por satélite não é enviada para o recetor; o recetor apenas "escuta" e calcula. O processo chama-se <strong>Trilateração Tridimensional</strong>.</p>
+        <ul style="margin-top:var(--space-3)">
+          <li>O cálculo baseia-se na medição rigorosa do <strong>tempo que o sinal de rádio demora</strong> desde a antena do satélite até ao recetor (viajando à velocidade da luz).</li>
+          <li>São necessários, no <strong>mínimo rigoroso, 4 satélites</strong> com linha de visão direta para obter uma coordenada tridimensional válida (Latitude, Longitude e Altitude + sincronização temporal).</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Largura de Banda Ocupada</h3>
+        <p>O peso dos dados GPS é incrivelmente leve. O envio é frequentemente formatado usando o protocolo da tabela ASCII, em que <strong>1 caracter equivale a exatamente 1 Byte (8 bits)</strong>.</p>
+        <div class="highlight hl-green" style="margin-top:var(--space-3)">
+          Exemplo matemático num tracker de baixa potência:<br>
+          Se uma coordenada tiver 23 caracteres, pesa apenas $23 \times 8 = 184$ bits. Se enviada a cada minuto (60s), a largura de banda ocupada é insignificante: $184 \div 60 = 3,06$ bps.
+        </div>
+      </div>
+    </div>
+
+    <!-- Caso de Estudo Aplicado -->
+    <div class="card" style="margin-top:var(--space-4); border-left: 4px solid var(--color-success);">
+      <h4>Caso Prático: Transmissões Remotas em Ambientes Extremos</h4>
+      <p style="font-size:var(--text-sm)">Num cenário de sistemas de comunicação em áreas isoladas (como a monitorização remota de torneios de <em>paintball</em> numa floresta de sobrevivência), garantir conectividade pode ser um desafio se não houver rede GSM/4G. A solução passa por integrar infraestrutura satélite de baixo débito.</p>
+      <ul style="margin-top:var(--space-2); font-size:var(--text-sm)">
+        <li><strong>Terminais e Trackers:</strong> Podem usar-se transmissores como o Yellowbrick (YB3i) associados a terminais satélite Thales VesseLINK, que interagem via constelação Iridium Certus.</li>
+        <li><strong>A Vantagem dos Bits:</strong> Sendo os dados de telemetria baseados em ASCII e pesando cerca de 184 a 300 bits, as balizas podem ser transmitidas com sucesso debaixo de copas densas de árvores com consumos e larguras de banda micro (abaixo dos 5 bps).</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 6. EXERCÍCIOS E FÓRMULAS -->
+  <section class="section" id="exercicios">
+    <div class="section-header">
+      <div class="section-icon" style="background:var(--color-primary-highlight); color:var(--color-primary)">🧮</div>
+      <div>
+        <div class="section-label">Problemas Práticos</div>
+        <h2 class="section-title">Fórmulas e Casos Resolvidos</h2>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Equação Fundamental da Taxa de Transmissão de Vídeo</h3>
+      <div class="highlight hl-blue" style="text-align: center; font-size: var(--text-lg); font-family: var(--font-display);">
+        Taxa = [ ( Resolução Horizontal &times; Resolução Vertical ) &times; Profundidade de Cor &times; FPS ] &divide; Compressão
+      </div>
+      <p style="text-align:center; font-size:var(--text-sm); margin-top:var(--space-2)">
+        <em>Nota: A profundidade de cor é os "bits/píxel" (ex: 24 no RGB, 16 no YCbCr). O resultado será em bps.</em>
+      </p>
+
+      <hr class="divider">
+
+      <h4>Exercício Tipo-Exame</h4>
+      <p style="color:var(--color-text-muted)"><strong>Cenário:</strong> Fazer upload para um satélite cuja largura de banda de upstream está limitada a 512 Kbps. As especificações do teu vídeo são: resolução 720x576, cor YCbCr 4:2:2 (16 bits/píxel) e um codec com rácio de compressão fixo de 1:200.</p>
+      
+      <div class="card-2col" style="margin-top:var(--space-5)">
+        
+        <div>
+          <h4>A) Quantos minutos demora o upload de um vídeo (ficheiro) que pesa 100 MB?</h4>
+          <ol style="font-size:var(--text-sm); line-height: 1.8;">
+            <li><strong>Converter Tamanho (MB) para bits:</strong><br>
+                100 MB = $100 \times 1024 \times 1024$ = 104.857.600 Bytes.<br>
+                Em bits = $104.857.600 \times 8$ = <strong>838.860.800 bits</strong>.
+            </li>
+            <li><strong>Converter Rede (Kbps) para bps:</strong><br>
+                512 Kbps = $512 \times 1000$ = <strong>512.000 bps</strong>.
+            </li>
+            <li><strong>Calcular Tempo:</strong><br>
+                Tempo (segundos) = $\frac{Tamanho}{Velocidade}$<br>
+                $838.860.800 \div 512.000 = 1.638,4$ segundos.
+            </li>
+            <li><strong>Converter para Minutos:</strong><br>
+                $1.638,4 \div 60$ = <strong>27,3 minutos.</strong>
+            </li>
+          </ol>
+        </div>
+
+        <div>
+          <h4>B) Nesse mesmo canal, qual é o número máximo de frames por segundo (FPS) se quisermos transmitir o vídeo em direto?</h4>
+          <ol style="font-size:var(--text-sm); line-height: 1.8;">
+            <li><strong>Pressuposto Base:</strong><br>
+                A <em>Taxa do Vídeo Comprimido</em> tem de ser <strong>&le;</strong> à capacidade da rede (512.000 bps).
+            </li>
+            <li><strong>Montar a Equação:</strong><br>
+                $\frac{720 \times 576 \times 16 \times FPS}{200} \le 512.000$
+            </li>
+            <li><strong>Isolar o FPS:</strong><br>
+                $\frac{6.635.520 \times FPS}{200} \le 512.000$<br>
+                $FPS \le \frac{512.000 \times 200}{6.635.520}$<br>
+                $FPS \le 15,43$
+            </li>
+            <li><strong>Conclusão Final:</strong><br>
+                Como os frames devem ser inteiros e não podemos exceder a rede, arrendondamos sempre para baixo: <strong>15 FPS</strong>.
+            </li>
+          </ol>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Q&A / REVISÕES -->
+  <section class="section" id="revisoes">
+    <div class="section-header">
+      <div class="section-icon" style="background:var(--color-gold-hl); color:var(--color-gold)">📝</div>
+      <div>
+        <div class="section-label">Flashcards</div>
+        <h2 class="section-title">Perguntas Rápidas de Revisão</h2>
+      </div>
+    </div>
+    <p style="color:var(--color-text-muted); font-size:var(--text-sm); margin-bottom:var(--space-5)">Clica na pergunta para revela a resposta (útil para autoavaliação final).</p>
+    
+    <ul class="qa-list">
+      <li class="qa-item"><div class="qa-q">O que foi o "Dividendo Digital"?</div><div class="qa-a">Foi o processo de libertação e realocação de espetro radioelétrico na faixa UHF. As frequências de televisão, ao passarem do analógico para o digital (altamente comprimido por multicasting), libertaram espaço. As faixas 790-862 MHz (1º) e 694-790 MHz (2º) foram cedidas às operadoras de telecomunicações para a expansão das redes móveis 4G e 5G.</div></li>
+      
+      <li class="qa-item"><div class="qa-q">Porque é que não se usam sistemas Multicast em canais "Video on Demand" (VoD)?</div><div class="qa-a">O VoD exige uma comunicação em que cada utilizador pode iniciar, parar ou rebobinar um vídeo a qualquer momento de forma completamente independente. O Multicast foi desenhado para transmissões partilhadas e sincronizadas (1-para-muitos). Logo, o VoD necessita obrigatoriamente de ligações bidirecionais Unicast (1-para-1).</div></li>
+      
+      <li class="qa-item"><div class="qa-q">Quantos canais consome um modelo NVoD para garantir um tempo máximo de espera de 15 minutos num filme de 2 horas?</div><div class="qa-a">Oito (8) canais em loop simultâneo. Como o filme dura 120 minutos, e queremos arranques a cada 15 minutos, fazemos 120 ÷ 15 = 8 transmissões paralelas desfasadas.</div></li>
+      
+      <li class="qa-item"><div class="qa-q">A subamostragem YCbCr 4:2:2 reduz que informação da imagem de vídeo? E qual é a poupança?</div><div class="qa-a">A subamostragem reduz a informação da Crominância (as componentes de cor Cb e Cr), passando-as de 8 para 4 bits cada, mas mantém a Luminância (Y) a 100% de resolução. Como resultado, o "peso" passa de 24 bits para 16 bits por píxel, poupando exatamente 33,3% da largura de banda em comparação com um sinal não comprimido (RGB 4:4:4).</div></li>
+      
+      <li class="qa-item"><div class="qa-q">Para efeitos de conversão, qual é o múltiplo base para Gbps face a GB?</div><div class="qa-a">Ao falar de taxas de transmissão de rede (Gigabits per second, Gbps), estamos a trabalhar em base 10 (decimal), logo os múltiplos são em parcelas de 1000. Se falarmos de Gigabytes (GB) de armazenamento, estamos em base 2 (binário), e os múltiplos são parcelas de 1024. Não confundir os dois no teste aquando do cálculo da velocidade vs tamanho de ficheiro!</div></li>
+      
+      <li class="qa-item"><div class="qa-q">Onde se localiza o conversor de sinal de fibra na arquitetura FTTN e na FTTB?</div><div class="qa-a">Na FTTN (Fiber to the Node), o conversor ótico/elétrico fica num nó central que dista a mais de 300 metros da casa do utilizador (o restante é cobre/coaxial). Na FTTB (Fiber to the Building), a fibra vai até ao próprio edifício residencial (normalmente as instalações técnicas na cave), entrando o cabo coaxial/par de cobre apenas até às divisões individuais de cada apartamento.</div></li>
+    </ul>
+  </section>
+
+</div><!-- /container -->
+</main>
+
+<footer>
+  <div class="container">
+    <p>Sistemas de Comunicação Multimédia · Universidade de Aveiro © 2026 · Resumo de estudo formatado com CSS</p>
+  </div>
+</footer>
+
+<script>
+// Theme toggle
+(function(){
+  const t=document.querySelector('[data-theme-toggle]'), r=document.documentElement;
+  let d=r.getAttribute('data-theme')||'dark';
+  function setIcon(mode){
+    if(!t)return;
+    t.innerHTML = mode==='dark'
+      ? '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>'
+      : '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>';
+  }
+  setIcon(d);
+  if(t) t.addEventListener('click',()=>{ d=d==='dark'?'light':'dark'; r.setAttribute('data-theme',d); setIcon(d); });
+})();
+
+// QA accordion
+document.querySelectorAll('.qa-q').forEach(q=>{
+  q.addEventListener('click',()=>{
+    const item=q.closest('.qa-item');
+    const wasOpen=item.classList.contains('open');
+    document.querySelectorAll('.qa-item.open').forEach(i=>i.classList.remove('open'));
+    if(!wasOpen) item.classList.add('open');
+  });
+});
+</script>
+</body>
+</html>
