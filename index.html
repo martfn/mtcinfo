@@ -205,6 +205,67 @@
       text-transform: uppercase;
       box-shadow: 0 4px 12px rgba(168, 85, 247, 0.3);
     }
+
+    .survey-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    background: rgba(0, 0, 0, 0.75);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    }
+    
+    .survey-overlay.show {
+        display: flex;
+        opacity: 1;
+    }
+    
+    .survey-modal {
+        position: relative;
+        max-width: 520px;
+        width: 100%;
+        max-height: 85vh;
+        animation: surveyFadeIn 0.4s ease;
+    }
+    
+    .survey-image {
+        display: block;
+        width: 100%;
+        max-height: 85vh;
+        object-fit: contain;
+        border-radius: 14px;
+        cursor: pointer;
+    }
+    
+    .survey-close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        z-index: 2;
+        width: 36px;
+        height: 36px;
+        border: none;
+        border-radius: 50%;
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
+        font-size: 26px;
+        cursor: pointer;
+    }
+
+@keyframes surveyFadeIn {
+    from {
+        transform: translateY(15px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
   </style>
 </head>
 <body>
@@ -544,6 +605,54 @@
     }
 
     init();
+
+        // ── Pop-up do inquérito ──────────────────────
+    
+    const SURVEY_POPUP_ACTIVE = true;
+    const SURVEY_POPUP_KEY = "survey-popup-nov-2026";
+    
+    const surveyPopup = document.getElementById("survey-popup");
+    const closeSurvey = document.getElementById("close-survey");
+    
+    if (
+        SURVEY_POPUP_ACTIVE &&
+        !localStorage.getItem(SURVEY_POPUP_KEY)
+    ) {
+        setTimeout(() => {
+            surveyPopup.style.display = "flex";
+    
+            requestAnimationFrame(() => {
+                surveyPopup.classList.add("show");
+            });
+        }, 1000);
+    }
+    
+    closeSurvey.addEventListener("click", () => {
+        surveyPopup.classList.remove("show");
+    
+        setTimeout(() => {
+            surveyPopup.style.display = "none";
+        }, 350);
+    
+        localStorage.setItem(SURVEY_POPUP_KEY, "closed");
+    });
   </script>
+
+  <div id="survey-popup" class="survey-overlay">
+    <div class="survey-modal">
+        <button id="close-survey" class="survey-close"
+                aria-label="Fechar">×</button>
+
+        <a href="https://forms.gle/81ZGLF4dSrV9U6xb8"
+           target="_blank" rel="noopener">
+            <img src="survey-popup.png"
+                 alt="Participa no inquérito sobre as aulas"
+                 class="survey-image">
+        </a>
+    </div>
+</div>
+
+
+  
 </body>
 </html>
