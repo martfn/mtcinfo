@@ -620,18 +620,15 @@
 
     init();
 
-        // ── Pop-up do inquérito ──────────────────────
-    
+     // ── Pop-up do inquérito ──────────────────────
+
     const SURVEY_POPUP_ACTIVE = true;
-    const SURVEY_POPUP_KEY = "survey-popup-nov-2026";
     
     const surveyPopup = document.getElementById("survey-popup");
     const closeSurvey = document.getElementById("close-survey");
     
-    if (
-        SURVEY_POPUP_ACTIVE &&
-        !localStorage.getItem(SURVEY_POPUP_KEY)
-    ) {
+    if (SURVEY_POPUP_ACTIVE && surveyPopup && closeSurvey) {
+    
         setTimeout(() => {
             surveyPopup.style.display = "flex";
     
@@ -639,17 +636,15 @@
                 surveyPopup.classList.add("show");
             });
         }, 1000);
+    
+        closeSurvey.addEventListener("click", () => {
+            surveyPopup.classList.remove("show");
+    
+            setTimeout(() => {
+                surveyPopup.style.display = "none";
+            }, 350);
+        });
     }
-    
-    closeSurvey.addEventListener("click", () => {
-        surveyPopup.classList.remove("show");
-    
-        setTimeout(() => {
-            surveyPopup.style.display = "none";
-        }, 350);
-    
-        localStorage.setItem(SURVEY_POPUP_KEY, "closed");
-    });
   </script>
 
   
