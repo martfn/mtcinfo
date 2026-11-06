@@ -326,6 +326,20 @@
 
   </div>
 
+  <div id="survey-popup" class="survey-overlay">
+    <div class="survey-modal">
+        <button id="close-survey" class="survey-close"
+                aria-label="Fechar">×</button>
+
+        <a href="https://forms.gle/81ZGLF4dSrV9U6xb8"
+           target="_blank" rel="noopener">
+            <img src="survey-popup.png"
+                 alt="Participa no inquérito sobre as aulas"
+                 class="survey-image">
+        </a>
+    </div>
+  </div>
+
   <script>
     function switchFrontTab(id, btn) {
       document.querySelectorAll('.view-panel').forEach(p => p.classList.remove('active'));
@@ -637,21 +651,6 @@
         localStorage.setItem(SURVEY_POPUP_KEY, "closed");
     });
   </script>
-
-  <div id="survey-popup" class="survey-overlay">
-    <div class="survey-modal">
-        <button id="close-survey" class="survey-close"
-                aria-label="Fechar">×</button>
-
-        <a href="https://forms.gle/81ZGLF4dSrV9U6xb8"
-           target="_blank" rel="noopener">
-            <img src="survey-popup.png"
-                 alt="Participa no inquérito sobre as aulas"
-                 class="survey-image">
-        </a>
-    </div>
-</div>
-
 
   
 </body>
