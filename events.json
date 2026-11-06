@@ -718,6 +718,13 @@
     "label": "(SMM) Sonorização - Resumo 1ª Ronda de Testes",
     "link": "https://martfn.github.io/mtcinfo/smm1.html",
     "author": null,
+    "pinned": false
+  },
+  {
+    "display": "resumo",
+    "label": "(LM3) Laboratório Multimédia 3 - Resumo 1º Teste Teórico",
+    "link": "https://martfn.github.io/mtcinfo/lab3_teorico.html",
+    "author": null,
     "pinned": true
   }
 ]
