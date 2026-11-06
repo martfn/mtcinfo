@@ -330,13 +330,14 @@
 
     // ── Informações Gerais ───────────────────────────────────────
     function buildInfoGerais(entries) {
-    const container = document.getElementById("info-gerais");
-    if (!container) return;
+    const el = document.getElementById("timeline-gerais");
 
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
+    if (!entries.length) {
+        el.innerHTML = `<div style="color:var(--text-muted);font-size:13px;font-style:italic;">Sem informações gerais.</div>`;
+        return;
+    }
 
-    const months = {
+    const meses = {
         "janeiro": 0,
         "fevereiro": 1,
         "março": 2,
@@ -351,34 +352,40 @@
         "dezembro": 11
     };
 
-    container.innerHTML = entries.map(e => {
-        const match = e.value.match(
+    const hoje = new Date();
+    hoje.setHours(0, 0, 0, 0);
+
+    el.innerHTML = entries.map(e => {
+        const match = String(e.value || "").match(
             /(\d{1,2})\s+de\s+([a-zç]+)\s+de\s+(\d{4})/i
         );
 
         let pastClass = "";
 
         if (match) {
-            const day = parseInt(match[1], 10);
-            const month = months[match[2].toLowerCase()];
-            const year = parseInt(match[3], 10);
+            const dia = Number(match[1]);
+            const mes = meses[match[2].toLowerCase()];
+            const ano = Number(match[3]);
 
-            if (month !== undefined) {
-                const eventDate = new Date(year, month, day);
-                eventDate.setHours(0, 0, 0, 0);
+            if (mes !== undefined) {
+                const data = new Date(ano, mes, dia);
+                data.setHours(0, 0, 0, 0);
 
-                if (eventDate < today) {
+                if (data < hoje) {
                     pastClass = " past-event";
                 }
             }
         }
 
+        const valueHtml = e.link
+            ? `<a href="${e.link}" target="_blank" rel="noopener" style="color:var(--green-bright);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(134,239,172,0.4);">${e.value}</a>`
+            : e.value;
+
         return `
             <div class="timeline-row${pastClass}">
                 <div class="timeline-label">${e.label}</div>
-                <div class="timeline-value">${e.value}</div>
-            </div>
-        `;
+                <div class="timeline-value">${valueHtml}</div>
+            </div>`;
     }).join("");
     }
 
