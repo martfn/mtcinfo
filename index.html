@@ -324,21 +324,42 @@
 
     // ── Informações Gerais ───────────────────────────────────────
     function buildInfoGerais(entries) {
-      const el = document.getElementById("timeline-gerais");
-      if (!entries.length) {
+    const el = document.getElementById("timeline-gerais");
+
+    if (!entries.length) {
         el.innerHTML = `<div style="color:var(--text-muted);font-size:13px;font-style:italic;">Sem informações gerais.</div>`;
         return;
-      }
-      el.innerHTML = entries.map(e => {
+    }
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    el.innerHTML = entries.map(e => {
         const valueHtml = e.link
-          ? `<a href="${e.link}" target="_blank" rel="noopener" style="color:var(--green-bright);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(134,239,172,0.4);">${e.value}</a>`
-          : e.value;
+            ? `<a href="${e.link}" target="_blank" rel="noopener" style="color:var(--green-bright);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(134,239,172,0.4);">${e.value}</a>`
+            : e.value;
+
+        // Verifica se o valor corresponde a uma data no formato DD/MM ou DD/MM/AAAA
+        const dateMatch = String(e.value).match(/^(\d{2})\/(\d{2})(?:\/(\d{4}))?$/);
+        let isPast = false;
+
+        if (dateMatch) {
+            const day = Number(dateMatch[1]);
+            const month = Number(dateMatch[2]) - 1;
+            const year = dateMatch[3]
+                ? Number(dateMatch[3])
+                : today.getFullYear();
+
+            const eventDate = new Date(year, month, day);
+            isPast = eventDate < today;
+        }
+
         return `
-          <div class="timeline-row">
-            <div class="timeline-label">${e.label}</div>
-            <div class="timeline-value">${valueHtml}</div>
-          </div>`;
-      }).join("");
+            <div class="timeline-row ${isPast ? 'past-event' : ''}">
+                <div class="timeline-label">${e.label}</div>
+                <div class="timeline-value">${valueHtml}</div>
+            </div>`;
+    }).join("");
     }
 
     // ── Resumos View ─────────────────────────────────────────────
