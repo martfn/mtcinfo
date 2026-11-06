@@ -330,41 +330,55 @@
 
     // ── Informações Gerais ───────────────────────────────────────
     function buildInfoGerais(entries) {
-    const el = document.getElementById("timeline-gerais");
-
-    if (!entries.length) {
-        el.innerHTML = `<div style="color:var(--text-muted);font-size:13px;font-style:italic;">Sem informações gerais.</div>`;
-        return;
-    }
+    const container = document.getElementById("info-gerais");
+    if (!container) return;
 
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
-    el.innerHTML = entries.map(e => {
-        const valueHtml = e.link
-            ? `<a href="${e.link}" target="_blank" rel="noopener" style="color:var(--green-bright);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(134,239,172,0.4);">${e.value}</a>`
-            : e.value;
+    const months = {
+        "janeiro": 0,
+        "fevereiro": 1,
+        "março": 2,
+        "abril": 3,
+        "maio": 4,
+        "junho": 5,
+        "julho": 6,
+        "agosto": 7,
+        "setembro": 8,
+        "outubro": 9,
+        "novembro": 10,
+        "dezembro": 11
+    };
 
-        // Verifica se o valor corresponde a uma data no formato DD/MM ou DD/MM/AAAA
-        const dateMatch = String(e.value).match(/^(\d{2})\/(\d{2})(?:\/(\d{4}))?$/);
-        let isPast = false;
+    container.innerHTML = entries.map(e => {
+        const match = e.value.match(
+            /(\d{1,2})\s+de\s+([a-zç]+)\s+de\s+(\d{4})/i
+        );
 
-        if (dateMatch) {
-            const day = Number(dateMatch[1]);
-            const month = Number(dateMatch[2]) - 1;
-            const year = dateMatch[3]
-                ? Number(dateMatch[3])
-                : today.getFullYear();
+        let pastClass = "";
 
-            const eventDate = new Date(year, month, day);
-            isPast = eventDate < today;
+        if (match) {
+            const day = parseInt(match[1], 10);
+            const month = months[match[2].toLowerCase()];
+            const year = parseInt(match[3], 10);
+
+            if (month !== undefined) {
+                const eventDate = new Date(year, month, day);
+                eventDate.setHours(0, 0, 0, 0);
+
+                if (eventDate < today) {
+                    pastClass = " past-event";
+                }
+            }
         }
 
         return `
-            <div class="timeline-row ${isPast ? 'past-event' : ''}">
+            <div class="timeline-row${pastClass}">
                 <div class="timeline-label">${e.label}</div>
-                <div class="timeline-value">${valueHtml}</div>
-            </div>`;
+                <div class="timeline-value">${e.value}</div>
+            </div>
+        `;
     }).join("");
     }
 
