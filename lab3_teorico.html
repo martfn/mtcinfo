@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>LabMM3 · Resumo teórico</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300..700&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js')</script>
+<style>
+*{box-sizing:border-box}
+:root{--bg:#f7f6f2;--sf:#fbfaf7;--of:#efece6;--bd:#dedad2;--tx:#1e1c17;--mu:#625f5a;--pr:#01696f;--ph:#d6e8e5;--wn:#964219;--ok:#437a22;--gd:#a8730a;--sd:0 1px 3px rgba(30,28,23,.07),0 10px 28px -14px rgba(30,28,23,.14);--r:14px;--fd:'Instrument Serif',Georgia,serif;--fb:'DM Sans',system-ui,-apple-system,'Segoe UI',sans-serif;color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141310;--sf:#1b1a18;--of:#252421;--bd:#34332f;--tx:#e2e0db;--mu:#a09e99;--pr:#59a5b0;--ph:#1e3033;--wn:#e0804f;--ok:#7bbc52;--gd:#e8af34;--sd:0 1px 3px rgba(0,0,0,.3),0 10px 28px -14px rgba(0,0,0,.6);color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#141310;--sf:#1b1a18;--of:#252421;--bd:#34332f;--tx:#e2e0db;--mu:#a09e99;--pr:#59a5b0;--ph:#1e3033;--wn:#e0804f;--ok:#7bbc52;--gd:#e8af34;--sd:0 1px 3px rgba(0,0,0,.3),0 10px 28px -14px rgba(0,0,0,.6);color-scheme:dark}
+html{scroll-behavior:smooth;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 76px);-webkit-font-smoothing:antialiased}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.65 var(--fb);transition:background .3s,color .3s}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:30}
+h1,h2,h3{font-family:var(--fd);font-weight:400;line-height:1.15;margin:0;text-wrap:balance}
+a{color:inherit;text-decoration:none}
+:is(a,button,summary):focus-visible{outline:2px solid var(--pr);outline-offset:2px}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;display:flex;align-items:center;gap:12px;padding:10px 20px;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--bd)}
+.lg{font-family:var(--fd);font-size:1.25rem;white-space:nowrap}
+#nl{flex:1;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;position:relative}
+#nl a{flex:none;font-size:.82rem;color:var(--mu);padding:6px 11px;border-radius:99px;transition:background .2s,color .2s}
+#nl a:hover{background:var(--of);color:var(--tx)}
+#nl a[aria-current="true"]{background:var(--ph);color:var(--pr);font-weight:600}
+#tt{flex:none;width:36px;height:36px;border-radius:10px;border:1px solid var(--bd);background:var(--sf);color:var(--mu);font-size:1rem;cursor:pointer;transition:background .2s}
+#tt:hover{background:var(--of)}
+.pg{position:absolute;left:0;bottom:-1px;height:2px;width:0;background:var(--pr)}
+.wrap,main{max-width:960px;margin:0 auto;padding:0 20px}
+main{padding-bottom:56px}
+.hero{padding:64px 0 36px;text-align:center}
+.eb{display:inline-block;font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--pr);background:var(--ph);padding:5px 14px;border-radius:99px;margin-bottom:18px}
+.hero h1{font-size:clamp(2.2rem,1.2rem + 4vw,3.8rem)}
+.hero h1 em{color:var(--pr)}
+.hero p{color:var(--mu);max-width:56ch;margin:14px auto 18px;font-size:1.05rem}
+.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:34px}
+.chips span{font-size:.8rem;padding:4px 12px;border:1px solid var(--bd);border-radius:99px;color:var(--mu);background:var(--sf)}
+.toc{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px;text-align:left}
+.tc{display:flex;align-items:center;gap:12px;padding:12px 14px;background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);transition:transform .25s,box-shadow .25s,border-color .25s}
+.tc:hover{transform:translateY(-2px);box-shadow:var(--sd);border-color:var(--a)}
+.tc b{flex:none;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-size:.8rem;background:color-mix(in srgb,var(--a) 16%,transparent);color:var(--a)}
+.tc span{font-size:.9rem;font-weight:500}
+.s{padding:44px 0 8px;border-top:1px solid var(--bd);margin-top:28px}
+.s:nth-of-type(4n+1){--a:var(--pr)}.s:nth-of-type(4n+2){--a:var(--wn)}.s:nth-of-type(4n+3){--a:var(--ok)}.s:nth-of-type(4n){--a:var(--gd)}
+.sh{display:flex;align-items:center;gap:14px;margin-bottom:20px}
+.sn{flex:none;width:44px;height:44px;border-radius:12px;display:grid;place-items:center;font-family:var(--fd);font-size:1.4rem;background:color-mix(in srgb,var(--a) 15%,transparent);color:var(--a)}
+.s h2{font-size:clamp(1.6rem,1.1rem + 1.8vw,2.3rem)}
+.s>p{color:var(--mu)}
+.c{background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);padding:18px 22px;margin:14px 0;box-shadow:var(--sd)}
+.c h3{font-size:1.3rem;color:var(--a);margin-bottom:8px}
+.c p,.c li{color:var(--mu);font-size:.95rem}
+.c b,.c strong{color:var(--tx)}
+.c p,.c ul{margin:6px 0}
+ul{padding-left:20px}
+.g{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr));gap:14px;margin:14px 0}
+.g .c{margin:0}
+code{font:.86em ui-monospace,Menlo,Consolas,monospace;background:var(--of);padding:1px 6px;border-radius:6px;color:var(--tx)}
+pre{font:.85rem/1.55 ui-monospace,Menlo,Consolas,monospace;background:var(--of);border:1px solid var(--bd);padding:14px 16px;border-radius:12px;overflow-x:auto;margin:10px 0;color:var(--tx)}
+.t{overflow-x:auto;border:1px solid var(--bd);border-radius:var(--r);margin:14px 0;background:var(--sf)}
+.c .t{margin:8px 0}
+table{width:100%;border-collapse:collapse;font-size:.9rem}
+th{background:var(--of);font:600 .72rem var(--fb);text-transform:uppercase;letter-spacing:.07em;text-align:left;padding:10px 14px;color:var(--tx);white-space:nowrap}
+td{padding:10px 14px;border-top:1px solid var(--bd);color:var(--mu);vertical-align:top}
+tr:hover td{background:var(--of);color:var(--tx)}
+.k{border-left:3px solid var(--a);background:color-mix(in srgb,var(--a) 10%,var(--sf));padding:13px 18px;border-radius:0 12px 12px 0;margin:16px 0;font-size:.95rem}
+.k.w{--a:var(--wn)}
+.ok{color:var(--ok)}.no{color:var(--wn)}
+details{background:var(--sf);border:1px solid var(--bd);border-radius:12px;margin:10px 0;overflow:hidden;transition:border-color .2s,box-shadow .2s}
+details[open]{border-color:var(--a);box-shadow:var(--sd)}
+summary{cursor:pointer;list-style:none;padding:13px 18px;font-weight:600;display:flex;justify-content:space-between;gap:12px;align-items:center}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"▸";color:var(--a);transition:transform .25s;flex:none}
+details[open]>summary::after{transform:rotate(90deg)}
+details>:not(summary){margin-left:18px;margin-right:18px;color:var(--mu);font-size:.95rem}
+details[open]>:not(summary){animation:dr .3s ease both}
+details>:last-child{margin-bottom:14px}
+@keyframes dr{from{opacity:0;transform:translateY(-6px)}}
+footer{text-align:center;color:var(--mu);font-size:.8rem;padding:24px 20px 40px;border-top:1px solid var(--bd)}
+.js .rv{opacity:0;transform:translateY(16px);transition:opacity .6s cubic-bezier(.2,.7,.2,1),transform .6s cubic-bezier(.2,.7,.2,1)}
+.js .rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.js .rv{opacity:1;transform:none;transition:none}details[open]>:not(summary){animation:none}}
+@media (max-width:560px){.lg span{display:none}.hero{padding-top:40px}}
+</style>
+</head>
+<body>
+<nav><a class="lg" href="#top">📘 <span>LabMM3</span></a><div id="nl"></div><button id="tt" aria-label="Alternar tema"></button><i class="pg" id="pg"></i></nav>
+<header class="hero" id="top"><div class="wrap">
+<span class="eb">LabMM3 · Teste Teórico 1 · 12/11/2026</span>
+<h1>Algoritmia &amp; JavaScript,<br><em>em modo revisão.</em></h1>
+<p>Resumo fiel das aulas T1–T16: conceitos, pseudocódigo, estruturas, DOM e funções, pensado para rever em minutos.</p>
+<div class="chips"><span>18% da nota da UC</span><span>Sem IA no teste</span><span>Mínimo 6,5 na componente T</span></div>
+<div class="toc" id="toc"></div>
+</div></header>
+<main>
+
+
+<section class="s" id="algoritmia" data-n="1" data-t="Algoritmia"><div class="sh"><span class="sn">1</span><h2>Algoritmia</h2></div>
+<div class="c"><h3>O que é um algoritmo?</h3>
+<p>Conjunto de expressões simbólicas que representam <b>ações</b>, <b>testes de condições</b> e <b>estruturas de controlo</b>, para especificar um problema e a sua solução.</p>
+<p>O algoritmo <b>não é a solução</b>: é a <b>forma de chegar</b> à solução. Aprende-se <span class="ok">construindo e testando</span>; não se aprende a copiar, ler ou decorar.</p></div>
+<div class="c"><h3>5 características (Knuth)</h3>
+<ul><li><b>Finitude</b> – todos os passos têm fim previsto.</li><li><b>Definitude</b> – sem ambiguidade em nenhuma instrução.</li><li><b>Entrada</b> – identificar os dados de entrada (se existirem).</li><li><b>Saída</b> – produz dados de saída.</li><li><b>Eficácia</b> – passos simples o suficiente para serem entendidos/executados.</li></ul></div>
+<div class="c"><h3>Passos para resolver um problema</h3>
+<p>1) Especificar o problema → 2) Definir estratégia/planificação (viabilidade, top-down vs bottom-up) → 3) Conceber o algoritmo → 4) Codificar (JavaScript, PHP, C, Java…) → 5) Testar e corrigir erros → 6) Documentar.</p></div>
+<div class="g">
+<div class="c"><h3>Top-down</h3><ul><li>Do geral para o específico; divide o problema em sub-problemas, sucessivamente.</li><li>Ignora detalhes no início; só se codifica quando a especificação está completa.</li><li>Comum na programação procedimental.</li></ul></div>
+<div class="c"><h3>Bottom-up</h3><ul><li>Parte de blocos simples pré-existentes (ex.: objetos) e liga-os até chegar ao processo final.</li><li>Reutilização de blocos; prioriza programação e testes.</li><li>Comum na POO.</li></ul></div>
+</div>
+<div class="k"><b>Três momentos de um algoritmo:</b> 1. entrada de dados → 2. processamento → 3. saída de dados. (Ex.: lâmpada – entradas: lâmpada nova, escadote; operações: subir, retirar, colocar, descer.)</div>
+<div class="c"><h3>Programar e programa</h3>
+<p><b>Programar</b> = “comunicar com o computador”: dar instruções, escritas numa linguagem de programação, para resolver problemas com lógica (identificar o problema, pensar a solução, escrever código, testar, corrigir, melhorar).</p>
+<p><b>Programa</b> = conjunto de instruções que o computador consegue executar (o que fazer e como fazer).</p></div>
+</section>
+
+<section class="s" id="representacao" data-n="2" data-t="Representação"><div class="sh"><span class="sn">2</span><h2>Técnicas de representação</h2></div>
+<div class="t"><table><tr><th></th><th>Pseudocódigo</th><th>Fluxograma</th><th>Linguagem de programação</th></tr>
+<tr><td>Como é</td><td>Texto próximo do português</td><td>Diagrama de blocos (ISO 5807:1985)</td><td>Codificação direta do algoritmo</td></tr>
+<tr><td>Vantagem</td><td>Fácil de escrever e entender</td><td>Objetivo e sintético</td><td>Executável</td></tr>
+<tr><td>Limite</td><td>Pode gerar erros de interpretação; menos objetivo</td><td>Exige conhecer os símbolos</td><td>Exige conhecer a sintaxe; mais difícil ver o todo</td></tr></table></div>
+<div class="c"><h3>Símbolos do fluxograma</h3>
+<p><b>Terminador</b> (início/fim) · <b>Processo</b> · <b>Processo pré-definido</b> · <b>Decisão</b> · <b>Decisão múltipla</b> · <b>Entrada/Saída de dados</b> · <b>Entrada manual</b> (teclado) · <b>Display</b> (mensagem no ecrã) · <b>Output</b> (saída para documento) · <b>Conectores</b> · <b>Fluxo</b> (ligação entre símbolos).</p>
+<p>No fluxograma <b>não se representam variáveis</b>: representam-se processos e fluxo de informação. Ferramentas: Flowgorithm, draw.io, Visio…</p></div>
+<div class="c"><h3>Instruções base de pseudocódigo</h3>
+<pre>INÍCIO … FIM
+VAR nome:TEXTO / NÚMERO / DATA / INTEIRO
+ESCREVE "mensagem"        LÊ variavel
+SE condição ENTÃO … SENÃO … FIM SE
+ESCOLHA x  CASO 1 … CASO OUTRO … FIM ESCOLHA
+REPETE ENQUANTO condição … FIM REPETE
+FAZ … ENQUANTO condição
+REPETE c DE ini ATÉ fim PASSO p … FIM REPETE</pre>
+<p>Ferramentas: Portugol, VisuAlg.</p></div>
+</section>
+
+<section class="s" id="variaveis" data-n="3" data-t="Variáveis"><div class="sh"><span class="sn">3</span><h2>Variáveis e tipos de dados</h2></div>
+<div class="c"><h3>Variável</h3>
+<ul><li>Espaço em <b>memória</b> onde se guarda informação; tem um <b>nome</b> que a identifica.</li><li>O <b>tipo</b> de informação condiciona as operações possíveis.</li><li>O valor <b>pode mudar</b> durante o programa.</li><li>Dá um nível superior de abstração.</li></ul></div>
+<div class="c"><h3>Nomes (regras)</h3>
+<ul><li>Podem conter letras, números, <code>_</code> e <code>$</code>; começam por letra, <code>_</code> ou <code>$</code>.</li><li><span class="no">Sem</span> espaços, acentos ou especiais (<code>@ # - ç ~ "</code>); sem repetir nomes; sem palavras reservadas.</li><li><b>Case sensitive</b>: <code>mVariavel</code> ≠ <code>mvariavel</code>.</li><li>Boas práticas: lower case ou camelCase, nomes com significado, prefixos, consistência.</li></ul>
+<p>Inválidos nos exemplos: <code>Data Nascimento</code> (espaço), <code>concorrente#1pontuação</code> (# e acento); <code>NomeCompleto: NÚMERO</code> é válido mas o tipo está errado.</p></div>
+<div class="t"><table><tr><th>Tipo</th><th>Primitivos (linguagens em geral)</th></tr>
+<tr><td>Lógico</td><td>boolean (1 bit)</td></tr><tr><td>Inteiro</td><td>byte 8 · short 16 · int 32 · long 64 bits</td></tr>
+<tr><td>Real</td><td>float 32 · double 64 bits</td></tr><tr><td>Texto</td><td>char 16 bits</td></tr></table></div>
+<div class="g">
+<div class="c"><h3>JavaScript</h3><p><b>Primitivos:</b> boolean, number, string, null, undefined.</p><p><b>Complexos:</b> array, function, object.</p></div>
+<div class="c"><h3>Memória</h3><p>1 byte = 8 bits. O texto “Azul” ocupa 4 bytes (32 bits): cada letra é guardada como código (A=65, z=122, u=117, l=108) em binário.</p></div>
+</div>
+<div class="k">No <b>pseudocódigo</b> as variáveis declaram-se no início (<code>VAR nome:TIPO</code>); podem usar-se tipos próprios, desde que claros e consistentes.</div>
+</section>
+
+<section class="s" id="operadores" data-n="4" data-t="Operadores"><div class="sh"><span class="sn">4</span><h2>Operadores</h2></div>
+<div class="t"><table><tr><th>Aritméticos</th><th>Relacionais (→ V/F)</th><th>Lógicos (→ V/F)</th></tr>
+<tr><td>+ adição · − subtração · × multiplicação · / divisão<br><b>EXP</b> expoente · <b>MOD</b> resto da divisão inteira · <b>DIV</b> quociente inteiro</td>
+<td>&gt; · &lt; · ≥ · ≤ · <b>==</b> igual · <b>≠</b> diferente</td>
+<td><b>E</b>: V só se todas as condições forem V<br><b>OU</b>: V se pelo menos uma for V<br><b>NÃO</b>: inverte o valor</td></tr></table></div>
+<div class="c"><h3>Tabela de verdade</h3><div class="t"><table><tr><th>X</th><th>Y</th><th>X E Y</th><th>X OU Y</th><th>NÃO X</th></tr>
+<tr><td>V</td><td>V</td><td>V</td><td>V</td><td>F</td></tr><tr><td>V</td><td>F</td><td>F</td><td>V</td><td>F</td></tr>
+<tr><td>F</td><td>V</td><td>F</td><td>V</td><td>V</td></tr><tr><td>F</td><td>F</td><td>F</td><td>F</td><td>V</td></tr></table></div></div>
+<div class="c"><h3>Prioridade (1 = executa primeiro)</h3>
+<p>1 parênteses → 2 × e ÷ → 3 + e − → 4 relacionais → 5 NÃO → 6 E → 7 OU.</p>
+<p>Ex.: <code>12+8×5</code> = 52 · <code>(12+8)×5</code> = 100 · <code>NÃO(10&gt;7) E (9==9)</code> = F E V = <b>F</b>.</p></div>
+<div class="c"><h3>Em JavaScript</h3>
+<ul><li>Aritméticos: <code>+ - * / %</code> (resto) <code>++ --</code></li><li>Atribuição: <code>= += -= *= /= %=</code> (<code>x+=y</code> ⇔ <code>x=x+y</code>)</li><li>Lógicos: <code>&amp;&amp;</code> (E) · <code>||</code> (OU) · <code>!</code> (NÃO)</li><li>Relacionais: <code>== === != &gt; &lt; &gt;= &lt;=</code></li></ul></div>
+</section>
+
+<section class="s" id="decisao" data-n="5" data-t="Decisão"><div class="sh"><span class="sn">5</span><h2>Estruturas de decisão</h2></div>
+<p>Alteram a execução sequencial. Todas as condições resultam num <b>booleano</b> (V/F), normalmente com operadores relacionais/lógicos.</p>
+<div class="g">
+<div class="c"><h3>Simples</h3><pre>SE cond ENTÃO
+  comandos      // só se V
+FIM SE
+
+if (cond) { comandos; }</pre></div>
+<div class="c"><h3>Composta</h3><pre>SE cond ENTÃO
+  comandos1     // se V
+SENÃO
+  comandos2     // se F
+FIM SE
+
+if (cond) {…} else {…}</pre></div>
+</div>
+<div class="c"><h3>Encadeada</h3><p>Pode aninhar-se qualquer número de decisões (um <code>SENÃO</code> com outro <code>SE</code> lá dentro). Em fluxograma: um losango por condição.</p>
+<pre>SE soma correta ENTÃO ESCREVE "parabéns"
+SENÃO
+  SE pontos &gt; 5 ENTÃO ESCREVE "está quase"
+  SENÃO ESCREVE "tenta outra vez"
+  FIM SE
+FIM SE</pre></div>
+<div class="k w"><b>Chavetas em JS:</b> sem <code>{ }</code>, só a <b>primeira instrução</b> depende do <code>if</code>. Em <code>if(t==30) alert("calor"); alert("t-shirt");</code> o 2.º alert corre <u>sempre</u>.</div>
+<div class="c"><h3><code>=</code> vs <code>==</code> vs <code>===</code></h3>
+<ul><li><code>=</code> atribuição. <code>if (t = 30)</code> atribui 30 (e é sempre verdadeiro!).</li><li><code>==</code> compara só o <b>valor</b> (ignora o tipo): <code>5 == "5"</code> → true.</li><li><code>===</code> compara <b>tipo e valor</b>: <code>5 === "5"</code> → false.</li><li>Valores lidos de <code>input</code>/<code>prompt</code> são texto → <code>valor === 30</code> é sempre false.</li></ul></div>
+<div class="c"><h3>Decisão múltipla (ESCOLHA / switch)</h3>
+<ul><li>Caso particular de <code>SE…SENÃO</code> encadeados: igualdade <b>absoluta</b> (valor <b>e tipo</b>) entre o seletor e as opções.</li><li><span class="no">Não</span> permite operadores relacionais/lógicos: <code>CASO &lt; 1000</code> é inválido.</li><li>Opção <code>OUTRO</code> / <code>default</code> é opcional.</li></ul>
+<pre>ESCOLHA fruta                switch (n) {
+  CASO "maça"  ESCREVE "2€"    case 1: console.log("Janeiro");
+  CASO "kiwi"  ESCREVE "3,5€"           break;      // termina o case
+  CASO OUTRO   ESCREVE "inválido"  case 2: …
+FIM ESCOLHA                    default: console.log("inválido");
+                             }</pre>
+<p>Sem <code>break</code> o código “cai” para o case seguinte. Isso permite agrupar casos: <code>case "mb": case 1: pagm="Multibanco"; break;</code></p></div>
+<details><summary>Exercício: conversão de intervalos</summary><p>Intervalos (“18 aos 25 anos”) não cabem num ESCOLHA: usa <code>SE … E …</code> encadeados, p. ex. <code>idade ≥ 18 E idade ≤ 25</code>.</p></details>
+</section>
+
+<section class="s" id="repeticao" data-n="6" data-t="Repetição"><div class="sh"><span class="sn">6</span><h2>Estruturas de repetição (ciclos)</h2></div>
+<p>Executam instruções várias vezes: algoritmos mais curtos e fáceis de manter. Dentro do ciclo só correm as instruções do ciclo.</p>
+<div class="g">
+<div class="c"><h3>REPETE ENQUANTO</h3><pre>REPETE ENQUANTO cond
+  comandos
+FIM REPETE</pre><p>Testa a condição <b>antes</b>: pode executar <b>0 vezes</b>.</p></div>
+<div class="c"><h3>FAZ … ENQUANTO</h3><pre>FAZ
+  comandos
+ENQUANTO cond</pre><p>Testa <b>depois</b>: executa <b>pelo menos 1 vez</b>. No fluxograma, não há operações no caminho de volta.</p></div>
+<div class="c"><h3>REPETE … DE … ATÉ</h3><pre>REPETE c DE 1 ATÉ 9 PASSO 1
+  comandos
+FIM REPETE</pre><p>Para nº de repetições <b>conhecido</b>.</p></div>
+</div>
+<div class="k"><b>Condicional</b> = nº de repetições desconhecido · <b>Contador</b> = nº conhecido. Repete enquanto a condição for <b>verdadeira</b>; por isso o valor da condição <b>tem de mudar</b> dentro do ciclo, senão fica infinito (viola a finitude).</div>
+<div class="c"><h3>Funcionamento do ciclo com contador</h3>
+<p>1) inicializa o contador → 2) testa (contador ≤ valor final; com passo negativo, ≥) → 3) V: executa o bloco; F: termina → 4) altera o contador (+ passo) → 5) volta ao 2.</p></div>
+<div class="c"><h3>Exemplos</h3>
+<pre>n = 1                      // contador manual
+REPETE ENQUANTO n ≤ 9
+  ESCREVE n
+  n = n + 1
+FIM REPETE</pre>
+<p>Ler até ser “zé”: <code>FAZ … LÊ palavra … ENQUANTO palavra ≠ "zé"</code>. Total acumulado: <code>total = total + valor</code> dentro do ciclo, com <code>total = 0</code> antes.</p></div>
+<details><summary>Qual o resultado? (PASSO)</summary><ul>
+<li><code>n DE 1 ATÉ 9 PASSO 3</code> → 1, 4, 7</li><li><code>n DE 10 ATÉ 0 PASSO -1</code> → 10, 9, … , 0</li><li><code>n DE 1 ATÉ 9 PASSO -1</code> → nada (a condição é falsa logo à partida)</li></ul></details>
+<p>Ciclos aninhados: o ciclo interno executa por completo em cada iteração do externo.</p>
+</section>
+
+<section class="s" id="bugs" data-n="7" data-t="Erros típicos"><div class="sh"><span class="sn">7</span><h2>Where’s the bug? Erros típicos</h2></div>
+<div class="c">
+<ul>
+<li><b>Resultado não guardado:</b> <code>num+10</code> não altera nada → <code>num = num + 10</code>.</li>
+<li><b>Condição errada:</b> <code>SE idade = 60</code> (atribuição/igualdade exata) em vez de <code>idade &gt; 60</code> ou <code>==</code>; atenção a &gt; vs ≥.</li>
+<li><b>Fluxograma sem ramo F:</b> se a decisão não tiver saída falsa, falta tratar o outro caso.</li>
+<li><b>Tipo do ESCOLHA:</b> <code>VAR num:NÚMERO</code> mas <code>CASO "1"</code> (texto) → nunca coincide (igualdade absoluta). Falta ainda <code>CASO OUTRO</code> para valores inválidos.</li>
+<li><b>Variável não inicializada:</b> <code>REPETE ENQUANTO n ≤ 9</code> sem <code>n = 1</code>; ou <code>peso_total</code> sem <code>= 0</code>.</li>
+<li><b>Variável não declarada:</b> usar <code>peso</code> sem <code>VAR peso:NÚMERO</code>.</li>
+<li><b>Ciclo infinito:</b> a condição nunca muda.</li>
+<li><b>ESCOLHA com operadores:</b> <code>CASO &lt; 1000</code>.</li>
+<li><b>SE vazio:</b> <code>SE c ENTÃO SENÃO …</code> (ENTÃO sem comandos).</li>
+<li><b>Ordem das condições:</b> condições sobrepostas/encadeadas na ordem errada dão resultados errados.</li>
+</ul></div>
+<div class="k">Estratégia para analisar código: percorre-o linha a linha e regista o valor de cada variável a cada passo (tabela de memória).</div>
+</section>
+
+<section class="s" id="js" data-n="8" data-t="JavaScript &amp; DOM"><div class="sh"><span class="sn">8</span><h2>JavaScript e DOM</h2></div>
+<div class="g">
+<div class="c"><h3>O que é</h3><ul><li>Linguagem de programação para a Web; interpretada (não compilada); <b>não é Java</b>.</li><li>Nome oficial: ECMAScript. Começou no Netscape Navigator 2 (LiveScript, 1995).</li><li>Segura: não escreve ficheiros no cliente (exceto cookies/local storage). Mas o código-fonte é visível.</li></ul></div>
+<div class="c"><h3>Linguagem <i>weakly typed</i></h3><ul><li>Declaração não obrigatória; não se indica o tipo; o tipo muda e converte-se automaticamente.</li><li>Mais simples, mas mais propensa a erros.</li><li>Variável declarada sem valor = <code>undefined</code>; variável inexistente → <code>ReferenceError</code>.</li></ul></div>
+</div>
+<div class="g">
+<div class="c"><h3>Client-side</h3><p class="ok">+ resposta rápida, alivia o servidor.</p><p class="no">− depende do browser; código exposto.</p></div>
+<div class="c"><h3>Server-side</h3><p class="ok">+ código protegido, acede a BD/ficheiros/API, sem dependência do cliente.</p><p class="no">− mais carga no servidor; precisa de ligação.</p></div>
+</div>
+<div class="c"><h3>Fluxo ao aceder a uma página</h3><p>Browser faz pedido <b>HTTP</b> → servidor devolve o HTML → browser interpreta e constrói o <b>DOM</b> → renderiza → pede os restantes recursos (CSS, JS, imagens). O JS pode alterar o HTML a qualquer momento manipulando o DOM.</p></div>
+<div class="c"><h3>Onde pôr o JavaScript</h3><p><b>Inline</b> · <b>embedded</b> (<code>&lt;script&gt;</code>) · <b>ficheiro externo</b> (<code>&lt;script src="x.js"&gt;</code>). O externo dá reutilização, manutenção e cache.</p></div>
+<div class="c"><h3>DOM (tree model)</h3><p>Representação hierárquica do HTML com 3 tipos de nós: <b>elemento</b> (html, body, p…), <b>atributo</b> (title="…") e <b>texto</b>.</p>
+<pre>document.getElementById("id")       // devolve null se não existir; case-sensitive
+el.title = "texto"                   // atributo
+el.innerHTML = "&lt;i&gt;olá&lt;/i&gt;"         // conteúdo (lê e escreve HTML)
+el.style.backgroundColor = "red"     // estilo: camelCase
+el.style.fontSize = "10pt"           // precisa de unidade ("10" não funciona)
+input.value                          // valor de um campo (sempre texto)</pre></div>
+<div class="c"><h3>Entrada e saída</h3>
+<pre>alert(x)                        // mostra janela
+idade = prompt("Idade?", 18)    // texto; Cancel → null
+ok = confirm("Sair?")           // OK → true · Cancel → false
+console.log("z =", z)           // consola (debug)</pre></div>
+<div class="c"><h3>Conversão de tipos</h3>
+<p><code>+</code> soma números mas <b>concatena</b> se houver texto. <code>parseInt()</code>, <code>parseFloat()</code>, <code>String()</code> convertem explicitamente; <code>isNaN(v)</code> → true se não for número.</p>
+<p><code>document.getElementById("pontos").value + 20</code> com valor 100 dá <code>"10020"</code> → usa <code>parseInt(...)</code>.</p></div>
+<details><summary>Quanto dá? (conversão implícita)</summary><ul>
+<li><code>12 + 34</code> → 46 · <code>"12" + "34"</code> → "1234" · <code>"A idade: " + 21</code> → "A idade: 21"</li>
+<li><code>1 + 4 + "cafés"</code> → "5cafés" · <code>"cafés" + 1 + 4</code> → "cafés14"</li>
+<li><code>"2" * "4"</code> → 8 · <code>"resultado" + 1 + 2*4</code> → "resultado18" · <code>"2"+"2"-"2"</code> → 20</li></ul></details>
+<details><summary>parseInt e isNaN</summary><ul>
+<li>Ignora espaços à esquerda; lê até ao 1.º carácter não numérico; se o 1.º não for número → <code>NaN</code>.</li>
+<li><code>parseInt("10.33")</code>, <code>("10,78")</code>, <code>("10 de Janeiro")</code> → 10 · <code>("34 56 78")</code> → 34 · <code>(" 60 ")</code> → 60 · <code>("Janeiro 10")</code> → NaN</li>
+<li><code>isNaN("123")</code> → false · <code>isNaN("Hello")</code> → true · <code>isNaN("2005/12/12")</code> → true · <code>isNaN(2005/12/12)</code> → false</li></ul></details>
+<div class="c"><h3><code>typeof</code> e números aleatórios</h3>
+<p><code>typeof v</code> → "boolean", "string", "number", "object", "function", "undefined" (arrays e <code>null</code> dão "object").</p>
+<p><code>Math.random()</code> → decimal em <b>[0, 1[</b>. <code>Math.random()*4</code> → [0, 4[. Inteiro entre min e max: <code>Math.floor(Math.random()*(max-min+1)+min)</code>. Probabilidade de 25%: <code>Math.random() &lt; 0.25</code>.</p></div>
+<div class="c"><h3>Eventos</h3>
+<ul><li>Ocorrem por ações do utilizador (rato, teclado, formulário, browser) ou automaticamente (timers).</li><li><b>Inline</b> (<code>onclick="…"</code>) a evitar; preferir <code>el.onclick = function(){…}</code>.</li><li><code>onkeydown</code>: ao premir, repete continuamente · <code>onkeyup</code>: ao libertar, 1 vez · <code>onkeypress</code>: descontinuado.</li><li>Tecla premida: <code>event.key</code> (<code>keyCode</code> está descontinuado).</li></ul></div>
+<div class="k w"><b>Ordem de execução:</b> o browser lê o HTML de cima para baixo. Um <code>&lt;script&gt;</code> no <code>&lt;head&gt;</code> que usa <code>getElementById</code> corre antes do elemento existir → <code>null</code>. Soluções: script no fim do <code>body</code>, ou <code>window.onload = function(){ … }</code>.</div>
+<div class="c"><h3>Áudio e vídeo (HTML5)</h3>
+<p>Tags <code>&lt;audio&gt;</code>/<code>&lt;video&gt;</code> com <code>&lt;source&gt;</code> (nem todos os formatos funcionam em todos os browsers; o Safari não suporta Ogg). Áudio via JS:</p>
+<pre>var som = new Audio();  som.src = "ficheiro.mp3";
+som.play();  som.pause();</pre></div>
+<p>Sintaxe: instruções terminam em <code>;</code>. Comentários: <code>// linha</code> e <code>/* bloco */</code>.</p>
+</section>
+
+<section class="s" id="funcoes" data-n="9" data-t="Funções &amp; scope"><div class="sh"><span class="sn">9</span><h2>Subalgoritmos (funções) e scope</h2></div>
+<div class="c"><h3>Porquê?</h3><p>Repetir código aumenta o tamanho e complica a manutenção. Subalgoritmos permitem <b>reutilizar</b> código, reduzir linhas, simplificar alterações e minimizar erros. Sem eles: <b>programação linear</b>; com eles: <b>estruturada/modular</b> (problema dividido em módulos reutilizáveis).</p></div>
+<div class="g">
+<div class="c"><h3>Tipos</h3><ul><li><b>Procedimento</b>: executa instruções.</li><li><b>Função</b>: executa e <b>retorna</b> um valor.</li><li><b>Intrínsecos</b>: nativos (<code>prompt</code>, <code>isNaN</code>, <code>Math.random</code>, <code>parseInt</code>).</li><li><b>Extrínsecos</b>: criados pelo programador.</li></ul></div>
+<div class="c"><h3>Caixa preta</h3><p>Invoca-se pelo nome (único), passam-se parâmetros, o subalgoritmo executa e devolve o resultado. Quem invoca não precisa de saber como funciona por dentro.</p></div>
+</div>
+<div class="c"><h3>Sintaxe</h3>
+<pre>function nome(p1, p2 = 33) {   // declaração; p2 tem valor por omissão
+  // código
+  return valor;                // opcional; TERMINA a função
+}
+var r = nome("Manel");         // invocação; sem return → undefined</pre>
+<ul><li>Parâmetro não passado = <code>undefined</code> (ou o valor por omissão).</li><li>Código depois de um <code>return</code> <b>nunca</b> executa.</li><li><b>Callback</b>: função passada a outra / chamada quando ocorre um evento (ex.: <code>window.onload = function(){…}</code>).</li><li>Parâmetros são <b>cópias</b>: alterar <code>x++</code> dentro da função não muda a variável de fora.</li></ul></div>
+<div class="c"><h3>Scope (visibilidade)</h3>
+<ul><li><b>Global</b>: declarada fora de funções; existe em todo o script até a página fechar. Atribuir sem <code>var</code> dentro de uma função cria uma global.</li><li><b>Local</b>: declarada dentro da função; só existe nela e desaparece quando termina. Funções diferentes podem ter locais com o mesmo nome.</li><li><b>Regra da proximidade</b>: procura primeiro no contexto atual e depois nos contextos acima, até ao global. Um parâmetro/local com o mesmo nome “esconde” a global.</li><li>Funções declaradas dentro de outra são locais a ela.</li><li>O mesmo vale para <code>let</code>.</li></ul></div>
+<details><summary>Exemplos (qual o resultado?)</summary><ul>
+<li><code>var nome="zé"; function f(){console.log(nome)}</code> → f() mostra “zé” (usa a global).</li>
+<li><code>function f(){var nome="zé"} f(); console.log(nome)</code> → <b>ReferenceError</b> (local).</li>
+<li><code>function f(){nome="zé"} f(); console.log(nome)</code> → “zé” (sem var = global).</li>
+<li><code>function sq(n){total=n*n}</code> com <code>var total=50; sq(20)</code> → 400; com <code>var total=n*n</code> dentro → 50.</li>
+<li><code>function inc(a,b){a++;b++}</code> com a=4, b=8 → dentro 5 9; fora continua 4 8.</li>
+<li><code>function f1(){ function f2(){…} }</code>; chamar <code>f2()</code> fora de f1 → erro (f2 é local a f1).</li></ul></details>
+<div class="c"><h3>Hoisting</h3>
+<p>As declarações <code>var</code> são “elevadas” para o topo do scope, mas <b>sem o valor</b>.</p>
+<pre>minha_var = 5; var minha_var;   console.log(minha_var)  // 5
+console.log(x); var x = 5;      // undefined (não dá erro)
+var a = 5, b; console.log(a + b) // NaN (5 + undefined)</pre></div>
+</section>
+
+
+<section class="s" id="revisao" data-n="10" data-t="Testa-te"><div class="sh"><span class="sn">10</span><h2>Testa-te</h2></div><p>Responde de cabeça antes de abrir cada pergunta.</p><details name="qa"><summary>Quais as 5 características de um algoritmo (Knuth)?</summary><p>Finitude, definitude, entrada, saída e eficácia.</p></details><details name="qa"><summary>Top-down vs bottom-up?</summary><p>Top-down parte do problema geral e divide-o em sub-problemas até ao detalhe (o código só começa no fim). Bottom-up parte de blocos simples pré-existentes e liga-os até ao processo final, reutilizando blocos.</p></details><details name="qa"><summary>REPETE ENQUANTO vs FAZ … ENQUANTO?</summary><p>O primeiro testa a condição antes e pode não executar nenhuma vez; o segundo executa primeiro e testa depois, por isso corre pelo menos uma vez.</p></details><details name="qa"><summary>Quando usar ciclo condicional e quando ciclo com contador?</summary><p>Condicional quando o nº de repetições é desconhecido; contador quando é conhecido à partida.</p></details><details name="qa"><summary>Porque pode um ciclo ficar infinito?</summary><p>Porque o valor lógico da condição nunca muda dentro do ciclo (ex.: esquecer <code>n = n + 1</code>). Viola a finitude.</p></details><details name="qa"><summary>Porque é inválido <code>CASO &lt; 1000</code> num ESCOLHA?</summary><p>O ESCOLHA só faz igualdade absoluta (valor e tipo) com o seletor; não aceita operadores relacionais nem lógicos. Para intervalos usa <code>SE … E …</code> encadeados.</p></details><details name="qa"><summary>Diferença entre <code>=</code>, <code>==</code> e <code>===</code>?</summary><p><code>=</code> atribui; <code>==</code> compara só o valor (<code>5 == "5"</code> é true); <code>===</code> compara tipo e valor (<code>5 === "5"</code> é false).</p></details><details name="qa"><summary>Resultado de <code>1 + 4 + "cafés"</code> e de <code>"cafés" + 1 + 4</code>?</summary><p>“5cafés” e “cafés14”. Avalia-se da esquerda para a direita e o <code>+</code> só concatena a partir do momento em que aparece texto.</p></details><details name="qa"><summary>Porque é que <code>campo.value + 20</code> dá “10020”?</summary><p>O valor lido de um campo (ou de um <code>prompt</code>) é sempre texto, por isso o <code>+</code> concatena. Converte antes com <code>parseInt()</code> ou <code>parseFloat()</code>.</p></details><details name="qa"><summary>Porque devolve <code>getElementById</code> null num script no head?</summary><p>O browser lê o HTML de cima para baixo: o script corre antes de o elemento existir. Põe o script no fim do body ou usa <code>window.onload</code>.</p></details><details name="qa"><summary>O que acontece se usares fora da função uma variável declarada com var lá dentro?</summary><p>Dá <code>ReferenceError</code>: a variável é local e desaparece quando a função termina. Sem <code>var</code> seria global.</p></details><details name="qa"><summary>Procedimento vs função; intrínseco vs extrínseco?</summary><p>Procedimento executa instruções; função executa e retorna um valor. Intrínsecos são nativos da linguagem (<code>prompt</code>, <code>isNaN</code>, <code>Math.random</code>); extrínsecos são criados pelo programador.</p></details></section>
+</main>
+<footer>Resumo feito a partir dos slides T1–T16 de LabMM3 (UA). Confirma com o docente a matéria exata do teste.</footer>
+<script>
+const R=document.documentElement,$=(s)=>[...document.querySelectorAll(s)],secs=$('.s'),nl=document.getElementById('nl'),toc=document.getElementById('toc'),tt=document.getElementById('tt'),pg=document.getElementById('pg'),A=['--pr','--wn','--ok','--gd'],links={};
+secs.forEach((s,i)=>{
+const a=document.createElement('a');a.href='#'+s.id;a.textContent=s.dataset.t;nl.appendChild(a);links[s.id]=a;
+const c=document.createElement('a');c.href='#'+s.id;c.className='tc';c.style.setProperty('--a','var('+A[i%4]+')');
+const b=document.createElement('b'),t=document.createElement('span');b.textContent=s.dataset.n;t.textContent=s.dataset.t;c.append(b,t);toc.appendChild(c);
+});
+const cur=()=>R.getAttribute('data-theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'),ico=()=>{tt.textContent=cur()==='dark'?'☀':'☾'};
+try{const sv=localStorage.getItem('th');if(sv)R.setAttribute('data-theme',sv)}catch(e){}
+ico();
+tt.onclick=()=>{const n=cur()==='dark'?'light':'dark';R.setAttribute('data-theme',n);try{localStorage.setItem('th',n)}catch(e){}ico()};
+const spy=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;Object.values(links).forEach(a=>a.removeAttribute('aria-current'));const a=links[e.target.id];a.setAttribute('aria-current','true');nl.scrollTo({left:a.offsetLeft-nl.clientWidth/2+a.offsetWidth/2,behavior:'smooth'})}),{rootMargin:'-35% 0px -60% 0px'});
+secs.forEach(s=>spy.observe(s));
+let tk=0;
+addEventListener('scroll',()=>{if(tk)return;tk=requestAnimationFrame(()=>{tk=0;const m=R.scrollHeight-innerHeight;pg.style.width=(m>0?scrollY/m*100:0)+'%'})},{passive:true});
+const ro=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');ro.unobserve(e.target)}}),{rootMargin:'0px 0px -6% 0px',threshold:.05});
+$('.s>.c,.s>.g>.c,.s>.k,.s>.t,.s>details,.s>p,.sh').forEach(el=>{el.classList.add('rv');if(el.parentElement.classList.contains('g'))el.style.transitionDelay=[...el.parentElement.children].indexOf(el)*70+'ms';ro.observe(el)});
+</script>
+</body>
+</html>
